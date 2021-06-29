@@ -1,0 +1,58 @@
+{
+  "name": "@storystore/ui-kit",
+  "version": "0.1.0",
+  "description": "A UI Component Library",
+  "author": "Carlos A. Cabrera @fnhipster",
+  "license": "ISC",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build-babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx\" src -d dist --copy-files --no-copy-ignored",
+    "build-types": "tsc --allowSyntheticDefaultImports --declaration --emitDeclarationOnly --esModuleInterop --jsx react-jsx --moduleResolution node --module esnext --outDir dist --rootDir src --target esnext",
+    "prepare": "yarn run build-babel && yarn run build-types",
+    "dev": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "cleanup": "rimraf dist"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-typescript": "^7.14.6",
+    "@babel/runtime": "^7.14.6",
+    "@react-aria/interactions": "^3.5.0",
+    "@storybook/addon-actions": "^6.3.0",
+    "@storybook/addon-essentials": "^6.3.0",
+    "@storybook/addon-links": "^6.3.0",
+    "@storybook/react": "^6.3.0",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "rimraf": "^3.0.2",
+    "storybook-css-modules-preset": "^1.1.1",
+    "typescript": "^4.3.4"
+  },
+  "babel": {
+    "presets": [
+      [
+        "react-app",
+        {
+          "runtime": "automatic",
+          "absoluteRuntime": false
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-typescript"
+    ]
+  }
+}

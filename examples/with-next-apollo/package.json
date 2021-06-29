@@ -1,0 +1,19 @@
+{
+  "name": "example-with-next-apollo",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "prepare": "echo ✔️",
+    "cleanup": "echo ✔️"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.1.1",
+    "@storystore/next-apollo": "^0.1.0",
+    "graphql": "^15.3.0",
+    "next": "latest",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

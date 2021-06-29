@@ -1,0 +1,42 @@
+.colors {
+  --color-surface: #eee;
+  --color-on-surface: #222;
+
+  --color-primary: #6b7280;
+  --color-primary-darker: #374151;
+  --color-primary-darkest: #111827;
+  --color-primary-lighter: #d1d5db;
+  --color-primary-lightest: #f3f4f6;
+  --color-primary: #6b7280;
+
+  --color-on-primary: #e5e7eb;
+  --color-on-primary-darker: #d1d5db;
+  --color-on-primary-darkest: #9ca3af;
+  --color-on-primary-lighter: #f3f4f6;
+  --color-on-primary-lightest: #f9fafb;
+
+  --color-secondary: #e5e7eb;
+  --color-secondary-darker: #d1d5db;
+  --color-secondary-darkest: #9ca3af;
+  --color-secondary-lighter: #f3f4f6;
+  --color-secondary-lightest: #f9fafb;
+
+  --color-on-secondary: #6b7280;
+  --color-on-secondary-darker: #374151;
+  --color-on-secondary-darkest: #111827;
+  --color-on-secondary-lighter: #d1d5db;
+  --color-on-secondary-lightest: #f3f4f6;
+  --color-on-secondary: #6b7280;
+
+  --color-accent: #f59e0b;
+  --color-accent-darker: #b45309;
+  --color-accent-darkest: #78350f;
+  --color-accent-lighter: #fcd34d;
+  --color-accent-lightest: #fef3c7;
+
+  --color-on-accent: #e5e7eb;
+  --color-on-accent-darker: #d1d5db;
+  --color-on-accent-darkest: #9ca3af;
+  --color-on-accent-lighter: #f3f4f6;
+  --color-on-accent-lightest: #f9fafb;
+}

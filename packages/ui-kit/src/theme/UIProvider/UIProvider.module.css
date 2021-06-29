@@ -1,0 +1,20 @@
+.root {
+  composes: colors from '../tokens/colors.module.css';
+  composes: typography from '../tokens/typography.module.css';
+  composes: breakpoints from '../tokens/breakpoints.module.css';
+  composes: radiusBorder from '../tokens/radius-borders.module.css';
+  composes: spacings from '../tokens/spacings.module.css';
+  font-size: 100%;
+  font-family: var(--font-body);
+}
+
+.root *:focus {
+  outline: 0;
+}
+
+.root.focusVisible *:focus {
+  outline-style: solid;
+  outline-color: var(--color-accent);
+  outline-width: 0.2rem;
+  outline-offset: 0.3rem;
+}

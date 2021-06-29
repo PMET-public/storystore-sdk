@@ -1,0 +1,13 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.enableDebugLogs": true,
+  "prettier.requireConfig": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

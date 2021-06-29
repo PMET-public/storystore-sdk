@@ -1,0 +1,68 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Button from '.'
+
+<Meta title="Components/Button" component={Button} />
+
+export const Template = args => <Button {...args} />
+
+# Button
+
+Buttons allow users to take actions with a single tap.
+
+<Canvas withSource="open">
+  <Story name="Button" args={{ children: 'Button' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Button" />
+
+## Visual Options
+
+### Call to Action
+
+<Canvas>
+  <Button variant="cta">Hola</Button>
+</Canvas>
+
+### Primary
+
+<Canvas>
+  <Button variant="primary">Hola</Button>
+</Canvas>
+
+### Quiet Primary
+
+<Canvas>
+  <Button variant="primary" quiet>
+    Hola
+  </Button>
+</Canvas>
+
+### Secondary
+
+<Canvas>
+  <Button variant="secondary">Hola</Button>
+</Canvas>
+
+### Quiet Secondary
+
+<Canvas>
+  <Button variant="secondary" quiet>
+    Hola
+  </Button>
+</Canvas>
+
+### Over Background
+
+<Canvas style={{ backgroundColor: 'var(--color-accent)' }}>
+  <Button variant="overBackground">Hola</Button>
+</Canvas>
+
+### Quiet Over Background
+
+<Canvas style={{ backgroundColor: 'var(--color-accent)' }}>
+  <Button variant="overBackground" quiet>
+    Hola
+  </Button>
+</Canvas>

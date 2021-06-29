@@ -1,0 +1,76 @@
+.root {
+  align-items: center;
+  background-color: var(--button-bg);
+  border-radius: var(--button-border-radius);
+  border: var(--button-border);
+  box-sizing: border-box;
+  color: var(--button-text);
+  display: inline-flex;
+  font-size: var(--font);
+  font-weight: var(--font-semibold);
+  height: 3em;
+  justify-content: center;
+  line-height: var(--leading-none);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition-duration: 305ms;
+  transition-property: opacity, color, background-color;
+  transition-timing-function: ease;
+}
+
+.root[disabled] {
+  opacity: 0.3;
+}
+
+.cta {
+  --button-bg: var(--color-accent);
+  --button-border: 0 none;
+  --button-text: var(--color-on-accent);
+}
+
+.primary {
+  --button-border: 0.1rem solid currentColor;
+  --button-text: var(--color-primary);
+}
+
+.primary:hover {
+  --button-bg: var(--color-primary);
+  --button-text: var(--color-on-primary);
+}
+
+.secondary {
+  --button-border: 0.1rem solid currentColor;
+  --button-text: var(--color-secondary);
+}
+
+.secondary:hover {
+  --button-bg: var(--color-secondary);
+  --button-text: var(--color-on-secondary);
+}
+
+.primary.quiet:hover {
+  --button-bg: var(--color-primary-lightest);
+  --button-text: var(--color-primary);
+}
+
+.secondary.quiet:hover {
+  --button-bg: var(--color-secondary-lightest);
+  --button-text: var(--color-secondary);
+}
+
+.overBackground {
+  --button-border: 0.1rem solid white;
+  --button-text: white;
+}
+
+.overBackground:hover {
+  --button-text: black;
+  --button-bg: white;
+}
+
+.overBackground.quiet:hover {
+  --button-bg: rgba(255, 255, 255, 0.2);
+}
+
+.quiet {
+  --button-border: 0 none;
+}
