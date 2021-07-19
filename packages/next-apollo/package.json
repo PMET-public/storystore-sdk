@@ -6,9 +6,10 @@
   "author": "Carlos A. Cabrera @fnhipster",
   "license": "ISC",
   "scripts": {
-    "build-babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx\" src -d dist --copy-files",
-    "build-types": "tsc --allowSyntheticDefaultImports --declaration --emitDeclarationOnly --esModuleInterop --jsx react-jsx --moduleResolution node --module esnext --outDir dist --rootDir src --target esnext",
-    "prepare": "yarn run build-babel && yarn run build-types",
+    "build:babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx\" src -d dist --copy-files",
+    "build:types": "tsc --allowSyntheticDefaultImports --declaration --emitDeclarationOnly --esModuleInterop --jsx react-jsx --moduleResolution node --module esnext --outDir dist --rootDir src --target esnext",
+    "dev": "concurrently \"yarn build:babel -- --watch\" \"yarn build:types -- --watch\"",
+    "prepare": "yarn run build:babel && yarn run build:types",
     "cleanup": "rimraf dist"
   },
   "files": [
@@ -20,10 +21,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "dependencies": {
-    "deepmerge": "^4.2.2",
-    "lodash.isequal": "^4.5.0"
-  },
   "devDependencies": {
     "@apollo/client": "^3.3.20",
     "@babel/cli": "^7.14.5",
@@ -33,7 +30,10 @@
     "@types/lodash.isequal": "^4.5.5",
     "@types/react": "^17.0.11",
     "babel-preset-react-app": "^10.0.0",
+    "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
+    "deepmerge": "^4.2.2",
+    "lodash.isequal": "^4.5.0",
     "graphql": "^15.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

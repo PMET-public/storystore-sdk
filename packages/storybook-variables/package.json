@@ -1,0 +1,54 @@
+{
+  "name": "@storystore/storybook-variables",
+  "version": "0.1.0",
+  "description": "Global Storybook variables",
+  "main": "index.js",
+  "author": "Carlos A. Cabrera @fnhipster",
+  "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.d.ts",
+    "*.js"
+  ],
+  "private": false,
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-typescript": "^7.14.6",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/react": "^6.3.4",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.2.0",
+    "deepmerge": "^4.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "build:babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx\" src -d dist --copy-files --no-copy-ignored",
+    "build:types": "tsc --allowSyntheticDefaultImports --declaration --emitDeclarationOnly --esModuleInterop --jsx react-jsx --moduleResolution node --module esnext --outDir dist --rootDir src --target esnext",
+    "build:watch": "concurrently \"yarn build:babel -- --watch\" \"yarn build:types -- --watch\"",
+    "prepare": "yarn run build:babel && yarn run build:types",
+    "dev": "concurrently --names \"BUILD,STORYBOOK\" \"yarn build:watch\" \"start-storybook -p 6006 --no-manager-cache --quiet\"",
+    "build-storybook": "build-storybook",
+    "cleanup": "rimraf dist"
+  },
+  "babel": {
+    "presets": [
+      [
+        "react-app",
+        {
+          "runtime": "automatic",
+          "absoluteRuntime": false
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-typescript"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import { useVariables } from '../src/lib'
+
+<Meta title="Example" />
+
+export const Template = () => {
+  const state = useVariables()
+  return (
+    <code>
+      <pre>{JSON.stringify(state, null, 2)}</pre>
+    </code>
+  )
+}
+
+<Canvas>
+  <Story
+    name="Example"
+    parameters={{
+      variables: {
+        title: 'Settings',
+        fields: {
+          foo: {
+            label: 'Foo Label',
+            defaultValue: 'foo default value',
+          },
+          bar: {
+            defaultValue: 'bar default value',
+          },
+        },
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story name="Example 2">{Template.bind({})}</Story>
+</Canvas>

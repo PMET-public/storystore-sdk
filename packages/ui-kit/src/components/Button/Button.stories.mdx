@@ -1,9 +1,11 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
-import Button from '.'
+import Button, { useButtonAs } from '.'
 
 <Meta title="Components/Button" component={Button} />
 
-export const Template = args => <Button {...args} />
+export const Template = args => {
+  return <Button {...args} />
+}
 
 # Button
 

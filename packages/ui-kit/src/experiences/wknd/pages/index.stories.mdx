@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Home, { HOME_QUERY } from '.'
+
+<Meta
+  title="Experiences/WKND/Home"
+  component={Home}
+  parameters={{
+    title: 'Settings',
+    variables: {
+      fields: {
+        graphQlEndpoint: {
+          label: 'GraphQL URL',
+          placeholder: 'https://...',
+          defaultValue: 'https://api.spacex.land/graphql/',
+        },
+      },
+    },
+  }}
+/>
+
+export const Template = args => <Home {...args} />
+
+# Home
+
+<Canvas withSource="open">
+  <Story name="Home" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
