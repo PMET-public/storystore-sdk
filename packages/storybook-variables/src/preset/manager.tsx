@@ -11,8 +11,9 @@ export type VariablesPanelProps = {
   params: Params
 }
 
-const Root = styled.div`
-  padding: 1rem 0;
+const Root = styled.table`
+  padding: 1rem;
+  width: 100%;
 `
 
 const FormWrapper = styled(Form)`
@@ -21,6 +22,21 @@ const FormWrapper = styled(Form)`
   grid-gap: 0.5rem;
   width: 100%;
 `
+
+const FormRow = styled.tr(({ theme }) => ({
+  display: 'table-row',
+
+  '& > td': {
+    marginBottom: '3rem',
+    borderBottom: `1px solid ${theme.appBorderColor}`,
+    margin: '0 15px',
+    padding: '8px 0',
+  },
+
+  '& > td:first-of-type ': {
+    paddingRight: '1rem',
+  },
+}))
 
 const NoVariablesWrapper = styled.div(({ theme }) => ({
   background: theme.background.warning,
@@ -56,25 +72,42 @@ const VariablesPanel = ({ params }: VariablesPanelProps) => {
 
   return (
     <Root>
-      {Object.entries(params.fields).map(([name, { label = name, defaultValue, ...props }]) => {
-        return (
-          <Form.Field key={name} label={label}>
-            <FormWrapper
-              onSubmit={handleOnSave}
-              onReset={handleOnReset}
-              data-name={name}
-              data-default-value={defaultValue}
-            >
-              <Form.Input key={state[name]} name={name} size="100%" defaultValue={state[name]} {...props} />
+      <tbody>
+        {Object.entries(params.fields).map(([name, { label = name, defaultValue, ...props }]) => {
+          return (
+            <FormRow key={name}>
+              <td>
+                <label htmlFor={`form__field__${name}`}>
+                  <strong>{label}</strong>
+                </label>
+              </td>
+              <td>
+                <FormWrapper
+                  onSubmit={handleOnSave}
+                  onReset={handleOnReset}
+                  data-name={name}
+                  data-default-value={defaultValue}
+                >
+                  <Form.Input
+                    id={`form__field__${name}`}
+                    key={state[name]}
+                    name={name}
+                    align="start"
+                    size="100%"
+                    defaultValue={state[name]}
+                    {...props}
+                  />
 
-              <Form.Button type="submit">Save</Form.Button>
-              <Form.Button type="reset" disabled={state[name] === defaultValue}>
-                Reset
-              </Form.Button>
-            </FormWrapper>
-          </Form.Field>
-        )
-      })}
+                  <Form.Button type="submit">Save</Form.Button>
+                  <Form.Button type="reset" disabled={state[name] === defaultValue}>
+                    Reset
+                  </Form.Button>
+                </FormWrapper>
+              </td>
+            </FormRow>
+          )
+        })}
+      </tbody>
     </Root>
   )
 }
