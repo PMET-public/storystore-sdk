@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Tabs, { TabsItem } from '.'
+
+<Meta title="Components/Tabs" component={Tabs} />
+
+export const Template = args => {
+  return <Tabs {...args} />
+}
+
+# Tabs
+
+Tabs organize content into multiple sections and allow users to navigate between them. The content under the set of tabs should be related and form a coherent unit.
+
+<Canvas withSource="open">
+  <Story
+    name="Tabs"
+    args={{
+      children: [
+        <TabsItem key="FoR" title="Founding of Rome">
+          Arma virumque cano, Troiae qui primus ab oris.
+        </TabsItem>,
+        <TabsItem key="MaR" title="Monarchy and Republic">
+          Senatus Populusque Romanus.
+        </TabsItem>,
+        <TabsItem key="Emp" title="Empire">
+          Alea jacta est.
+        </TabsItem>,
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import Tabs, { TabsItem } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Tabs" />
