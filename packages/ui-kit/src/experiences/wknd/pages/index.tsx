@@ -3,11 +3,10 @@ import gql from 'graphql-tag'
 
 export const HOME_QUERY = gql`
   query HOME_QUERY {
-    ships {
-      id
-      image
-      name
-      url
+    articleList {
+      items {
+        author
+      }
     }
   }
 `
@@ -21,15 +20,10 @@ const Home = () => {
 
   return (
     <section>
-      <h2>SpaceX Ships</h2>
-      {data.ships?.map(({ id, image, name, url }: any) => (
+      <h2>Articles</h2>
+      {data.articleList?.items.map(({ author }: any, id: number) => (
         <article key={id}>
-          <h2>{name}</h2>
-          <img width="300" src={image} />
-          <br />
-          <a href={url} target="blank">
-            View Details
-          </a>
+          <h2>{author}</h2>
         </article>
       ))}
     </section>

@@ -11,7 +11,12 @@ import Home, { HOME_QUERY } from '.'
         graphQlEndpoint: {
           label: 'GraphQL URL',
           placeholder: 'https://...',
-          defaultValue: 'https://api.spacex.land/graphql/',
+          defaultValue: 'http://localhost:4502/content/graphql/global/endpoint.json',
+        },
+        graphQlBasicAuth: {
+          label: 'GraphQL Auth',
+          placeholder: 'username:password',
+          defaultValue: 'admin:admin',
         },
       },
     },

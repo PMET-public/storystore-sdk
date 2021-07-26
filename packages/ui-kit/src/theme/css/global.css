@@ -4,7 +4,9 @@ body {
   padding: 0;
 }
 
-body {
-  background-color: var(--ui-color-body, #fff);
-  color: var(--ui-on-body, #111);
+:root {
+  --ui-color-body: #f6f6f6;
+  --ui-color-on-body: #222;
+  background-color: var(--ui-color-body);
+  color: var(--ui-color-on-body);
 }

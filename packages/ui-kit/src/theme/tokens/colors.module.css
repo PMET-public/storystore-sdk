@@ -1,6 +1,16 @@
 .colors {
-  --color-surface: #eee;
-  --color-on-surface: #222;
+  --color-surface: #6b7280;
+  --color-surface-darker: #374151;
+  --color-surface-darkest: #111827;
+  --color-surface-lighter: #d1d5db;
+  --color-surface-lightest: #f3f4f6;
+  --color-surface: #6b7280;
+
+  --color-on-surface: #e5e7eb;
+  --color-on-surface-darker: #d1d5db;
+  --color-on-surface-darkest: #9ca3af;
+  --color-on-surface-lighter: #f3f4f6;
+  --color-on-surface-lightest: #f9fafb;
 
   --color-primary: #6b7280;
   --color-primary-darker: #374151;
