@@ -77,8 +77,7 @@ export const useVariables = () => {
 
   const initialState = useDefaultValuesFromParams(parameters.variables)
 
-  const [_state] = useClientAddonState<StateValues>(ADDON_ID, deepmerge({ [id]: initialState }, store))
+  const [state] = useClientAddonState<StateValues>(ADDON_ID, deepmerge({ [id]: initialState }, store))
 
-  const state = _state ? _state[id] : {}
-  return state
+  return (state && state[id]) || {}
 }
