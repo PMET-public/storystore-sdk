@@ -1,0 +1,93 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Header, { HeaderNavItem, HeaderNavFill } from '.'
+import LogoIcon from '../../experiences/wknd/assets/wknd-logo.svg'
+import HeartIcon from 'remixicon/icons/Health/heart-fill.svg'
+import CheckInIcon from 'remixicon/icons/System/check-double-line.svg'
+
+<Meta title="Components/Header" component={Header} />
+
+export const Template = ({ children, ...args }) => (
+  <Header {...args}>
+    <HeaderNavFill />
+    <HeaderNavItem active>
+      <a href="#">Home</a>
+    </HeaderNavItem>
+    <HeaderNavItem>
+      <a href="#">Articles</a>
+    </HeaderNavItem>
+    <HeaderNavItem>
+      <a href="#">Aventures</a>
+    </HeaderNavItem>
+    <HeaderNavFill />
+    <HeaderNavItem compact variant="icon">
+      <a href="#">
+        <HeartIcon aria-label="Check-ins" />
+      </a>
+    </HeaderNavItem>
+    <HeaderNavItem compact variant="icon">
+      <a href="#">
+        <CheckInIcon aria-label="Home" />
+      </a>
+    </HeaderNavItem>
+  </Header>
+)
+
+# Header
+
+App Header.
+
+<Canvas withSource="open">
+  <Story
+    name="Header"
+    args={{
+      logo: LogoIcon,
+      quiet: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import Header from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Header" />
+
+## Visual Options
+
+### Primary
+
+<Canvas>
+  <Template variant="primary" logo={LogoIcon} />
+</Canvas>
+
+### Quiet Primary
+
+<Canvas>
+  <Template variant="primary" quiet logo={LogoIcon} />
+</Canvas>
+
+### Secondary
+
+<Canvas>
+  <Template variant="secondary" logo={LogoIcon} />
+</Canvas>
+
+### Quiet Secondary
+
+<Canvas>
+  <Template variant="secondary" quiet logo={LogoIcon} />
+</Canvas>
+
+### Accent
+
+<Canvas>
+  <Template variant="accent" logo={LogoIcon} />
+</Canvas>
+
+### Quiet Accent
+
+<Canvas>
+  <Template variant="accent" quiet logo={LogoIcon} />
+</Canvas>
