@@ -31,33 +31,25 @@
     "@babel/plugin-transform-typescript": "^7.14.6",
     "@babel/runtime": "^7.14.6",
     "@react-aria/interactions": "^3.5.0",
+    "@react-aria/tabs": "^3.0.0",
+    "@react-stately/collections": "^3.3.2",
+    "@react-stately/tabs": "^3.0.0",
+    "@react-types/tabs": "^3.0.0",
     "@storybook/addon-actions": "^6.3.0",
     "@storybook/addon-essentials": "^6.3.0",
     "@storybook/addon-links": "^6.3.0",
     "@storybook/react": "^6.3.0",
     "@storystore/storybook-variables": "0.1.0",
     "babel-loader": "^8.2.2",
+    "babel-plugin-inline-react-svg": "^2.0.1",
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
+    "remixicon": "^2.5.0",
     "rimraf": "^3.0.2",
     "storybook-css-modules-preset": "^1.1.1",
     "typescript": "^4.3.4"
-  },
-  "babel": {
-    "presets": [
-      [
-        "react-app",
-        {
-          "runtime": "automatic",
-          "absoluteRuntime": false
-        }
-      ]
-    ],
-    "plugins": [
-      "@babel/plugin-transform-typescript"
-    ]
   }
 }

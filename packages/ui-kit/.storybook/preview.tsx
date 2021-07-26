@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { themes } from '@storybook/theming'
-import { DocsContainer } from '@storybook/addon-docs/blocks'
-import UIProvider from '../src/theme/UIProvider'
+import { DocsContainer } from '@storybook/addon-docs'
 import { useVariables } from '@storystore/storybook-variables/lib'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { MockedProvider } from '@apollo/client/testing'
+import { auth } from '@storystore/toolbox'
+import UIProvider from '../src/theme/UIProvider'
 
 export const parameters = {
   docs: {
@@ -32,9 +33,10 @@ export const parameters = {
 
 type ApolloProviderWrapperProps = {
   uri?: string
+  basicAuth?: string
 }
 
-const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ children, uri }) => {
+const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ children, uri, basicAuth }) => {
   useEffect(() => {
     /** Enable Apollo Client Dev Chrome Ext from Story iframes */
     if (window.parent !== window) {
@@ -52,11 +54,14 @@ const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ 
         ssrMode: false,
         link: new HttpLink({
           uri,
-          // credentials: 'include',
+          credentials: 'include',
+          headers: {
+            authorization: basicAuth ? auth.getBasicAuthenticationHeader(basicAuth.split(':') as any) : undefined,
+          },
         }),
         cache: new InMemoryCache({}),
       }),
-    [uri]
+    [uri, basicAuth]
   )
 
   if (!uri) return <MockedProvider>{children}</MockedProvider>
@@ -66,10 +71,10 @@ const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ 
 
 export const decorators = [
   (Story: FunctionComponent) => {
-    const variables = useVariables()
+    const { graphQlEndpoint, graphQlBasicAuth } = useVariables()
 
     return (
-      <ApolloProviderWrapper uri={variables?.graphQlEndpoint}>
+      <ApolloProviderWrapper uri={graphQlEndpoint} basicAuth={graphQlBasicAuth}>
         <UIProvider>
           <Story />
         </UIProvider>
