@@ -1,0 +1,30 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Banner from '.'
+import backgroundImage from '../../experiences/wknd/assets/background-header.jpg'
+
+<Meta title="Components/Banner" component={Banner} />
+
+export const Template = args => {
+  return <Banner {...args} />
+}
+
+# Banner
+
+App Banner.
+
+<Canvas withSource="open">
+  <Story
+    name="Banner"
+    args={{
+      backgroundImage: props => <img src={backgroundImage} {...props} />,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import Banner from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Banner" />
