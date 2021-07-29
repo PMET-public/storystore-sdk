@@ -1,9 +1,3 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --ui-color-body: #f6f6f6;
   --ui-color-on-body: #222;

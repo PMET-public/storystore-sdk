@@ -1,5 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Banner from '.'
+import Image from '../Image'
+import Button from '../Button'
 import backgroundImage from '../../experiences/wknd/assets/background-header.jpg'
 
 <Meta title="Components/Banner" component={Banner} />
@@ -16,7 +18,10 @@ App Banner.
   <Story
     name="Banner"
     args={{
-      backgroundImage: props => <img src={backgroundImage} {...props} />,
+      textColor: 'black',
+      backgroundImage: <Image src={backgroundImage} />,
+      title: <h2>Banner Title</h2>,
+      button: <Button variant="cta">Button</Button>,
     }}
   >
     {Template.bind({})}
@@ -24,7 +29,54 @@ App Banner.
 </Canvas>
 
 ```
-import Banner from '@storystore/ui-kit/components'
+import { Banner } from '@storystore/ui-kit/components'
 ```
 
 <ArgsTable story="Banner" />
+
+## Visual Options
+
+### Center
+
+<Canvas>
+  <Banner
+    backgroundColor="teal"
+    title={<h2>Banner Title</h2>}
+    button={
+      <Button variant="accent" transparent>
+        Button
+      </Button>
+    }
+    align="center"
+  />
+</Canvas>
+
+### Left
+
+<Canvas>
+  <Banner
+    backgroundColor="teal"
+    title={<h2>Banner Title</h2>}
+    button={
+      <Button variant="accent" transparent>
+        Button
+      </Button>
+    }
+    align="left"
+  />
+</Canvas>
+
+### Right
+
+<Canvas>
+  <Banner
+    backgroundColor="teal"
+    title={<h2>Banner Title</h2>}
+    button={
+      <Button variant="accent" transparent>
+        Button
+      </Button>
+    }
+    align="right"
+  />
+</Canvas>

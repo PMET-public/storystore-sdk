@@ -49,4 +49,7 @@
   --color-on-accent-darkest: #9ca3af;
   --color-on-accent-lighter: #f3f4f6;
   --color-on-accent-lightest: #f9fafb;
+
+  --color-black: #222;
+  --color-on-black: #f6f6f6;
 }

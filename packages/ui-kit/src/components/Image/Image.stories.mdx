@@ -1,0 +1,32 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Image from '.'
+import imgSrc from '../../experiences/wknd/assets/background-header.jpg'
+
+<Meta title="Components/Image" component={Image} />
+
+export const Template = args => {
+  return <Image {...args} />
+}
+
+# Image
+
+WIP.
+
+<Canvas withSource="open">
+  <Story
+    name="Image"
+    args={{
+      src: imgSrc,
+      width: 400,
+      height: 195,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Image } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Image" />

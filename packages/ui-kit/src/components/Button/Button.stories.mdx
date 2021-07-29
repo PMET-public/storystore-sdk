@@ -18,7 +18,7 @@ Buttons allow users to take actions with a single tap.
 </Canvas>
 
 ```
-import Button from '@storystore/ui-kit/components'
+import { Button } from '@storystore/ui-kit/components'
 ```
 
 <ArgsTable story="Button" />
@@ -31,16 +31,24 @@ import Button from '@storystore/ui-kit/components'
   <Button variant="cta">Hola</Button>
 </Canvas>
 
+### Transparent Call to Action
+
+<Canvas>
+  <Button variant="cta" transparent>
+    Hola
+  </Button>
+</Canvas>
+
 ### Primary
 
 <Canvas>
   <Button variant="primary">Hola</Button>
 </Canvas>
 
-### Quiet Primary
+### Transparent Primary
 
 <Canvas>
-  <Button variant="primary" quiet>
+  <Button variant="primary" transparent>
     Hola
   </Button>
 </Canvas>
@@ -51,24 +59,10 @@ import Button from '@storystore/ui-kit/components'
   <Button variant="secondary">Hola</Button>
 </Canvas>
 
-### Quiet Secondary
+### Transparent Secondary
 
 <Canvas>
-  <Button variant="secondary" quiet>
-    Hola
-  </Button>
-</Canvas>
-
-### Over Background
-
-<Canvas style={{ backgroundColor: 'var(--color-accent)' }}>
-  <Button variant="overBackground">Hola</Button>
-</Canvas>
-
-### Quiet Over Background
-
-<Canvas style={{ backgroundColor: 'var(--color-accent)' }}>
-  <Button variant="overBackground" quiet>
+  <Button variant="secondary" transparent>
     Hola
   </Button>
 </Canvas>

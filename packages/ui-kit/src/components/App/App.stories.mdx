@@ -1,0 +1,35 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import App from '.'
+import Header from '../Header'
+import Footer from '../Footer'
+import LogoIcon from 'remixicon/icons/System/apps-fill.svg'
+
+<Meta
+  title="Components/App"
+  component={App}
+  parameters={{
+    layout: 'fullscreen',
+  }}
+/>
+
+export const Template = args => {
+  return (
+    <App {...args} header={<Header logo={LogoIcon} sticky contained />} footer={<Footer logo={LogoIcon} contained />} />
+  )
+}
+
+# App
+
+App Shell.
+
+<Canvas withSource="open">
+  <Story name="App" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { App } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="App" />

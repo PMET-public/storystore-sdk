@@ -1,36 +1,18 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
-import Header, { HeaderNavItem, HeaderNavFill } from '.'
-import LogoIcon from '../../experiences/wknd/assets/wknd-logo.svg'
+import Header, { HeaderMenuItem } from '.'
+import LogoIcon from 'remixicon/icons/System/apps-fill.svg'
 import HeartIcon from 'remixicon/icons/Health/heart-fill.svg'
 import CheckInIcon from 'remixicon/icons/System/check-double-line.svg'
 
-<Meta title="Components/Header" component={Header} />
+<Meta
+  title="Components/Header"
+  component={Header}
+  parameters={{
+    layout: 'fullscreen',
+  }}
+/>
 
-export const Template = ({ children, ...args }) => (
-  <Header {...args}>
-    <HeaderNavFill />
-    <HeaderNavItem active>
-      <a href="#">Home</a>
-    </HeaderNavItem>
-    <HeaderNavItem>
-      <a href="#">Articles</a>
-    </HeaderNavItem>
-    <HeaderNavItem>
-      <a href="#">Aventures</a>
-    </HeaderNavItem>
-    <HeaderNavFill />
-    <HeaderNavItem compact variant="icon">
-      <a href="#">
-        <HeartIcon aria-label="Check-ins" />
-      </a>
-    </HeaderNavItem>
-    <HeaderNavItem compact variant="icon">
-      <a href="#">
-        <CheckInIcon aria-label="Home" />
-      </a>
-    </HeaderNavItem>
-  </Header>
-)
+export const Template = args => <Header {...args} />
 
 # Header
 
@@ -40,8 +22,30 @@ App Header.
   <Story
     name="Header"
     args={{
-      logo: LogoIcon,
-      quiet: true,
+      logo: <LogoIcon style={{ fill: 'white' }} />,
+      menu: [
+        <HeaderMenuItem variant="fill" />,
+        <HeaderMenuItem active>
+          <a href="#">Home</a>
+        </HeaderMenuItem>,
+        <HeaderMenuItem>
+          <a href="#">Articles</a>
+        </HeaderMenuItem>,
+        <HeaderMenuItem>
+          <a href="#">Contact</a>
+        </HeaderMenuItem>,
+        <HeaderMenuItem variant="fill" />,
+        <HeaderMenuItem variant="icon" compact>
+          <a href="#">
+            <HeartIcon aria-label="Likes" />
+          </a>
+        </HeaderMenuItem>,
+        <HeaderMenuItem variant="icon" compact>
+          <a href="#">
+            <CheckInIcon aria-label="Check-ins" />
+          </a>
+        </HeaderMenuItem>,
+      ],
     }}
   >
     {Template.bind({})}
@@ -49,7 +53,7 @@ App Header.
 </Canvas>
 
 ```
-import Header from '@storystore/ui-kit/components'
+import { Header, HeaderNavItem, HeaderNavFill } from '@storystore/ui-kit/components'
 ```
 
 <ArgsTable story="Header" />
@@ -59,35 +63,35 @@ import Header from '@storystore/ui-kit/components'
 ### Primary
 
 <Canvas>
-  <Template variant="primary" logo={LogoIcon} />
+  <Template variant="primary" logo={<LogoIcon />} />
 </Canvas>
 
-### Quiet Primary
+### Transparent Primary
 
 <Canvas>
-  <Template variant="primary" quiet logo={LogoIcon} />
+  <Template variant="primary" transparent logo={<LogoIcon />} />
 </Canvas>
 
 ### Secondary
 
 <Canvas>
-  <Template variant="secondary" logo={LogoIcon} />
+  <Template variant="secondary" logo={<LogoIcon />} />
 </Canvas>
 
-### Quiet Secondary
+### Transparent Secondary
 
 <Canvas>
-  <Template variant="secondary" quiet logo={LogoIcon} />
+  <Template variant="secondary" transparent logo={<LogoIcon />} />
 </Canvas>
 
 ### Accent
 
 <Canvas>
-  <Template variant="accent" logo={LogoIcon} />
+  <Template variant="accent" logo={<LogoIcon />} />
 </Canvas>
 
-### Quiet Accent
+### Transparent Accent
 
 <Canvas>
-  <Template variant="accent" quiet logo={LogoIcon} />
+  <Template variant="accent" transparent logo={<LogoIcon />} />
 </Canvas>

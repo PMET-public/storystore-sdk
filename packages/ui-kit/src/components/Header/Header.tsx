@@ -1,52 +1,110 @@
-import { FunctionComponent, cloneElement, HTMLAttributes, ReactElement } from 'react'
-import '../../lib/class-names'
+import {
+  FunctionComponent,
+  HTMLAttributes,
+  ReactElement,
+  Children,
+  isValidElement,
+  cloneElement,
+  useState,
+  useRef,
+} from 'react'
 import classes from '../../lib/class-names'
 import style from './Header.module.css'
-
-export type HeaderNavFill = {}
-
-export const HeaderNavFill: FunctionComponent<HeaderNavFill> = ({ ...props }) => {
-  return <div className={style.navFill} />
-}
-
-export type HeaderNavItem = {
-  active?: boolean
-  compact?: boolean
-  variant?: 'link' | 'button'
-}
-
-export const HeaderNavItem: FunctionComponent<HeaderNavItem> = ({ active, variant = 'link', compact, ...props }) => {
-  return (
-    <div
-      className={classes([style.navItem, style[variant], [style.compact, compact], [style.active, active]])}
-      {...props}
-    />
-  )
-}
+import View from '../View'
+import { useScrollPosition } from '../../hooks/useScrollPosition'
 
 export type HeaderProps = {
   /** React SVG Logo */
-  logo: FunctionComponent<HTMLAttributes<SVGElement>>
-  /** Whether the button should be less prominent. */
-  quiet?: boolean
+  logo: ReactElement<HTMLAttributes<SVGElement>>
+  /** Menu Navigation */
+  menu?: ReactElement[]
+  /** Whether the button should have transparent background. */
+  transparent?: boolean
   /** Visual styles. */
-  variant?: 'primary' | 'secondary' | 'accent'
+  variant?: 'surface' | 'primary' | 'secondary' | 'accent'
+  /** Stick to the top while scrolling. */
+  sticky?: boolean
+  /** Centered content */
+  contained?: boolean
 }
 
-export const Header: FunctionComponent<HeaderProps> = ({
-  logo: Logo,
-  quiet = false,
-  variant = 'primary',
+export type HeaderMenuItemProps = {
+  active?: boolean
+  compact?: boolean
+  as?: ReactElement<any>
+  variant?: 'link' | 'button' | 'icon' | 'fill'
+}
+
+export const HeaderMenuItem: FunctionComponent<HeaderMenuItemProps> = ({
+  active = false,
+  compact = false,
+  variant = 'link',
   children,
   ...props
 }) => {
-  return (
-    <div {...props} className={classes([style.root, style[variant], [style.quiet, quiet]])}>
-      <h1 className={style.logoWrapper}>
-        <Logo className={style.logo} />
-      </h1>
+  if (variant === 'fill') return <span className={classes([style.menuItem, style.fill])} />
 
-      <nav className={style.nav}>{children}</nav>
+  return (
+    <>
+      {Children.map(children, child => {
+        if (isValidElement(child)) {
+          return cloneElement(child, {
+            className: classes([style.menuItem, style[variant], [style.active, active], [style.compact, compact]]),
+            ...props,
+          })
+        }
+        return child
+      })}
+    </>
+  )
+}
+
+export const Header: FunctionComponent<HeaderProps> = ({
+  logo,
+  menu,
+  transparent = false,
+  variant = 'surface',
+  sticky = false,
+  contained = false,
+  ...props
+}) => {
+  const [scrolled, setScrolled] = useState(false)
+  const [hide, setHide] = useState(false)
+
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    if (!sticky || !rootRef.current) return
+    const currPosY = currPos.y * -1
+    const prevPosY = prevPos.y * -1
+    const scrollingDown = currPosY > prevPosY
+    const scrolledPastElement = currPosY > rootRef.current.offsetHeight
+    setHide(scrolledPastElement && scrollingDown)
+    setScrolled(currPosY > 0)
+  })
+
+  return (
+    <div
+      ref={rootRef}
+      {...props}
+      className={classes([
+        style.root,
+        style[variant],
+        [style.transparent, transparent],
+        [style.sticky, sticky],
+        [style.scrolled, scrolled],
+        [style.hide, hide],
+      ])}
+    >
+      <View className={style.wrapper} contained={contained} padded>
+        <h1 className={style.logoWrapper}>{cloneElement(logo, { className: style.logo })}</h1>
+
+        {menu && (
+          <div className={style.menuWrapper}>
+            <nav className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</nav>
+          </div>
+        )}
+      </View>
     </div>
   )
 }

@@ -1,11 +1,15 @@
 .root {
   composes: colors from '../tokens/colors.module.css';
   composes: typography from '../tokens/typography.module.css';
-  composes: breakpoints from '../tokens/breakpoints.module.css';
+  composes: layout from '../tokens/layout.module.css';
   composes: radiusBorder from '../tokens/radius-borders.module.css';
   composes: spacings from '../tokens/spacings.module.css';
   font-size: 100%;
   font-family: var(--font-body);
+}
+
+.root * {
+  box-sizing: border-box;
 }
 
 .root *:focus {

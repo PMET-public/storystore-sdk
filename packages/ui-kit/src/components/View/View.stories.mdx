@@ -1,0 +1,30 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import View from '.'
+
+<Meta
+  title="Components/View"
+  component={View}
+  parameters={{
+    layout: 'fullscreen',
+  }}
+/>
+
+export const Template = args => {
+  return (
+    <View {...args}>
+      <div style={{ height: '100vh', background: '#ddd' }} />
+    </View>
+  )
+}
+
+# View
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="View">{Template.bind({})}</Story>
+</Canvas>
+
+```
+import { View } from '@storystore/ui-kit/components'
+```
