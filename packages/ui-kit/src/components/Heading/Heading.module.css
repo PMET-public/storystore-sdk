@@ -7,6 +7,12 @@
 
 @media (min-width: 768px) {
   .root {
+    font-size: var(--banner-size-medium);
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
     font-size: var(--banner-size-large);
   }
 }

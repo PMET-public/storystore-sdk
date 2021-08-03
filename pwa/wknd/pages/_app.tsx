@@ -4,18 +4,22 @@ import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { variables, auth } from '@storystore/toolbox'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { FunctionComponent, useMemo } from 'react'
-import { wknd } from '@storystore/ui-kit/experiences'
+import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
+import NextImage from 'next/image'
 
-const Link: FunctionComponent = ({ href, ...props }) => {
+const Image: FunctionComponent<any> = ({ src, ...props }) => {
+  // sanitize NextJS Img Src Object
+  return <img {...props} src={typeof src === 'object' ? src.src : src} />
+}
+
+const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
     <NextLink href={href}>
       <a {...props} />
     </NextLink>
   )
 }
-
-const { App } = wknd.pages
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
   const AEM_GRAPHQL_URL = variables.get('NEXT_PUBLIC_AEM_GRAPHQL_URL') || process.env['NEXT_PUBLIC_AEM_GRAPHQL_URL']
@@ -47,9 +51,9 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider>
-        <App linkRoot={<Link />}>
+        <WKND.App linkRoot={<Link />} imageRoot={<Image />}>
           <Component {...pageProps} />
-        </App>
+        </WKND.App>
       </UIProvider>
     </ApolloProvider>
   )

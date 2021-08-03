@@ -10,6 +10,14 @@
 
 @media (min-width: 768px) {
   .root {
+    --columns: var(--grid-columns-medium);
+    --gap: var(--grid-gap-medium);
+    --rows: var(--grid-rows-medium);
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
     --columns: var(--grid-columns-large);
     --gap: var(--grid-gap-large);
     --rows: var(--grid-rows-large);

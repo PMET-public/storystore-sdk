@@ -5,14 +5,14 @@ const ADDON_ID = 'storybook-variables'
 
 module.exports = function expressMiddleware(router) {
   router.use('/__aem/', (req, res, next) => {
-    const cookie = req.headers.cookie.match(new RegExp(ADDON_ID + '=([^;]+)'))
+    const cookie = req.headers.cookie && req.headers.cookie.match(new RegExp(ADDON_ID + '=([^;]+)'))
     const settings = cookie ? JSON.parse(decodeURIComponent(cookie[1])) : null
 
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
-    const target = new URL(settings ? settings[id].graphQlEndpoint : process.env.GRAPHQL_URL).origin
-    const auth = settings ? settings[id].graphQlBasicAuth : process.env.GRAPHQL_AUTH
+    const target = new URL(settings && settings[id] ? settings[id].graphQlEndpoint : process.env.GRAPHQL_URL).origin
+    const auth = settings && settings[id] ? settings[id].graphQlBasicAuth : process.env.GRAPHQL_AUTH
 
     createProxyMiddleware({
       auth,

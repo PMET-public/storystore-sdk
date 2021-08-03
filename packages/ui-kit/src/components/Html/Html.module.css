@@ -56,3 +56,8 @@
   background-repeat: no-repeat;
   margin-right: 0.5em;
 }
+
+.root strong,
+.root b {
+  font-weight: var(--font-bold);
+}

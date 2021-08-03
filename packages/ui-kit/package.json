@@ -4,11 +4,16 @@
   "description": "A UI Component Library",
   "author": "Carlos A. Cabrera @fnhipster",
   "license": "ISC",
-  "main": "index.js",
   "files": [
-    "index.js",
-    "index.d.ts",
-    "dist"
+    "dist",
+    "components.d.ts",
+    "components.js",
+    "experiences.d.ts",
+    "experiences.js",
+    "hooks.d.ts",
+    "hooks.js",
+    "lib.d.ts",
+    "lib.js"
   ],
   "scripts": {
     "build:babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx\" src -d dist --copy-files --no-copy-ignored",

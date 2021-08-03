@@ -107,10 +107,10 @@ export const Home: FunctionComponent = () => {
     <Grid gap={{ small: 'lg', large: '2xl' }} className={style.root}>
       <Banner
         backgroundColor="#f4ecea"
-        backgroundImage={<Image src={'/__aem' + bgImageBanner} />}
+        backgroundImage={<Image src={bgImageBanner} />}
         height={{ small: '80vh', large: '70vh' }}
         heading={
-          <Heading root={<h2 />} size={{ small: 'xl', large: '4xl' }}>
+          <Heading root={<h2 />} size={{ small: 'xl', medium: '4xl', large: '5xl' }}>
             Not all who wander are lost.
           </Heading>
         }

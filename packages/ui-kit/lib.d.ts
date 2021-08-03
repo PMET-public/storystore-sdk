@@ -1,1 +1,1 @@
-export * from './dist/theme'
+export * from './dist/lib'

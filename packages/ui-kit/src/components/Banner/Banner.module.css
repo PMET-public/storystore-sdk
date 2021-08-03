@@ -12,6 +12,13 @@
 
 @media (min-width: 768px) {
   .root {
+    --width: var(--banner-medium-width);
+    --height: var(--banner-medium-height);
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
     --width: var(--banner-large-width);
     --height: var(--banner-large-height);
   }

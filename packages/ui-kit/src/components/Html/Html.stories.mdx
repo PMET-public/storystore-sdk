@@ -4,11 +4,7 @@ import Html from '.'
 <Meta title="Components/Html" component={Html} />
 
 export const Template = args => {
-  return (
-    <Html {...args}>
-      <div style={{ height: '400px', background: '#ddd' }} />
-    </Html>
-  )
+  return <Html {...args} />
 }
 
 # Html
@@ -16,7 +12,9 @@ export const Template = args => {
 WIP
 
 <Canvas withSource="open">
-  <Story name="Html">{Template.bind({})}</Story>
+  <Story name="Html" args={{ htmlString: '<strong>Hello</strong> World!' }}>
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ```

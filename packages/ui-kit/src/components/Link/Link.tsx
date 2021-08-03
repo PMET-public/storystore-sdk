@@ -1,6 +1,11 @@
-import { useLink } from '../App'
-import { FunctionComponent, AnchorHTMLAttributes } from 'react'
+import { FunctionComponent, AnchorHTMLAttributes, createContext, useContext } from 'react'
 import { classes, merge } from '../../lib'
+
+const LinkContext = createContext(<a />)
+
+export const LinkProvider = LinkContext.Provider
+
+export const useLink = () => useContext(LinkContext)
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {}
 

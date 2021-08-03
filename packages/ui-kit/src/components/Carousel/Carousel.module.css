@@ -16,6 +16,12 @@
 
 @media (min-width: 768px) {
   .root {
+    --show: var(--carousel-show-medium);
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
     --show: var(--carousel-show-large);
   }
 }

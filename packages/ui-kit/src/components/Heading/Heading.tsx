@@ -23,6 +23,7 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       className={classes([style.root, [style.accent, accent], className])}
       style={{
         ['--banner-size-small' as string]: `var(--font-${size.small})`,
+        ['--banner-size-medium' as string]: `var(--font-${size.medium})`,
         ['--banner-size-large' as string]: `var(--font-${size.large})`,
         ...props.style,
       }}

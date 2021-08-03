@@ -150,7 +150,8 @@
   flex-grow: 1;
 }
 
-.menuItem.icon svg {
+.menuItem.icon svg,
+svg.menuItem.icon {
   fill: currentColor;
   height: 1.875rem;
   width: auto;

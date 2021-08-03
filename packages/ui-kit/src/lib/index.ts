@@ -6,18 +6,16 @@ export type Size = 'md' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 
 export type Color = 'surface' | 'primary' | 'secondary' | 'accent'
 
-export type BreakpointValues<T> = T | { small: T; large: T }
+export type BreakpointValues<T> = T | { small: T; medium?: T; large: T }
 
 export const getBreakpointValues = (value: BreakpointValues<any>) => {
-  return typeof value !== 'object'
-    ? {
-        small: value,
-        large: value,
-      }
-    : {
-        small: value.small,
-        large: value.large ?? value.small,
-      }
+  if (typeof value !== 'object') return { small: value, medium: value, large: value }
+
+  return {
+    small: value.small,
+    medium: value.medium ?? value.small,
+    large: value.large ?? value.medium ?? value.small,
+  }
 }
 
 export const merge = deepmerge

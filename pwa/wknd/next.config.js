@@ -17,5 +17,3 @@ module.exports = withTM({
     ]
   },
 })
-
-// '/content/dam/wknd/en/adventures/bali-surf-camp/bali-surf-camp'

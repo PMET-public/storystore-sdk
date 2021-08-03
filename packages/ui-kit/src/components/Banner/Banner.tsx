@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactElement, ImgHTMLAttributes, cloneElement, HTMLAttributes } from 'react'
-import { classes, merge, BreakpointValues, getBreakpointValues, Color } from '../../lib'
+import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
 import style from './Banner.module.css'
 import { ButtonProps } from '../Button'
 import View from '../View'
@@ -46,8 +46,10 @@ export const Banner: FunctionComponent<BannerProps> = ({
         ['--banner-bg-color' as string]: backgroundColor,
         ['--banner-text-color' as string]: textColor,
         ['--banner-small-width' as string]: width.small,
+        ['--banner-medium-width' as string]: width.medium,
         ['--banner-large-width' as string]: width.large,
         ['--banner-small-height' as string]: height.small,
+        ['--banner-medium-height' as string]: height.medium,
         ['--banner-large-height' as string]: height.large,
         ...props.style,
       }}

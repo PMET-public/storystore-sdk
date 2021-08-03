@@ -33,6 +33,7 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
       className={classes([style.root, [style.hideScrollBar, hideScrollBar], [style.padded, padded], className])}
       style={{
         ['--carousel-show-small' as string]: show.small ? `calc(100% / ${show.small} - ${padding})` : 'max-content',
+        ['--carousel-show-medium' as string]: show.medium ? `calc(100% / ${show.medium} - ${padding})` : 'max-content',
         ['--carousel-show-large' as string]: show.large ? `calc(100% / ${show.large} - ${padding})` : 'max-content',
         ['--carousel-gap' as string]: gap,
         ['--carousel-padding' as string]: padding,
