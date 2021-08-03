@@ -1,52 +1,65 @@
-import { FunctionComponent, ReactElement, ImgHTMLAttributes, cloneElement } from 'react'
-import classes from '../../lib/class-names'
+import { FunctionComponent, ReactElement, ImgHTMLAttributes, cloneElement, HTMLAttributes } from 'react'
+import { classes, merge, BreakpointValues, getBreakpointValues, Color } from '../../lib'
 import style from './Banner.module.css'
 import { ButtonProps } from '../Button'
 import View from '../View'
 
-export type BannerProps = {
+export type BannerProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
   backgroundImage?: ReactElement<ImgHTMLAttributes<HTMLImageElement>>
   backgroundColor?: string
   textColor?: string
   align?: 'left' | 'right' | 'center'
-  title?: ReactElement<ButtonProps>
+  vAlign?: 'top' | 'bottom' | 'middle'
+  heading?: ReactElement<ButtonProps>
   button?: ReactElement<ButtonProps>
   contained?: boolean
-  width?: string
-  height?: string
+  width?: BreakpointValues<string>
+  height?: BreakpointValues<string>
+  screen?: 'dark' | 'darker' | 'light' | 'lighter'
 }
-
 export const Banner: FunctionComponent<BannerProps> = ({
+  root = <div />,
+  align = 'center',
+  vAlign = 'middle',
   backgroundColor,
   backgroundImage,
   button,
   children,
+  className,
   contained = false,
+  heading,
+  height: _height = '400px',
   textColor,
-  title,
-  align = 'center',
-  width = '100%',
-  height = '400px',
+  width: _width = '100%',
+  screen,
   ...props
 }) => {
+  const height = getBreakpointValues(_height)
+  const width = getBreakpointValues(_width)
+
   return (
-    <div
-      {...props}
-      className={style.root}
+    <root.type
+      {...merge(props, root.props)}
+      className={classes([style.root, className, [style.screen, screen], style[screen || 'dark'], style[vAlign]])}
       style={{
         ['--banner-bg-color' as string]: backgroundColor,
         ['--banner-text-color' as string]: textColor,
-        ['--banner-width' as string]: width,
-        ['--banner-height' as string]: height,
+        ['--banner-small-width' as string]: width.small,
+        ['--banner-large-width' as string]: width.large,
+        ['--banner-small-height' as string]: height.small,
+        ['--banner-large-height' as string]: height.large,
+        ...props.style,
       }}
     >
       {backgroundImage && cloneElement(backgroundImage, { className: style.backgroundImage })}
-      <View className={classes([style.wrapper, style[align]])} contained={contained}>
+
+      <View className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
         <div className={style.content}>
-          {title && cloneElement(title, { className: style.title })}
+          {heading && cloneElement(heading, { className: style.heading })}
           {button && cloneElement(button, { className: style.button })}
         </div>
       </View>
-    </div>
+    </root.type>
   )
 }

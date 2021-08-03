@@ -1,5 +1,6 @@
 .root {
+  --app-header-height: unset;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  min-height: calc(100vh);
 }

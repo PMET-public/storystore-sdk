@@ -1,2 +1,47 @@
 .root {
+  display: inline-grid;
+  overflow: hidden;
+  grid-gap: var(--spacing-sm);
+}
+
+.surface {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.content {
+  display: grid;
+  grid-gap: var(--spacing-xs);
+}
+
+.surface .content {
+  padding: 0 var(--padded) var(--padded);
+}
+
+.heading {
+  font-weight: var(--font-semibold);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--font-xs);
+}
+
+.tag {
+  color: var(--color-on-surface-lighter);
+}
+
+a.tag:hover {
+  color: var(--color-on-surface);
+}
+
+.tag:not(:last-of-type) {
+  margin-right: var(--spacing-sm);
 }

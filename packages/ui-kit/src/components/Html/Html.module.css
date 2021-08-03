@@ -1,0 +1,58 @@
+.root h1,
+.root h2,
+.root h3,
+.root h4,
+.root h5,
+.root h6 {
+  margin-bottom: 1em;
+}
+
+.root h1 {
+  font-size: var(--font-3xl);
+}
+
+.root h2 {
+  font-size: var(--font-2xl);
+}
+
+.root h3 {
+  font-size: var(--font-xl);
+}
+
+.root h4 {
+  font-size: var(--font-lg);
+}
+
+.root h5 {
+  font-size: var(--font-md);
+}
+
+.root h6 {
+  font-size: var(--font-sm);
+}
+
+.root p:not(:last-of-type) {
+  margin-bottom: var(--spacing-md);
+}
+
+.root ol,
+.root ul {
+  list-style: none;
+  padding-left: 1em;
+  display: grid;
+  grid-gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  grid-auto-rows: max-content;
+}
+
+.root ol li::before,
+.root ul li::before {
+  content: '';
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' d='M0 0h24v24H0z'/><path d='M14.59 16.004L5.982 7.397l1.414-1.414 8.607 8.606V7.004h2v11h-11v-2z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 0.5em;
+}

@@ -1,0 +1,31 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Adventure from '.'
+import App from '../App'
+import { settings } from '../../../../../.storybook/lib'
+
+<Meta
+  title="Experiences/WKND/Adventure"
+  component={Adventure}
+  parameters={{
+    layout: 'fullscreen',
+    title: 'Settings',
+    variables: { ...settings },
+  }}
+/>
+
+export const Template = args => (
+  <App>
+    <Adventure {...args} />
+  </App>
+)
+
+# Adventure
+
+<Canvas withSource="open">
+  <Story
+    name="Adventure"
+    args={{ path: '/content/dam/wknd/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica' }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

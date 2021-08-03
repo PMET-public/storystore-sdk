@@ -12,18 +12,20 @@ import LogoIcon from 'remixicon/icons/System/apps-fill.svg'
   }}
 />
 
-export const Template = args => {
-  return (
-    <App {...args} header={<Header logo={LogoIcon} sticky contained />} footer={<Footer logo={LogoIcon} contained />} />
-  )
-}
+export const Template = args => <App {...args} />
 
 # App
 
 App Shell.
 
 <Canvas withSource="open">
-  <Story name="App" args={{}}>
+  <Story
+    name="App"
+    args={{
+      header: <Header logo={<LogoIcon />} variant="accent" sticky contained />,
+      footer: <Footer logo={<LogoIcon />} contained />,
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>

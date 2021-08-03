@@ -30,18 +30,17 @@
   --opacity: 0.6;
   border-bottom-color: var(--border-bottom-color);
   border-bottom-style: solid;
-  border-bottom-width: 0.2rem;
+  border-bottom-width: 0.3rem;
   cursor: var(--cursor);
   font-size: var(--font-sm);
   opacity: var(--opacity);
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-xs) 0;
   transition: opacity 500ms ease, border-bottom-color 500ms ease;
   white-space: nowrap;
   z-index: 1;
 }
 
 .tab:hover:not(.disabled) {
-  --color: var(--color-on-surface);
   --opacity: 1;
 }
 
@@ -56,6 +55,6 @@
 }
 
 .panel {
-  margin-top: -0.2rem;
-  border-top: 0.2rem solid var(--color-primary-lighter);
+  margin-top: -0.1rem;
+  border-top: 0.1rem solid var(--color-surface-darker);
 }

@@ -2,7 +2,8 @@ import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Banner from '.'
 import Image from '../Image'
 import Button from '../Button'
-import backgroundImage from '../../experiences/wknd/assets/background-header.jpg'
+import Heading from '../Heading'
+import backgroundImage from '../../experiences/wknd/assets/bg-adventures-1.jpg'
 
 <Meta title="Components/Banner" component={Banner} />
 
@@ -20,7 +21,7 @@ App Banner.
     args={{
       textColor: 'black',
       backgroundImage: <Image src={backgroundImage} />,
-      title: <h2>Banner Title</h2>,
+      heading: <Heading size={{ small: '2xl', large: '5xl' }}>Banner heading</Heading>,
       button: <Button variant="cta">Button</Button>,
     }}
   >
@@ -41,7 +42,7 @@ import { Banner } from '@storystore/ui-kit/components'
 <Canvas>
   <Banner
     backgroundColor="teal"
-    title={<h2>Banner Title</h2>}
+    heading={<Heading size="2xl">Banner heading</Heading>}
     button={
       <Button variant="accent" transparent>
         Button
@@ -56,7 +57,7 @@ import { Banner } from '@storystore/ui-kit/components'
 <Canvas>
   <Banner
     backgroundColor="teal"
-    title={<h2>Banner Title</h2>}
+    heading={<Heading size="2xl">Banner heading</Heading>}
     button={
       <Button variant="accent" transparent>
         Button
@@ -71,7 +72,7 @@ import { Banner } from '@storystore/ui-kit/components'
 <Canvas>
   <Banner
     backgroundColor="teal"
-    title={<h2>Banner Title</h2>}
+    heading={<Heading size="2xl">Banner heading</Heading>}
     button={
       <Button variant="accent" transparent>
         Button

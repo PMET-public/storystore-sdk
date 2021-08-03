@@ -1,8 +1,9 @@
 .spacings {
-  --spacing-xxs: 0.25rem;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 4rem;
-  --spacing-xl: 6rem;
+  --spacing-xxs: 0.15625rem;
+  --spacing-xs: 0.3125rem;
+  --spacing-sm: 0.625rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 3.75rem;
+  --spacing-2xl: 4.25rem;
 }

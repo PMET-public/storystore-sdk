@@ -1,0 +1,22 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Link from '.'
+
+<Meta title="Components/Link" component={Link} />
+
+export const Template = args => {
+  return <Link {...args}>Link</Link>
+}
+
+# Link
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="Link" args={{ href: 'https://adobe.com', target: '_blank' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Link } from '@storystore/ui-kit/components'
+```

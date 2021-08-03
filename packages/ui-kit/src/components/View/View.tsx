@@ -1,27 +1,33 @@
-import { FunctionComponent, forwardRef } from 'react'
-import classes from '../../lib/class-names'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { classes, Color, merge } from '../../lib'
 import style from './View.module.css'
 
-export type ViewProps = {
-  /** Render as HTML Element or React Component  */
-  as?: keyof JSX.IntrinsicElements | React.ComponentType<any>
+export type ViewProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
   /** Contains centered layout */
   contained?: boolean
   /** Add side padding */
   padded?: boolean
-  /** CSS Classes */
-  className?: string
+  background?: Color
 }
 
-export const View: FunctionComponent<ViewProps> = forwardRef(
-  ({ as: Root = 'div', className = '', contained = false, padded = false, ...props }, ref) => {
-    const classNames = className.split(' ')
-    return (
-      <Root
-        className={classes([[style.contained, contained], [style.padded, padded], ...classNames])}
-        {...props}
-        ref={ref}
-      />
-    )
-  }
-)
+export const View: FunctionComponent<ViewProps> = ({
+  root = <div />,
+  className,
+  contained = false,
+  padded = false,
+  background,
+  ...props
+}) => {
+  return (
+    <root.type
+      {...merge(props, root.props)}
+      className={classes([style.root, [style.contained, contained], [style.padded, padded], className])}
+      style={{
+        ['--view-bg' as string]: background ? `var(--color-${background})` : 'transparent',
+        ['--view-color' as string]: background ? `var(--color-on-${background})` : 'inherit',
+        ...props.style,
+      }}
+    />
+  )
+}

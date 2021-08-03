@@ -11,13 +11,7 @@ import LogoIcon from 'remixicon/icons/System/apps-fill.svg'
 />
 
 export const Template = args => {
-  return (
-    <Footer
-      logo={<LogoIcon />}
-      menu={[<a href="#">Articles</a>, <a href="#">Adventures</a>, <a href="#">About</a>, <a href="#">Contacts</a>]}
-      {...args}
-    />
-  )
+  return <Footer logo={<LogoIcon />} {...args} />
 }
 
 # Footer
@@ -25,7 +19,15 @@ export const Template = args => {
 Footers allow users to take actions with a single tap.
 
 <Canvas withSource="open">
-  <Story name="Footer">{Template.bind({})}</Story>
+  <Story
+    name="Footer"
+    args={{
+      logo: <LogoIcon />,
+      menu: [<a href="#">Articles</a>, <a href="#">Adventures</a>, <a href="#">About</a>, <a href="#">Contacts</a>],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ```

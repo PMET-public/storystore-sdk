@@ -1,0 +1,66 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Carousel from '.'
+import Tile from '../Tile'
+import Image from '../Image'
+import imgSrc from '../../experiences/wknd/assets/bg-adventures-1.jpg'
+
+<Meta title="Components/Carousel" component={Carousel} parameters={{ layout: 'fullscreen' }} />
+
+export const Template = args => {
+  return <Carousel {...args} />
+}
+
+# Carousel
+
+WIP.
+
+<Canvas withSource="open">
+  <Story
+    name="Carousel"
+    args={{
+      show: { small: 1, large: 3 },
+      gap: 'sm',
+      padded: true,
+      items: [
+        <Tile
+          image={<Image src={imgSrc} width={500} height={500} />}
+          heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+          subheading="4-days"
+          tags={['#Flying', '#Get Away']}
+        />,
+        <Tile
+          image={<Image src={imgSrc} width={500} height={500} />}
+          heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+          subheading="4-days"
+          tags={['#Flying', '#Get Away']}
+        />,
+        <Tile
+          image={<Image src={imgSrc} width={500} height={500} />}
+          heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+          subheading="4-days"
+          tags={['#Flying', '#Get Away']}
+        />,
+        <Tile
+          image={<Image src={imgSrc} width={500} height={500} />}
+          heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+          subheading="4-days"
+          tags={['#Flying', '#Get Away']}
+        />,
+        <Tile
+          image={<Image src={imgSrc} width={500} height={500} />}
+          heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+          subheading="4-days"
+          tags={['#Flying', '#Get Away']}
+        />,
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Carousel } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Carousel" />

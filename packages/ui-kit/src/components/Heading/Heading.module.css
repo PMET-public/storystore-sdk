@@ -1,0 +1,21 @@
+.root {
+  font-size: var(--banner-size-small);
+  font-weight: var(--font-semibold);
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .root {
+    font-size: var(--banner-size-large);
+  }
+}
+
+.root.accent::after {
+  background-color: var(--color-accent);
+  content: '';
+  display: block;
+  height: 0.185rem;
+  margin-top: 0.15em;
+  width: 2rem;
+}

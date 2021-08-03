@@ -1,0 +1,24 @@
+.root {
+  margin-top: -82px;
+}
+
+.banner {
+  border-radius: var(--rounded-xl);
+  color: #fff;
+  overflow: hidden;
+}
+
+.banner .subheading {
+  display: block;
+  font-size: 0.5em;
+}
+
+.category img {
+  border-radius: var(--rounded-xl);
+  overflow: hidden;
+}
+
+.tile {
+  border-radius: var(--rounded-xl);
+  overflow: hidden;
+}

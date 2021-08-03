@@ -1,0 +1,52 @@
+.root {
+  --show: var(--carousel-show-small);
+  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-auto-columns: var(--show);
+  grid-auto-flow: column;
+  grid-gap: var(--carousel-gap);
+  margin-bottom: var(--spacing-sm);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-sm);
+  position: relative;
+  scroll-padding: var(--carousel-padding);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: 1px;
+}
+
+@media (min-width: 768px) {
+  .root {
+    --show: var(--carousel-show-large);
+  }
+}
+
+.root::-webkit-scrollbar {
+  height: 0.125rem;
+}
+.root::-webkit-scrollbar-track {
+  margin: 0 20vw;
+  border-radius: 0.625rem;
+  background: var(--color-surface-darker);
+}
+.root::-webkit-scrollbar-thumb {
+  border-radius: 0.625rem;
+  background: var(--color-on-surface-lighter);
+}
+
+.root.hideScrollBar {
+  padding-bottom: unset;
+  scrollbar-width: none;
+  margin-bottom: 0;
+}
+
+.root.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.padded {
+  padding-left: var(--padded);
+}
+
+.item {
+  scroll-snap-align: center;
+}

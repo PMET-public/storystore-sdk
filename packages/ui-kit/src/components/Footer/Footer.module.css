@@ -1,6 +1,6 @@
 .root {
-  --footer-text-color: var(--color-on-surface-darkest);
-  background-color: var(--color-surface-darkest);
+  --footer-text-color: #ccc;
+  background-color: #222;
   color: var(--footer-text-color);
 }
 
@@ -32,13 +32,13 @@
 }
 
 .root a:hover {
-  --footer-text-color: var(--color-on-surface);
+  --footer-text-color: #fff;
 }
 
 .logo {
   grid-area: logo;
   fill: currentColor;
-  height: 3rem;
+  height: 3.125rem;
 }
 
 .menu {
@@ -46,7 +46,7 @@
   display: grid;
   font-size: var(--font-sm);
   grid-area: menu;
-  grid-gap: var(--spacing-xs);
+  grid-gap: var(--spacing-sm);
 }
 
 @media (min-width: 1024px) {
@@ -81,5 +81,5 @@
 
 .social svg {
   fill: currentColor;
-  width: 1.6em;
+  width: 1.875em;
 }

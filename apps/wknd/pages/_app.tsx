@@ -4,8 +4,11 @@ import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { variables, auth } from '@storystore/toolbox'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { useMemo } from 'react'
+import { wknd } from '@storystore/ui-kit/experiences'
 
-const App = ({ Component, pageProps }: AppProps) => {
+const { App } = wknd.pages
+
+const AppRoot = ({ Component, pageProps }: AppProps) => {
   const AEM_GRAPHQL_URL = variables.get('NEXT_PUBLIC_AEM_GRAPHQL_URL') || process.env['NEXT_PUBLIC_AEM_GRAPHQL_URL']
   const AEM_GRAPHQL_AUTH = variables.get('NEXT_PUBLIC_AEM_GRAPHQL_AUTH') || process.env['NEXT_PUBLIC_AEM_GRAPHQL_AUTH']
 
@@ -35,10 +38,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider>
-        <Component {...pageProps} />
+        <App>
+          <Component {...pageProps} />
+        </App>
       </UIProvider>
     </ApolloProvider>
   )
 }
 
-export default App
+export default AppRoot

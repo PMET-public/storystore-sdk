@@ -1,8 +1,9 @@
-import { ButtonHTMLAttributes, FunctionComponent, ReactNode } from 'react'
-import classes from '../../lib/class-names'
+import { ButtonHTMLAttributes, FunctionComponent, HTMLAttributes, ReactElement, ReactNode } from 'react'
+import { classes, merge } from '../../lib'
 import style from './Button.module.css'
 
 export type ButtonProps = {
+  root?: ReactElement
   /** Content. */
   children: ReactNode
   /** Visual styles. */
@@ -14,14 +15,19 @@ export type ButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 export const Button: FunctionComponent<ButtonProps> = ({
+  root = <button />,
   variant = 'primary',
   transparent = false,
   children,
+  className,
   ...props
 }) => {
   return (
-    <button {...props} className={classes([style.root, style[variant], [style.transparent, transparent]])}>
+    <root.type
+      {...merge(props, root.props)}
+      className={classes([style.root, style[variant], [style.transparent, transparent], className])}
+    >
       {children}
-    </button>
+    </root.type>
   )
 }

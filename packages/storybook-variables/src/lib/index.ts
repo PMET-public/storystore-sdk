@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useAddonState, useStorybookApi } from '@storybook/api'
+import * as cookies from '@storystore/toolbox/src/cookies'
 
 import { useAddonState as useClientAddonState, useStoryContext as useClientStoryContext } from '@storybook/client-api'
 import deepmerge from 'deepmerge'
@@ -29,11 +30,11 @@ export const ADDON_ID = 'storybook-variables'
 export const STORYBOOK_VARIABLES = ADDON_ID
 
 const getStoredValues = () => {
-  return JSON.parse(localStorage.getItem(STORYBOOK_VARIABLES) || '{}')
+  return JSON.parse(decodeURIComponent(cookies.get(STORYBOOK_VARIABLES) || '{}'))
 }
 
 const setStoredValues = (values: StateValues) => {
-  localStorage.setItem(STORYBOOK_VARIABLES, JSON.stringify(values))
+  cookies.set(STORYBOOK_VARIABLES, JSON.stringify(values), 30)
 }
 
 export const useDefaultValuesFromParams = (params: Params): Fields => {
@@ -47,17 +48,18 @@ export const useDefaultValuesFromParams = (params: Params): Fields => {
 }
 
 export const useStoryStateVariables = (params: Params) => {
-  const { getUrlState } = useStorybookApi()
+  const { getCurrentStoryData } = useStorybookApi()
 
-  const { storyId } = getUrlState()
+  const story = getCurrentStoryData()
+  const storyId = story.id
 
   if (!storyId) throw Error('Missing "storyId"')
 
   const store = getStoredValues()
 
-  const initialState = useDefaultValuesFromParams(params)
+  const initialState = deepmerge({ [storyId]: useDefaultValuesFromParams(params) }, { ...store })
 
-  const [_state, _setState] = useAddonState<StateValues>(ADDON_ID, deepmerge({ [storyId]: initialState }, store))
+  const [_state, _setState] = useAddonState<StateValues>(ADDON_ID, initialState)
 
   const state = _state[storyId]
 
@@ -67,7 +69,7 @@ export const useStoryStateVariables = (params: Params) => {
     setStoredValues(newValues)
   }
 
-  return [state, setState]
+  return [state || initialState[storyId], setState]
 }
 
 export const useVariables = () => {
@@ -77,7 +79,7 @@ export const useVariables = () => {
 
   const initialState = useDefaultValuesFromParams(parameters.variables)
 
-  const [state] = useClientAddonState<StateValues>(ADDON_ID, deepmerge({ [id]: initialState }, store))
+  const [state] = useClientAddonState<StateValues>(ADDON_ID, deepmerge({ [id]: initialState }, { ...store }))
 
-  return (state && state[id]) || {}
+  return (state && state[id]) || initialState || {}
 }

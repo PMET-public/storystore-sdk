@@ -1,0 +1,28 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import Home from '.'
+import App from '../App'
+import { settings } from '../../../../../.storybook/lib'
+
+<Meta
+  title="Experiences/WKND/Home"
+  component={Home}
+  parameters={{
+    layout: 'fullscreen',
+    title: 'Settings',
+    variables: { ...settings },
+  }}
+/>
+
+export const Template = args => (
+  <App>
+    <Home {...args} />
+  </App>
+)
+
+# Home
+
+<Canvas withSource="open">
+  <Story name="Home" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>

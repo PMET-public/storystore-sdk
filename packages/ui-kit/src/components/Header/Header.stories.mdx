@@ -14,40 +14,36 @@ import CheckInIcon from 'remixicon/icons/System/check-double-line.svg'
 
 export const Template = args => <Header {...args} />
 
+export const menu = [
+  <HeaderMenuItem variant="fill" />,
+  <HeaderMenuItem active>
+    <a href="#">Home</a>
+  </HeaderMenuItem>,
+  <HeaderMenuItem>
+    <a href="#">Articles</a>
+  </HeaderMenuItem>,
+  <HeaderMenuItem>
+    <a href="#">Contact</a>
+  </HeaderMenuItem>,
+  <HeaderMenuItem variant="fill" />,
+  <HeaderMenuItem variant="icon" compact>
+    <a href="#">
+      <HeartIcon aria-label="Likes" />
+    </a>
+  </HeaderMenuItem>,
+  <HeaderMenuItem variant="icon" compact>
+    <a href="#">
+      <CheckInIcon aria-label="Check-ins" />
+    </a>
+  </HeaderMenuItem>,
+]
+
 # Header
 
 App Header.
 
 <Canvas withSource="open">
-  <Story
-    name="Header"
-    args={{
-      logo: <LogoIcon style={{ fill: 'white' }} />,
-      menu: [
-        <HeaderMenuItem variant="fill" />,
-        <HeaderMenuItem active>
-          <a href="#">Home</a>
-        </HeaderMenuItem>,
-        <HeaderMenuItem>
-          <a href="#">Articles</a>
-        </HeaderMenuItem>,
-        <HeaderMenuItem>
-          <a href="#">Contact</a>
-        </HeaderMenuItem>,
-        <HeaderMenuItem variant="fill" />,
-        <HeaderMenuItem variant="icon" compact>
-          <a href="#">
-            <HeartIcon aria-label="Likes" />
-          </a>
-        </HeaderMenuItem>,
-        <HeaderMenuItem variant="icon" compact>
-          <a href="#">
-            <CheckInIcon aria-label="Check-ins" />
-          </a>
-        </HeaderMenuItem>,
-      ],
-    }}
-  >
+  <Story name="Header" args={{ logo: <LogoIcon />, menu }}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -63,35 +59,35 @@ import { Header, HeaderNavItem, HeaderNavFill } from '@storystore/ui-kit/compone
 ### Primary
 
 <Canvas>
-  <Template variant="primary" logo={<LogoIcon />} />
+  <Template variant="primary" logo={<LogoIcon />} menu={menu} />
 </Canvas>
 
 ### Transparent Primary
 
 <Canvas>
-  <Template variant="primary" transparent logo={<LogoIcon />} />
+  <Template variant="primary" transparent logo={<LogoIcon />} menu={menu} />
 </Canvas>
 
 ### Secondary
 
 <Canvas>
-  <Template variant="secondary" logo={<LogoIcon />} />
+  <Template variant="secondary" logo={<LogoIcon />} menu={menu} />
 </Canvas>
 
 ### Transparent Secondary
 
 <Canvas>
-  <Template variant="secondary" transparent logo={<LogoIcon />} />
+  <Template variant="secondary" transparent logo={<LogoIcon />} menu={menu} />
 </Canvas>
 
 ### Accent
 
 <Canvas>
-  <Template variant="accent" logo={<LogoIcon />} />
+  <Template variant="accent" logo={<LogoIcon />} menu={menu} />
 </Canvas>
 
 ### Transparent Accent
 
 <Canvas>
-  <Template variant="accent" transparent logo={<LogoIcon />} />
+  <Template variant="accent" transparent logo={<LogoIcon />} menu={menu} />
 </Canvas>

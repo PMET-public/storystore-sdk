@@ -1,6 +1,7 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Tile from '.'
-import imgSrc from '../../experiences/wknd/assets/background-header.jpg'
+import imgSrc from '../../experiences/wknd/assets/bg-adventures-1.jpg'
+import Image from '../Image'
 
 <Meta title="Components/Tile" component={Tile} />
 
@@ -13,7 +14,17 @@ export const Template = args => {
 WIP.
 
 <Canvas withSource="open">
-  <Story name="Tile">{Template.bind({})}</Story>
+  <Story
+    name="Tile"
+    args={{
+      image: <Image src={imgSrc} width={500} height={500} />,
+      heading: <h3>Ahoy-hoy, buckaroos!</h3>,
+      subheading: '4-days',
+      tags: ['#Flying', '#Get Away'],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 ```

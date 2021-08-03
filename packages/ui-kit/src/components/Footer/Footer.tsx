@@ -1,12 +1,14 @@
-import { FunctionComponent, HTMLAttributes, ReactElement, cloneElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement, cloneElement, isValidElement } from 'react'
 import style from './Footer.module.css'
 import View from '../View'
+import { classes, merge } from '../../lib'
 import FacebookIcon from 'remixicon/icons/Logos/facebook-fill.svg'
 import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg'
 import InstagramIcon from 'remixicon/icons/Logos/instagram-fill.svg'
 import PinterestIcon from 'remixicon/icons/Logos/pinterest-fill.svg'
 
-export type FooterProps = {
+export type FooterProps = HTMLAttributes<HTMLElement> & {
+  root?: ReactElement
   /** Name of the website */
   name?: string
   /** Site description */
@@ -20,21 +22,27 @@ export type FooterProps = {
 }
 
 export const Footer: FunctionComponent<FooterProps> = ({
+  root = <footer />,
   name = 'Adobe',
   logo,
   description,
   contained,
   menu,
+  className,
   ...props
 }) => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className={style.root} {...props}>
+    <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
       <View className={style.wrapper} contained={contained} padded>
-        <div>{cloneElement(logo, { className: style.logo })}</div>
+        <div>{isValidElement(logo) ? cloneElement(logo, { className: style.logo }) : null}</div>
 
-        <div className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</div>
+        <div className={style.menu}>
+          {menu?.map((item, key) => {
+            return isValidElement(item) ? cloneElement(item, { key }) : null
+          })}
+        </div>
 
         <div className={style.disclaimer}>
           Ⓒ {year}, {name}. {description}
@@ -61,6 +69,6 @@ export const Footer: FunctionComponent<FooterProps> = ({
           </a>
         </div>
       </View>
-    </footer>
+    </root.type>
   )
 }

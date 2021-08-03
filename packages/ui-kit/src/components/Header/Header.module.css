@@ -3,11 +3,13 @@
   --header-bg: var(--color-surface);
   --header-link: var(--header-text);
   --header-text: var(--color-on-surface);
-  --header-logo-size: 4rem;
+  --header-logo-size: 3.125rem;
   --header-logo-color: unset;
 
   background-color: var(--header-bg);
   color: var(--header-text);
+  font-size: var(--font-sm);
+  z-index: 10;
 }
 
 .wrapper {
@@ -24,11 +26,12 @@
 }
 
 .root.surface.transparent {
+  --header-bg: transparent;
   --header-text: var(--color-surface);
 }
 
 .root.surface.transparent.scrolled {
-  --header-bg: var(--color-surface);
+  --header-bg: var(--color-surface-transparent);
   --header-text: var(--color-on-surface);
 }
 
@@ -38,11 +41,13 @@
 }
 
 .root.primary.transparent {
+  --header-bg: transparent;
   --header-text: var(--color-primary);
 }
 
 .root.primary.transparent.scrolled {
-  --header-bg: var(--color-primary);
+  --header-bg: var(--color-primary-transparent);
+  --header-text: var(--color-on-primary);
 }
 
 .root.secondary {
@@ -51,26 +56,28 @@
 }
 
 .root.secondary.transparent {
+  --header-bg: transparent;
   --header-text: var(--color-secondary);
 }
 
-.root.surface.transparent.scrolled {
-  --header-bg: var(--color-surface);
+.root.secondary.transparent.scrolled {
+  --header-bg: var(--color-secondary-transparent);
+  --header-text: var(--color-on-secondary);
 }
 
 .root.accent {
-  --header-accent: var(--color-on-accent);
   --header-bg: var(--color-accent);
   --header-text: var(--color-on-accent);
 }
 
 .root.accent.transparent {
-  --header-accent: var(--color-accent);
+  --header-bg: transparent;
   --header-text: var(--color-accent);
 }
 
-.root.transparent {
-  --header-bg: transparent;
+.root.accent.transparent.scrolled {
+  --header-bg: var(--color-accent-transparent);
+  --header-text: var(--color-on-accent);
 }
 
 .root.sticky {
@@ -78,7 +85,7 @@
   position: sticky;
   top: 0;
   transform: translateY(var(--header-top));
-  transition: all 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
 }
 
 .root.sticky.hide {
@@ -88,6 +95,7 @@
 .root.sticky.scrolled {
   --header-logo-size: 2.5rem;
   --header-logo-color: var(--header-text);
+  backdrop-filter: blur(50px);
 }
 
 .logoWrapper {
@@ -97,7 +105,7 @@
   width: auto;
 }
 
-.logo {
+.logoWrapper svg {
   fill: var(--header-logo-color);
   transition: all 300ms ease;
   height: var(--header-logo-size);
@@ -144,7 +152,7 @@
 
 .menuItem.icon svg {
   fill: currentColor;
-  height: 1.6rem;
+  height: 1.875rem;
   width: auto;
 }
 

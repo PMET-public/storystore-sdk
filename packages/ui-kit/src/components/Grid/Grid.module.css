@@ -1,0 +1,17 @@
+.root {
+  --columns: var(--grid-columns-small);
+  --gap: var(--grid-gap-small);
+  --rows: var(--grid-rows-small);
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template-columns: var(--columns);
+  grid-template-rows: var(--rows);
+}
+
+@media (min-width: 768px) {
+  .root {
+    --columns: var(--grid-columns-large);
+    --gap: var(--grid-gap-large);
+    --rows: var(--grid-rows-large);
+  }
+}

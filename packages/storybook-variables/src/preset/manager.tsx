@@ -73,7 +73,9 @@ const VariablesPanel = ({ params }: VariablesPanelProps) => {
   return (
     <Root>
       <tbody>
-        {Object.entries(params.fields).map(([name, { label = name, defaultValue, ...props }]) => {
+        {Object.entries(params?.fields).map(item => {
+          const [name, { label = name, defaultValue, ...props }] = item
+
           return (
             <FormRow key={name}>
               <td>
@@ -112,7 +114,7 @@ const VariablesPanel = ({ params }: VariablesPanelProps) => {
   )
 }
 
-addons.register(ADDON_ID, () => {
+addons.register(ADDON_ID, api => {
   addons.add(PANEL_ID, {
     type: types.PANEL,
     title() {
@@ -123,11 +125,11 @@ addons.register(ADDON_ID, () => {
     },
     render: ({ active = false, key }) => {
       const params: Params = useParameter('variables')
-
+      const panelKey = api.getUrlState().path
       return (
         <AddonPanel active={active} key={key}>
           {params?.fields ? (
-            <VariablesPanel params={params} />
+            <VariablesPanel params={params} key={panelKey} />
           ) : (
             <NoVariablesWrapper> This story is not configured to handle variables.</NoVariablesWrapper>
           )}
