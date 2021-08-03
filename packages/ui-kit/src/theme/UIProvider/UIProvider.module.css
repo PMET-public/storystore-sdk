@@ -17,3 +17,7 @@
   outline-width: 0.2rem;
   outline-offset: 0.3rem;
 }
+
+.root * {
+  box-sizing: border-box;
+}

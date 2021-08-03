@@ -23,7 +23,7 @@
   opacity: 0.3;
 }
 
-.root:hover {
+.root:hover:not(:disabled) {
   filter: brightness(80%) contrast(120%);
 }
 

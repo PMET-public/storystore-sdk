@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react'
 import style from './Home.module.css'
 import { useQuery } from '@apollo/client'
+import Link from '../../../../components/Link'
 import Grid from '../../../../components/Grid'
 import View from '../../../../components/View'
 import Banner from '../../../../components/Banner'
@@ -106,14 +107,14 @@ export const Home: FunctionComponent = () => {
     <Grid gap={{ small: 'lg', large: '2xl' }} className={style.root}>
       <Banner
         backgroundColor="#f4ecea"
-        backgroundImage={<Image src={bgImageBanner} />}
+        backgroundImage={<Image src={'/__aem' + bgImageBanner} />}
         height={{ small: '80vh', large: '70vh' }}
         heading={
           <Heading root={<h2 />} size={{ small: 'xl', large: '4xl' }}>
             Not all who wander are lost.
           </Heading>
         }
-        button={<Button>Find Getaway</Button>}
+        button={<Button disabled>Find Getaway</Button>}
         align="left"
         contained
       />
@@ -133,13 +134,13 @@ export const Home: FunctionComponent = () => {
               items={data.beginner.items.map(
                 ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                   <Tile
-                    root={<article />}
+                    root={<Link href={id} />}
                     className={style.tile}
                     key={id}
                     image={
                       <Image
                         loading="lazy"
-                        src={adventurePrimaryImage.src}
+                        src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}
@@ -162,7 +163,7 @@ export const Home: FunctionComponent = () => {
             className={style.banner}
             backgroundImage={
               <Image
-                src={data.bannerCamping.item.adventurePrimaryImage.src}
+                src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage.src}
                 width={data.bannerCamping.item.adventurePrimaryImage.width}
                 height={data.bannerCamping.item.adventurePrimaryImage.height}
                 alt={data.bannerCamping.item.adventureTitle}
@@ -179,7 +180,11 @@ export const Home: FunctionComponent = () => {
                 </Heading>
               </div>
             }
-            button={<Button variant="cta">View Adventure</Button>}
+            button={
+              <Button root={<Link href={data.bannerCamping.item.id} />} variant="cta">
+                View Adventure
+              </Button>
+            }
             align="left"
             vAlign="bottom"
             screen="dark"
@@ -202,13 +207,13 @@ export const Home: FunctionComponent = () => {
               items={data.camping.items.map(
                 ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                   <Tile
-                    root={<article />}
+                    root={<Link href={id} />}
                     className={style.tile}
                     key={id}
                     image={
                       <Image
                         loading="lazy"
-                        src={adventurePrimaryImage.src}
+                        src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}
@@ -231,7 +236,7 @@ export const Home: FunctionComponent = () => {
             className={style.banner}
             backgroundImage={
               <Image
-                src={data.bannerSurfing.item.adventurePrimaryImage.src}
+                src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage.src}
                 width={data.bannerSurfing.item.adventurePrimaryImage.width}
                 height={data.bannerSurfing.item.adventurePrimaryImage.height}
                 alt={data.bannerSurfing.item.adventureTitle}
@@ -246,7 +251,11 @@ export const Home: FunctionComponent = () => {
                 {data.bannerSurfing.item.adventureTitle}
               </Heading>
             }
-            button={<Button variant="cta">View Adventure</Button>}
+            button={
+              <Button root={<Link href={data.bannerSurfing.item.id} />} variant="cta">
+                View Adventure
+              </Button>
+            }
             align="left"
             vAlign="bottom"
             screen="dark"
@@ -269,13 +278,13 @@ export const Home: FunctionComponent = () => {
               items={data.overstay.items.map(
                 ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                   <Tile
-                    root={<article />}
+                    root={<Link href={id} />}
                     className={style.tile}
                     key={id}
                     image={
                       <Image
                         loading="lazy"
-                        src={adventurePrimaryImage.src}
+                        src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}

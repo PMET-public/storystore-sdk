@@ -3,8 +3,17 @@ import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/c
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { variables, auth } from '@storystore/toolbox'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import { useMemo } from 'react'
+import { FunctionComponent, useMemo } from 'react'
 import { wknd } from '@storystore/ui-kit/experiences'
+import NextLink from 'next/link'
+
+const Link: FunctionComponent = ({ href, ...props }) => {
+  return (
+    <NextLink href={href}>
+      <a {...props} />
+    </NextLink>
+  )
+}
 
 const { App } = wknd.pages
 
@@ -38,7 +47,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider>
-        <App>
+        <App linkRoot={<Link />}>
           <Component {...pageProps} />
         </App>
       </UIProvider>

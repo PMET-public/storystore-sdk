@@ -77,7 +77,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
   return (
     <div className={style.root}>
       <Banner
-        backgroundImage={<Image src={adventurePrimaryImage.src} alt={adventureTitle} />}
+        backgroundImage={<Image src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
         className={style.banner}
         screen="light"
         vAlign="top"

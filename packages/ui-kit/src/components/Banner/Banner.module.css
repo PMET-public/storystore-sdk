@@ -3,7 +3,6 @@
   --height: var(--banner-small-height);
   align-items: center;
   background-color: var(--banner-bg-color, var(--color-surface));
-  color: #fff;
   color: var(--banner-text-color, var(--color-on-surface));
   height: var(--height);
   overflow: hidden;

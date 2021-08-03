@@ -2,10 +2,9 @@
   margin-top: -82px;
 }
 
-.banner {
+.root .banner {
   border-radius: var(--rounded-xl);
   color: #fff;
-  overflow: hidden;
 }
 
 .banner .subheading {

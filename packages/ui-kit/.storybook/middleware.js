@@ -4,7 +4,7 @@ const { URL, URLSearchParams } = require('url')
 const ADDON_ID = 'storybook-variables'
 
 module.exports = function expressMiddleware(router) {
-  router.use('/content/dam/', (req, res, next) => {
+  router.use('/__aem/', (req, res, next) => {
     const cookie = req.headers.cookie.match(new RegExp(ADDON_ID + '=([^;]+)'))
     const settings = cookie ? JSON.parse(decodeURIComponent(cookie[1])) : null
 
@@ -18,6 +18,7 @@ module.exports = function expressMiddleware(router) {
       auth,
       target,
       changeOrigin: true,
+      pathRewrite: { '^/__aem': '' },
     })(req, res, next)
   })
 }
