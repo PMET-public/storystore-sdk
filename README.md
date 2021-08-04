@@ -1,4 +1,5 @@
-[[./packages/ui-kit/.storybook/logo.png][StoryStore SDK]]
+<img src="storystore-sdk.png" width="100" height="100" />
+
 
 ## ⚠️ Beta v0.1.0 ⚠️
 
