@@ -1,6 +1,13 @@
 import { addons } from '@storybook/addons'
-import { themes } from '@storybook/theming'
+import { create } from '@storybook/theming'
+import brandImage from './logo.png'
+
+const theme = create({
+  base: 'dark',
+  brandTitle: 'StoryStore.SDK',
+  brandImage,
+})
 
 addons.setConfig({
-  theme: themes.dark,
+  theme,
 })

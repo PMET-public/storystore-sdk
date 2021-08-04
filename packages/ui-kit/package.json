@@ -20,7 +20,7 @@
     "build:types": "tsc --allowSyntheticDefaultImports --declaration --emitDeclarationOnly --esModuleInterop --jsx react-jsx --moduleResolution node --module esnext --outDir dist --rootDir src --target esnext",
     "build:watch": "concurrently \"yarn build:babel -- --watch\" \"yarn build:types -- --watch\"",
     "prepare": "yarn run build:babel && yarn run build:types",
-    "dev": "concurrently --names \"BUILD,STORYBOOK\" \"yarn build:watch\" \"start-storybook -p 6006 --no-manager-cache --quiet\"",
+    "dev": "concurrently --names \"BUILD,STORYBOOK\" \"yarn build:watch\" \"start-storybook -p 6006 --no-manager-cache --quiet -s ./.storybook/assets\"",
     "build-storybook": "build-storybook",
     "cleanup": "rimraf dist"
   },
