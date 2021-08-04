@@ -6,10 +6,8 @@ import { UIProvider } from '@storystore/ui-kit/theme'
 import { FunctionComponent, useMemo } from 'react'
 import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
-import NextImage from 'next/image'
 
 const Image: FunctionComponent<any> = ({ src, ...props }) => {
-  // sanitize NextJS Img Src Object
   return <img {...props} src={typeof src === 'object' ? src.src : src} />
 }
 

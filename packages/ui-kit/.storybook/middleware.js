@@ -1,5 +1,7 @@
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const { URL, URLSearchParams } = require('url')
+const express = require('express')
+const path = require('path')
 
 const ADDON_ID = 'storybook-variables'
 
@@ -20,5 +22,11 @@ module.exports = function expressMiddleware(router) {
       changeOrigin: true,
       pathRewrite: { '^/__aem': '' },
     })(req, res, next)
+  })
+
+  router.use('/__assets/:site/', (req, res, next) => {
+    const site = req.params.site
+    const pathname = path.join(__dirname, `../src/experiences/${site}/assets`)
+    express.static(pathname)(req, res, next)
   })
 }

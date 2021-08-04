@@ -11,6 +11,7 @@ import Heading from '../../../../components/Heading'
 import Button from '../../../../components/Button'
 import Image from '../../../../components/Image'
 import gql from 'graphql-tag'
+
 import bgImageBanner from '../../assets/bg-adventures-1.jpg'
 
 export const HOME_QUERY = gql`
@@ -122,7 +123,7 @@ export const Home: FunctionComponent = () => {
       {data.beginner && (
         <View contained padded>
           <Grid root={<section />} gap={{ small: 'md', large: 'lg' }}>
-            <Heading root={<h2 />} size="2xl">
+            <Heading root={<h2 />} size={{ small: 'lg', medium: '2xl' }}>
               Trying something new? Start easy.
             </Heading>
 
@@ -172,7 +173,7 @@ export const Home: FunctionComponent = () => {
             height={{ small: '70vh', large: '600px' }}
             heading={
               <div>
-                <Heading root={<h2 />} size={{ small: 'xl', large: '4xl' }}>
+                <Heading root={<h2 />} size={{ small: '2xl', large: '4xl' }}>
                   <span className={style.subheading}>
                     {data.bannerCamping.item.adventureTripLength} {data.bannerCamping.item.adventureType}
                   </span>
@@ -244,7 +245,7 @@ export const Home: FunctionComponent = () => {
             }
             height={{ small: '70vh', large: '600px' }}
             heading={
-              <Heading root={<h2 />} size={{ small: 'xl', large: '4xl' }}>
+              <Heading root={<h2 />} size={{ small: '2xl', large: '4xl' }}>
                 <span className={style.subheading}>
                   {data.bannerSurfing.item.adventureTripLength} {data.bannerSurfing.item.adventureType}
                 </span>

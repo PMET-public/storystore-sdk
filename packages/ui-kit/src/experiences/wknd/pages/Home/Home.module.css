@@ -1,5 +1,5 @@
 .root {
-  margin-top: -82px;
+  margin-top: -85px;
 }
 
 .root .banner {
@@ -9,7 +9,7 @@
 
 .banner .subheading {
   display: block;
-  font-size: 0.5em;
+  font-size: 0.75em;
 }
 
 .category img {

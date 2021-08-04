@@ -1,15 +1,20 @@
 {
   "private": true,
   "workspaces": [
-    "packages/*",
+    "packages/toolbox",
+    "packages/storybook-variables",
+    "packages/ui-kit",
+    "packages/next-apollo",
     "pwa/*"
   ],
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "prettier": "^2.3.1"
   },
   "scripts": {
-    "uikit": "yarn workspace @storystore/ui-kit",
+    "cleanup": "yarn workspaces run cleanup",
     "prepare": "yarn workspaces run prepare",
-    "cleanup": "yarn workspaces run cleanup"
+    "ui-kit": "yarn workspace @storystore/ui-kit",
+    "sdk:wknd": "concurrently --names \"WKND,UI-KIT\" \"yarn workspace @storystore/pwa-wknd dev\" \"yarn workspace @storystore/ui-kit dev\""
   }
 }

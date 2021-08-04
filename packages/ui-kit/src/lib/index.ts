@@ -6,7 +6,7 @@ export type Size = 'md' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 
 export type Color = 'surface' | 'primary' | 'secondary' | 'accent'
 
-export type BreakpointValues<T> = T | { small: T; medium?: T; large: T }
+export type BreakpointValues<T> = T | { small: T; medium?: T; large?: T }
 
 export const getBreakpointValues = (value: BreakpointValues<any>) => {
   if (typeof value !== 'object') return { small: value, medium: value, large: value }

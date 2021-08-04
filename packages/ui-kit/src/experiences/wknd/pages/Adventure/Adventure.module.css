@@ -1,10 +1,11 @@
 .root {
+  --header-height: 85px;
   min-height: 100vh;
   display: grid;
+  margin-top: calc(var(--header-height) * -1);
 }
 
 .banner {
-  /* margin-top: -82px; */
   /* color: #fff; */
   height: 80vh;
 }
@@ -66,6 +67,12 @@
     height: 100vh;
     position: sticky;
     top: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    padding-top: var(--header-height);
   }
 
   .content {

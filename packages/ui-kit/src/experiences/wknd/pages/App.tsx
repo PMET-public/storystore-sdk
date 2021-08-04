@@ -17,7 +17,7 @@ const App: FunctionComponent<AppProps> = ({ header, footer, ...props }) => {
           }
           transparent
           sticky
-          contained
+          // contained
           {...header}
         />
       }

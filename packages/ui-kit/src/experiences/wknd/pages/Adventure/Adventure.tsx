@@ -79,11 +79,11 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
       <Banner
         backgroundImage={<Image src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
         className={style.banner}
-        screen="light"
+        screen="lighter"
         vAlign="top"
       />
 
-      <View padded>
+      <View padded className={style.wrapper}>
         <Grid gap="lg" className={style.content}>
           <header>
             <Heading root={<span />} size={{ small: 'md', large: 'lg' }}>
