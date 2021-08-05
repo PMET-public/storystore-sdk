@@ -1,1 +1,1 @@
-export * from './dist/hooks'
+module.exports = require('./dist/hooks')

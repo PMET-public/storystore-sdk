@@ -1,1 +1,1 @@
-export * from './dist/theme'
+module.exports = require('./dist/theme')

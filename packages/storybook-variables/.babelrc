@@ -8,11 +8,5 @@
             }
         ],
         "@babel/typescript"
-    ],
-    "plugins": [
-        "inline-react-svg"
-    ],
-    "ignore": [
-        "./src/**/*.stories.mdx"
     ]
 }
