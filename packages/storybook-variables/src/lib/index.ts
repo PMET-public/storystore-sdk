@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useAddonState, useStorybookApi } from '@storybook/api'
-import * as cookies from '@storystore/toolbox/src/cookies'
+import { cookies } from '@storystore/toolbox'
 
 import { useAddonState as useClientAddonState, useStoryContext as useClientStoryContext } from '@storybook/client-api'
 import deepmerge from 'deepmerge'

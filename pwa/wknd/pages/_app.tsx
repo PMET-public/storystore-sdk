@@ -1,9 +1,9 @@
+import { FunctionComponent, useMemo } from 'react'
 import { AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { variables, auth } from '@storystore/toolbox'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import { FunctionComponent, useMemo } from 'react'
 import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
 
