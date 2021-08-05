@@ -11,11 +11,7 @@
 
 ## Getting Started
 
-### ☝️ Clone mono-repo
-
-`git clone https://github.com/PMET-public/storystore-sdk.git`
-
-### ✌️ Install dependencies and prepare packages
+### ☝️ Install dependencies and prepare packages
 
 `yarn install && yarn prepare`
 
