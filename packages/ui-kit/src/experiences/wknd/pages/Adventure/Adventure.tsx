@@ -4,7 +4,6 @@ import style from './Adventure.module.css'
 import View from '../../../../components/View'
 import Grid from '../../../../components/Grid'
 import Banner from '../../../../components/Banner'
-import Image from '../../../../components/Image'
 import Heading from '../../../../components/Heading'
 import Html from '../../../../components/Html'
 import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
@@ -77,7 +76,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
   return (
     <div className={style.root}>
       <Banner
-        backgroundImage={<Image src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
+        backgroundImage={<img src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
         className={style.banner}
         screen="lighter"
         vAlign="top"

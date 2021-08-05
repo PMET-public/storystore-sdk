@@ -7,10 +7,6 @@ import { UIProvider } from '@storystore/ui-kit/theme'
 import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
 
-const Image: FunctionComponent<any> = ({ src, ...props }) => {
-  return <img {...props} src={typeof src === 'object' ? src.src : src} />
-}
-
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
     <NextLink href={href}>
@@ -49,7 +45,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider>
-        <WKND.App linkRoot={<Link />} imageRoot={<Image />}>
+        <WKND.App linkRoot={<Link />}>
           <Component {...pageProps} />
         </WKND.App>
       </UIProvider>

@@ -54,7 +54,9 @@ export const Banner: FunctionComponent<BannerProps> = ({
         ...props.style,
       }}
     >
-      {backgroundImage && cloneElement(backgroundImage, { className: style.backgroundImage })}
+      {backgroundImage && (
+        <backgroundImage.type {...merge(backgroundImage.props, { className: style.backgroundImage })} />
+      )}
 
       <View className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
         <div className={style.content}>

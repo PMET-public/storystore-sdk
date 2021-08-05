@@ -1,4 +1,4 @@
-import { cloneElement, FunctionComponent, HTMLAttributes, ReactElement, isValidElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement, isValidElement } from 'react'
 import { classes, merge } from '../../lib'
 import style from './Tile.module.css'
 

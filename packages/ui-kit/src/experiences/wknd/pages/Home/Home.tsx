@@ -9,10 +9,7 @@ import Carousel from '../../../../components/Carousel'
 import Tile from '../../../../components/Tile'
 import Heading from '../../../../components/Heading'
 import Button from '../../../../components/Button'
-import Image from '../../../../components/Image'
 import gql from 'graphql-tag'
-
-import bgImageBanner from '../../assets/bg-adventures-1.jpg'
 
 export const HOME_QUERY = gql`
   query HOME_QUERY {
@@ -108,7 +105,12 @@ export const Home: FunctionComponent = () => {
     <Grid gap={{ small: 'lg', large: '2xl' }} className={style.root}>
       <Banner
         backgroundColor="#f4ecea"
-        backgroundImage={<Image src={bgImageBanner} />}
+        backgroundImage={
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
+            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" />
+          </picture>
+        }
         height={{ small: '80vh', large: '70vh' }}
         heading={
           <Heading root={<h2 />} size={{ small: 'xl', medium: '4xl', large: '5xl' }}>
@@ -139,7 +141,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
@@ -163,7 +165,7 @@ export const Home: FunctionComponent = () => {
           <Banner
             className={style.banner}
             backgroundImage={
-              <Image
+              <img
                 src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage.src}
                 width={data.bannerCamping.item.adventurePrimaryImage.width}
                 height={data.bannerCamping.item.adventurePrimaryImage.height}
@@ -212,7 +214,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
@@ -236,7 +238,7 @@ export const Home: FunctionComponent = () => {
           <Banner
             className={style.banner}
             backgroundImage={
-              <Image
+              <img
                 src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage.src}
                 width={data.bannerSurfing.item.adventurePrimaryImage.width}
                 height={data.bannerSurfing.item.adventurePrimaryImage.height}
@@ -283,7 +285,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}

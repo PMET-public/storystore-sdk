@@ -1,4 +1,4 @@
-import { cloneElement, FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import style from './Carousel.module.css'
 import { classes, merge, BreakpointValues, getBreakpointValues, Spacing } from '../../lib'
 

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FunctionComponent, HTMLAttributes, ReactElement, ReactNode } from 'react'
+import { ButtonHTMLAttributes, FunctionComponent, ReactElement, ReactNode } from 'react'
 import { classes, merge } from '../../lib'
 import style from './Button.module.css'
 
