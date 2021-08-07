@@ -1,0 +1,41 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Swatches from '.'
+import { useForm } from 'react-hook-form'
+
+<Meta title="Components/Form/Swatches" component={Swatches} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  const { register, watch } = useForm()
+  console.log(watch('number'))
+  return (
+    <Swatches
+      {...args}
+      items={[
+        { label: 'Uno', value: 'one', ...register('number') },
+        { label: 'Dos', value: 'two', disabled: true, ...register('number') },
+        { label: 'Tres', value: 'three', ...register('number') },
+      ]}
+    />
+  )
+}
+
+# Swatches
+
+WIP
+
+<Canvas withSource="open">
+  <Story
+    name="Swatches"
+    args={{
+      name: 'number',
+      variant: 'multi',
+      color: 'accent',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Swatches } from '@storystore/ui-kit/components'
+```

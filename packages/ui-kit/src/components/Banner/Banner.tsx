@@ -45,12 +45,14 @@ export const Banner: FunctionComponent<BannerProps> = ({
       style={{
         ['--banner-bg-color' as string]: backgroundColor,
         ['--banner-text-color' as string]: textColor,
-        ['--banner-small-width' as string]: width.small,
-        ['--banner-medium-width' as string]: width.medium,
-        ['--banner-large-width' as string]: width.large,
-        ['--banner-small-height' as string]: height.small,
-        ['--banner-medium-height' as string]: height.medium,
-        ['--banner-large-height' as string]: height.large,
+        ['--banner-sm-width' as string]: width.sm,
+        ['--banner-md-width' as string]: width.md,
+        ['--banner-lg-width' as string]: width.lg,
+        ['--banner-xl-width' as string]: width.xl,
+        ['--banner-sm-height' as string]: height.sm,
+        ['--banner-md-height' as string]: height.md,
+        ['--banner-lg-height' as string]: height.lg,
+        ['--banner-xl-height' as string]: height.xl,
         ...props.style,
       }}
     >

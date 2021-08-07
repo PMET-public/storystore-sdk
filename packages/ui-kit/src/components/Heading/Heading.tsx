@@ -22,9 +22,10 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       {...merge(props, root.props)}
       className={classes([style.root, [style.accent, accent], className])}
       style={{
-        ['--banner-size-small' as string]: `var(--font-${size.small})`,
-        ['--banner-size-medium' as string]: `var(--font-${size.medium})`,
-        ['--banner-size-large' as string]: `var(--font-${size.large})`,
+        ['--banner-size-sm' as string]: `var(--font-${size.sm})`,
+        ['--banner-size-md' as string]: `var(--font-${size.md})`,
+        ['--banner-size-lg' as string]: `var(--font-${size.lg})`,
+        ['--banner-size-xl' as string]: `var(--font-${size.xl})`,
         ...props.style,
       }}
     />

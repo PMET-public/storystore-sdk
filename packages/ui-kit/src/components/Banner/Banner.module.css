@@ -1,10 +1,11 @@
 .root {
-  --width: var(--banner-small-width);
-  --height: var(--banner-small-height);
+  --width: var(--banner-sm-width);
+  --height: var(--banner-sm-height);
   align-items: center;
   background-color: var(--banner-bg-color, var(--color-surface));
   color: var(--banner-text-color, var(--color-on-surface));
   height: var(--height);
+  max-width: 100%;
   overflow: hidden;
   position: relative;
   width: var(--width);
@@ -12,15 +13,22 @@
 
 @media (min-width: 768px) {
   .root {
-    --width: var(--banner-medium-width);
-    --height: var(--banner-medium-height);
+    --width: var(--banner-md-width);
+    --height: var(--banner-md-height);
   }
 }
 
 @media (min-width: 1024px) {
   .root {
-    --width: var(--banner-large-width);
-    --height: var(--banner-large-height);
+    --width: var(--banner-lg-width);
+    --height: var(--banner-lg-height);
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    --width: var(--banner-xl-width);
+    --height: var(--banner-xl-height);
   }
 }
 

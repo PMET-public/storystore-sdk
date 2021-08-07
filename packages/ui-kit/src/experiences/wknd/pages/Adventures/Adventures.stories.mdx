@@ -1,11 +1,11 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import Home from '.'
+import Adventures from '.'
 import App from '../App'
 import { settings } from '../../../../../.storybook/lib'
 
 <Meta
-  title="Experiences/WKND/Home"
-  component={Home}
+  title="Experiences/WKND/Adventures"
+  component={Adventures}
   parameters={{
     layout: 'fullscreen',
     title: 'Settings',
@@ -15,25 +15,14 @@ import { settings } from '../../../../../.storybook/lib'
 
 export const Template = args => (
   <App>
-    <Home {...args} />
+    <Adventures {...args} />
   </App>
 )
 
-# Home
+# Adventures
 
 <Canvas withSource="open">
-  <Story
-    name="Home"
-    args={{
-      hero: {
-        text: 'Not all who wander are lost',
-        cta: {
-          label: 'Find get away',
-          href: '#',
-        },
-      },
-    }}
-  >
+  <Story name="Adventures" args={{}}>
     {Template.bind({})}
   </Story>
 </Canvas>

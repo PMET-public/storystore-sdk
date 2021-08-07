@@ -3,7 +3,7 @@ import Banner from '.'
 import Button from '../Button'
 import Heading from '../Heading'
 
-<Meta title="Components/Banner" component={Banner} />
+<Meta title="Components/Banner" component={Banner} parameters={{ layout: 'centered' }} />
 
 export const Template = args => {
   return <Banner {...args} />
@@ -17,9 +17,11 @@ App Banner.
   <Story
     name="Banner"
     args={{
+      width: '100vh',
+      height: '50vh',
       textColor: 'black',
       backgroundImage: <img src="/__assets/wknd/bg-adventures-1.jpg" />,
-      heading: <Heading size={{ small: '2xl', large: '5xl' }}>Banner heading</Heading>,
+      heading: <Heading size={{ sm: '2xl', lg: '5xl' }}>Banner heading</Heading>,
       button: <Button variant="cta">Button</Button>,
     }}
   >

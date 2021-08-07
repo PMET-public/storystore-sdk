@@ -10,16 +10,24 @@
 
 @media (min-width: 768px) {
   .root {
-    --columns: var(--grid-columns-medium);
-    --gap: var(--grid-gap-medium);
-    --rows: var(--grid-rows-medium);
+    --columns: var(--grid-columns-md);
+    --gap: var(--grid-gap-md);
+    --rows: var(--grid-rows-md);
   }
 }
 
 @media (min-width: 1024px) {
   .root {
-    --columns: var(--grid-columns-large);
-    --gap: var(--grid-gap-large);
-    --rows: var(--grid-rows-large);
+    --columns: var(--grid-columns-lg);
+    --gap: var(--grid-gap-lg);
+    --rows: var(--grid-rows-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    --columns: var(--grid-columns-xl);
+    --gap: var(--grid-gap-xl);
+    --rows: var(--grid-rows-xl);
   }
 }

@@ -23,7 +23,7 @@ export const App: FunctionComponent<AppProps> = ({
     <LinkProvider value={linkRoot}>
       <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
         <header.type {...header.props} className={classes([style.header, header.props.className])} />
-        <div className={style.body}>{children}</div>
+        <main className={style.body}>{children}</main>
         <footer.type {...footer.props} className={classes([style.footer, footer.props.className])} />
       </root.type>
     </LinkProvider>

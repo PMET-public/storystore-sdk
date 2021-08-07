@@ -16,13 +16,19 @@
 
 @media (min-width: 768px) {
   .root {
-    --show: var(--carousel-show-medium);
+    --show: var(--carousel-show-md);
   }
 }
 
 @media (min-width: 1024px) {
   .root {
-    --show: var(--carousel-show-large);
+    --show: var(--carousel-show-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    --show: var(--carousel-show-xl);
   }
 }
 

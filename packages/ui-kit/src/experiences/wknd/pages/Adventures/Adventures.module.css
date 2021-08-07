@@ -1,0 +1,21 @@
+@media (min-width: 768px) {
+  .tile:first-of-type {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+  }
+}
+
+.filter {
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--ui-color-body);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  scrollbar-width: none;
+  top: 0;
+}
+
+.filter::-webkit-scrollbar {
+  display: none;
+}
