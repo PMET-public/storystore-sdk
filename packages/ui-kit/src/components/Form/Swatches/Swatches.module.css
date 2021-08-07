@@ -1,0 +1,40 @@
+.root {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.item label {
+  --bg: transparent;
+  --border: var(--color-on-surface-lighter);
+  --text: var(--color-on-surface);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: inline-block;
+  padding: var(--spacing-sm);
+  transition: all 300ms ease;
+  white-space: nowrap;
+}
+
+.item input {
+  display: none;
+}
+
+.item input:not(:disabled) + label {
+  cursor: pointer;
+}
+
+.item input:not(:disabled) + label:hover {
+  --border: var(--bg-active);
+}
+
+.item input:checked + label {
+  --bg: var(--bg-active);
+  --border: transparent;
+  --text: var(--text-active);
+}
+
+.item input:disabled + label {
+  opacity: 0.5;
+}

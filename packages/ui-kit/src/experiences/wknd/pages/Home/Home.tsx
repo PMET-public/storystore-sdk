@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import style from './Home.module.css'
 import { useQuery } from '@apollo/client'
 import Link from '../../../../components/Link'
@@ -9,10 +9,7 @@ import Carousel from '../../../../components/Carousel'
 import Tile from '../../../../components/Tile'
 import Heading from '../../../../components/Heading'
 import Button from '../../../../components/Button'
-import Image from '../../../../components/Image'
 import gql from 'graphql-tag'
-
-import bgImageBanner from '../../assets/bg-adventures-1.jpg'
 
 export const HOME_QUERY = gql`
   query HOME_QUERY {
@@ -97,7 +94,17 @@ export const HOME_QUERY = gql`
   }
 `
 
-export const Home: FunctionComponent = () => {
+export type HomeProps = {
+  hero?: {
+    text: ReactElement | string
+    cta?: {
+      label: string
+      href: string
+    }
+  }
+}
+
+export const Home: FunctionComponent<HomeProps> = ({ hero }) => {
   const { loading, data, error } = useQuery(HOME_QUERY)
 
   if (loading) return <h1>Loading...</h1>
@@ -105,30 +112,35 @@ export const Home: FunctionComponent = () => {
   if (error) return <h1>There was an issue.</h1>
 
   return (
-    <Grid gap={{ small: 'lg', large: '2xl' }} className={style.root}>
+    <Grid gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
       <Banner
         backgroundColor="#f4ecea"
-        backgroundImage={<Image src={bgImageBanner} />}
-        height={{ small: '80vh', large: '70vh' }}
+        backgroundImage={
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--sm.jpg" />
+            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" />
+          </picture>
+        }
+        height={{ sm: '80vh', lg: '70vh' }}
         heading={
-          <Heading root={<h2 />} size={{ small: 'xl', medium: '4xl', large: '5xl' }}>
-            Not all who wander are lost.
+          <Heading root={<h2 />} size={{ sm: 'xl', md: '4xl', lg: '5xl' }}>
+            {hero?.text}
           </Heading>
         }
-        button={<Button disabled>Find Getaway</Button>}
+        button={hero?.cta && <Button root={<Link href={hero.cta.href} />}>{hero.cta.label}</Button>}
         align="left"
         contained
       />
 
       {data.beginner && (
         <View contained padded>
-          <Grid root={<section />} gap={{ small: 'md', large: 'lg' }}>
-            <Heading root={<h2 />} size={{ small: 'lg', medium: '2xl' }}>
+          <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
+            <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
               Trying something new? Start easy.
             </Heading>
 
             <Carousel
-              show={{ small: 1, large: 3 }}
+              show={{ sm: 1, lg: 3 }}
               gap="sm"
               peak
               hideScrollBar
@@ -139,7 +151,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
@@ -163,17 +175,17 @@ export const Home: FunctionComponent = () => {
           <Banner
             className={style.banner}
             backgroundImage={
-              <Image
+              <img
                 src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage.src}
                 width={data.bannerCamping.item.adventurePrimaryImage.width}
                 height={data.bannerCamping.item.adventurePrimaryImage.height}
                 alt={data.bannerCamping.item.adventureTitle}
               />
             }
-            height={{ small: '70vh', large: '600px' }}
+            height={{ sm: '70vh', lg: '600px' }}
             heading={
               <div>
-                <Heading root={<h2 />} size={{ small: '2xl', large: '4xl' }}>
+                <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
                   <span className={style.subheading}>
                     {data.bannerCamping.item.adventureTripLength} {data.bannerCamping.item.adventureType}
                   </span>
@@ -195,13 +207,13 @@ export const Home: FunctionComponent = () => {
 
       {data.camping && (
         <View contained padded>
-          <Grid root={<section />} gap={{ small: 'md', large: 'lg' }}>
+          <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
             <Heading root={<h2 />} size="2xl">
               For the outdoor kind.
             </Heading>
 
             <Carousel
-              show={{ small: 1, large: 3 }}
+              show={{ sm: 1, lg: 3 }}
               gap="sm"
               peak
               hideScrollBar
@@ -212,7 +224,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}
@@ -236,16 +248,16 @@ export const Home: FunctionComponent = () => {
           <Banner
             className={style.banner}
             backgroundImage={
-              <Image
+              <img
                 src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage.src}
                 width={data.bannerSurfing.item.adventurePrimaryImage.width}
                 height={data.bannerSurfing.item.adventurePrimaryImage.height}
                 alt={data.bannerSurfing.item.adventureTitle}
               />
             }
-            height={{ small: '70vh', large: '600px' }}
+            height={{ sm: '70vh', lg: '600px' }}
             heading={
-              <Heading root={<h2 />} size={{ small: '2xl', large: '4xl' }}>
+              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
                 <span className={style.subheading}>
                   {data.bannerSurfing.item.adventureTripLength} {data.bannerSurfing.item.adventureType}
                 </span>
@@ -266,13 +278,13 @@ export const Home: FunctionComponent = () => {
 
       {data.overstay && (
         <View contained padded>
-          <Grid root={<section />} gap={{ small: 'md', large: 'lg' }}>
+          <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
             <Heading root={<h2 />} size="2xl">
               Time is a construct. Overstay.
             </Heading>
 
             <Carousel
-              show={{ small: 1, large: 3 }}
+              show={{ sm: 1, lg: 3 }}
               gap="sm"
               peak
               hideScrollBar
@@ -283,7 +295,7 @@ export const Home: FunctionComponent = () => {
                     className={style.tile}
                     key={id}
                     image={
-                      <Image
+                      <img
                         loading="lazy"
                         src={'/__aem' + adventurePrimaryImage.src}
                         width={400}

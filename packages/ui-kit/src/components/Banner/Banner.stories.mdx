@@ -1,11 +1,9 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Banner from '.'
-import Image from '../Image'
 import Button from '../Button'
 import Heading from '../Heading'
-import backgroundImage from '../../experiences/wknd/assets/bg-adventures-1.jpg'
 
-<Meta title="Components/Banner" component={Banner} />
+<Meta title="Components/Banner" component={Banner} parameters={{ layout: 'centered' }} />
 
 export const Template = args => {
   return <Banner {...args} />
@@ -19,9 +17,11 @@ App Banner.
   <Story
     name="Banner"
     args={{
+      width: '100vh',
+      height: '50vh',
       textColor: 'black',
-      backgroundImage: <Image src={backgroundImage} />,
-      heading: <Heading size={{ small: '2xl', large: '5xl' }}>Banner heading</Heading>,
+      backgroundImage: <img src="/__assets/wknd/bg-adventures-1.jpg" />,
+      heading: <Heading size={{ sm: '2xl', lg: '5xl' }}>Banner heading</Heading>,
       button: <Button variant="cta">Button</Button>,
     }}
   >

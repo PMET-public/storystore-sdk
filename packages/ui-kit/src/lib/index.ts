@@ -1,20 +1,21 @@
 import deepmerge from 'deepmerge'
 
-export type Spacing = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+export type Spacing = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type Size = 'md' | 'sm' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl'
 
 export type Color = 'surface' | 'primary' | 'secondary' | 'accent'
 
-export type BreakpointValues<T> = T | { small: T; medium?: T; large?: T }
+export type BreakpointValues<T> = T | { sm: T; md?: T; lg?: T; xl?: T }
 
 export const getBreakpointValues = (value: BreakpointValues<any>) => {
-  if (typeof value !== 'object') return { small: value, medium: value, large: value }
+  if (typeof value !== 'object') return { sm: value, md: value, lg: value, xl: value, '2xl': value }
 
   return {
-    small: value.small,
-    medium: value.medium ?? value.small,
-    large: value.large ?? value.medium ?? value.small,
+    sm: value.sm,
+    md: value.md ?? value.sm,
+    lg: value.lg ?? value.md ?? value.sm,
+    xl: value.xl ?? value.lg ?? value.md ?? value.sm,
   }
 }
 

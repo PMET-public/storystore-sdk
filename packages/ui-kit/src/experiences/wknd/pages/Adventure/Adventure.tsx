@@ -4,7 +4,6 @@ import style from './Adventure.module.css'
 import View from '../../../../components/View'
 import Grid from '../../../../components/Grid'
 import Banner from '../../../../components/Banner'
-import Image from '../../../../components/Image'
 import Heading from '../../../../components/Heading'
 import Html from '../../../../components/Html'
 import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
@@ -77,7 +76,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
   return (
     <div className={style.root}>
       <Banner
-        backgroundImage={<Image src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
+        backgroundImage={<img src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
         className={style.banner}
         screen="lighter"
         vAlign="top"
@@ -86,15 +85,15 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
       <View padded className={style.wrapper}>
         <Grid gap="lg" className={style.content}>
           <header>
-            <Heading root={<span />} size={{ small: 'md', large: 'lg' }}>
+            <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
               {adventureTripLength} {adventureType}
             </Heading>
-            <Heading root={<h2 />} size={{ small: '2xl', large: '4xl' }}>
+            <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
               {adventureTitle}
             </Heading>
           </header>
           <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ small: 'xl', large: '2xl' }}>
+            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
               <MapIcon /> {adventureActivity} Details
             </Heading>
 
@@ -133,7 +132,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
           </div>
 
           <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ small: 'xl', large: '2xl' }}>
+            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
               <CalendarIcon /> Itinerary
             </Heading>
 
@@ -141,7 +140,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
           </Grid>
 
           <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ small: 'xl', large: '2xl' }}>
+            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
               <BagIcon />
               What to Bring
             </Heading>

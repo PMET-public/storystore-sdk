@@ -1,4 +1,6 @@
 {
+  "name": "@storystore/sdk",
+  "version": "0.1.0",
   "private": true,
   "workspaces": [
     "packages/toolbox",
@@ -14,7 +16,6 @@
   "scripts": {
     "cleanup": "yarn workspaces run cleanup",
     "prepare": "yarn workspaces run prepare",
-    "ui-kit": "yarn workspace @storystore/ui-kit",
     "sdk:wknd": "concurrently --names \"WKND,UI-KIT\" \"yarn workspace @storystore/pwa-wknd dev\" \"yarn workspace @storystore/ui-kit dev\""
   }
 }

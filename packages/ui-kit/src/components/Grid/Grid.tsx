@@ -26,15 +26,18 @@ export const Grid: FunctionComponent<GridProps> = ({
       {...merge(props, root.props)}
       className={classes([style.root, className])}
       style={{
-        ['--grid-columns-small' as string]: columns.small || 'initial',
-        ['--grid-columns-medium' as string]: columns.medium || 'initial',
-        ['--grid-columns-large' as string]: columns.large || 'initial',
-        ['--grid-rows-small' as string]: rows.small || 'initial',
-        ['--grid-rows-medium' as string]: rows.medium || 'initial',
-        ['--grid-rows-large' as string]: rows.large || 'initial',
-        ['--grid-gap-small' as string]: gap.small ? `var(--spacing-${gap.small})` : 0,
-        ['--grid-gap-medium' as string]: gap.medium ? `var(--spacing-${gap.medium})` : 0,
-        ['--grid-gap-large' as string]: gap.large ? `var(--spacing-${gap.large})` : 0,
+        ['--grid-columns-sm' as string]: columns.sm || 'initial',
+        ['--grid-columns-md' as string]: columns.md || 'initial',
+        ['--grid-columns-lg' as string]: columns.lg || 'initial',
+        ['--grid-columns-xl' as string]: columns.xl || 'initial',
+        ['--grid-rows-sm' as string]: rows.sm || 'initial',
+        ['--grid-rows-md' as string]: rows.md || 'initial',
+        ['--grid-rows-lg' as string]: rows.lg || 'initial',
+        ['--grid-rows-xl' as string]: rows.xl || 'initial',
+        ['--grid-gap-sm' as string]: gap.sm ? `var(--spacing-${gap.sm})` : 0,
+        ['--grid-gap-md' as string]: gap.md ? `var(--spacing-${gap.md})` : 0,
+        ['--grid-gap-lg' as string]: gap.lg ? `var(--spacing-${gap.lg})` : 0,
+        ['--grid-gap-xl' as string]: gap.xl ? `var(--spacing-${gap.xl})` : 0,
         ...props.style,
       }}
     />

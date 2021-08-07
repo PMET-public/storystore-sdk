@@ -3,21 +3,10 @@
 }
 
 .root .banner {
-  border-radius: var(--rounded-xl);
   color: #fff;
 }
 
 .banner .subheading {
   display: block;
   font-size: 0.75em;
-}
-
-.category img {
-  border-radius: var(--rounded-xl);
-  overflow: hidden;
-}
-
-.tile {
-  border-radius: var(--rounded-xl);
-  overflow: hidden;
 }

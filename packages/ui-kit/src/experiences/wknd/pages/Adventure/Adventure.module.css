@@ -23,7 +23,6 @@
 .details span {
   align-items: center;
   background-color: var(--color-surface);
-  border-radius: var(--rounded-xl);
   color: var(--color-on-surface);
   display: grid;
   grid-gap: var(--spacing-sm);
@@ -54,7 +53,6 @@
 .section {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-  border-radius: var(--rounded-xl);
   padding: var(--spacing-md);
 }
 

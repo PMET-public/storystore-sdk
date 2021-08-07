@@ -1128,7 +1128,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-typescript@^7.12.1", "@babel/plugin-transform-typescript@^7.14.5", "@babel/plugin-transform-typescript@^7.14.6":
+"@babel/plugin-transform-typescript@^7.12.1", "@babel/plugin-transform-typescript@^7.14.5":
   version "7.14.6"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.14.6.tgz#6e9c2d98da2507ebe0a883b100cde3c7279df36c"
   integrity sha512-XlTdBq7Awr4FYIzqhmYY80WN0V0azF74DMPyFqVHBvf81ZUgc4X7ZOpx6O8eLDK6iM5cCQzeyJw0ynTaefixRA==
@@ -5629,6 +5629,19 @@ copy-to-clipboard@^3.3.1:
   dependencies:
     toggle-selection "^1.0.6"
 
+copy-webpack-plugin@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/copy-webpack-plugin/-/copy-webpack-plugin-9.0.1.tgz#b71d21991599f61a4ee00ba79087b8ba279bbb59"
+  integrity sha512-14gHKKdYIxF84jCEgPgYXCPpldbwpxxLbCmA7LReY7gvbaT555DgeBWBgBZM116tv/fO6RRJrsivBqRyRlukhw==
+  dependencies:
+    fast-glob "^3.2.5"
+    glob-parent "^6.0.0"
+    globby "^11.0.3"
+    normalize-path "^3.0.0"
+    p-limit "^3.1.0"
+    schema-utils "^3.0.0"
+    serialize-javascript "^6.0.0"
+
 core-js-compat@^3.14.0, core-js-compat@^3.16.0, core-js-compat@^3.6.2, core-js-compat@^3.8.1:
   version "3.16.0"
   resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.16.0.tgz#fced4a0a534e7e02f7e084bff66c701f8281805f"
@@ -7243,7 +7256,7 @@ fast-glob@^2.2.6:
     merge2 "^1.2.3"
     micromatch "^3.1.10"
 
-fast-glob@^3.1.1:
+fast-glob@^3.1.1, fast-glob@^3.2.5:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.7.tgz#fd6cb7a2d7e9aa7a7846111e85a196d6b2f766a1"
   integrity sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==
@@ -7764,6 +7777,13 @@ glob-parent@^5.1.2, glob-parent@~5.1.0, glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
   integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
+  dependencies:
+    is-glob "^4.0.1"
+
+glob-parent@^6.0.0:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-6.0.1.tgz#42054f685eb6a44e7a7d189a96efa40a54971aa7"
+  integrity sha512-kEVjS71mQazDBHKcsq4E9u/vUzaLcw1A8EtUeydawvIWQCJM0qQ08G1H7/XTjFUulla6XQiDOG6MXSaG0HDKog==
   dependencies:
     is-glob "^4.0.1"
 
@@ -10432,6 +10452,11 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
+next-compose-plugins@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
+  integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
+
 next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
@@ -12420,6 +12445,11 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
+react-hook-form@^7.12.2:
+  version "7.12.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.12.2.tgz#2660afbf03c4ef360a9314ebf46ce3d972296c77"
+  integrity sha512-cpxocjrgpMAJCMJQR51BQhMoEx80/EQqePNihMTgoTYTqCRbd2GExi+N4GJIr+cFqrmbwNj9wxk5oLWYQsUefg==
+
 react-inspector@^5.1.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-5.1.1.tgz#58476c78fde05d5055646ed8ec02030af42953c8"
@@ -13248,6 +13278,13 @@ serialize-javascript@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-5.0.1.tgz#7886ec848049a462467a97d3d918ebb2aaf934f4"
   integrity sha512-SaaNal9imEO737H2c05Og0/8LUXG7EnsZyMa8MzkmuHoELfT6txuj0cMqRj6zfPKnmQ1yasR4PCJc8x+M4JSPA==
+  dependencies:
+    randombytes "^2.1.0"
+
+serialize-javascript@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-6.0.0.tgz#efae5d88f45d7924141da8b5c3a7a7e663fefeb8"
+  integrity sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==
   dependencies:
     randombytes "^2.1.0"
 
