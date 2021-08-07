@@ -76,8 +76,6 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
           { label: 'Skiing', value: 'Skiing', ...register('filter.adventureActivity') },
           { label: 'Surfing', value: 'Surfing', ...register('filter.adventureActivity') },
           { label: 'Travel', value: ['Social', 'Camping'], ...register('filter.adventureActivity') },
-          { label: 'Travel', value: ['Social', 'Camping'], ...register('filter.adventureActivity') },
-          { label: 'Travel', value: ['Social', 'Camping'], ...register('filter.adventureActivity') },
         ]}
       />
 
