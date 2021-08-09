@@ -17,7 +17,7 @@
 
 ### ✨ Run SDK
 
-`yarn sdk:wknd`
+`yarn wknd:sdk`
 
 - **WKND Adventures**: http://localhost:3000
 - **UIKit**: http://localhost:6006
