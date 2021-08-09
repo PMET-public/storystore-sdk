@@ -26,7 +26,7 @@ The following tools should be installed locally:
 
 `yarn sdk:wknd`
 
-**4.** The experience will be available at:
+The experiences will be available at:
 
 - **WKND Adventures (Your Demo Web App)**: http://localhost:3000
 - **UIKit (Development Canvas)**: http://localhost:6006
