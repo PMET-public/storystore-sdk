@@ -1,8 +1,9 @@
 .wrapper {
   display: inline-flex;
   flex-direction: column;
-  overflow: hidden;
   height: 100%;
+  overflow: hidden;
+  width: 100%;
 }
 
 .surface {
