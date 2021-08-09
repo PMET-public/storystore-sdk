@@ -2,7 +2,6 @@
 
 ## ⚠️ Beta v0.1.0 ⚠️
 
-
 ### Pre-requisites
 
 The following tools should be installed locally:
@@ -19,14 +18,15 @@ The following tools should be installed locally:
 
 `cd storystore-sdk`
 
-✌️  Install dependencies:
+✌️ Install dependencies:
 
 `yarn install`
 
 ✨ Run StoryStore SDK:
 
-`yarn wknd:sdk`
+`yarn sdk:wknd`
 
-__4.__ The experience will be available at:
-  - **WKND Adventures (Your Demo Web App)**: http://localhost:3000
-  - **UIKit (Development Canvas)**: http://localhost:6006
+**4.** The experience will be available at:
+
+- **WKND Adventures (Your Demo Web App)**: http://localhost:3000
+- **UIKit (Development Canvas)**: http://localhost:6006
