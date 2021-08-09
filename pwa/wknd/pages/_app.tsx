@@ -7,6 +7,10 @@ import { UIProvider } from '@storystore/ui-kit/theme'
 import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
 
+if (!process.browser) {
+  global.URL = require('url').URL
+}
+
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
     <NextLink href={href}>
@@ -40,7 +44,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     )
   }, [AEM_GRAPHQL_URL])
 
-  const apolloClient = useApollo(useApollo)
+  const apolloClient = useApollo(pageProps)
 
   return (
     <ApolloProvider client={apolloClient}>
