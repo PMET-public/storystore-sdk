@@ -15,27 +15,27 @@ The following tools should be installed locally:
 
 ### Instructions
 
-1. Navigate to the [Software Distribution Portal](https://experience.adobe.com/#/downloads/content/software-distribution/en/aemcloud.html) > __AEM as a Cloud Service__ and download the latest version of the AEM SDK.
+__1.__ Navigate to the [Software Distribution Portal](https://experience.adobe.com/#/downloads/content/software-distribution/en/aemcloud.html) > __AEM as a Cloud Service__ and download the latest version of the AEM SDK.
 
 <img src="https://experienceleague.adobe.com/docs/experience-manager-learn/assets/software-distribution-portal-download.png?lang=en" />
 
 _⚠️ The GraphQL feature is enabled by default only on the AEM SDK from 2021-02-04 or newer._
 
-2. Unzip the download and copy the Quickstart jar (aem-sdk-quickstart-XXX.jar) to a dedicated folder, i.e ~/aem-sdk/author.
+__2.__ Unzip the download and copy the Quickstart jar (aem-sdk-quickstart-XXX.jar) to a dedicated folder, i.e ~/aem-sdk/author.
 
-3. Re-name the jar file to `aem-author-p4502.jar`. The `author` name specifies that the Quickstart jar will start in Author mode. The `p4502` specifies that the Quickstart server will run on port 4502.
+__3.__ Re-name the jar file to `aem-author-p4502.jar`. The `author` name specifies that the Quickstart jar will start in Author mode. The `p4502` specifies that the Quickstart server will run on port 4502.
 
-4. Open a new terminal window and navigate to the folder that contains the jar file. Run the following command to install and start the AEM instance:
+__4.__ Open a new terminal window and navigate to the folder that contains the jar file. Run the following command to install and start the AEM instance:
 
 `cd ~/aem-sdk/author`
 
 `java -jar aem-author-p4502.jar`
 
-5. Provide an admin password as `admin` to avoid any further re-configuration.
+__5.__ Provide an admin password as `admin` to avoid any further re-configuration.
 
-6. After a few minutes, the AEM instance will finish installing, and a new browser window should open at http://localhost:4502.
+__6.__ After a few minutes, the AEM instance will finish installing, and a new browser window should open at http://localhost:4502.
 
-7. Login with the username `admin` and password `admin`.
+__7.__ Login with the username `admin` and password `admin`.
 
 ---
 
@@ -53,20 +53,20 @@ The following tools should be installed locally:
 
 ### Instructions
 
-1. Open a new terminal window and run the following command to clone the StoryStore SDK
+__1.__ Open a new terminal window and run the following command to clone the StoryStore SDK
 
 `git clone https://github.com/PMET-public/storystore-sdk.git`
 
 `cd storystore-sdk`
 
-2.  Install dependencies:
+__2.__  Install dependencies:
 
 `yarn install`
 
-3. ✨ Run SDK:
+__3.__ ✨ Run SDK:
 
 `yarn wknd:sdk`
 
-4. The experience will be available at:
+__4.__ The experience will be available at:
   - **WKND Adventures (PWA)**: http://localhost:3000
   - **UIKit (Develoment Canvas)**: http://localhost:6006
