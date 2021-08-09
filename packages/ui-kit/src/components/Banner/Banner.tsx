@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement, ImgHTMLAttributes, cloneElement, HTMLAttributes } from 'react'
+import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } from 'react'
 import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
 import style from './Banner.module.css'
 import { ButtonProps } from '../Button'
@@ -62,8 +62,8 @@ export const Banner: FunctionComponent<BannerProps> = ({
 
       <View className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
         <div className={style.content}>
-          {heading && cloneElement(heading, { className: style.heading })}
-          {button && cloneElement(button, { className: style.button })}
+          {heading && <heading.type {...merge(heading.props, {})} />}
+          {button && <button.type {...merge(button.props, { className: style.button })} />}
         </div>
       </View>
     </root.type>

@@ -1,7 +1,8 @@
 .root {
-  font-size: var(--banner-size-small);
-  font-weight: var(--font-semibold);
   display: block;
+  font-size: var(--banner-size-sm);
+  font-weight: var(--font-semibold);
+  line-height: 1.3;
   width: 100%;
 }
 

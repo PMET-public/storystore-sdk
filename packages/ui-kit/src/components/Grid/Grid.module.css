@@ -1,7 +1,7 @@
 .root {
-  --columns: var(--grid-columns-small);
-  --gap: var(--grid-gap-small);
-  --rows: var(--grid-rows-small);
+  --columns: var(--grid-columns-sm);
+  --gap: var(--grid-gap-sm);
+  --rows: var(--grid-rows-sm);
   display: grid;
   grid-gap: var(--gap);
   grid-template-columns: var(--columns);

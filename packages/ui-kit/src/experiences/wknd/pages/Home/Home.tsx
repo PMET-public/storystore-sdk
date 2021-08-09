@@ -95,16 +95,10 @@ export const HOME_QUERY = gql`
 `
 
 export type HomeProps = {
-  hero?: {
-    text: ReactElement | string
-    cta?: {
-      label: string
-      href: string
-    }
-  }
+  heroCTAHref?: string
 }
 
-export const Home: FunctionComponent<HomeProps> = ({ hero }) => {
+export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
   const { loading, data, error } = useQuery(HOME_QUERY)
 
   if (loading) return <h1>Loading...</h1>
@@ -117,17 +111,22 @@ export const Home: FunctionComponent<HomeProps> = ({ hero }) => {
         backgroundColor="#f4ecea"
         backgroundImage={
           <picture>
-            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--sm.jpg" />
-            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" />
+            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
+            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
           </picture>
         }
         height={{ sm: '80vh', lg: '70vh' }}
         heading={
-          <Heading root={<h2 />} size={{ sm: 'xl', md: '4xl', lg: '5xl' }}>
-            {hero?.text}
+          <Heading
+            className={style.heroHeading}
+            root={<h2 />}
+            size={{ sm: '4xl', md: '5xl' }}
+            style={{ paddingRight: '100px' }}
+          >
+            Not all who wander are lost.
           </Heading>
         }
-        button={hero?.cta && <Button root={<Link href={hero.cta.href} />}>{hero.cta.label}</Button>}
+        button={heroCTAHref ? <Button root={<Link href={heroCTAHref} />}>View Adventures</Button> : undefined}
         align="left"
         contained
       />
