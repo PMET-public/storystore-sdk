@@ -1,5 +1,5 @@
 .root {
-  --show: var(--carousel-show-small);
+  --show: var(--carousel-show-sm);
   -webkit-overflow-scrolling: touch;
   display: grid;
   grid-auto-columns: var(--show);

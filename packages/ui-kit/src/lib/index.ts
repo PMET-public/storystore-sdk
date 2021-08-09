@@ -9,7 +9,7 @@ export type Color = 'surface' | 'primary' | 'secondary' | 'accent'
 export type BreakpointValues<T> = T | { sm: T; md?: T; lg?: T; xl?: T }
 
 export const getBreakpointValues = (value: BreakpointValues<any>) => {
-  if (typeof value !== 'object') return { sm: value, md: value, lg: value, xl: value, '2xl': value }
+  if (typeof value !== 'object') return { sm: value, md: value, lg: value, xl: value }
 
   return {
     sm: value.sm,
