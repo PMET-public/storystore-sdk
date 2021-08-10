@@ -2,14 +2,14 @@ const { createProxyMiddleware, fixRequestBody } = require('http-proxy-middleware
 const { URL, URLSearchParams } = require('url')
 const express = require('express')
 const path = require('path')
+const { cookies } = require('@storystore/toolbox')
 
 const ADDON_ID = 'storybook-variables'
 
 module.exports = function expressMiddleware(router) {
   router.use('/__graphql/', (req, res, next) => {
-    const cookie = req.headers.cookie && req.headers.cookie.match(new RegExp(ADDON_ID + '=([^;]+)'))
-    const settings = cookie ? JSON.parse(decodeURIComponent(cookie[1])) : null
-
+    const cookie = cookies.getCookieValueFromString(req.headers.cookie, ADDON_ID)
+    const settings = JSON.parse(cookie)
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
@@ -26,9 +26,8 @@ module.exports = function expressMiddleware(router) {
   })
 
   router.use('/__aem/', (req, res, next) => {
-    const cookie = req.headers.cookie && req.headers.cookie.match(new RegExp(ADDON_ID + '=([^;]+)'))
-    const settings = cookie ? JSON.parse(decodeURIComponent(cookie[1])) : null
-
+    const cookie = cookies.getCookieValueFromString(req.headers.cookie, ADDON_ID)
+    const settings = JSON.parse(cookie)
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
