@@ -312,7 +312,6 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
           </Grid>
         </View>
       )}
-      <br />
     </Grid>
   )
 }

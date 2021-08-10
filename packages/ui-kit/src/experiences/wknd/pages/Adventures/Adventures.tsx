@@ -64,7 +64,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
   if (error) return <h1>There was an issue.</h1>
 
   return (
-    <View padded>
+    <View padded className={style.root}>
       <Swatches
         className={style.filter}
         name="filters"
@@ -101,7 +101,6 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
             />
           )
         )}
-        <br />
       </Grid>
     </View>
   )

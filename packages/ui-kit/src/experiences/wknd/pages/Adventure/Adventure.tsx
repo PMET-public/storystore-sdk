@@ -147,7 +147,6 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
 
             <Html htmlString={adventureGearList.html} />
           </Grid>
-          <br />
         </Grid>
       </View>
     </div>

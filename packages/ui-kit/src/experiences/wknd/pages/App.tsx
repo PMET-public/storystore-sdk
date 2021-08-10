@@ -20,7 +20,7 @@ const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }) => {
           sticky
         />
       }
-      footer={<Footer logo={<LogoIcon />} contained />}
+      footer={<Footer logo={<LogoIcon />} />}
     />
   )
 }

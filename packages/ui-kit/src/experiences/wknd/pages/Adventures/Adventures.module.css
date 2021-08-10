@@ -1,3 +1,7 @@
+.root {
+  padding-bottom: var(--spacing-lg);
+}
+
 @media (min-width: 768px) {
   .tile:first-of-type {
     grid-column: 1 / 3;
