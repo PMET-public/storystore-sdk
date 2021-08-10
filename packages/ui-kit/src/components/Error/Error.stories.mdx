@@ -1,0 +1,20 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Error from '.'
+
+<Meta title="Components/Error" component={Error} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return <Error {...args}>Error</Error>
+}
+
+# Error
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="Error">{Template.bind({})}</Story>
+</Canvas>
+
+```
+import { Error } from '@storystore/ui-kit/components'
+```

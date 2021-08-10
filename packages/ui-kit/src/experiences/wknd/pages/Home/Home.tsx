@@ -9,6 +9,7 @@ import Carousel from '../../../../components/Carousel'
 import Tile from '../../../../components/Tile'
 import Heading from '../../../../components/Heading'
 import Button from '../../../../components/Button'
+import Error from '../../../../components/Error'
 import gql from 'graphql-tag'
 
 export const HOME_QUERY = gql`
@@ -103,7 +104,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
 
   if (loading) return <h1>Loading...</h1>
 
-  if (error) return <h1>There was an issue.</h1>
+  if (error) return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
 
   return (
     <Grid gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>

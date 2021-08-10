@@ -1,0 +1,20 @@
+.root {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-md);
+  justify-content: center;
+}
+
+.root > span {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.root svg {
+  color: currentColor;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+  width: 6em;
+}

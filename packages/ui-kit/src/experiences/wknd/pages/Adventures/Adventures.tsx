@@ -1,6 +1,7 @@
 import { FunctionComponent, useEffect } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import style from './Adventures.module.css'
+import Error from '../../../../components/Error'
 import View from '../../../../components/View'
 import Grid from '../../../../components/Grid'
 import Tile from '../../../../components/Tile'
@@ -61,7 +62,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
 
   if (loading) return <h1>Loading...</h1>
 
-  if (error) return <h1>There was an issue.</h1>
+  if (error) return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
 
   return (
     <View padded className={style.root}>
