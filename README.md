@@ -6,9 +6,11 @@
 
 The following tools should be installed locally:
 
-- AEM SDK + WKND Reference site running locally at https://localhost:4502
 - Node 12 or above https://nodejs.org/
-- Yarn https://yarnpkg.com/getting-started/install
+- Yarn `sudo npm install -g yarn`
+- [AEM SDK](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#aem-sdk) running locally (localhost:4502)
+  - ✅ [Sample Data and GraphQL Endpoing](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#wknd-site-content-endpoints)
+  - ✅ [CORS Configuration](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#cors-config)
 
 ### Instructions
 
