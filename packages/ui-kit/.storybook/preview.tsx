@@ -4,7 +4,6 @@ import { DocsContainer } from '@storybook/addon-docs'
 import { useVariables } from '@storystore/storybook-variables/lib'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { MockedProvider } from '@apollo/client/testing'
-import { auth } from '@storystore/toolbox'
 import UIProvider from '../src/theme/UIProvider'
 
 export const parameters = {
@@ -53,11 +52,7 @@ const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ 
         queryDeduplication: true,
         ssrMode: false,
         link: new HttpLink({
-          uri,
-          credentials: 'include',
-          headers: {
-            authorization: basicAuth ? auth.getBasicAuthenticationHeader(basicAuth.split(':') as any) : undefined,
-          },
+          uri: '/__graphql',
         }),
         cache: new InMemoryCache({}),
       }),

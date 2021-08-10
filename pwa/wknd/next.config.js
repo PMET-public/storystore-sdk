@@ -10,6 +10,10 @@ module.exports = withPlugins([withTM, withStoryStore], {
         source: '/__aem/:pathname*',
         destination: '/api/__aem',
       },
+      {
+        source: '/__graphql/:pathname*',
+        destination: '/api/__graphql',
+      },
       /** Adventure */
       {
         source: '/content/dam/wknd/:locale/adventures/:pathname*',
