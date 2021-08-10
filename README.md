@@ -32,3 +32,5 @@ The experiences will be available at:
 
 - **WKND Adventures (Your Demo Web App)**: http://localhost:3000
 - **UIKit (Development Canvas)**: http://localhost:6006
+
+You can view and edit source code in the UIKit `./packages/ui-kit/src`
