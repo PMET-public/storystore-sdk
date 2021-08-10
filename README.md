@@ -2,23 +2,33 @@
 
 ## ⚠️ Beta v0.1.0 ⚠️
 
-## Pre-Requisite
+### Pre-requisites
+
+The following tools should be installed locally:
 
 - Node 12 or above https://nodejs.org/
-- Yarn https://yarnpkg.com/getting-started/install
+- Yarn `sudo npm install -g yarn`
 - [AEM SDK](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#aem-sdk) running locally (localhost:4502)
   - ✅ [Sample Data and GraphQL Endpoing](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#wknd-site-content-endpoints)
   - ✅ [CORS Configuration](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#cors-config)
 
-## Getting Started
+### Instructions
 
-### ☝️ Install and prepare
+☝️ Open a new terminal window and run the following command to clone the StoryStore SDK
+
+`git clone https://github.com/PMET-public/storystore-sdk.git`
+
+`cd storystore-sdk`
+
+✌️ Install dependencies:
 
 `yarn install`
 
-### ✨ Run SDK
+✨ Run StoryStore SDK:
 
-`yarn wknd:sdk`
+`yarn sdk:wknd`
 
-- **WKND Adventures**: http://localhost:3000
-- **UIKit**: http://localhost:6006
+The experiences will be available at:
+
+- **WKND Adventures (Your Demo Web App)**: http://localhost:3000
+- **UIKit (Development Canvas)**: http://localhost:6006

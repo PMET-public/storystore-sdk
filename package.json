@@ -17,5 +17,8 @@
     "cleanup": "yarn workspaces run cleanup",
     "prepare": "yarn workspaces run prepare",
     "sdk:wknd": "concurrently --names \"WKND,UI-KIT\" \"yarn workspace @storystore/pwa-wknd dev\" \"yarn workspace @storystore/ui-kit dev\""
+  },
+  "engines": {
+    "node": ">=12.0.0"
   }
 }
