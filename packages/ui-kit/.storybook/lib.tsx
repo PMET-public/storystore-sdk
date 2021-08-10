@@ -3,12 +3,12 @@ export const settings = {
     graphQlEndpoint: {
       label: 'GraphQL URL',
       placeholder: 'https://...',
-      defaultValue: new URL(process.env.GRAPHQL_URL).href,
+      defaultValue: new URL(process.env.AEM_GRAPHQL_URL).href,
     },
     graphQlBasicAuth: {
       label: 'GraphQL Auth',
       placeholder: 'username:password',
-      defaultValue: process.env.GRAPHQL_AUTH,
+      defaultValue: process.env.AEM_GRAPHQL_AUTH,
     },
   },
 }

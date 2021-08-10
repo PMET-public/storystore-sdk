@@ -1,5 +1,5 @@
 import { cookies } from './'
-type Variable = 'NEXT_PUBLIC_AEM_GRAPHQL_URL' | 'NEXT_PUBLIC_AEM_GRAPHQL_AUTH'
+type Variable = 'AEM_GRAPHQL_URL' | 'AEM_GRAPHQL_AUTH'
 
 export const get = (variable: Variable) => {
   return cookies.get(variable)

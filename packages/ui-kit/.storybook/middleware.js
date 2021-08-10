@@ -13,8 +13,8 @@ module.exports = function expressMiddleware(router) {
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
-    const endpoint = new URL(settings && settings[id] ? settings[id].graphQlEndpoint : process.env.GRAPHQL_URL)
-    const auth = settings && settings[id] ? settings[id].graphQlBasicAuth : process.env.GRAPHQL_AUTH
+    const endpoint = new URL(settings && settings[id] ? settings[id].graphQlEndpoint : process.env.AEM_GRAPHQL_URL)
+    const auth = settings && settings[id] ? settings[id].graphQlBasicAuth : process.env.AEM_GRAPHQL_AUTH
 
     createProxyMiddleware({
       auth,
@@ -32,12 +32,12 @@ module.exports = function expressMiddleware(router) {
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
-    const target = new URL(settings && settings[id] ? settings[id].graphQlEndpoint : process.env.GRAPHQL_URL).origin
-    const auth = settings && settings[id] ? settings[id].graphQlBasicAuth : process.env.GRAPHQL_AUTH
+    const endpoint = new URL(settings && settings[id] ? settings[id].graphQlEndpoint : process.env.AEM_GRAPHQL_URL)
+    const auth = settings && settings[id] ? settings[id].graphQlBasicAuth : process.env.AEM_GRAPHQL_AUTH
 
     createProxyMiddleware({
       auth,
-      target,
+      target: endpoint.origin,
       changeOrigin: true,
       pathRewrite: { '^/__aem': '' },
     })(req, res, next)

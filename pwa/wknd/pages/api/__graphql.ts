@@ -25,10 +25,10 @@ function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const overrideTarget = cookies.getCookieValueFromString(req.headers.cookie, 'AEM_GRAPHQL_URL')
-  const endpoint = new URL(overrideTarget || process.env.NEXT_PUBLIC_AEM_GRAPHQL_URL)
+  const endpoint = new URL(overrideTarget || process.env.AEM_GRAPHQL_URL)
 
   const overrideAuth = cookies.getCookieValueFromString(req.headers.cookie, 'AEM_GRAPHQL_AUTH')
-  const auth = overrideAuth || process.env.NEXT_PUBLIC_AEM_GRAPHQL_AUTH
+  const auth = overrideAuth || process.env.AEM_GRAPHQL_AUTH
 
   await runMiddleware(
     req,
