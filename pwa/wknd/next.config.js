@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins')
 const withTM = require('next-transpile-modules')(['@storystore/ui-kit'])
 const withStoryStore = require('@storystore/ui-kit/nextjs')
+const { WebpackOpenBrowser } = require('webpack-open-browser')
 
 module.exports = withPlugins([withTM, withStoryStore], {
   async rewrites() {
@@ -20,5 +21,14 @@ module.exports = withPlugins([withTM, withStoryStore], {
         destination: '/adventure',
       },
     ]
+  },
+
+  webpack: config => {
+    config.plugins = config.plugins || []
+
+    if (process.env.NODE_ENV === 'development') {
+      config.plugins.push(new WebpackOpenBrowser({ url: `http://localhost:${process.env.PORT || 3000}` }))
+    }
+    return config
   },
 })
