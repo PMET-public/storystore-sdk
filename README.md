@@ -34,3 +34,7 @@ The experiences will be available at:
 - **UIKit (Development Canvas)**: http://localhost:6006
 
 You can view and edit source code in the UIKit `./packages/ui-kit/src`
+
+### Other tools
+
+Apollo Clien Devtools ([Chrome](https://chrome.google.com/webstore/detail/apollo-client-devtools/jdkknkkbebbapilgoeccciglkfbmbnfm?utm_source=chrome-ntp-icon) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/apollo-developer-tools/))
