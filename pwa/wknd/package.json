@@ -2,6 +2,7 @@
   "name": "@storystore/pwa-wknd",
   "version": "0.1.0",
   "scripts": {
+    "lint": "next lint",
     "dev": "next",
     "build": "next build",
     "start": "next start",
@@ -15,12 +16,13 @@
     "@storystore/ui-kit": "^0.1.0",
     "graphql": "^15.3.0",
     "http-proxy-middleware": "^2.0.1",
-    "next": "latest",
+    "next": "^11.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
+    "eslint-config-next": "11.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^8.0.0",
     "webpack-open-browser": "^1.0.5"
