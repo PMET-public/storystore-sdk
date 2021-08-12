@@ -14,13 +14,7 @@ The following tools should be installed locally:
 
 ### 📜 Instructions
 
-☝️ Open a new terminal window and run the following command to clone the StoryStore SDK
-
-`git clone https://github.com/PMET-public/storystore-sdk.git`
-
-`cd storystore-sdk`
-
-✌️ Install dependencies:
+☝️ Install dependencies:
 
 `yarn install`
 
