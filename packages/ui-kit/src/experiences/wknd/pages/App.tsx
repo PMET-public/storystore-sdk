@@ -5,7 +5,7 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import LogoIcon from '../assets/wknd-adventures_logo.svg'
 
-const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }) => {
+export const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }) => {
   return (
     <AppComponent
       {...props}
@@ -24,5 +24,3 @@ const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }) => {
     />
   )
 }
-
-export default App

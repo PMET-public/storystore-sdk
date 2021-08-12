@@ -1,11 +1,4 @@
-import App from './pages/App'
-import Home from './pages/Home'
-import Adventure from './pages/Adventure'
-import Adventures from './pages/Adventures'
-
-export const WKND = {
-  App,
-  Home,
-  Adventure,
-  Adventures,
-}
+export * from './pages/App'
+export * from './pages/Home'
+export * from './pages/Adventure'
+export * from './pages/Adventures'

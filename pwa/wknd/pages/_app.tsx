@@ -41,18 +41,16 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         />
         <meta name="description" content="Description" />
         <meta name="keywords" content="Keywords" />
-        <title>WKND Adventures</title>
-
-        <link rel="shortcut icon" href="/static/favicon.ico" />
-        {/* iOS */}
+        <meta name="theme-color" content="#fdd835" />
         <meta name="apple-mobile-web-app-title" content="WKND Adventures" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png" />
-        {/* Web App Manifest  */}
-        <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
 
-        <meta name="theme-color" content="#fdd835" />
+        <title>WKND Adventures</title>
+
+        <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
       </Head>
 
       <ApolloProvider client={apolloClient}>

@@ -57,14 +57,14 @@ export const ADVENTURE_QUERY = gql`
 export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
-  if (error) return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
+  if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
 
   const adventure = data?.adventureByPath.item
 
   return (
     <div className={style.root}>
       {loading && !adventure ? (
-        <BannerSkeleton className={style.banner} />
+        <BannerSkeleton className={style.banner} uniqueKey="adventure-image" />
       ) : (
         <Banner
           backgroundImage={<img src={'/__aem' + adventure.adventurePrimaryImage.src} alt={adventure.adventureTitle} />}
@@ -76,7 +76,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
 
       <View padded className={style.wrapper}>
         {loading && !adventure ? (
-          <ContentLoader viewBox="0 0 604.62 637.75">
+          <ContentLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
             <rect width="191.58" height="23.16" />
             <rect y="31.58" width="396.62" height="38.26" />
             <rect y="106.32" width="604.62" height="353.71" />
