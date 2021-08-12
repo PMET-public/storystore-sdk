@@ -4,6 +4,10 @@ const withStoryStore = require('@storystore/ui-kit/nextjs')
 const { WebpackOpenBrowser } = require('webpack-open-browser')
 
 module.exports = withPlugins([withTM, withStoryStore], {
+  experimental: {
+    esmExternals: 'loose',
+  },
+
   async rewrites() {
     return [
       /** Proxy to AEM. Images, etc */
