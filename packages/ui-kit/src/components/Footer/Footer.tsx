@@ -55,16 +55,16 @@ export const Footer: FunctionComponent<FooterProps> = ({
         </div>
 
         <div className={style.social}>
-          <a href="https://facebook.com" target="_blank">
+          <a href="https://facebook.com" target="_blank" rel="noreferrer">
             <FacebookIcon aria-label="Facebook" />
           </a>
-          <a href="https://twitter.com" target="_blank">
+          <a href="https://twitter.com" target="_blank" rel="noreferrer">
             <TwitterIcon aria-label="Twitter" />
           </a>
-          <a href="https://instagram.com" target="_blank">
+          <a href="https://instagram.com" target="_blank" rel="noreferrer">
             <InstagramIcon aria-label="Instagram" />
           </a>
-          <a href="https://pinterest.com" target="_blank">
+          <a href="https://pinterest.com" target="_blank" rel="noreferrer">
             <PinterestIcon aria-label="Pinterest" />
           </a>
         </div>

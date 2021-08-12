@@ -9,10 +9,6 @@ module.exports = withPlugins([withPWA, withTM, withStoryStore], {
     esmExternals: 'loose',
   },
 
-  i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
-  },
   pwa: {
     dest: '.next/static',
     disable: process.env.NODE_ENV === 'development',
