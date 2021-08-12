@@ -13,7 +13,7 @@ export const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }
         <Header
           logo={
             <Link href="/">
-              <LogoIcon />
+              <LogoIcon aria-label="WKND" />
             </Link>
           }
           transparent

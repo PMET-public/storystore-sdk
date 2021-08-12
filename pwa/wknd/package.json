@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "^9.0.1",
     "eslint-config-next": "11.1.0",
     "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.2.24",
     "next-transpile-modules": "^8.0.0",
     "webpack-open-browser": "^1.0.5"
   },

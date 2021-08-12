@@ -47,8 +47,8 @@ export const Footer: FunctionComponent<FooterProps> = ({
         <div className={style.disclaimer}>
           Ⓒ {year}, {name}. {description}
           <em>
-            Many of the beautiful images in the WKND site are available for purchase via{' '}
-            <a href="https://stock.adobe.com" target="_blank">
+            Many of the beautiful images in the WKND site are available for purchase via
+            <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
               Adobe Stock.
             </a>
           </em>
