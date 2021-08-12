@@ -3,6 +3,7 @@ import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib
 import style from './Banner.module.css'
 import { ButtonProps } from '../Button'
 import View from '../View'
+import ContentLoader from 'react-content-loader'
 
 export type BannerProps = HTMLAttributes<HTMLDivElement> & {
   root?: ReactElement
@@ -67,5 +68,25 @@ export const Banner: FunctionComponent<BannerProps> = ({
         </div>
       </View>
     </root.type>
+  )
+}
+
+export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
+  contained?: boolean
+  width?: BreakpointValues<string>
+  height?: BreakpointValues<string>
+  screen?: 'dark' | 'darker' | 'light' | 'lighter'
+}
+
+export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ ...props }) => {
+  return (
+    <Banner
+      backgroundImage={
+        <ContentLoader width="100%" height="100%">
+          <rect width="100%" height="100%" />
+        </ContentLoader>
+      }
+      {...props}
+    />
   )
 }

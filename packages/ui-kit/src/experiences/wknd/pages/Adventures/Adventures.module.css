@@ -1,5 +1,5 @@
 .root {
-  padding-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
 }
 
 @media (min-width: 768px) {

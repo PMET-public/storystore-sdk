@@ -1,11 +1,10 @@
-import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement, Children } from 'react'
 import style from './Carousel.module.css'
 import { classes, merge, BreakpointValues, getBreakpointValues, Spacing } from '../../lib'
 
 type CarouselProps = HTMLAttributes<HTMLDivElement> & {
   gap?: Spacing
   hideScrollBar?: boolean
-  items: ReactElement[]
   peak?: boolean
   root?: ReactElement
   show?: BreakpointValues<number>
@@ -16,7 +15,7 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
   className,
   gap: _gap,
   hideScrollBar = false,
-  items,
+  children,
   peak,
   root = <div />,
   show: _show,
@@ -41,7 +40,7 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
         ...props.style,
       }}
     >
-      {items.map((item, key) => (
+      {Children.toArray(children).map((item: any, key) => (
         <item.type key={key} {...item.props} className={classes([style.item, item.props.className])} />
       ))}
     </root.type>

@@ -1,6 +1,7 @@
 import { FunctionComponent, HTMLAttributes, ReactElement, isValidElement } from 'react'
 import { classes, merge } from '../../lib'
 import style from './Tile.module.css'
+import ContentLoader from 'react-content-loader'
 
 type TileProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
@@ -55,5 +56,26 @@ export const Tile: FunctionComponent<TileProps> = ({
         </div>
       </div>
     </root.type>
+  )
+}
+
+export type TileSkeletonProps = HTMLAttributes<HTMLElement> & { surface?: boolean }
+
+export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ ...props }) => {
+  return (
+    <Tile
+      image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
+      heading={
+        <ContentLoader width="70%" height="1em">
+          <rect width="100%" height="100%" />
+        </ContentLoader>
+      }
+      tags={[
+        <ContentLoader width="30%" height="1em">
+          <rect width="100%" height="100%" />
+        </ContentLoader>,
+      ]}
+      {...props}
+    />
   )
 }

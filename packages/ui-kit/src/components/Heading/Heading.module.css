@@ -1,6 +1,7 @@
 .root {
+  color: var(--heading-color);
   display: block;
-  font-size: var(--banner-size-sm);
+  font-size: var(--heading-size-sm);
   font-weight: var(--font-semibold);
   line-height: 1.3;
   width: 100%;
@@ -8,19 +9,19 @@
 
 @media (min-width: 768px) {
   .root {
-    font-size: var(--banner-size-md);
+    font-size: var(--heading-size-md);
   }
 }
 
 @media (min-width: 1024px) {
   .root {
-    font-size: var(--banner-size-lg);
+    font-size: var(--heading-size-lg);
   }
 }
 
 @media (min-width: 1280px) {
   .root {
-    font-size: var(--banner-size-xl);
+    font-size: var(--heading-size-xl);
   }
 }
 

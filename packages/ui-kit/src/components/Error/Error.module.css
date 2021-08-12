@@ -3,6 +3,9 @@
   display: flex;
   font-size: var(--font-md);
   justify-content: center;
+  padding: var(--padded);
+  line-height: 1.5;
+  text-align: center;
 }
 
 .root > span {

@@ -5,15 +5,14 @@ import LockIcon from 'remixicon/icons/System/lock-line.svg'
 import PlugIcon from 'remixicon/icons/Others/plug-line.svg'
 import ErrorIcon from 'remixicon/icons/System/error-warning-line.svg'
 
-type Status = 401 | 403 | 404 | 500
-
 export type ErrorProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
-  status?: Status
+  status?: number | string
 }
 
-const error = (status: Status) => {
+const error = (status: number | string) => {
   const _status = Number(status)
+
   switch (_status) {
     case 401:
       return (
@@ -33,6 +32,14 @@ const error = (status: Status) => {
         <span>
           <PlugIcon />
           The GraphQL endpoint provided can't be found.
+        </span>
+      )
+    case 504:
+      return (
+        <span>
+          <PlugIcon />
+          Can't connect to the GraphQL endpoint.
+          <br /> Please make sure AEM is running.
         </span>
       )
     default:

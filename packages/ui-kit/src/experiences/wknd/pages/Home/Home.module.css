@@ -1,13 +1,4 @@
 .root {
   margin-top: -85px;
-  padding-bottom: var(--spacing-lg);
-}
-
-.root .banner {
-  color: #fff;
-}
-
-.banner .subheading {
-  display: block;
-  font-size: 0.75em;
+  padding-bottom: var(--spacing-xl);
 }

@@ -4,7 +4,7 @@ import style from './Adventure.module.css'
 import Error from '../../../../components/Error'
 import View from '../../../../components/View'
 import Grid from '../../../../components/Grid'
-import Banner from '../../../../components/Banner'
+import Banner, { BannerSkeleton } from '../../../../components/Banner'
 import Heading from '../../../../components/Heading'
 import Html from '../../../../components/Html'
 import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
@@ -14,6 +14,7 @@ import BagIcon from 'remixicon/icons/Business/briefcase-line.svg'
 import GroupIcon from 'remixicon/icons/User/group-fill.svg'
 import MedalIcon from 'remixicon/icons/Business/medal-2-fill.svg'
 import PriceIcon from 'remixicon/icons/Finance/price-tag-3-fill.svg'
+import ContentLoader from 'react-content-loader'
 
 export type AdventureProps = {
   path: string
@@ -54,101 +55,105 @@ export const ADVENTURE_QUERY = gql`
 `
 
 export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
-  const { loading, data, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
-
-  if (loading) return <h1>Loading...</h1>
+  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
   if (error) return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
 
-  const {
-    adventureTitle,
-    adventureActivity,
-    adventureTripLength,
-    adventureType,
-    adventureDifficulty,
-    adventurePrice,
-    adventureGroupSize,
-    adventurePrimaryImage,
-    adventureDescription,
-    adventureGearList,
-    adventureItinerary,
-  } = data.adventureByPath?.item || {}
+  const adventure = data?.adventureByPath.item
 
   return (
     <div className={style.root}>
-      <Banner
-        backgroundImage={<img src={'/__aem' + adventurePrimaryImage.src} alt={adventureTitle} />}
-        className={style.banner}
-        screen="lighter"
-        vAlign="top"
-      />
+      {loading && !adventure ? (
+        <BannerSkeleton className={style.banner} />
+      ) : (
+        <Banner
+          backgroundImage={<img src={'/__aem' + adventure.adventurePrimaryImage.src} alt={adventure.adventureTitle} />}
+          className={style.banner}
+          screen="lighter"
+          vAlign="top"
+        />
+      )}
 
       <View padded className={style.wrapper}>
-        <Grid gap="lg" className={style.content}>
-          <header>
-            <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
-              {adventureTripLength} {adventureType}
-            </Heading>
-            <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
-              {adventureTitle}
-            </Heading>
-          </header>
-          <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-              <MapIcon /> {adventureActivity} Details
-            </Heading>
+        {loading && !adventure ? (
+          <ContentLoader viewBox="0 0 604.62 637.75">
+            <rect width="191.58" height="23.16" />
+            <rect y="31.58" width="396.62" height="38.26" />
+            <rect y="106.32" width="604.62" height="353.71" />
+            <rect y="492.63" width="295.2" height="61.96" />
+            <rect y="575.79" width="295.2" height="61.96" />
+            <rect x="308.42" y="492.63" width="295.2" height="61.96" />
+            <rect x="308.42" y="575.79" width="295.2" height="61.96" />
+          </ContentLoader>
+        ) : (
+          <Grid gap="lg" className={style.content}>
+            <header>
+              <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
+                {adventure.adventureTripLength} {adventure.adventureType}
+              </Heading>
 
-            <Html htmlString={adventureDescription.html} />
+              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
+                {adventure.adventureTitle}
+              </Heading>
+            </header>
+
+            <Grid gap="md" className={style.section}>
+              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
+                <MapIcon /> {adventure.adventureActivity} Details
+              </Heading>
+
+              <Html htmlString={adventure.adventureDescription.html} />
+            </Grid>
+
+            <div className={style.details}>
+              <span>
+                <strong>
+                  <LengthIcon />
+                  Trip Length:
+                </strong>
+                {adventure.adventureTripLength}
+              </span>
+              <span>
+                <strong>
+                  <GroupIcon />
+                  Group Size:
+                </strong>
+                {adventure.adventureGroupSize}
+              </span>
+              <span>
+                <strong>
+                  <MedalIcon />
+                  Dificulty:
+                </strong>
+                {adventure.adventureDifficulty}
+              </span>
+              <span>
+                <strong>
+                  <PriceIcon />
+                  Price:
+                </strong>
+                {adventure.adventurePrice}
+              </span>
+            </div>
+
+            <Grid gap="md" className={style.section}>
+              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
+                <CalendarIcon /> Itinerary
+              </Heading>
+
+              <Html htmlString={adventure.adventureItinerary.html} />
+            </Grid>
+
+            <Grid gap="md" className={style.section}>
+              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
+                <BagIcon />
+                What to Bring
+              </Heading>
+
+              <Html htmlString={adventure.adventureGearList.html} />
+            </Grid>
           </Grid>
-
-          <div className={style.details}>
-            <span>
-              <strong>
-                <LengthIcon />
-                Trip Length:
-              </strong>
-              {adventureTripLength}
-            </span>
-            <span>
-              <strong>
-                <GroupIcon />
-                Group Size:
-              </strong>
-              {adventureGroupSize}
-            </span>
-            <span>
-              <strong>
-                <MedalIcon />
-                Dificulty:
-              </strong>
-              {adventureDifficulty}
-            </span>
-            <span>
-              <strong>
-                <PriceIcon />
-                Price:
-              </strong>
-              {adventurePrice}
-            </span>
-          </div>
-
-          <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-              <CalendarIcon /> Itinerary
-            </Heading>
-
-            <Html htmlString={adventureItinerary.html} />
-          </Grid>
-
-          <Grid gap="md" className={style.section}>
-            <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-              <BagIcon />
-              What to Bring
-            </Heading>
-
-            <Html htmlString={adventureGearList.html} />
-          </Grid>
-        </Grid>
+        )}
       </View>
     </div>
   )
