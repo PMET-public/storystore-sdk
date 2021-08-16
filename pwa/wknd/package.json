@@ -1,11 +1,12 @@
 {
   "name": "@storystore/pwa-wknd",
   "version": "0.1.0",
+  "license": "MIT",
   "scripts": {
     "lint": "next lint",
-    "dev": "next",
+    "dev": "next -p 6007",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 6007",
     "prepare": "echo ✔️",
     "cleanup": "echo ✔️"
   },

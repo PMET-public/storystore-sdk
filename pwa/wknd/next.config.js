@@ -42,12 +42,11 @@ module.exports = withPlugins([withPWA, withTM, withStoryStore], {
     ]
   },
 
-  webpack: config => {
+  webpack: (config, { isServer }) => {
     config.plugins = config.plugins || []
 
-    if (process.env.NODE_ENV === 'development') {
-      config.plugins.push(new WebpackOpenBrowser({ url: `http://localhost:${process.env.PORT || 3000}` }))
-    }
+    if (isServer) config.plugins.push(new WebpackOpenBrowser({ url: `http://localhost:${process.env.PORT || 6007}` }))
+
     return config
   },
 })
