@@ -2,13 +2,18 @@
   "name": "@storystore/pwa-wknd",
   "version": "0.1.0",
   "license": "MIT",
+  "main": "main.js",
   "scripts": {
     "lint": "next lint",
-    "dev": "next -p 6007",
+    "dev": "NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "next start -p 6007",
+    "xstart": "node server.js",
+    "start": "electron .",
     "prepare": "echo ✔️",
-    "cleanup": "echo ✔️"
+    "cleanup": "echo ✔️",
+    "prepkg": "rimraf .pkg && next build",
+    "pkg": "nexe -t v12.9.1 -o .pkg/WKND.app -r \".next/**/*\" -r \"public/**/*\" -r \"../../node_modules/@storystore/{ui-kit,next-apollo,toolbox}/{*.js,package.json}\" -r \"../../node_modules/@storystore/{ui-kit,next-apollo,toolbox}/dist/**/*\" --verbose",
+    "postpkg": "copyfiles -a .next/server/pages/*.html .env.local .pkg/ && chmod 774 .pkg/WKND.app"
   },
   "dependencies": {
     "@apollo/client": "^3.1.1",
@@ -23,10 +28,16 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^9.0.1",
+    "copyfiles": "^2.4.1",
+    "dotenv": "^10.0.0",
+    "electron": "^13.2.0",
+    "eslint": "^7.32.0",
     "eslint-config-next": "11.1.0",
+    "nexe": "^3.3.7",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.2.24",
     "next-transpile-modules": "^8.0.0",
+    "rimraf": "^3.0.2",
     "webpack-open-browser": "^1.0.5"
   },
   "engines": {
