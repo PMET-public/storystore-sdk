@@ -12,6 +12,8 @@ The following tools should be installed locally:
   - [Sample Data and GraphQL Endpoing](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#wknd-site-content-endpoints)
   - [CORS Configuration](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#cors-config)
 
+---
+
 ### 📜 Instructions
 
 ☝️ Install dependencies:
@@ -29,9 +31,13 @@ The experiences will be available at:
 
 You can view and edit source code in the UIKit `./packages/ui-kit/src`
 
+---
+
 ## 📦 Package PWA
 
 `yarn pkg`
+
+---
 
 ### 🔨 Other tools
 
