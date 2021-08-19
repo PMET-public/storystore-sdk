@@ -1,10 +1,8 @@
 const withPlugins = require('next-compose-plugins')
-const withTM = require('next-transpile-modules')(['@storystore/ui-kit'])
 const withStoryStore = require('@storystore/ui-kit/nextjs')
 const withPWA = require('next-pwa')
-const { WebpackOpenBrowser } = require('webpack-open-browser')
 
-module.exports = withPlugins([withPWA, withTM, withStoryStore], {
+module.exports = withPlugins([withPWA, withStoryStore], {
   experimental: {
     esmExternals: 'loose',
   },
@@ -42,10 +40,21 @@ module.exports = withPlugins([withPWA, withTM, withStoryStore], {
     ]
   },
 
-  webpack: (config, { isServer }) => {
-    config.plugins = config.plugins || []
+  webpack: config => {
+    config.module.rules = config.module.rules.map(rule => {
+      if (!rule.oneOf) return rule
 
-    if (isServer) config.plugins.push(new WebpackOpenBrowser({ url: `http://localhost:${process.env.PORT || 6007}` }))
+      rule.oneOf = rule.oneOf.map(x => {
+        if (x.test && x.test.toString() === '/\\.module\\.css$/') {
+          delete x.issuer
+          return x
+        }
+
+        return x
+      })
+
+      return rule
+    })
 
     return config
   },

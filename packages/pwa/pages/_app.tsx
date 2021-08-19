@@ -6,6 +6,7 @@ import { UIProvider } from '@storystore/ui-kit/theme'
 import Head from 'next/head'
 import { WKND } from '@storystore/ui-kit/experiences'
 import NextLink from 'next/link'
+import '@storystore/ui-kit/dist/theme/css/global.css'
 
 initApolloClient(
   new ApolloClient({

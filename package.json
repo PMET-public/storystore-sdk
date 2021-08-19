@@ -7,7 +7,7 @@
     "packages/storybook-variables",
     "packages/ui-kit",
     "packages/next-apollo",
-    "pwa/*"
+    "packages/pwa"
   ],
   "devDependencies": {
     "concurrently": "^6.2.0",
@@ -16,7 +16,8 @@
   "scripts": {
     "cleanup": "yarn workspaces run cleanup",
     "prepare": "yarn workspaces run prepare",
-    "sdk:wknd": "concurrently --names \"UIKit,WKND\" \"yarn workspace @storystore/ui-kit dev\" \"yarn workspace @storystore/pwa-wknd dev\""
+    "sdk": "concurrently --names \"UIKit,WKND\" \"yarn workspace @storystore/ui-kit dev\" \"yarn workspace @storystore/pwa dev\"",
+    "pkg": "concurrently --names \"UIKit,WKND\" \"yarn workspace @storystore/ui-kit dev\" \"yarn workspace @storystore/pwa dev\""
   },
   "engines": {
     "node": ">=12.0.0"

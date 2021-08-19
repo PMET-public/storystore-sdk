@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 # PKG
-.pkg
+pkg
