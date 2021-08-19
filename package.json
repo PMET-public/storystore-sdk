@@ -17,7 +17,7 @@
     "cleanup": "yarn workspaces run cleanup",
     "prepare": "yarn workspaces run prepare",
     "sdk": "concurrently --names \"UIKit,WKND\" \"yarn workspace @storystore/ui-kit dev\" \"yarn workspace @storystore/pwa dev\"",
-    "pkg": "concurrently --names \"UIKit,WKND\" \"yarn workspace @storystore/ui-kit dev\" \"yarn workspace @storystore/pwa dev\""
+    "pkg": "yarn workspace @storystore/pwa pkg && open packages/pwa/pkg"
   },
   "engines": {
     "node": ">=12.0.0"
