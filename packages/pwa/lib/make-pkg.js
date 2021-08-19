@@ -3,7 +3,7 @@ const { readdirSync, copy } = require('fs-extra')
 const path = require('path')
 const { name } = require('../package.json')
 
-const APP_NAME = 'WKND'
+const APP_NAME = 'StoryStore PWA'
 const APP_CONTENT_PATH = path.join(__dirname, `../pkg/${APP_NAME}.app/Contents/MacOS/`)
 
 const modules = readdirSync(path.join(__dirname, '../../../node_modules/@storystore'), { withFileTypes: true })
