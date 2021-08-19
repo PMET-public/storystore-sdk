@@ -20,7 +20,7 @@ The following tools should be installed locally:
 
 ✨ Run StoryStore SDK:
 
-`yarn sdk:wknd`
+`yarn sdk`
 
 The experiences will be available at:
 
@@ -28,6 +28,10 @@ The experiences will be available at:
 - **UIKit (Development Canvas)**: http://localhost:6006
 
 You can view and edit source code in the UIKit `./packages/ui-kit/src`
+
+## 📦 Package PWA
+
+`yarn pkg`
 
 ### 🔨 Other tools
 
