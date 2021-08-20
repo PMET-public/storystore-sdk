@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "main": "lib/server.js",
+  "bin": "lib/server.js",
   "author": "Carlos A. Cabrera @fnhipster",
   "description": "An AEM PWA Experience",
   "scripts": {
@@ -13,7 +14,7 @@
     "prepare": "echo ✔️",
     "cleanup": "rimraf pkg .next",
     "prepkg": "rimraf pkg ; next build",
-    "pkg": "node lib/make-pkg.js"
+    "pkg": "pkg . --no-bytecode --public-packages \"*\" --public --compress GZip --output pkg/PWA"
   },
   "dependencies": {
     "@apollo/client": "^3.1.1",
@@ -24,21 +25,31 @@
     "http-proxy-middleware": "^2.0.1",
     "next": "^11.1.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "remove": "^0.1.5"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "copy": "^0.3.2",
-    "copyfiles": "^2.4.1",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.0",
-    "nexe": "3.3.7",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.2.24",
+    "pkg": "^5.3.1",
     "rimraf": "^3.0.2"
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "pkg": {
+    "assets": [
+      ".env.local",
+      ".next/**/*",
+      "public/**/*",
+      "../../node_modules/@surma/rollup-plugin-off-main-thread/loader.ejs",
+      "../../node_modules/ts-invariant/process/*",
+      "../../node_modules/react-hook-form/**/*"
+    ],
+    "targets": [
+      "node12-macos-x64"
+    ]
   }
 }

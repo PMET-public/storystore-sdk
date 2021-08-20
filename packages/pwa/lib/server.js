@@ -19,7 +19,7 @@ const config = require('../next.config')
 const app = next({
   dev,
   config,
-  dir: path.join(__dirname, '../')
+  dir: path.join(__dirname, '../'),
 })
 
 const handle = app.getRequestHandler()
@@ -38,8 +38,8 @@ app.prepare().then(() => {
     console.groupEnd()
 
     if (process.env.OPEN_IN_BROWSER) {
-      const start = (process.platform == 'darwin' ? 'open' : process.platform == 'win32' ? 'start' : 'xdg-open');
-      require('child_process').exec(start + ' ' + url);
+      const start = process.platform == 'darwin' ? 'open' : process.platform == 'win32' ? 'start' : 'xdg-open'
+      require('child_process').exec(start + ' ' + url)
     }
   })
 })
