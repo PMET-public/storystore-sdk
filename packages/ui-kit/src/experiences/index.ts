@@ -1,1 +1,1 @@
-export * from './wknd'
+export * as WKND from './wknd'

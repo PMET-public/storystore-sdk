@@ -6,6 +6,9 @@ import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/c
 import { MockedProvider } from '@apollo/client/testing'
 import UIProvider from '../src/theme/UIProvider'
 
+// TODO: Moved to App wrapper until Next.js allows for global css import from other files.
+import '../src/theme/css/global.css'
+
 export const parameters = {
   docs: {
     theme: themes.dark,

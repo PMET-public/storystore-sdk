@@ -2,8 +2,9 @@ import { FunctionComponent } from 'react'
 import { useFocusVisible } from '@react-aria/interactions'
 import style from './UIProvider.module.css'
 import { classes } from '../../lib'
-import '../css/normalize.css'
-import '../css/global.css'
+
+// TODO: Moved to App wrapper until Next.js allows for global css import from other files.
+// import '../css/global.css'
 
 export type UIProvider = {}
 

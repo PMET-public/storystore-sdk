@@ -35,7 +35,7 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  font-size: var(--font-xs);
+  font-size: var(--font-sm);
 }
 
 .tag {

@@ -58,7 +58,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
     })
   }
 
-  if (error) return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
+  if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
 
   return (
     <View padded className={style.root}>
@@ -81,7 +81,9 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
         {loading
           ? Array(5)
               .fill(null)
-              .map((_, key) => <TileSkeleton key={key} className={style.tile} surface />)
+              .map((_, key) => (
+                <TileSkeleton key={key} uniqueKey={`adventure--${key}`} className={style.tile} surface />
+              ))
           : data.adventureList.items.map(
               ({ id, adventurePrimaryImage, adventureTitle, adventureTripLength, adventureActivity }: any) => (
                 <Tile

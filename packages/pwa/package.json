@@ -1,0 +1,55 @@
+{
+  "name": "@storystore/pwa",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/server.js",
+  "bin": "lib/server.js",
+  "author": "Carlos A. Cabrera @fnhipster",
+  "description": "An AEM PWA Experience",
+  "scripts": {
+    "lint": "next lint",
+    "dev": "NODE_ENV=development node lib/server.js",
+    "build": "next build",
+    "start": "node lib/server.js",
+    "prepare": "echo ✔️",
+    "cleanup": "rimraf pkg .next",
+    "prepkg": "rimraf pkg ; next build",
+    "pkg": "pkg . --no-bytecode --public-packages \"*\" --public --compress GZip --output pkg/PWA"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.1.1",
+    "@storystore/next-apollo": "^0.1.0",
+    "@storystore/toolbox": "^0.1.0",
+    "@storystore/ui-kit": "^0.1.0",
+    "graphql": "^15.3.0",
+    "http-proxy-middleware": "^2.0.1",
+    "next": "^11.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.2.24",
+    "pkg": "^5.3.1",
+    "rimraf": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "pkg": {
+    "assets": [
+      ".env.local",
+      ".next/**/*",
+      "public/**/*",
+      "../../node_modules/@surma/rollup-plugin-off-main-thread/loader.ejs",
+      "../../node_modules/ts-invariant/process/*",
+      "../../node_modules/react-hook-form/**/*"
+    ],
+    "targets": [
+      "node12-macos-x64"
+    ]
+  }
+}

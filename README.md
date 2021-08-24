@@ -1,6 +1,6 @@
 <img src="storystore-sdk.png" width="100" height="100" />
 
-## ⚠️ Beta v0.1.0 ⚠️
+## v0.1.0
 
 ### ✅ Pre-requisites
 
@@ -20,14 +20,18 @@ The following tools should be installed locally:
 
 ✨ Run StoryStore SDK:
 
-`yarn sdk:wknd`
+`yarn sdk`
 
 The experiences will be available at:
 
-- **WKND Adventures (Your Demo Web App)**: http://localhost:3000
+- **WKND Adventures (Your Demo Web App)**: http://localhost:6007
 - **UIKit (Development Canvas)**: http://localhost:6006
 
 You can view and edit source code in the UIKit `./packages/ui-kit/src`
+
+📦 Package PWA
+
+`yarn pkg`
 
 ### 🔨 Other tools
 

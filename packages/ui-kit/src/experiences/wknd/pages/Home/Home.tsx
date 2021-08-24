@@ -103,7 +103,8 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
   const { error, loading, data } = useQuery(HOME_QUERY)
 
   if (error) {
-    return <Error status={(error.networkError as any)?.response.status} style={{ height: '100%' }} />
+    console.log(error.networkError)
+    return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
   }
 
   return (
@@ -139,7 +140,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             {loading && !data?.beginner
               ? Array(4)
                   .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} surface />)
+                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`beginner-carousel--${key}`} surface />)
               : data.beginner.items.map(
                   ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                     <Tile
@@ -167,7 +168,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
       {/* Camping Banner */}
       <View contained padded>
         {loading && !data?.bannerCamping ? (
-          <BannerSkeleton height={{ sm: '70vh', lg: '600px' }} />
+          <BannerSkeleton uniqueKey="camping-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
             height={{ sm: '70vh', lg: '600px' }}
@@ -214,7 +215,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             {loading && !data?.camping
               ? Array(4)
                   .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} surface />)
+                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`camping-carousel--${key}`} surface />)
               : data.camping.items.map(
                   ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                     <Tile
@@ -242,7 +243,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
       {/* Surfing Banner */}
       <View contained padded>
         {loading && !data?.bannerSurfing ? (
-          <BannerSkeleton height={{ sm: '70vh', lg: '600px' }} />
+          <BannerSkeleton uniqueKey="surfing-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
             backgroundImage={
@@ -286,7 +287,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             {loading && !data?.overstay
               ? Array(4)
                   .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} surface />)
+                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`overstay-carousel--${key}`} surface />)
               : data.overstay.items.map(
                   ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
                     <Tile

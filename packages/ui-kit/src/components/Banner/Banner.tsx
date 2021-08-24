@@ -76,13 +76,14 @@ export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
   width?: BreakpointValues<string>
   height?: BreakpointValues<string>
   screen?: 'dark' | 'darker' | 'light' | 'lighter'
+  uniqueKey?: string
 }
 
-export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ ...props }) => {
+export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
     <Banner
       backgroundImage={
-        <ContentLoader width="100%" height="100%">
+        <ContentLoader uniqueKey={uniqueKey} width="100%" height="100%">
           <rect width="100%" height="100%" />
         </ContentLoader>
       }

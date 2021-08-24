@@ -4,42 +4,51 @@ import style from './Error.module.css'
 import LockIcon from 'remixicon/icons/System/lock-line.svg'
 import PlugIcon from 'remixicon/icons/Others/plug-line.svg'
 import ErrorIcon from 'remixicon/icons/System/error-warning-line.svg'
+import OfflineIcon from 'remixicon/icons/Device/wifi-off-line.svg'
 
 export type ErrorProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
-  status?: number | string
+  status?: 401 | 403 | 404 | 504 | 'Offline'
 }
 
 const error = (status: number | string) => {
-  const _status = Number(status)
+  const _status = status.toString()
 
   switch (_status) {
-    case 401:
+    case '401':
       return (
         <span>
           <LockIcon /> You must provide GraphQL credentials to access this endpoint.
         </span>
       )
-    case 403:
+    case '403':
       return (
         <span>
           <LockIcon />
           The GraphQL credentials provided are incorrect. Please check your configuration.
         </span>
       )
-    case 404:
+    case '404':
       return (
         <span>
           <PlugIcon />
           The GraphQL endpoint provided can't be found.
         </span>
       )
-    case 504:
+    case '504':
       return (
         <span>
           <PlugIcon />
           Can't connect to the GraphQL endpoint.
           <br /> Please make sure AEM is running.
+        </span>
+      )
+    case 'Offline':
+      return (
+        <span>
+          <OfflineIcon />
+          You are offline.
+          <br /> Please check your internet connection.
         </span>
       )
     default:
