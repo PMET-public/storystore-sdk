@@ -1,55 +1,136 @@
 import { Meta, Source } from '@storybook/addon-docs'
 
-<Meta title="Theme/Tokens" />
+<Meta title="Theme/Colors" />
 
 export const Color = ({ variant = 'surface', ...props }) => (
   <div
     {...props}
     style={{
-      padding: '1rem',
+      padding: 'var(--spacing-sm)',
       background: `var(--color-${variant})`,
       color: `var(--color-on-${variant})`,
+      display: 'grid',
+      gridGap: 'var(--spacing-sm)',
       ...props.style,
     }}
+  >
+    <div style={{ fontSize: '0.75em' }}>--color-{variant}</div>
+    <div style={{ fontWeight: '600' }}>--color-on-{variant}</div>
+  </div>
+)
+
+export const Typography = ({ variable, property, ...props }) => {
+  const style = { [property]: `var(${variable})` }
+  return (
+    <div style={{ display: 'grid', gridGap: 'var(--spacing-sm)' }}>
+      <div style={{ fontSize: 'var(--font-xm)' }}>{variable}</div>
+      <div style={style}>The quick brown fox jumps over the lazy dog</div>
+    </div>
+  )
+}
+
+export const Block = ({ ...props }) => (
+  <div
+    style={{
+      display: 'grid',
+      gridGap: '1rem',
+      padding: '1rem',
+      background: 'var(--color-surface)',
+      color: 'var(--color-on-surface)',
+    }}
+    {...props}
   />
+)
+
+export const Spacing = ({ spacing, ...props }) => (
+  <div style={{ display: 'grid', gridGap: `var(${spacing})`, gridTemplateColumns: '1fr 1fr' }}>
+    <div
+      style={{ background: 'var(--color-surface-darker)', height: 50, padding: '0.5rem', fontSize: 'var(--font-xs)' }}
+    >
+      {spacing}
+    </div>
+    <div style={{ background: 'var(--color-surface-darker)', height: 50 }} />
+  </div>
 )
 
 # Theme
 
-With `MDX`, we can define a story for `Checkbox` right in the middle of our
-Markdown documentation.
-
-<Source
-  language="css"
-  code={`
-    :root {
-    --color: #fff;
-}
-  `}
-></Source>
-
 ## Colors
 
-<div
-  style={{
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    gridGap: '1rem',
-    padding: '1rem',
-    background: 'var(--color-surface)',
-    color: 'var(--color-on-surface)',
-  }}
->
-  <Color variant="surface-lighter">Surface (lighter)</Color>
-  <Color variant="surface">Surface</Color>
-  <Color variant="surface-darker">Surface (darker)</Color>
-  <Color variant="accent-lighter">Accent (lighter)</Color>
-  <Color variant="accent">Accent</Color>
-  <Color variant="accent-darker">Accent (darker)</Color>
-  <Color variant="primary-lighter">Primary (lighter)</Color>
-  <Color variant="primary">Primary</Color>
-  <Color variant="primary-darker">Primary (darker)</Color>
-  <Color variant="secondary-lighter">Secondary (lighter)</Color>
-  <Color variant="secondary">Secondary</Color>
-  <Color variant="secondary-darker">Secondary (darker)</Color>
-</div>
+`colors.module.css`
+
+<Block>
+  <Color variant="surface-lighter" />
+  <Color variant="surface" />
+  <Color variant="surface-darker" />
+  <Color variant="accent-lighter" />
+  <Color variant="accent" />
+  <Color variant="accent-darker" />
+  <Color variant="primary-lighter" />
+  <Color variant="primary" />
+  <Color variant="primary-darker" />
+  <Color variant="secondary-lighter" />
+  <Color variant="secondary" />
+  <Color variant="secondary-darker" />
+</Block>
+
+## Spacing
+
+<Block>
+  <Spacing spacing="--spacing-xxs" />
+  <Spacing spacing="--spacing-xs" />
+  <Spacing spacing="--spacing-sm" />
+  <Spacing spacing="--spacing-md" />
+  <Spacing spacing="--spacing-lg" />
+  <Spacing spacing="--spacing-xl" />
+  <Spacing spacing="--spacing-2xl" />
+</Block>
+
+## Typography
+
+`typography.module.css`
+
+### Font Family
+
+<Block>
+  <Typography property="font-family" variable="--font-body" />
+</Block>
+
+### Font Size
+
+<Block>
+  <Typography property="font-size" variable="--font-xs" />
+  <Typography property="font-size" variable="--font-sm" />
+  <Typography property="font-size" variable="--font" />
+  <Typography property="font-size" variable="--font-lg" />
+  <Typography property="font-size" variable="--font-xl" />
+  <Typography property="font-size" variable="--font-2xl" />
+  <Typography property="font-size" variable="--font-3xl" />
+  <Typography property="font-size" variable="--font-4xl" />
+  <Typography property="font-size" variable="--font-5xl" />
+</Block>
+
+### Font Weight
+
+<Block>
+  <Typography property="font-weight" variable="--font-thin" />
+  <Typography property="font-weight" variable="--font-extralight" />
+  <Typography property="font-weight" variable="--font-light" />
+  <Typography property="font-weight" variable="--font-normal" />
+  <Typography property="font-weight" variable="--font-medium" />
+  <Typography property="font-weight" variable="--font-semibold" />
+  <Typography property="font-weight" variable="--font-bold" />
+  <Typography property="font-weight" variable="--font-extrabold" />
+  <Typography property="font-weight" variable="--font-black" />
+</Block>
+
+### Line Height
+
+<Block>
+  <Typography property="line-height" variable="--leading-none" />
+  <Typography property="line-height" variable="--leading-tight" />
+  <Typography property="line-height" variable="--leading-snug" />
+  <Typography property="line-height" variable="--leading-normal" />
+  <Typography property="line-height" variable="--leading-relaxed" />
+  <Typography property="line-height" variable="--leading-loose" />
+</Block>
