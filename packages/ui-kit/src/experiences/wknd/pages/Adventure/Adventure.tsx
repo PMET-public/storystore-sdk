@@ -67,7 +67,11 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
         <BannerSkeleton className={style.banner} uniqueKey="adventure-image" />
       ) : (
         <Banner
-          backgroundImage={<img src={'/__aem' + adventure.adventurePrimaryImage?.src} alt={adventure.adventureTitle} />}
+          backgroundImage={
+            adventure.adventurePrimaryImage && (
+              <img src={'/__aem' + adventure.adventurePrimaryImage.src} alt={adventure.adventureTitle} />
+            )
+          }
           className={style.banner}
           screen="lighter"
           vAlign="top"
