@@ -91,15 +91,13 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
                   className={style.tile}
                   key={id}
                   image={
-                    adventurePrimaryImage && (
-                      <img
-                        loading="lazy"
-                        src={'/__aem' + adventurePrimaryImage.src}
-                        width={400}
-                        height={400}
-                        alt={adventureTitle}
-                      />
-                    )
+                    <img
+                      loading="lazy"
+                      src={'/__aem' + adventurePrimaryImage?.src}
+                      width={400}
+                      height={400}
+                      alt={adventureTitle}
+                    />
                   }
                   heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
                   tags={[`${adventureTripLength} ${adventureActivity}`]}

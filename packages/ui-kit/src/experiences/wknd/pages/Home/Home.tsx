@@ -147,15 +147,13 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       root={<Link href={id} />}
                       key={id}
                       image={
-                        adventurePrimaryImage && (
-                          <img
-                            loading="lazy"
-                            src={'/__aem' + adventurePrimaryImage.src}
-                            width={400}
-                            height={400}
-                            alt={adventureTitle}
-                          />
-                        )
+                        <img
+                          loading="lazy"
+                          src={'/__aem' + adventurePrimaryImage?.src}
+                          width={400}
+                          height={400}
+                          alt={adventureTitle}
+                        />
                       }
                       heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
                       tags={[`${adventureTripLength} ${adventureActivity}`]}
@@ -179,14 +177,12 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             screen="dark"
             textColor="white"
             backgroundImage={
-              data.bannerCamping.item.adventurePrimaryImage && (
-                <img
-                  src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage.src}
-                  width={data.bannerCamping.item.adventurePrimaryImage.width}
-                  height={data.bannerCamping.item.adventurePrimaryImage.height}
-                  alt={data.bannerCamping.item.adventureTitle}
-                />
-              )
+              <img
+                src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage?.src}
+                width={data.bannerCamping.item.adventurePrimaryImage?.width}
+                height={data.bannerCamping.item.adventurePrimaryImage?.height}
+                alt={data.bannerCamping.item.adventureTitle}
+              />
             }
             heading={
               <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
@@ -224,15 +220,13 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       root={<Link href={id} />}
                       key={id}
                       image={
-                        adventurePrimaryImage && (
-                          <img
-                            loading="lazy"
-                            src={'/__aem' + adventurePrimaryImage.src}
-                            width={400}
-                            height={400}
-                            alt={adventureTitle}
-                          />
-                        )
+                        <img
+                          loading="lazy"
+                          src={'/__aem' + adventurePrimaryImage?.src}
+                          width={400}
+                          height={400}
+                          alt={adventureTitle}
+                        />
                       }
                       heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
                       tags={[`${adventureTripLength} ${adventureActivity}`]}
@@ -251,14 +245,12 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
         ) : (
           <Banner
             backgroundImage={
-              data.bannerSurfing.item.adventurePrimaryImage && (
-                <img
-                  src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage.src}
-                  width={data.bannerSurfing.item.adventurePrimaryImage.width}
-                  height={data.bannerSurfing.item.adventurePrimaryImage.height}
-                  alt={data.bannerSurfing.item.adventureTitle}
-                />
-              )
+              <img
+                src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage?.src}
+                width={data.bannerSurfing.item.adventurePrimaryImage?.width}
+                height={data.bannerSurfing.item.adventurePrimaryImage?.height}
+                alt={data.bannerSurfing.item.adventureTitle}
+              />
             }
             height={{ sm: '70vh', lg: '600px' }}
             heading={
@@ -300,15 +292,13 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       root={<Link href={id} />}
                       key={id}
                       image={
-                        adventurePrimaryImage && (
-                          <img
-                            loading="lazy"
-                            src={'/__aem' + adventurePrimaryImage.src}
-                            width={400}
-                            height={400}
-                            alt={adventureTitle}
-                          />
-                        )
+                        <img
+                          loading="lazy"
+                          src={'/__aem' + adventurePrimaryImage?.src}
+                          width={400}
+                          height={400}
+                          alt={adventureTitle}
+                        />
                       }
                       heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
                       tags={[`${adventureTripLength} ${adventureActivity}`]}
