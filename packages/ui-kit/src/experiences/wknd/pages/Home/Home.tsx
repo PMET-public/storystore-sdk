@@ -137,7 +137,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             Trying something new? Start easy.
           </Heading>
           <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.beginner
+            {loading && !data?.beginner?.items
               ? Array(4)
                   .fill(null)
                   .map((_, key) => <TileSkeleton key={key} uniqueKey={`beginner-carousel--${key}`} surface />)
@@ -149,7 +149,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       image={
                         <img
                           loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage.src}
+                          src={'/__aem' + adventurePrimaryImage?.src}
                           width={400}
                           height={400}
                           alt={adventureTitle}
@@ -167,7 +167,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
 
       {/* Camping Banner */}
       <View contained padded>
-        {loading && !data?.bannerCamping ? (
+        {loading && !data?.bannerCamping?.item ? (
           <BannerSkeleton uniqueKey="camping-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
@@ -178,21 +178,19 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             textColor="white"
             backgroundImage={
               <img
-                src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage.src}
-                width={data.bannerCamping.item.adventurePrimaryImage.width}
-                height={data.bannerCamping.item.adventurePrimaryImage.height}
+                src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage?.src}
+                width={data.bannerCamping.item.adventurePrimaryImage?.width}
+                height={data.bannerCamping.item.adventurePrimaryImage?.height}
                 alt={data.bannerCamping.item.adventureTitle}
               />
             }
             heading={
-              data?.bannerCamping && (
-                <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
-                  <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
-                    {data.bannerCamping.item.adventureTripLength} {data.bannerCamping.item.adventureType}
-                  </Heading>
-                  {data.bannerCamping.item.adventureTitle}
+              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
+                <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
+                  {data.bannerCamping.item.adventureTripLength} {data.bannerCamping.item.adventureType}
                 </Heading>
-              )
+                {data.bannerCamping.item.adventureTitle}
+              </Heading>
             }
             button={
               data?.bannerCamping && (
@@ -212,7 +210,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
             For the outdoor kind.
           </Heading>
           <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.camping
+            {loading && !data?.camping?.items
               ? Array(4)
                   .fill(null)
                   .map((_, key) => <TileSkeleton key={key} uniqueKey={`camping-carousel--${key}`} surface />)
@@ -224,7 +222,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       image={
                         <img
                           loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage.src}
+                          src={'/__aem' + adventurePrimaryImage?.src}
                           width={400}
                           height={400}
                           alt={adventureTitle}
@@ -242,15 +240,15 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
 
       {/* Surfing Banner */}
       <View contained padded>
-        {loading && !data?.bannerSurfing ? (
+        {loading && !data?.bannerSurfing?.item ? (
           <BannerSkeleton uniqueKey="surfing-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
             backgroundImage={
               <img
-                src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage.src}
-                width={data.bannerSurfing.item.adventurePrimaryImage.width}
-                height={data.bannerSurfing.item.adventurePrimaryImage.height}
+                src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage?.src}
+                width={data.bannerSurfing.item.adventurePrimaryImage?.width}
+                height={data.bannerSurfing.item.adventurePrimaryImage?.height}
                 alt={data.bannerSurfing.item.adventureTitle}
               />
             }
@@ -284,7 +282,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
           </Heading>
 
           <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.overstay
+            {loading && !data?.overstay?.items
               ? Array(4)
                   .fill(null)
                   .map((_, key) => <TileSkeleton key={key} uniqueKey={`overstay-carousel--${key}`} surface />)
@@ -296,7 +294,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
                       image={
                         <img
                           loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage.src}
+                          src={'/__aem' + adventurePrimaryImage?.src}
                           width={400}
                           height={400}
                           alt={adventureTitle}

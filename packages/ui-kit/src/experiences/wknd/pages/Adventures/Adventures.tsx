@@ -93,7 +93,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
                   image={
                     <img
                       loading="lazy"
-                      src={'/__aem' + adventurePrimaryImage.src}
+                      src={'/__aem' + adventurePrimaryImage?.src}
                       width={400}
                       height={400}
                       alt={adventureTitle}
