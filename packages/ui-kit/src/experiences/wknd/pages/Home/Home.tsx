@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import style from './Home.module.css'
 import { useQuery } from '@apollo/client'
 import Link from '../../../../components/Link'
@@ -96,10 +96,10 @@ export const HOME_QUERY = gql`
 `
 
 export type HomeProps = {
-  heroCTAHref?: string
+  heroCTA?: ReactElement
 }
 
-export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
+export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   const { error, loading, data } = useQuery(HOME_QUERY)
 
   if (error) {
@@ -125,7 +125,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTAHref }) => {
               Not all who wander are lost.
             </Heading>
           }
-          button={heroCTAHref ? <Button root={<Link href={heroCTAHref} />}>View Adventures</Button> : undefined}
+          button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
           align="left"
           contained
         />
