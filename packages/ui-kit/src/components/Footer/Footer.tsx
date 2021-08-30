@@ -6,6 +6,8 @@ import FacebookIcon from 'remixicon/icons/Logos/facebook-fill.svg'
 import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg'
 import InstagramIcon from 'remixicon/icons/Logos/instagram-fill.svg'
 import PinterestIcon from 'remixicon/icons/Logos/pinterest-fill.svg'
+import SettingsIcon from 'remixicon/icons/System/settings-4-line.svg'
+import Button from '../Button'
 
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
@@ -19,6 +21,8 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   menu?: Array<ReactElement>
   /** Centered content */
   contained?: boolean
+  /** Link to Settings Screen */
+  settingsLink?: ReactElement
 }
 
 export const Footer: FunctionComponent<FooterProps> = ({
@@ -29,6 +33,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
   contained,
   menu,
   className,
+  settingsLink,
   ...props
 }) => {
   const year = new Date().getFullYear()
@@ -46,12 +51,26 @@ export const Footer: FunctionComponent<FooterProps> = ({
 
         <div className={style.disclaimer}>
           Ⓒ {year}, {name}. {description}
-          <em>
-            Many of the beautiful images in the WKND site are available for purchase via
-            <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
-              Adobe Stock.
-            </a>
-          </em>
+          <div>
+            <p>WKND is a fictitious adventure and travel PWA created by Adobe.</p>
+            <p>
+              Many of the beautiful images in the WKND site are available for purchase via{' '}
+              <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
+                Adobe Stock.
+              </a>
+            </p>
+          </div>
+          {settingsLink && (
+            <div className={style.storystore}>
+              <Button
+                root={<settingsLink.type />}
+                transparent
+                size="xs"
+                icon={<SettingsIcon aria-label="Settings" />}
+                {...settingsLink.props}
+              />
+            </div>
+          )}
         </div>
 
         <div className={style.social}>

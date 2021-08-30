@@ -5,3 +5,15 @@
   grid-template-columns: 100%;
   min-height: calc(100vh);
 }
+
+.toast {
+  align-items: center;
+  display: grid;
+  grid-gap: var(--spacing-sm);
+  grid-template-columns: auto 1fr;
+}
+
+.toast svg {
+  width: 1.6em;
+  fill: currentColor;
+}

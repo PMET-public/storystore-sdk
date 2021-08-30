@@ -10,8 +10,8 @@
   grid-template-areas:
     'logo'
     'menu'
-    'disclaimer'
-    'social';
+    'social'
+    'disclaimer';
   padding-bottom: var(--spacing-lg);
   padding-top: var(--spacing-lg);
 }
@@ -62,12 +62,16 @@
   line-height: 1.5;
   font-size: var(--font-sm);
   display: grid;
-  grid-gap: var(--spacing-xs);
+  grid-gap: var(--spacing-md);
 }
 
-.disclaimer em {
+.disclaimer > div {
+  opacity: 0.65;
   font-style: normal;
-  font-size: var(--font-xs);
+}
+
+.disclaimer > div p:not(:last-of-type) {
+  margin-bottom: var(--spacing-xs);
 }
 
 .social {
@@ -82,4 +86,8 @@
 .social svg {
   fill: currentColor;
   width: 1.875em;
+}
+
+.storystore {
+  opacity: 0.6;
 }

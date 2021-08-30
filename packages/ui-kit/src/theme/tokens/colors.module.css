@@ -38,4 +38,6 @@
   --color-on-secondary: #222;
   --color-on-secondary-darker: #000;
   --color-on-secondary-lighter: #999;
+
+  --color-error: red;
 }

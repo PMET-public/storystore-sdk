@@ -1,0 +1,29 @@
+.root {
+  --bg: var(--color-surface-lighter);
+  --text: var(--color-on-surface);
+  --border: var(--border, var(--color-surface-darker));
+  background-color: var(--bg);
+  color: var(--text);
+  border-width: 0 0 1px;
+  border-color: var(--border);
+  border-style: solid;
+  padding: var(--spacing-sm);
+  transition: all 300ms ease;
+}
+
+.root:not(:disabled):hover,
+.root:not(:disabled):focus {
+  --border: var(--color-accent);
+}
+
+.root:not(:disabled):focus {
+  --bg: var(--color-surface-lighter);
+}
+
+.root:disabled {
+  opacity: 0.5;
+}
+
+.root.error {
+  --border: var(--color-error) !important;
+}

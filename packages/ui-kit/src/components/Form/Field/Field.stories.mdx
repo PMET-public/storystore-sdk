@@ -1,0 +1,43 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Field, { Label, Error } from '.'
+import Input from '../Input'
+import { useForm } from 'react-hook-form'
+
+<Meta title="Components/Form/Field" component={Field} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  const name = args.name || 'foo'
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const onSubmit = data => alert(JSON.stringify(data))
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Field {...args}>
+        <Label error={!!errors?.firstName}>First Name</Label>
+        <Input
+          name="firstName"
+          error={!!errors.firstName}
+          {...register(name, { required: 'Please enter your first name.' })}
+        />
+        <Error>{errors?.firstName?.message}</Error>
+      </Field>
+    </form>
+  )
+}
+
+# Field
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="Field" args={{ name: 'firstName', label: 'First Name' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Field } from '@storystore/ui-kit/components'
+```

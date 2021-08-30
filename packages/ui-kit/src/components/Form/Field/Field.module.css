@@ -1,0 +1,21 @@
+.root {
+  display: grid;
+  grid-gap: var(--spacing-sm);
+}
+
+.label {
+  --color: inherit;
+  color: var(--color);
+  font-size: var(--font-sm);
+  font-weight: var(--font-semibold);
+}
+
+.label.error {
+  --color: var(--color-error);
+}
+
+.error {
+  color: red;
+  font-size: var(--font-sm);
+  min-height: 1em;
+}
