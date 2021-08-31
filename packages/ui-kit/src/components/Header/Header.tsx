@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { classes, Color, merge } from '../../lib'
 import style from './Header.module.css'
-import View from '../View'
+import Block from '../Block'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import { useMeasure } from '../../hooks/useMeasure'
 
@@ -102,7 +102,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
         className,
       ])}
     >
-      <View className={style.wrapper} contained={contained} padded>
+      <Block className={style.wrapper} contained={contained} padded>
         <div className={style.logoWrapper}>
           <logo.type {...logo.props} className={classes([style.logo, logo.props.className])} />
         </div>
@@ -112,7 +112,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
             <nav className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</nav>
           </div>
         )}
-      </View>
+      </Block>
     </root.type>
   )
 }

@@ -1,6 +1,6 @@
 import { FunctionComponent, HTMLAttributes, ReactElement, cloneElement, isValidElement } from 'react'
 import style from './Footer.module.css'
-import View from '../View'
+import Block from '../Block'
 import { classes, merge } from '../../lib'
 import FacebookIcon from 'remixicon/icons/Logos/facebook-fill.svg'
 import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg'
@@ -40,7 +40,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
 
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
-      <View className={style.wrapper} contained={contained} padded>
+      <Block className={style.wrapper} contained={contained} padded>
         <div>{isValidElement(logo) ? cloneElement(logo, { className: style.logo }) : null}</div>
 
         <div className={style.menu}>
@@ -87,7 +87,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
             <PinterestIcon aria-label="Pinterest" />
           </a>
         </div>
-      </View>
+      </Block>
     </root.type>
   )
 }

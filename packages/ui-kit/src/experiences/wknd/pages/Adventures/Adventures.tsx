@@ -2,8 +2,7 @@ import { FunctionComponent } from 'react'
 import { gql, NetworkStatus, useQuery } from '@apollo/client'
 import style from './Adventures.module.css'
 import Error from '../../../../components/Error'
-import View from '../../../../components/View'
-import Grid from '../../../../components/Grid'
+import Block from '../../../../components/Block'
 import Tile, { TileSkeleton } from '../../../../components/Tile'
 import Link from '../../../../components/Link'
 import Swatches from '../../../../components/Form/Swatches'
@@ -61,7 +60,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
   if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
 
   return (
-    <View padded className={style.root}>
+    <Block padded className={style.root}>
       <form onChange={handleOnFilterUpdate} className={style.filter}>
         <Swatches
           name="filters"
@@ -77,7 +76,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
         />
       </form>
 
-      <Grid gap="md" columns={{ sm: '1fr', md: '1fr 1fr ', lg: '1fr 1fr 1fr', xl: '1fr 1fr 1fr 1fr' }}>
+      <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr ', lg: '1fr 1fr 1fr', xl: '1fr 1fr 1fr 1fr' }}>
         {loading
           ? Array(5)
               .fill(null)
@@ -105,7 +104,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
                 />
               )
             )}
-      </Grid>
-    </View>
+      </Block>
+    </Block>
   )
 }

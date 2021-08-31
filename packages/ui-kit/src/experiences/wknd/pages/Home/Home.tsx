@@ -2,8 +2,7 @@ import { FunctionComponent, ReactElement } from 'react'
 import style from './Home.module.css'
 import { useQuery } from '@apollo/client'
 import Link from '../../../../components/Link'
-import Grid from '../../../../components/Grid'
-import View from '../../../../components/View'
+import Block from '../../../../components/Block'
 import Banner, { BannerSkeleton } from '../../../../components/Banner'
 import Carousel from '../../../../components/Carousel'
 import Tile, { TileSkeleton } from '../../../../components/Tile'
@@ -108,9 +107,9 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   }
 
   return (
-    <Grid gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
+    <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
       {/* Hero */}
-      <View>
+      <Block>
         <Banner
           backgroundColor="#f4ecea"
           backgroundImage={
@@ -129,10 +128,10 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
           align="left"
           contained
         />
-      </View>
+      </Block>
 
-      <View contained padded>
-        <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
+      <Block contained padded>
+        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
           <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
             Trying something new? Start easy.
           </Heading>
@@ -162,11 +161,11 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                   )
                 )}
           </Carousel>
-        </Grid>
-      </View>
+        </Block>
+      </Block>
 
       {/* Camping Banner */}
-      <View contained padded>
+      <Block contained padded>
         {loading && !data?.bannerCamping?.item ? (
           <BannerSkeleton uniqueKey="camping-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
@@ -201,11 +200,11 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
             }
           />
         )}
-      </View>
+      </Block>
 
       {/* Camping Carousel */}
-      <View contained padded>
-        <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
+      <Block contained padded>
+        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
           <Heading root={<h2 />} size="2xl">
             For the outdoor kind.
           </Heading>
@@ -235,11 +234,11 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                   )
                 )}
           </Carousel>
-        </Grid>
-      </View>
+        </Block>
+      </Block>
 
       {/* Surfing Banner */}
-      <View contained padded>
+      <Block contained padded>
         {loading && !data?.bannerSurfing?.item ? (
           <BannerSkeleton uniqueKey="surfing-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
@@ -272,11 +271,11 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
             textColor="white"
           />
         )}
-      </View>
+      </Block>
 
       {/* Overstay Carousel */}
-      <View contained padded>
-        <Grid root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
+      <Block contained padded>
+        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
           <Heading root={<h2 />} size="2xl">
             Time is a construct. Overstay.
           </Heading>
@@ -307,8 +306,8 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                   )
                 )}
           </Carousel>
-        </Grid>
-      </View>
-    </Grid>
+        </Block>
+      </Block>
+    </Block>
   )
 }

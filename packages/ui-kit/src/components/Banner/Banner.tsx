@@ -2,7 +2,7 @@ import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } fr
 import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
 import style from './Banner.module.css'
 import { ButtonProps } from '../Button'
-import View from '../View'
+import Block from '../Block'
 import ContentLoader from 'react-content-loader'
 
 export type BannerProps = HTMLAttributes<HTMLDivElement> & {
@@ -61,12 +61,12 @@ export const Banner: FunctionComponent<BannerProps> = ({
         <backgroundImage.type {...merge(backgroundImage.props, { className: style.backgroundImage })} />
       )}
 
-      <View className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
+      <Block className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
         <div className={style.content}>
           {heading && <heading.type {...merge(heading.props, {})} />}
           {button && <button.type {...merge(button.props, { className: style.button })} />}
         </div>
-      </View>
+      </Block>
     </root.type>
   )
 }

@@ -2,8 +2,7 @@ import { FunctionComponent } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import style from './Adventure.module.css'
 import Error from '../../../../components/Error'
-import View from '../../../../components/View'
-import Grid from '../../../../components/Grid'
+import Block from '../../../../components/Block'
 import Banner, { BannerSkeleton } from '../../../../components/Banner'
 import Heading from '../../../../components/Heading'
 import Html from '../../../../components/Html'
@@ -74,7 +73,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
         />
       )}
 
-      <View padded className={style.wrapper}>
+      <Block padded className={style.wrapper}>
         {loading && !adventure ? (
           <ContentLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
             <rect width="191.58" height="23.16" />
@@ -86,7 +85,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
             <rect x="308.42" y="575.79" width="295.2" height="61.96" />
           </ContentLoader>
         ) : (
-          <Grid gap="lg" className={style.content}>
+          <Block gap="lg" className={style.content}>
             <header>
               <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
                 {adventure.adventureTripLength} {adventure.adventureType}
@@ -97,13 +96,13 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
               </Heading>
             </header>
 
-            <Grid gap="md" className={style.section}>
+            <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
                 <MapIcon /> {adventure.adventureActivity} Details
               </Heading>
 
               <Html htmlString={adventure.adventureDescription.html} />
-            </Grid>
+            </Block>
 
             <div className={style.details}>
               <span>
@@ -136,25 +135,25 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
               </span>
             </div>
 
-            <Grid gap="md" className={style.section}>
+            <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
                 <CalendarIcon /> Itinerary
               </Heading>
 
               <Html htmlString={adventure.adventureItinerary.html} />
-            </Grid>
+            </Block>
 
-            <Grid gap="md" className={style.section}>
+            <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
                 <BagIcon />
                 What to Bring
               </Heading>
 
               <Html htmlString={adventure.adventureGearList.html} />
-            </Grid>
-          </Grid>
+            </Block>
+          </Block>
         )}
-      </View>
+      </Block>
     </div>
   )
 }
