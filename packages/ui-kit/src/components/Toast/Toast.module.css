@@ -1,0 +1,338 @@
+.root {
+  --toastify-color-light: var(--color-surface);
+  --toastify-color-dark: #121212;
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-warning: var(--toastify-color-warning);
+  --toastify-icon-color-error: var(--toastify-color-error);
+  --toastify-toast-width: 320px;
+  --toastify-toast-background: #fff;
+  --toastify-toast-min-height: 64px;
+  --toastify-toast-max-height: 800px;
+  --toastify-font-family: sans-serif;
+  --toastify-z-index: 9999;
+  --toastify-text-color-light: var(--color-on-surface);
+  --toastify-text-color-dark: #fff;
+  --toastify-text-color-info: #fff;
+  --toastify-text-color-success: #fff;
+  --toastify-text-color-warning: #fff;
+  --toastify-text-color-error: #fff;
+  --toastify-spinner-color: #616161;
+  --toastify-spinner-color-empty-area: #e0e0e0;
+  --toastify-color-progress-light: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+  --toastify-color-progress-dark: #bb86fc;
+  --toastify-color-progress-info: var(--toastify-color-info);
+  --toastify-color-progress-success: var(--toastify-color-success);
+  --toastify-color-progress-warning: var(--toastify-color-warning);
+  --toastify-color-progress-error: var(--toastify-color-error);
+}
+
+.root :global .Toastify__toast-container {
+  z-index: var(--toastify-z-index);
+  -webkit-transform: translate3d(0, 0, var(--toastify-z-index) px);
+  position: fixed;
+  padding: 4px;
+  width: var(--toastify-toast-width);
+  box-sizing: border-box;
+  color: #fff;
+}
+.root :global .Toastify__toast-container--top-left {
+  top: 1em;
+  left: 1em;
+}
+.root :global .Toastify__toast-container--top-center {
+  top: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.root :global .Toastify__toast-container--top-right {
+  top: 1em;
+  right: 1em;
+}
+.root :global .Toastify__toast-container--bottom-left {
+  bottom: 1em;
+  left: 1em;
+}
+.root :global .Toastify__toast-container--bottom-center {
+  bottom: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.root :global .Toastify__toast-container--bottom-right {
+  bottom: 1em;
+  right: 1em;
+}
+
+@media only screen and (max-width: 480px) {
+  .root :global .Toastify__toast-container {
+    width: 100vw;
+    padding: 0;
+    left: 0;
+    margin: 0;
+  }
+  .root :global .Toastify__toast-container--top-left,
+  .root :global .Toastify__toast-container--top-center,
+  .root :global .Toastify__toast-container--top-right {
+    top: 0;
+    transform: translateX(0);
+  }
+  .root :global .Toastify__toast-container--bottom-left,
+  .root :global .Toastify__toast-container--bottom-center,
+  .root :global .Toastify__toast-container--bottom-right {
+    bottom: 0;
+    transform: translateX(0);
+  }
+  .root :global .Toastify__toast-container--rtl {
+    right: 0;
+    left: initial;
+  }
+}
+.root :global .Toastify__toast {
+  position: relative;
+  min-height: var(--toastify-toast-min-height);
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-height: var(--toastify-toast-max-height);
+  overflow: hidden;
+  font-family: var(--toastify-font-family);
+  cursor: pointer;
+  direction: ltr;
+}
+.root :global .Toastify__toast--rtl {
+  direction: rtl;
+}
+.root :global .Toastify__toast-body {
+  margin: auto 0;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 6px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.root :global .Toastify__toast-icon {
+  -webkit-margin-end: 10px;
+  margin-inline-end: 10px;
+  width: 20px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.root :global .Toastify--animate {
+  animation-fill-mode: both;
+  animation-duration: 0.7s;
+}
+
+.root :global .Toastify--animate-icon {
+  animation-fill-mode: both;
+  animation-duration: 0.3s;
+}
+
+@media only screen and (max-width: 480px) {
+  .root :global .Toastify__toast {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}
+.root :global .Toastify__toast-theme--dark {
+  background: var(--toastify-color-dark);
+  color: var(--toastify-text-color-dark);
+}
+.root :global .Toastify__toast-theme--light {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+}
+.root :global .Toastify__toast-theme--colored.Toastify__toast--default {
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+}
+.root :global .Toastify__toast-theme--colored.Toastify__toast--info {
+  color: var(--toastify-text-color-info);
+  background: var(--toastify-color-info);
+}
+.root :global .Toastify__toast-theme--colored.Toastify__toast--success {
+  color: var(--toastify-text-color-success);
+  background: var(--toastify-color-success);
+}
+.root :global .Toastify__toast-theme--colored.Toastify__toast--warning {
+  color: var(--toastify-text-color-warning);
+  background: var(--toastify-color-warning);
+}
+.root :global .Toastify__toast-theme--colored.Toastify__toast--error {
+  color: var(--toastify-text-color-error);
+  background: var(--toastify-color-error);
+}
+
+.root :global .Toastify__progress-bar-theme--light {
+  background: var(--toastify-color-progress-light);
+}
+.root :global .Toastify__progress-bar-theme--dark {
+  background: var(--toastify-color-progress-dark);
+}
+.root :global .Toastify__progress-bar--info {
+  background: var(--toastify-color-progress-info);
+}
+.root :global .Toastify__progress-bar--success {
+  background: var(--toastify-color-progress-success);
+}
+.root :global .Toastify__progress-bar--warning {
+  background: var(--toastify-color-progress-warning);
+}
+.root :global .Toastify__progress-bar--error {
+  background: var(--toastify-color-progress-error);
+}
+.root :global .Toastify__progress-bar-theme--colored.Toastify__progress-bar--info,
+.root :global .Toastify__progress-bar-theme--colored.Toastify__progress-bar--success,
+.root :global .Toastify__progress-bar-theme--colored.Toastify__progress-bar--warning,
+.root :global .Toastify__progress-bar-theme--colored.Toastify__progress-bar--error {
+  background: var(--toastify-color-transparent);
+}
+
+.root :global .Toastify__close-button {
+  color: #fff;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.3s ease;
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+.root :global .Toastify__close-button--light {
+  color: #000;
+  opacity: 0.3;
+}
+.root :global .Toastify__close-button > svg {
+  fill: currentColor;
+  height: 16px;
+  width: 14px;
+}
+.root :global .Toastify__close-button:hover,
+.root :global .Toastify__close-button:focus {
+  opacity: 1;
+}
+
+.root :global .Toastify__progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  z-index: var(--toastify-z-index);
+  opacity: 0.7;
+  transform-origin: left;
+}
+.root :global .Toastify__progress-bar--animated {
+  animation: Toastify__trackProgress linear 1 forwards;
+}
+.root :global .Toastify__progress-bar--controlled {
+  transition: transform 0.2s;
+}
+.root :global .Toastify__progress-bar--rtl {
+  right: 0;
+  left: initial;
+  transform-origin: right;
+}
+
+.root :global .Toastify__spinner {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: var(--toastify-spinner-color-empty-area);
+  border-right-color: var(--toastify-spinner-color);
+  animation: Toastify__spin 0.65s linear infinite;
+}
+
+.root :global .Toastify__bounce-enter--top-left,
+.root :global .Toastify__bounce-enter--bottom-left {
+  animation-name: Toastify__bounceInLeft;
+}
+.root :global .Toastify__bounce-enter--top-right,
+.root :global .Toastify__bounce-enter--bottom-right {
+  animation-name: Toastify__bounceInRight;
+}
+.root :global .Toastify__bounce-enter--top-center {
+  animation-name: Toastify__bounceInDown;
+}
+.root :global .Toastify__bounce-enter--bottom-center {
+  animation-name: Toastify__bounceInUp;
+}
+
+.root :global .Toastify__bounce-exit--top-left,
+.root :global .Toastify__bounce-exit--bottom-left {
+  animation-name: Toastify__bounceOutLeft;
+}
+.root :global .Toastify__bounce-exit--top-right,
+.root :global .Toastify__bounce-exit--bottom-right {
+  animation-name: Toastify__bounceOutRight;
+}
+.root :global .Toastify__bounce-exit--top-center {
+  animation-name: Toastify__bounceOutUp;
+}
+.root :global .Toastify__bounce-exit--bottom-center {
+  animation-name: Toastify__bounceOutDown;
+}
+
+.root :global .Toastify__zoom-enter {
+  animation-name: Toastify__zoomIn;
+}
+
+.root :global .Toastify__zoom-exit {
+  animation-name: Toastify__zoomOut;
+}
+
+.root :global .Toastify__flip-enter {
+  animation-name: Toastify__flipIn;
+}
+
+.root :global .Toastify__flip-exit {
+  animation-name: Toastify__flipOut;
+}
+
+.root :global .Toastify__slide-enter--top-left,
+.root :global .Toastify__slide-enter--bottom-left {
+  animation-name: Toastify__slideInLeft;
+}
+.root :global .Toastify__slide-enter--top-right,
+.root :global .Toastify__slide-enter--bottom-right {
+  animation-name: Toastify__slideInRight;
+}
+.root :global .Toastify__slide-enter--top-center {
+  animation-name: Toastify__slideInDown;
+}
+.root :global .Toastify__slide-enter--bottom-center {
+  animation-name: Toastify__slideInUp;
+}
+
+.root :global .Toastify__slide-exit--top-left,
+.root :global .Toastify__slide-exit--bottom-left {
+  animation-name: Toastify__slideOutLeft;
+}
+.root :global .Toastify__slide-exit--top-right,
+.root :global .Toastify__slide-exit--bottom-right {
+  animation-name: Toastify__slideOutRight;
+}
+.root :global .Toastify__slide-exit--top-center {
+  animation-name: Toastify__slideOutUp;
+}
+.root :global .Toastify__slide-exit--bottom-center {
+  animation-name: Toastify__slideOutDown;
+}

@@ -23,3 +23,7 @@
 .filter::-webkit-scrollbar {
   display: none;
 }
+
+.filter .swatches {
+  flex-wrap: nowrap;
+}

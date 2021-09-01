@@ -1,0 +1,37 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Block from '.'
+import TileComponent from '../Tile'
+
+<Meta title="Components/Block" component={Block} />
+
+export const Tile = () => (
+  <TileComponent
+    image={<img src="/__assets/wknd/bg-adventures-1.jpg" width={500} height={500} />}
+    heading={<h3>Ahoy-hoy, buckaroos!</h3>}
+    subheading="4-days"
+    tags={['#Flying', '#Get Away']}
+  />
+)
+
+export const Template = args => {
+  return (
+    <Block {...args}>
+      <Tile />
+      <Tile />
+      <Tile />
+      <Tile />
+    </Block>
+  )
+}
+
+# Block
+
+<Canvas withSource="open">
+  <Story args={{ columns: '1fr 1fr', columnsGap: 'md', gap: 'lg' }} name="Block">
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Block } from '@storystore/ui-kit/components'
+```

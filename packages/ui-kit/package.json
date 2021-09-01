@@ -1,6 +1,6 @@
 {
   "name": "@storystore/ui-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A UI Component Library",
   "author": "Carlos A. Cabrera @fnhipster",
   "license": "ISC",
@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build:babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx,.mdx\" src -d dist --copy-files --no-copy-ignored",
-    "build:types": "tsc  --emitDeclarationOnly",
+    "build:types": "tsc --emitDeclarationOnly",
     "build:watch": "concurrently \"yarn build:babel -- --watch\" \"yarn build:types -- --watch\"",
     "prepare": "yarn run build:babel && yarn run build:types",
     "dev": "concurrently --names \"BUILD,STORYBOOK\" \"yarn build:watch\" \"start-storybook -p 6006 --no-manager-cache --quiet -s ./.storybook/assets\"",
@@ -55,6 +55,7 @@
     "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.12.2",
+    "react-toastify": "^8.0.0",
     "remixicon": "^2.5.0",
     "rimraf": "^3.0.2",
     "storybook-css-modules-preset": "^1.1.1",

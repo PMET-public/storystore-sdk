@@ -1,7 +1,7 @@
 {
   "name": "WKND Adventures",
   "short_name": "WKND",
-  "theme_color": "#fdd835",
+  "theme_color": "#222222",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait-primary",

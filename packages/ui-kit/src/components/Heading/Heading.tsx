@@ -1,12 +1,12 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
-import { classes, merge, Size, BreakpointValues, getBreakpointValues, Color } from '../../lib'
+import { classes, merge, Size, BreakpointValues, getBreakpointValues, OnColor } from '../../lib'
 import style from './Heading.module.css'
 
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   root?: ReactElement
   size?: BreakpointValues<Size>
   accent?: boolean
-  color?: Color
+  color?: OnColor
 }
 
 export const Heading: FunctionComponent<HeadingProps> = ({

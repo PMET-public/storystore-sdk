@@ -7,12 +7,12 @@
   color: var(--button-text);
   cursor: var(--cursor);
   display: inline-flex;
-  font-size: var(--font);
+  font-size: var(--size);
   font-weight: var(--font-semibold);
   height: 3em;
   justify-content: center;
   line-height: var(--leading-none);
-  padding: var(--spacing-sm) var(--spacing-md);
+  padding: 1.2em;
   transition-duration: 305ms;
   transition-property: opacity, color, background-color, filter;
   transition-timing-function: ease;
@@ -58,4 +58,15 @@
 .transparent {
   --button-bg: transparent;
   --button-border: 0.1rem solid currentColor;
+}
+
+.text {
+  --button-bg: transparent;
+  --button-border: 0 none;
+}
+
+.icon {
+  fill: currentColor;
+  width: 1.4em;
+  margin-right: 0.65em;
 }

@@ -1,0 +1,29 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Input from '.'
+import { useForm } from 'react-hook-form'
+
+<Meta title="Components/Form/Input" component={Input} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  const { register, watch } = useForm()
+  console.log(watch('input'))
+  return <Input {...args} name="firstName" />
+}
+
+# Input
+
+<Canvas withSource="open">
+  <Story
+    name="Input"
+    args={{
+      name: 'firstName',
+      disabled: false,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Input } from '@storystore/ui-kit/components'
+```

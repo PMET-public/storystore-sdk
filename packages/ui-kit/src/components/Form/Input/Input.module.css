@@ -1,0 +1,34 @@
+.root {
+  --bg: transparent;
+  --text: var(--color-on-surface);
+  --border: var(--color-surface-darker);
+  background-color: var(--bg);
+  color: var(--text);
+  border-width: 0 0 1px;
+  border-color: var(--border);
+  border-style: solid;
+  padding: var(--spacing-sm) var(--spacing-xs);
+  transition: all 300ms ease;
+}
+
+.root:not(:disabled):hover {
+  --border: var(--color-on-surface-lighter);
+  --bg: var(--color-surface-lighter);
+}
+
+.root:not(:disabled):focus {
+  --border: var(--color-accent);
+  --bg: var(--color-surface-lighter);
+}
+
+.root:disabled {
+  opacity: 0.5;
+}
+
+.root::placeholder {
+  opacity: 0.6;
+}
+
+.root.error {
+  --border: var(--color-error) !important;
+}

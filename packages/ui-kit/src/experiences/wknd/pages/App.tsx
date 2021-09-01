@@ -5,9 +5,16 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import LogoIcon from '../assets/wknd-adventures_logo.svg'
 
-export const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }) => {
+export type AppProps = {
+  linkRoot?: ReactElement
+  menu?: Array<ReactElement>
+  footerMenu?: Array<ReactElement>
+}
+
+export const App: FunctionComponent<AppProps> = ({ linkRoot, menu, footerMenu, ...props }) => {
   return (
     <AppComponent
+      linkRoot={linkRoot}
       {...props}
       header={
         <Header
@@ -16,11 +23,12 @@ export const App: FunctionComponent<{ linkRoot?: ReactElement }> = ({ ...props }
               <LogoIcon aria-label="WKND" />
             </Link>
           }
+          menu={menu}
           transparent
           sticky
         />
       }
-      footer={<Footer logo={<LogoIcon />} />}
+      footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
     />
   )
 }

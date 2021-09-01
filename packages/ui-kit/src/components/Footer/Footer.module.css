@@ -6,12 +6,12 @@
 
 .wrapper {
   display: grid;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-lg);
   grid-template-areas:
     'logo'
     'menu'
-    'disclaimer'
-    'social';
+    'social'
+    'disclaimer';
   padding-bottom: var(--spacing-lg);
   padding-top: var(--spacing-lg);
 }
@@ -46,14 +46,14 @@
   display: grid;
   font-size: var(--font-sm);
   grid-area: menu;
-  grid-gap: var(--spacing-sm);
+  grid-gap: var(--spacing-md);
+  grid-auto-columns: max-content;
 }
 
 @media (min-width: 1024px) {
   .menu {
-    grid-auto-columns: max-content;
     grid-auto-flow: column;
-    grid-gap: var(--spacing-md);
+    grid-gap: var(--spacing-lg);
   }
 }
 
@@ -62,16 +62,20 @@
   line-height: 1.5;
   font-size: var(--font-sm);
   display: grid;
-  grid-gap: var(--spacing-xs);
+  grid-gap: var(--spacing-md);
 }
 
-.disclaimer em {
+.disclaimer > div {
+  opacity: 0.65;
   font-style: normal;
-  font-size: var(--font-xs);
+}
+
+.disclaimer > div p:not(:last-of-type) {
+  margin-bottom: var(--spacing-xs);
 }
 
 .social {
-  align-items: center;
+  align-items: start;
   grid-area: social;
   display: grid;
   grid-auto-columns: max-content;

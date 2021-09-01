@@ -1,0 +1,82 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import ToastContainer, { toast } from '.'
+import Button from '../Button'
+
+<Meta title="Components/Toast" component={ToastContainer} parameters={{ layout: 'fullscreen' }} />
+
+export const Template = args => {
+  return (
+    <div style={{ display: 'grid', gridAutoFlow: 'column', gridGap: 'var(--spacing-sm)' }}>
+      <Button transparent onClick={() => toast.info('info')}>
+        info
+      </Button>
+      <Button transparent onClick={() => toast.success('success')}>
+        success
+      </Button>
+      <Button transparent onClick={() => toast.warning('warning')}>
+        warning
+      </Button>
+      <Button transparent onClick={() => toast.error('error')}>
+        error
+      </Button>
+    </div>
+  )
+}
+
+# Toast
+
+```
+import { toast } from '@storystore/ui-kit/components'
+```
+
+## Variants
+
+<br />
+
+### Info
+
+<br />
+
+<Button variant="secondary" transparent onClick={() => toast.info(`Hi, I'm an info toast.`)}>
+  Show Toast
+</Button>
+
+```
+toast.info('info')
+```
+
+### Success
+
+<br />
+
+<Button variant="secondary" transparent onClick={() => toast.success(`Hi, I'm a success toast.`)}>
+  Show Toast
+</Button>
+
+```
+toast.success('info')
+```
+
+### Warning
+
+<br />
+
+<Button variant="secondary" transparent onClick={() => toast.success(`Hi, I'm a warning toast.`)}>
+  Show Toast
+</Button>
+
+```
+toast.warning('info')
+```
+
+### Error
+
+<br />
+
+<Button variant="secondary" transparent onClick={() => toast.success(`Hi, I'm an error toast.`)}>
+  Show Toast
+</Button>
+
+```
+toast.error('info')
+```

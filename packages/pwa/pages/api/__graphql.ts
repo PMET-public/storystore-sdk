@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import { cookies } from '@storystore/toolbox'
 import { URL } from 'url'
+import { runMiddleware } from '../../lib/run-middleware'
 
 export const config = {
   api: {
@@ -9,26 +10,10 @@ export const config = {
   },
 }
 
-// Helper method to wait for a middleware to execute before continuing
-// And to throw an error when an error happens in a middleware
-function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: any) {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result: any) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
-
-      return resolve(result)
-    })
-  })
-}
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const overrideTarget = cookies.getCookieValueFromString(req.headers.cookie, 'AEM_GRAPHQL_URL')
-  const endpoint = new URL(overrideTarget || process.env.AEM_GRAPHQL_URL)
-
-  const overrideAuth = cookies.getCookieValueFromString(req.headers.cookie, 'AEM_GRAPHQL_AUTH')
-  const auth = overrideAuth || process.env.AEM_GRAPHQL_AUTH
+  const settings = JSON.parse(cookies.getCookieValueFromString(req.headers.cookie, 'STORYSTORE_SETTINGS') || '{}')
+  const endpoint = new URL(settings.AEM_GRAPHQL_URL || process.env.AEM_GRAPHQL_URL)
+  const auth = settings.AEM_GRAPHQL_AUTH ?? process.env.AEM_GRAPHQL_AUTH
 
   await runMiddleware(
     req,
