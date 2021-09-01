@@ -65,6 +65,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({}) => {
         <Swatches
           name="filters"
           variant="single"
+          className={style.swatches}
           items={[
             { label: 'All', value: '', ...register('filter.adventureActivity') },
             { label: 'Rock Climbing', value: 'Rock Climbing', ...register('filter.adventureActivity') },

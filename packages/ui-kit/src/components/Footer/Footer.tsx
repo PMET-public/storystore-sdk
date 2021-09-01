@@ -6,8 +6,6 @@ import FacebookIcon from 'remixicon/icons/Logos/facebook-fill.svg'
 import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg'
 import InstagramIcon from 'remixicon/icons/Logos/instagram-fill.svg'
 import PinterestIcon from 'remixicon/icons/Logos/pinterest-fill.svg'
-import SettingsIcon from 'remixicon/icons/System/settings-4-line.svg'
-import Button from '../Button'
 
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
@@ -21,8 +19,6 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   menu?: Array<ReactElement>
   /** Centered content */
   contained?: boolean
-  /** Link to Settings Screen */
-  settingsLink?: ReactElement
 }
 
 export const Footer: FunctionComponent<FooterProps> = ({
@@ -33,7 +29,6 @@ export const Footer: FunctionComponent<FooterProps> = ({
   contained,
   menu,
   className,
-  settingsLink,
   ...props
 }) => {
   const year = new Date().getFullYear()
@@ -45,7 +40,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
 
         <div className={style.menu}>
           {menu?.map((item, key) => {
-            return isValidElement(item) ? cloneElement(item, { key }) : null
+            return item ? <item.type key={item.key ?? key} {...item.props} /> : null
           })}
         </div>
 
@@ -60,17 +55,6 @@ export const Footer: FunctionComponent<FooterProps> = ({
               </a>
             </p>
           </div>
-          {settingsLink && (
-            <div className={style.storystore}>
-              <Button
-                root={<settingsLink.type />}
-                transparent
-                size="xs"
-                icon={<SettingsIcon aria-label="Settings" />}
-                {...settingsLink.props}
-              />
-            </div>
-          )}
         </div>
 
         <div className={style.social}>

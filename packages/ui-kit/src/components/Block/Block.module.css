@@ -10,6 +10,8 @@
   grid-row-gap: var(--rowsGap);
   grid-template-columns: var(--columns);
   grid-template-rows: var(--rows);
+  justify-content: var(--align);
+  align-items: var(--vAlign);
 }
 
 @media (min-width: 768px) {

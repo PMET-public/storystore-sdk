@@ -20,6 +20,10 @@ export type BlockProps = HTMLAttributes<HTMLDivElement> & {
   padded?: boolean
   /** Background Color */
   background?: Color
+  /** Alignment */
+  align?: 'start' | 'center' | 'end'
+  /** Vertical Alignment */
+  vAlign?: 'start' | 'center' | 'end'
 }
 
 export const Block: FunctionComponent<BlockProps> = ({
@@ -33,6 +37,8 @@ export const Block: FunctionComponent<BlockProps> = ({
   columnsGap: _columnsGap,
   rows: _rows,
   rowsGap: _rowsGap,
+  align = 'unset',
+  vAlign = 'unset',
   ...props
 }) => {
   const gap = getBreakpointValues(_gap)
@@ -74,6 +80,9 @@ export const Block: FunctionComponent<BlockProps> = ({
         ['--grid-rows-gap-md' as string]: rowsGap.md ? `var(--spacing-${rowsGap.md})` : `var(--spacing-${gap.md})`,
         ['--grid-rows-gap-lg' as string]: rowsGap.lg ? `var(--spacing-${rowsGap.lg})` : `var(--spacing-${gap.lg})`,
         ['--grid-rows-gap-xl' as string]: rowsGap.xl ? `var(--spacing-${rowsGap.xl})` : `var(--spacing-${gap.xl})`,
+
+        ['--align' as string]: align,
+        ['--vAlign' as string]: vAlign,
 
         ...props.style,
       }}

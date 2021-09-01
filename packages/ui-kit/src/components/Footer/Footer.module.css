@@ -6,7 +6,7 @@
 
 .wrapper {
   display: grid;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-lg);
   grid-template-areas:
     'logo'
     'menu'
@@ -46,14 +46,14 @@
   display: grid;
   font-size: var(--font-sm);
   grid-area: menu;
-  grid-gap: var(--spacing-sm);
+  grid-gap: var(--spacing-md);
+  grid-auto-columns: max-content;
 }
 
 @media (min-width: 1024px) {
   .menu {
-    grid-auto-columns: max-content;
     grid-auto-flow: column;
-    grid-gap: var(--spacing-md);
+    grid-gap: var(--spacing-lg);
   }
 }
 
@@ -75,7 +75,7 @@
 }
 
 .social {
-  align-items: center;
+  align-items: start;
   grid-area: social;
   display: grid;
   grid-auto-columns: max-content;
@@ -86,8 +86,4 @@
 .social svg {
   fill: currentColor;
   width: 1.875em;
-}
-
-.storystore {
-  opacity: 0.6;
 }

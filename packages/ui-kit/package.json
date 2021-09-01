@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build:babel": "cross-env BABEL_ENV=production babel --extensions \".js,.jsx,.ts,.tsx,.mdx\" src -d dist --copy-files --no-copy-ignored",
-    "build:types": "tsc  --emitDeclarationOnly",
+    "build:types": "tsc --emitDeclarationOnly",
     "build:watch": "concurrently \"yarn build:babel -- --watch\" \"yarn build:types -- --watch\"",
     "prepare": "yarn run build:babel && yarn run build:types",
     "dev": "concurrently --names \"BUILD,STORYBOOK\" \"yarn build:watch\" \"start-storybook -p 6006 --no-manager-cache --quiet -s ./.storybook/assets\"",

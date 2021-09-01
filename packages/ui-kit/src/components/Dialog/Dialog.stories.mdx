@@ -1,0 +1,21 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import { useState } from 'react'
+import Dialog from '.'
+
+<Meta title="Components/Dialog" component={Dialog} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return <Dialog {...args} />
+}
+
+# Dialog
+
+<Canvas withSource="open">
+  <Story name="Dialog">{Template.bind({})}</Story>
+</Canvas>
+
+```
+import { Dialog } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Dialog" />

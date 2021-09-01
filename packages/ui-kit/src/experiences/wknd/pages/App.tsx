@@ -7,10 +7,11 @@ import LogoIcon from '../assets/wknd-adventures_logo.svg'
 
 export type AppProps = {
   linkRoot?: ReactElement
-  settingsLink?: ReactElement
+  menu?: Array<ReactElement>
+  footerMenu?: Array<ReactElement>
 }
 
-export const App: FunctionComponent<AppProps> = ({ linkRoot, settingsLink, ...props }) => {
+export const App: FunctionComponent<AppProps> = ({ linkRoot, menu, footerMenu, ...props }) => {
   return (
     <AppComponent
       linkRoot={linkRoot}
@@ -22,11 +23,12 @@ export const App: FunctionComponent<AppProps> = ({ linkRoot, settingsLink, ...pr
               <LogoIcon aria-label="WKND" />
             </Link>
           }
+          menu={menu}
           transparent
           sticky
         />
       }
-      footer={<Footer logo={<LogoIcon />} settingsLink={settingsLink} />}
+      footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
     />
   )
 }

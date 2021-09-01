@@ -60,6 +60,11 @@
   --button-border: 0.1rem solid currentColor;
 }
 
+.text {
+  --button-bg: transparent;
+  --button-border: 0 none;
+}
+
 .icon {
   fill: currentColor;
   width: 1.4em;
