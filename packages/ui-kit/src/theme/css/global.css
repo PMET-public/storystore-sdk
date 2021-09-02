@@ -527,7 +527,8 @@ a {
   text-decoration: none;
 }
 
-/** Toasts Animations **/
+/** Toasts  **/
+
 @keyframes Toastify__zoomIn {
   from {
     opacity: 0;

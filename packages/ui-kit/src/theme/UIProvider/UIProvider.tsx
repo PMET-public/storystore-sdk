@@ -17,7 +17,7 @@ export const UIProvider: FunctionComponent<UIProvider> = ({ children, ...props }
       <div {...props} className={classes([style.root, [style.focusVisible, isFocusVisible]])}>
         {children}
       </div>
-      <ToastContainer autoClose={5000} closeOnClick pauseOnFocusLoss />
+      <ToastContainer autoClose={5000} closeOnClick pauseOnFocusLoss theme="dark" />
     </>
   )
 }
