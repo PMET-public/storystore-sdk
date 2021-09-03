@@ -82,48 +82,6 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
         />
       </Block>
 
-      {/* Check-ins */}
-      <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
-        <Heading className={style.heading} root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
-          <CheckedInIcon style={{ fill: 'green ' }} /> Been there, done that.
-        </Heading>
-        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-          {data?.checkIns?.items.map(
-            ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-              <Tile
-                root={<Link href={id} />}
-                className={style.stamp}
-                key={id}
-                image={
-                  <img
-                    loading="lazy"
-                    src={'/__aem' + adventurePrimaryImage?.src}
-                    width={400}
-                    height={400}
-                    alt={adventureTitle}
-                  />
-                }
-                heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                tags={[`${adventureTripLength} ${adventureActivity}`]}
-                surface
-              />
-            )
-          )}
-
-          {Array(getEmptySlotsQty(data?.checkIns?.items?.length, 4))
-            .fill(null)
-            .map((_, key) => (
-              <TileSkeleton
-                key={key}
-                className={style.empty}
-                uniqueKey={`checkIns-carousel--${key}`}
-                surface
-                animate={loading}
-              />
-            ))}
-        </Carousel>
-      </Block>
-
       {/* bookmarks */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading className={style.heading} root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
@@ -165,7 +123,48 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
             ))}
         </Carousel>
       </Block>
-      <br />
+
+      {/* Check-ins */}
+      <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
+        <Heading className={style.heading} root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
+          <CheckedInIcon style={{ fill: 'green ' }} /> Been there, done that.
+        </Heading>
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
+          {data?.checkIns?.items.map(
+            ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
+              <Tile
+                root={<Link href={id} />}
+                className={style.stamp}
+                key={id}
+                image={
+                  <img
+                    loading="lazy"
+                    src={'/__aem' + adventurePrimaryImage?.src}
+                    width={400}
+                    height={400}
+                    alt={adventureTitle}
+                  />
+                }
+                heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
+                tags={[`${adventureTripLength} ${adventureActivity}`]}
+                surface
+              />
+            )
+          )}
+
+          {Array(getEmptySlotsQty(data?.checkIns?.items?.length, 4))
+            .fill(null)
+            .map((_, key) => (
+              <TileSkeleton
+                key={key}
+                className={style.empty}
+                uniqueKey={`checkIns-carousel--${key}`}
+                surface
+                animate={loading}
+              />
+            ))}
+        </Carousel>
+      </Block>
     </Block>
   )
 }
