@@ -42,7 +42,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
   return (
     <root.type
       {...merge(props, root.props)}
-      className={classes([style.root, className, [style.screen, screen], style[screen || 'dark'], style[vAlign]])}
+      className={classes([style.root, [style.screen, screen], style[screen || 'dark'], style[vAlign], className])}
       style={{
         ['--banner-bg-color' as string]: backgroundColor,
         ['--banner-text-color' as string]: textColor,

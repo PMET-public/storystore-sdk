@@ -3,7 +3,8 @@ import style from './App.module.css'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
 import { useNetworkStatus } from '../../hooks'
-import { toast } from '../Toast'
+import { toast } from '../../components'
+
 import OfflineIcon from 'remixicon/icons/Device/wifi-off-line.svg'
 
 export type AppProps = HTMLAttributes<HTMLDivElement> & {

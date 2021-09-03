@@ -11,6 +11,7 @@ import { settings } from '../../../../../.storybook/lib'
     title: 'Settings',
     variables: { ...settings },
   }}
+  argTypes={{ onClick: 'onClick' }}
 />
 
 export const Template = args => (
@@ -25,6 +26,10 @@ export const Template = args => (
   <Story
     name="Adventure"
     args={{ path: '/content/dam/wknd/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica' }}
+    actions={{
+      bookmark: false,
+      checkedIn: false,
+    }}
   >
     {Template.bind({})}
   </Story>

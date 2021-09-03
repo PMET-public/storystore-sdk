@@ -62,19 +62,20 @@ export const Tile: FunctionComponent<TileProps> = ({
 export type TileSkeletonProps = HTMLAttributes<HTMLElement> & {
   surface?: boolean
   uniqueKey?: string
+  animate?: boolean
 }
 
-export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ uniqueKey, ...props }) => {
+export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ uniqueKey, animate, ...props }) => {
   return (
     <Tile
       image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
       heading={
-        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em">
+        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />
         </ContentLoader>
       }
       tags={[
-        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--tags`} width="30%" height="1em">
+        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--tags`} width="30%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />
         </ContentLoader>,
       ]}

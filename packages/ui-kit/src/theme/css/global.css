@@ -552,6 +552,30 @@ a {
   }
 }
 
+@media (max-width: 640px) {
+  .hide-sm-only {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-md-only {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hide-lg-only {
+    display: none;
+  }
+}
+
+@media (max-width: 1280px) {
+  .hide-xl-only {
+    display: none;
+  }
+}
+
 @keyframes Toastify__flipIn {
   from {
     transform: perspective(400px) rotate3d(1, 0, 0, 90deg);

@@ -100,12 +100,17 @@ const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: stri
         <UIProvider>
           <WKND.App
             linkRoot={<Link />}
+            homeLink={<Link href="/" />}
+            passportLink={<Link href="/my-passport" />}
             footerMenu={[
               <Link key="home" href="/">
                 Home
               </Link>,
-              <Link key="Adventures" href="/adventures">
+              <Link key="adventures" href="/adventures">
                 Adventures
+              </Link>,
+              <Link key="my-trips" href="/my-passport">
+                My Passport
               </Link>,
               <Button
                 key="settings"
@@ -123,8 +128,6 @@ const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: stri
 
           <Dialog open={openSettings} onClose={() => setOpenSettings(false)}>
             <UIKitSettings
-              open={openSettings}
-              onClose={setOpenSettings}
               onSubmit={handleSettingsUpdate}
               onReset={handleSettingsReset}
               values={settings.values}
