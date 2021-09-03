@@ -102,16 +102,18 @@ export const Header: FunctionComponent<HeaderProps> = ({
         className,
       ])}
     >
-      <Block className={style.wrapper} contained={contained} padded>
-        <div className={style.logoWrapper}>
-          <logo.type {...logo.props} className={classes([style.logo, logo.props.className])} />
-        </div>
-
-        {menu && (
-          <div className={style.menuWrapper}>
-            <nav className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</nav>
+      <Block contained={contained} padded>
+        <div className={style.wrapper}>
+          <div className={style.logoWrapper}>
+            <logo.type {...logo.props} className={classes([style.logo, logo.props.className])} />
           </div>
-        )}
+
+          {menu && (
+            <div className={style.menuWrapper}>
+              <nav className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</nav>
+            </div>
+          )}
+        </div>
       </Block>
     </root.type>
   )

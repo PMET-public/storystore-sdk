@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Pills from '.'
+
+<Meta
+  title="Components/Pills"
+  component={Pills}
+  parameters={{ layout: 'centered' }}
+  argTypes={{ onChange: { action: 'onChange' } }}
+/>
+
+export const Template = args => {
+  return <Pills {...args} />
+}
+
+# Pills
+
+<Canvas withSource="open">
+  <Story
+    name="Pills"
+    args={{
+      items: [
+        { label: 'All', value: '', id: 'adventureActivity' },
+        { label: 'Rock Climbing', value: 'Rock Climbing', id: 'adventureActivity' },
+        { label: 'Cycling', value: 'Cycling', id: 'adventureActivity' },
+        { label: 'Skiing', value: 'Skiing', id: 'adventureActivity' },
+        { label: 'Surfing', value: 'Surfing', id: 'adventureActivity' },
+        { label: 'Travel', value: ['Social', 'Camping'], id: 'adventureActivity' },
+      ],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Pills } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Pills" />

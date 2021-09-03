@@ -1,13 +1,14 @@
-import { FunctionComponent, useMemo, useState } from 'react'
+import { FunctionComponent, useMemo, useState, useCallback, useEffect } from 'react'
 import App, { AppContext, AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import Head from 'next/head'
 import { WKND } from '@storystore/ui-kit/experiences'
-import { Button, SettingsDialog } from '@storystore/ui-kit/components'
+import { Button, Dialog, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-kit/components'
 import NextLink from 'next/link'
 import '@storystore/ui-kit/dist/theme/css/global.css'
+import { cookies } from '@storystore/toolbox'
 
 initApolloClient(
   new ApolloClient({
@@ -26,14 +27,53 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
   )
 }
 
-const AppRoot = ({ Component, pageProps, uri, settings }: AppProps & { uri: string; settings: any }) => {
-  const [openSettings, setOpenSettings] = useState(false)
-
+const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: string }) => {
   const apolloClient = useApollo(pageProps)
 
+  const [openSettings, setOpenSettings] = useState(false)
+
+  const settings = useUIKitSettings()
+
+  useEffect(() => {
+    const cookie = cookies.get('STORYSTORE_SETTINGS')
+    if (cookie) {
+      settings.setValues(JSON.parse(cookie))
+    }
+  }, [settings])
+
+  const handleSettingsUpdate = useCallback(
+    async data => {
+      const params = new URLSearchParams(data).toString()
+      const { success, errors } = await (await fetch(`/api/check-endpoint?${params}`)).json()
+
+      if (success) {
+        cookies.set('STORYSTORE_SETTINGS', JSON.stringify(data), 365)
+        apolloClient.resetStore()
+        settings.setValues(data)
+        settings.clearErrors()
+        setOpenSettings(false)
+        toast.success('UIKit settings has been updated.')
+      }
+
+      if (errors) {
+        settings.setErrors(errors)
+      }
+    },
+    [apolloClient, settings]
+  )
+
+  const handleSettingsReset = useCallback(async () => {
+    cookies.remove('STORYSTORE_SETTINGS')
+    settings.reset()
+    apolloClient.resetStore()
+    setOpenSettings(false)
+    toast.success('Using UIKit default settings.')
+  }, [apolloClient, settings])
+
   useMemo(() => {
+    const uri = referrer ? new URL('/__graphql', referrer).href : '/__graphql'
     apolloClient.setLink(new HttpLink({ uri }))
-  }, [apolloClient, uri])
+  }, [apolloClient, referrer])
 
   return (
     <>
@@ -60,12 +100,17 @@ const AppRoot = ({ Component, pageProps, uri, settings }: AppProps & { uri: stri
         <UIProvider>
           <WKND.App
             linkRoot={<Link />}
+            homeLink={<Link href="/" />}
+            passportLink={<Link href="/my-passport" />}
             footerMenu={[
               <Link key="home" href="/">
                 Home
               </Link>,
-              <Link key="Adventures" href="/adventures">
+              <Link key="adventures" href="/adventures">
                 Adventures
+              </Link>,
+              <Link key="my-trips" href="/my-passport">
+                My Passport
               </Link>,
               <Button
                 key="settings"
@@ -81,19 +126,14 @@ const AppRoot = ({ Component, pageProps, uri, settings }: AppProps & { uri: stri
             <Component {...pageProps} />
           </WKND.App>
 
-          <SettingsDialog
-            open={openSettings}
-            onClose={setOpenSettings}
-            onSubmit={() => {
-              setOpenSettings(false)
-              apolloClient.resetStore()
-            }}
-            onReset={() => {
-              setOpenSettings(false)
-              apolloClient.resetStore()
-            }}
-            {...settings}
-          />
+          <Dialog open={openSettings} onClose={() => setOpenSettings(false)}>
+            <UIKitSettings
+              onSubmit={handleSettingsUpdate}
+              onReset={handleSettingsReset}
+              values={settings.values}
+              errors={settings.errors}
+            />
+          </Dialog>
         </UIProvider>
       </ApolloProvider>
     </>
@@ -103,9 +143,7 @@ const AppRoot = ({ Component, pageProps, uri, settings }: AppProps & { uri: stri
 AppRoot.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext)
   const referrer = appContext.ctx.req?.headers.referer
-  const uri = referrer ? new URL('/__graphql', referrer).href : '/__graphql'
-
-  return { ...appProps, uri }
+  return { ...appProps, referrer }
 }
 
 export default AppRoot

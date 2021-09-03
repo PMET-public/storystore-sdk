@@ -7,6 +7,17 @@
   width: 100%;
 }
 
+.root svg {
+  margin-top: -0.15em;
+  height: 1em;
+  margin-right: var(--spacing-xs);
+  vertical-align: middle;
+}
+
+.root em {
+  font-style: italic;
+}
+
 @media (min-width: 768px) {
   .root {
     font-size: var(--heading-size-md);

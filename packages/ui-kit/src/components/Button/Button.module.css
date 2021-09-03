@@ -24,7 +24,7 @@
 }
 
 .root:hover:not(:disabled) {
-  filter: brightness(80%) contrast(120%);
+  filter: brightness(90%) contrast(120%);
 }
 
 .cta {
