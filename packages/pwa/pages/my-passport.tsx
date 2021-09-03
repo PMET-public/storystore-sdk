@@ -4,7 +4,7 @@ import { MY_PASSPORT } from '../lib/variables'
 import { useEffect, useState } from 'react'
 
 const MyPassport: NextPage = () => {
-  const [passport, setPassport] = useState<{ checkIns: string[]; bookmarks: string[] }>({})
+  const [passport, setPassport] = useState<{ checkIns?: string[]; bookmarks?: string[] }>({})
 
   console.log(passport)
 
