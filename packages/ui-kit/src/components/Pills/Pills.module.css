@@ -1,0 +1,18 @@
+.root {
+  -webkit-overflow-scrolling: touch;
+  background-color: var(--ui-color-body);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  scrollbar-width: none;
+  top: 0;
+}
+
+.root::-webkit-scrollbar {
+  display: none;
+}
+
+.root .swatches {
+  flex-wrap: nowrap;
+}

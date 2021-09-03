@@ -1,0 +1,12 @@
+.root {
+  margin-top: -85px;
+  padding-bottom: var(--spacing-xl);
+}
+
+.stamp {
+  box-shadow: 0 0 10px rgb(0 0 0 / 3%);
+}
+
+.empty {
+  border: 2px dashed rgba(0, 0, 0, 0.12);
+}

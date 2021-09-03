@@ -109,59 +109,55 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   return (
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
       {/* Hero */}
-      <Block>
-        <Banner
-          backgroundColor="#f4ecea"
-          backgroundImage={
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
-              <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
-            </picture>
-          }
-          height={{ sm: '80vh', lg: '70vh' }}
-          heading={
-            <Heading root={<h2 />} size={{ sm: '4xl', md: '5xl' }} style={{ paddingRight: '100px' }}>
-              Not all who wander are lost.
-            </Heading>
-          }
-          button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
-          align="left"
-          contained
-        />
-      </Block>
-
-      <Block contained padded>
-        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
-          <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
-            Trying something new? Start easy.
+      <Banner
+        backgroundColor="#f4ecea"
+        backgroundImage={
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
+            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
+          </picture>
+        }
+        height={{ sm: '80vh', lg: '70vh' }}
+        heading={
+          <Heading root={<h2 />} size={{ sm: '4xl', md: '5xl' }} style={{ paddingRight: '100px' }}>
+            Not all who wander are lost.
           </Heading>
-          <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.beginner?.items
-              ? Array(4)
-                  .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`beginner-carousel--${key}`} surface />)
-              : data.beginner.items.map(
-                  ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                    <Tile
-                      root={<Link href={id} />}
-                      key={id}
-                      image={
-                        <img
-                          loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage?.src}
-                          width={400}
-                          height={400}
-                          alt={adventureTitle}
-                        />
-                      }
-                      heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                      tags={[`${adventureTripLength} ${adventureActivity}`]}
-                      surface
-                    />
-                  )
-                )}
-          </Carousel>
-        </Block>
+        }
+        button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
+        align="left"
+        contained
+      />
+
+      <Block root={<section />} gap="md" contained padded>
+        <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
+          Trying something new? Start easy.
+        </Heading>
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
+          {loading && !data?.beginner?.items
+            ? Array(4)
+                .fill(null)
+                .map((_, key) => <TileSkeleton key={key} uniqueKey={`beginner-carousel--${key}`} surface />)
+            : data.beginner.items.map(
+                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
+                  <Tile
+                    root={<Link href={id} />}
+                    key={id}
+                    image={
+                      <img
+                        loading="lazy"
+                        src={'/__aem' + adventurePrimaryImage?.src}
+                        width={400}
+                        height={400}
+                        alt={adventureTitle}
+                      />
+                    }
+                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
+                    tags={[`${adventureTripLength} ${adventureActivity}`]}
+                    surface
+                  />
+                )
+              )}
+        </Carousel>
       </Block>
 
       {/* Camping Banner */}
@@ -203,38 +199,36 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
       </Block>
 
       {/* Camping Carousel */}
-      <Block contained padded>
-        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
-          <Heading root={<h2 />} size="2xl">
-            For the outdoor kind.
-          </Heading>
-          <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.camping?.items
-              ? Array(4)
-                  .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`camping-carousel--${key}`} surface />)
-              : data.camping.items.map(
-                  ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                    <Tile
-                      root={<Link href={id} />}
-                      key={id}
-                      image={
-                        <img
-                          loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage?.src}
-                          width={400}
-                          height={400}
-                          alt={adventureTitle}
-                        />
-                      }
-                      heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                      tags={[`${adventureTripLength} ${adventureActivity}`]}
-                      surface
-                    />
-                  )
-                )}
-          </Carousel>
-        </Block>
+      <Block root={<section />} gap="md" contained padded>
+        <Heading root={<h2 />} size="2xl">
+          For the outdoor kind.
+        </Heading>
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
+          {loading && !data?.camping?.items
+            ? Array(4)
+                .fill(null)
+                .map((_, key) => <TileSkeleton key={key} uniqueKey={`camping-carousel--${key}`} surface />)
+            : data.camping.items.map(
+                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
+                  <Tile
+                    root={<Link href={id} />}
+                    key={id}
+                    image={
+                      <img
+                        loading="lazy"
+                        src={'/__aem' + adventurePrimaryImage?.src}
+                        width={400}
+                        height={400}
+                        alt={adventureTitle}
+                      />
+                    }
+                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
+                    tags={[`${adventureTripLength} ${adventureActivity}`]}
+                    surface
+                  />
+                )
+              )}
+        </Carousel>
       </Block>
 
       {/* Surfing Banner */}
@@ -274,39 +268,37 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
       </Block>
 
       {/* Overstay Carousel */}
-      <Block contained padded>
-        <Block root={<section />} gap={{ sm: 'md', lg: 'lg' }}>
-          <Heading root={<h2 />} size="2xl">
-            Time is a construct. Overstay.
-          </Heading>
+      <Block root={<section />} gap="md" contained padded>
+        <Heading root={<h2 />} size="2xl">
+          Time is a construct. Overstay.
+        </Heading>
 
-          <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-            {loading && !data?.overstay?.items
-              ? Array(4)
-                  .fill(null)
-                  .map((_, key) => <TileSkeleton key={key} uniqueKey={`overstay-carousel--${key}`} surface />)
-              : data.overstay.items.map(
-                  ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                    <Tile
-                      root={<Link href={id} />}
-                      key={id}
-                      image={
-                        <img
-                          loading="lazy"
-                          src={'/__aem' + adventurePrimaryImage?.src}
-                          width={400}
-                          height={400}
-                          alt={adventureTitle}
-                        />
-                      }
-                      heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                      tags={[`${adventureTripLength} ${adventureActivity}`]}
-                      surface
-                    />
-                  )
-                )}
-          </Carousel>
-        </Block>
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
+          {loading && !data?.overstay?.items
+            ? Array(4)
+                .fill(null)
+                .map((_, key) => <TileSkeleton key={key} uniqueKey={`overstay-carousel--${key}`} surface />)
+            : data.overstay.items.map(
+                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
+                  <Tile
+                    root={<Link href={id} />}
+                    key={id}
+                    image={
+                      <img
+                        loading="lazy"
+                        src={'/__aem' + adventurePrimaryImage?.src}
+                        width={400}
+                        height={400}
+                        alt={adventureTitle}
+                      />
+                    }
+                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
+                    tags={[`${adventureTripLength} ${adventureActivity}`]}
+                    surface
+                  />
+                )
+              )}
+        </Carousel>
       </Block>
     </Block>
   )

@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form'
 <Meta title="Components/Form/Swatches" component={Swatches} parameters={{ layout: 'centered' }} />
 
 export const Template = args => {
-  const { register, watch } = useForm()
-  console.log(watch('number'))
+  const { register } = useForm()
   return (
     <Swatches
       {...args}

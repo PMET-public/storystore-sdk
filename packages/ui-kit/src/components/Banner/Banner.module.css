@@ -98,6 +98,10 @@
   align-items: flex-end;
 }
 
+.wrapper.middle {
+  align-items: center;
+}
+
 img.backgroundImage,
 .backgroundImage img {
   height: 100%;

@@ -1,11 +1,7 @@
 import { FunctionComponent } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import style from './Adventure.module.css'
-import Error from '../../../../components/Error'
-import Block from '../../../../components/Block'
-import Banner, { BannerSkeleton } from '../../../../components/Banner'
-import Heading from '../../../../components/Heading'
-import Html from '../../../../components/Html'
+import { Error, Block, Banner, BannerSkeleton, Heading, Html, Button } from '../../../../components'
 import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
 import CalendarIcon from 'remixicon/icons/Business/calendar-check-line.svg'
 import LengthIcon from 'remixicon/icons/Business/calendar-fill.svg'
@@ -13,10 +9,18 @@ import BagIcon from 'remixicon/icons/Business/briefcase-line.svg'
 import GroupIcon from 'remixicon/icons/User/group-fill.svg'
 import MedalIcon from 'remixicon/icons/Business/medal-2-fill.svg'
 import PriceIcon from 'remixicon/icons/Finance/price-tag-3-fill.svg'
+import CheckInIcon from 'remixicon/icons/System/check-line.svg'
+import CheckedInIcon from 'remixicon/icons/System/check-double-line.svg'
+import BookmarkIcon from 'remixicon/icons/Business/bookmark-line.svg'
+import BookmarkedIcon from 'remixicon/icons/Business/bookmark-fill.svg'
 import ContentLoader from 'react-content-loader'
 
 export type AdventureProps = {
   path: string
+  checkedIn?: boolean
+  bookmarked?: boolean
+  onCheckIn?: (id: string) => any
+  onBookmark?: (id: string) => any
 }
 
 export const ADVENTURE_QUERY = gql`
@@ -53,7 +57,13 @@ export const ADVENTURE_QUERY = gql`
   }
 `
 
-export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
+export const Adventure: FunctionComponent<AdventureProps> = ({
+  path,
+  checkedIn,
+  onCheckIn,
+  bookmarked,
+  onBookmark,
+}) => {
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
   if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
@@ -95,6 +105,33 @@ export const Adventure: FunctionComponent<AdventureProps> = ({ path }) => {
                 {adventure.adventureTitle}
               </Heading>
             </header>
+
+            <Block gap="md" align="start" columns={{ sm: '1fr', md: '1fr 1fr', lg: '180px 180px' }}>
+              <Button
+                variant="cta"
+                disabled={!onCheckIn}
+                icon={checkedIn ? <CheckedInIcon style={{ fill: 'green' }} /> : <CheckInIcon />}
+                onClick={() => onCheckIn?.(path)}
+              >
+                Check In
+              </Button>
+
+              <Button
+                variant="primary"
+                transparent
+                disabled={!onBookmark}
+                icon={
+                  bookmarked ? (
+                    <BookmarkedIcon aria-label="Saved for later" style={{ fill: 'red' }} />
+                  ) : (
+                    <BookmarkIcon aria-label="Save for later" />
+                  )
+                }
+                onClick={() => onBookmark?.(path)}
+              >
+                Save for Later
+              </Button>
+            </Block>
 
             <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
