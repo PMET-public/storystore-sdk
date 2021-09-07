@@ -28,7 +28,10 @@ export const ADVENTURES_QUERY = gql`
 `
 
 export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
-  const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, { variables: { filter } })
+  const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, {
+    context: { clientName: 'aem' },
+    variables: { filter },
+  })
 
   useEffect(() => {
     if (previousData) {

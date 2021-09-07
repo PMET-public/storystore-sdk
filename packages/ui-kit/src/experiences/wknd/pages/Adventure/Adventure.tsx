@@ -64,7 +64,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   bookmarked,
   onBookmark,
 }) => {
-  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
+  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { context: { clientName: 'aem' }, variables: { path } })
 
   if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
 
