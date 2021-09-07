@@ -65,21 +65,45 @@ export const Block: FunctionComponent<BlockProps> = ({
 
         ['--grid-columns-gap-sm' as string]: columnsGap.sm
           ? `var(--spacing-${columnsGap.sm})`
-          : `var(--spacing-${gap.sm})`,
+          : gap.sm
+          ? `var(--spacing-${gap.sm})`
+          : 'initial',
         ['--grid-columns-gap-md' as string]: columnsGap.md
           ? `var(--spacing-${columnsGap.md})`
-          : `var(--spacing-${gap.md})`,
+          : gap.md
+          ? `var(--spacing-${gap.md})`
+          : 'initial',
         ['--grid-columns-gap-lg' as string]: columnsGap.lg
           ? `var(--spacing-${columnsGap.lg})`
-          : `var(--spacing-${gap.lg})`,
+          : gap.lg
+          ? `var(--spacing-${gap.lg})`
+          : 'initial',
         ['--grid-columns-gap-xl' as string]: columnsGap.xl
           ? `var(--spacing-${columnsGap.xl})`
-          : `var(--spacing-${gap.xl})`,
+          : gap.xl
+          ? `var(--spacing-${gap.xl})`
+          : 'initial',
 
-        ['--grid-rows-gap-sm' as string]: rowsGap.sm ? `var(--spacing-${rowsGap.sm})` : `var(--spacing-${gap.sm})`,
-        ['--grid-rows-gap-md' as string]: rowsGap.md ? `var(--spacing-${rowsGap.md})` : `var(--spacing-${gap.md})`,
-        ['--grid-rows-gap-lg' as string]: rowsGap.lg ? `var(--spacing-${rowsGap.lg})` : `var(--spacing-${gap.lg})`,
-        ['--grid-rows-gap-xl' as string]: rowsGap.xl ? `var(--spacing-${rowsGap.xl})` : `var(--spacing-${gap.xl})`,
+        ['--grid-rows-gap-sm' as string]: rowsGap.sm
+          ? `var(--spacing-${rowsGap.sm})`
+          : gap.sm
+          ? `var(--spacing-${gap.sm})`
+          : 'initial',
+        ['--grid-rows-gap-md' as string]: rowsGap.md
+          ? `var(--spacing-${rowsGap.md})`
+          : gap.md
+          ? `var(--spacing-${gap.md})`
+          : 'initial',
+        ['--grid-rows-gap-lg' as string]: rowsGap.lg
+          ? `var(--spacing-${rowsGap.lg})`
+          : gap.lg
+          ? `var(--spacing-${gap.lg})`
+          : 'initial',
+        ['--grid-rows-gap-xl' as string]: rowsGap.xl
+          ? `var(--spacing-${rowsGap.xl})`
+          : gap.xl
+          ? `var(--spacing-${gap.xl})`
+          : 'initial',
 
         ['--align' as string]: align,
         ['--vAlign' as string]: vAlign,

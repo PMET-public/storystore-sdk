@@ -1,7 +1,6 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import { WKND } from '@storystore/ui-kit/experiences'
 import { Block, Pills } from '@storystore/ui-kit/components'
-import { addApolloState, getApolloClient } from '@storystore/next-apollo'
 import { useState } from 'react'
 
 const Adventures: NextPage = props => {
@@ -28,7 +27,7 @@ const Adventures: NextPage = props => {
   }
 
   return (
-    <Block padded>
+    <Block rows="auto 1fr" padded style={{ height: '100%' }}>
       <Pills
         variant="single"
         items={[
@@ -41,20 +40,11 @@ const Adventures: NextPage = props => {
         ]}
         onChange={handleOnFilterUpdate}
       />
-
-      <WKND.Adventures filter={filters} {...props} />
+      <div>
+        <WKND.Adventures filter={filters} {...props} />
+      </div>
     </Block>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const apolloClient = getApolloClient()
-
-  await apolloClient.query({ query: WKND.ADVENTURES_QUERY })
-
-  return addApolloState(apolloClient, {
-    props: {},
-  })
 }
 
 export default Adventures

@@ -1,8 +1,11 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 
 export const useNetworkStatus = (callback?: (state: boolean) => void) => {
+  const [status, setState] = useState(true)
+
   const handleNetworkChange = useCallback(() => {
     const { onLine } = navigator
+    setState(onLine)
     callback?.(onLine)
   }, [])
 
@@ -17,4 +20,6 @@ export const useNetworkStatus = (callback?: (state: boolean) => void) => {
       window.removeEventListener('offline', handleNetworkChange)
     }
   }, [])
+
+  return status
 }

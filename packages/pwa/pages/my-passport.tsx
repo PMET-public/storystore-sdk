@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react'
 const MyPassport: NextPage = () => {
   const [passport, setPassport] = useState<{ checkIns?: string[]; bookmarks?: string[] }>({})
 
-  console.log(passport)
-
   useEffect(() => {
     const _passport = JSON.parse(localStorage.getItem(MY_PASSPORT) || '{}')
 
