@@ -7,8 +7,8 @@ import Head from 'next/head'
 import { WKND } from '@storystore/ui-kit/experiences'
 import { Button, Dialog, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-kit/components'
 import NextLink from 'next/link'
-import '@storystore/ui-kit/dist/theme/css/global.css'
 import { cookies } from '@storystore/toolbox'
+import '@storystore/ui-kit/dist/theme/css/global.css'
 
 initApolloClient(
   new ApolloClient({
@@ -27,8 +27,10 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
   )
 }
 
-const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: string }) => {
+const AppRoot = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)
+
+  const { ssrGraphQLEndpoint } = pageProps
 
   const [openSettings, setOpenSettings] = useState(false)
 
@@ -71,9 +73,9 @@ const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: stri
   }, [apolloClient, settings])
 
   useMemo(() => {
-    const uri = referrer ? new URL('/__graphql', referrer).href : '/__graphql'
+    const uri = ssrGraphQLEndpoint || '/__graphql'
     apolloClient.setLink(new HttpLink({ uri }))
-  }, [apolloClient, referrer])
+  }, [apolloClient, ssrGraphQLEndpoint])
 
   return (
     <>
@@ -138,12 +140,6 @@ const AppRoot = ({ Component, pageProps, referrer }: AppProps & { referrer: stri
       </ApolloProvider>
     </>
   )
-}
-
-AppRoot.getInitialProps = async (appContext: AppContext) => {
-  const appProps = await App.getInitialProps(appContext)
-  const referrer = appContext.ctx.req?.headers.referer
-  return { ...appProps, referrer }
 }
 
 export default AppRoot
