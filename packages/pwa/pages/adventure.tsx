@@ -29,7 +29,6 @@ const Adventure: NextPage = ({ ...props }) => {
         newValues = {
           ...newValues,
           [id]: {
-            // ...newValues[id],
             checkIn: timestamp,
           },
         }
@@ -53,7 +52,6 @@ const Adventure: NextPage = ({ ...props }) => {
         newValues = {
           ...newValues,
           [id]: {
-            // ...newValues[id],
             bookmark: timestamp,
           },
         }
