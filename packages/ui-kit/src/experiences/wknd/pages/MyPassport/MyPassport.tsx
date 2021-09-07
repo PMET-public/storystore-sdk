@@ -52,6 +52,7 @@ const getEmptySlotsQty = (from = 0, to = 4) => {
 
 export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookmarks }) => {
   const { error, loading, data } = useQuery(MY_PASSPORT_QUERY, {
+    context: { clientName: 'aem' },
     variables: {
       checkIns: checkIns?.map(p => ({ value: p })),
       bookmarks: bookmarks?.map(p => ({ value: p })),

@@ -99,7 +99,7 @@ export type HomeProps = {
 }
 
 export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
-  const { error, loading, data } = useQuery(HOME_QUERY)
+  const { error, loading, data } = useQuery(HOME_QUERY, { context: { clientName: 'aem' } })
 
   if (error) {
     console.log(error.networkError)
