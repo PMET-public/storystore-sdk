@@ -27,7 +27,7 @@ const Adventures: NextPage = props => {
   }
 
   return (
-    <Block padded>
+    <Block rows="auto 1fr" padded style={{ height: '100%' }}>
       <Pills
         variant="single"
         items={[
@@ -40,8 +40,9 @@ const Adventures: NextPage = props => {
         ]}
         onChange={handleOnFilterUpdate}
       />
-
-      <WKND.Adventures filter={filters} {...props} />
+      <div>
+        <WKND.Adventures filter={filters} {...props} />
+      </div>
     </Block>
   )
 }

@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactElement } from 'react'
 import style from './MyPassport.module.css'
 import { useQuery } from '@apollo/client'
+import { useNetworkStatus } from '../../../../hooks'
 import { Link, Block, Banner, Tile, TileSkeleton, Heading, Error, Carousel } from '../../../../components'
 import gql from 'graphql-tag'
 import CheckedInIcon from 'remixicon/icons/System/check-double-line.svg'
@@ -59,10 +60,9 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
     },
   })
 
-  if (error) {
-    console.log(error.networkError)
-    return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
-  }
+  const online = useNetworkStatus()
+
+  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
 
   return (
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>

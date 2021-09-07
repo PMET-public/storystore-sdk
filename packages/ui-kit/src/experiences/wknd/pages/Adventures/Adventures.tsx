@@ -3,6 +3,7 @@ import { gql, useQuery } from '@apollo/client'
 import { classes } from '../../../../lib'
 import style from './Adventures.module.css'
 import { Error, Block, Tile, TileSkeleton, Link, Heading } from '../../../../components'
+import { useNetworkStatus } from '../../../../hooks'
 
 export type AdventuresProps = {
   filter?: unknown
@@ -33,13 +34,15 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
     variables: { filter },
   })
 
+  const online = useNetworkStatus()
+
   useEffect(() => {
     if (previousData) {
       window.scrollTo(0, 0) // reset scroll
     }
   }, [previousData])
 
-  if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
+  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
 
   return (
     <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr ', lg: '1fr 1fr 1fr', xl: '1fr 1fr 1fr 1fr' }}>

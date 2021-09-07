@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactElement } from 'react'
 import style from './Home.module.css'
 import { useQuery } from '@apollo/client'
+import { useNetworkStatus } from '../../../../hooks'
 import Link from '../../../../components/Link'
 import Block from '../../../../components/Block'
 import Banner, { BannerSkeleton } from '../../../../components/Banner'
@@ -101,10 +102,9 @@ export type HomeProps = {
 export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   const { error, loading, data } = useQuery(HOME_QUERY, { context: { clientName: 'aem' } })
 
-  if (error) {
-    console.log(error.networkError)
-    return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
-  }
+  const online = useNetworkStatus()
+
+  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
 
   return (
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>

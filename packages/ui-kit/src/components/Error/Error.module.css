@@ -6,6 +6,7 @@
   padding: var(--padded);
   line-height: 1.5;
   text-align: center;
+  height: 100%;
 }
 
 .root > span {

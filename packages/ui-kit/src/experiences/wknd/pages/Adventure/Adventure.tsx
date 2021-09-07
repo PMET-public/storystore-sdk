@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import style from './Adventure.module.css'
 import { Error, Block, Banner, BannerSkeleton, Heading, Html, Button } from '../../../../components'
+import { useNetworkStatus } from '../../../../hooks'
 import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
 import CalendarIcon from 'remixicon/icons/Business/calendar-check-line.svg'
 import LengthIcon from 'remixicon/icons/Business/calendar-fill.svg'
@@ -66,7 +67,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 }) => {
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { context: { clientName: 'aem' }, variables: { path } })
 
-  if (error) return <Error status={(error.networkError as any)?.response?.status} style={{ height: '100%' }} />
+  const online = useNetworkStatus()
+
+  if (error) return <Error status={online ? 'Offline' : (error.networkError as any)?.response?.status} />
 
   const adventure = data?.adventureByPath.item
 
