@@ -21,8 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     createProxyMiddleware({
       auth,
       target,
-      changeOrigin: true,
-      pathRewrite: { '^/__aem': '' },
+      changeOrigin: false,
+      pathRewrite: { '^/__remote': '' },
     })
   )
 }

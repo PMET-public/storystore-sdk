@@ -98,7 +98,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
                 image={
                   <img
                     loading="lazy"
-                    src={'/__aem' + adventurePrimaryImage?.src}
+                    src={'/__remote' + adventurePrimaryImage?.src}
                     width={400}
                     height={400}
                     alt={adventureTitle}
@@ -140,7 +140,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
                 image={
                   <img
                     loading="lazy"
-                    src={'/__aem' + adventurePrimaryImage?.src}
+                    src={'/__remote' + adventurePrimaryImage?.src}
                     width={400}
                     height={400}
                     alt={adventureTitle}

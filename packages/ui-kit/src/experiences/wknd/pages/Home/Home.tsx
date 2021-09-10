@@ -29,44 +29,12 @@ export const HOME_QUERY = gql`
       }
     }
 
-    bannerCamping: adventureByPath(
-      _path: "/content/dam/wknd/en/adventures/riverside-camping-australia/riverside-camping-australia"
-    ) {
-      item {
-        id: _path
-        adventureTitle
-        adventureTripLength
-        adventurePrimaryImage {
-          ... on ImageRef {
-            id: _path
-            src: _path
-          }
-        }
-      }
-    }
-
     camping: adventureList(
       filter: { adventureActivity: { _logOp: OR, _expressions: [{ value: "Cycling" }, { value: "Rock Climbing" }] } }
     ) {
       items {
         id: _path
         adventureActivity
-        adventureTitle
-        adventureTripLength
-        adventurePrimaryImage {
-          ... on ImageRef {
-            id: _path
-            src: _path
-          }
-        }
-      }
-    }
-
-    bannerSurfing: adventureByPath(
-      _path: "/content/dam/wknd/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica"
-    ) {
-      item {
-        id: _path
         adventureTitle
         adventureTripLength
         adventurePrimaryImage {
@@ -145,7 +113,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                     image={
                       <img
                         loading="lazy"
-                        src={'/__aem' + adventurePrimaryImage?.src}
+                        src={'/__remote' + adventurePrimaryImage?.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}
@@ -162,7 +130,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
 
       {/* Camping Banner */}
       <Block contained padded>
-        {loading && !data?.bannerCamping?.item ? (
+        {loading && !data?.camping?.items ? (
           <BannerSkeleton uniqueKey="camping-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
@@ -173,23 +141,23 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
             textColor="white"
             backgroundImage={
               <img
-                src={'/__aem' + data.bannerCamping.item.adventurePrimaryImage?.src}
-                width={data.bannerCamping.item.adventurePrimaryImage?.width}
-                height={data.bannerCamping.item.adventurePrimaryImage?.height}
-                alt={data.bannerCamping.item.adventureTitle}
+                src={'/__remote' + data.camping.items[0].adventurePrimaryImage?.src}
+                width={data.camping.items[0].adventurePrimaryImage?.width}
+                height={data.camping.items[0].adventurePrimaryImage?.height}
+                alt={data.camping.items[0].adventureTitle}
               />
             }
             heading={
               <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
                 <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
-                  {data.bannerCamping.item.adventureTripLength} {data.bannerCamping.item.adventureType}
+                  {data.camping.items[0].adventureTripLength} {data.camping.items[0].adventureType}
                 </Heading>
-                {data.bannerCamping.item.adventureTitle}
+                {data.camping.items[0].adventureTitle}
               </Heading>
             }
             button={
-              data?.bannerCamping && (
-                <Button root={<Link href={data.bannerCamping.item.id} />} variant="cta">
+              data.camping.items[0] && (
+                <Button root={<Link href={data.camping.items[0].id} />} variant="cta">
                   View Adventure
                 </Button>
               )
@@ -216,7 +184,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                     image={
                       <img
                         loading="lazy"
-                        src={'/__aem' + adventurePrimaryImage?.src}
+                        src={'/__remote' + adventurePrimaryImage?.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}
@@ -231,38 +199,40 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
         </Carousel>
       </Block>
 
-      {/* Surfing Banner */}
+      {/* Overstay Banner */}
       <Block contained padded>
-        {loading && !data?.bannerSurfing?.item ? (
-          <BannerSkeleton uniqueKey="surfing-banner" height={{ sm: '70vh', lg: '600px' }} />
+        {loading && !data?.overstay?.items ? (
+          <BannerSkeleton uniqueKey="overstay-banner" height={{ sm: '70vh', lg: '600px' }} />
         ) : (
           <Banner
-            backgroundImage={
-              <img
-                src={'/__aem' + data.bannerSurfing.item.adventurePrimaryImage?.src}
-                width={data.bannerSurfing.item.adventurePrimaryImage?.width}
-                height={data.bannerSurfing.item.adventurePrimaryImage?.height}
-                alt={data.bannerSurfing.item.adventureTitle}
-              />
-            }
             height={{ sm: '70vh', lg: '600px' }}
-            heading={
-              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
-                <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
-                  {data.bannerSurfing.item.adventureTripLength} {data.bannerSurfing.item.adventureType}
-                </Heading>
-                {data.bannerSurfing.item.adventureTitle}
-              </Heading>
-            }
-            button={
-              <Button root={<Link href={data.bannerSurfing.item.id} />} variant="cta">
-                View Adventure
-              </Button>
-            }
             align="left"
             vAlign="bottom"
             screen="dark"
             textColor="white"
+            backgroundImage={
+              <img
+                src={'/__remote' + data.overstay.items[0].adventurePrimaryImage?.src}
+                width={data.overstay.items[0].adventurePrimaryImage?.width}
+                height={data.overstay.items[0].adventurePrimaryImage?.height}
+                alt={data.overstay.items[0].adventureTitle}
+              />
+            }
+            heading={
+              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
+                <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
+                  {data.overstay.items[0].adventureTripLength} {data.overstay.items[0].adventureType}
+                </Heading>
+                {data.overstay.items[0].adventureTitle}
+              </Heading>
+            }
+            button={
+              data.overstay.items[0] && (
+                <Button root={<Link href={data.overstay.items[0].id} />} variant="cta">
+                  View Adventure
+                </Button>
+              )
+            }
           />
         )}
       </Block>
@@ -286,7 +256,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
                     image={
                       <img
                         loading="lazy"
-                        src={'/__aem' + adventurePrimaryImage?.src}
+                        src={'/__remote' + adventurePrimaryImage?.src}
                         width={400}
                         height={400}
                         alt={adventureTitle}

@@ -69,7 +69,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
   const online = useNetworkStatus()
 
-  if (error) return <Error status={online ? 'Offline' : (error.networkError as any)?.response?.status} />
+  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
 
   const adventure = data?.adventureByPath.item
 
@@ -79,7 +79,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
         <BannerSkeleton className={style.banner} uniqueKey="adventure-image" />
       ) : (
         <Banner
-          backgroundImage={<img src={'/__aem' + adventure.adventurePrimaryImage?.src} alt={adventure.adventureTitle} />}
+          backgroundImage={
+            <img src={'/__remote' + adventure.adventurePrimaryImage?.src} alt={adventure.adventureTitle} />
+          }
           className={style.banner}
           screen="lighter"
           vAlign="top"

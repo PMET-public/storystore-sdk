@@ -19,13 +19,13 @@ module.exports = function expressMiddleware(router) {
     createProxyMiddleware({
       auth,
       target: endpoint.origin,
-      changeOrigin: true,
+      changeOrigin: false,
       pathRewrite: { '^/__graphql': endpoint.pathname },
       onProxyReq: fixRequestBody,
     })(req, res, next)
   })
 
-  router.use('/__aem/', (req, res, next) => {
+  router.use('/__remote/', (req, res, next) => {
     const cookie = cookies.getCookieValueFromString(req.headers.cookie, ADDON_ID)
     const settings = JSON.parse(cookie)
     const searchQuery = new URL(req.headers.referer).search
@@ -37,8 +37,8 @@ module.exports = function expressMiddleware(router) {
     createProxyMiddleware({
       auth,
       target: endpoint.origin,
-      changeOrigin: true,
-      pathRewrite: { '^/__aem': '' },
+      changeOrigin: false,
+      pathRewrite: { '^/__remote': '' },
     })(req, res, next)
   })
 

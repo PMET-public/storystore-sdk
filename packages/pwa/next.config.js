@@ -25,8 +25,8 @@ module.exports = withPlugins([withPWA, withStoryStore], {
       },
       /** Proxy to AEM. Images, etc */
       {
-        source: '/__aem/:pathname*',
-        destination: '/api/aem',
+        source: '/__remote/:pathname*',
+        destination: '/api/remote',
       },
       {
         source: '/__graphql/:pathname*',
@@ -34,7 +34,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
       },
       /** Adventure */
       {
-        source: '/content/dam/wknd/:locale/adventures/:pathname*',
+        source: '/content/dam/:site/:locale/adventures/:pathname*',
         destination: '/adventure',
       },
     ]

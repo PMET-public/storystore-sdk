@@ -28,9 +28,15 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 }
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
+  const { ssrGraphQLEndpoint } = pageProps
+
   const apolloClient = useApollo(pageProps)
 
-  const { ssrGraphQLEndpoint } = pageProps
+  // Set CSR & SSR GraphQL Endpoint to App Proxy
+  useMemo(() => {
+    const uri = ssrGraphQLEndpoint || '/__graphql'
+    apolloClient.setLink(new HttpLink({ uri }))
+  }, [apolloClient, ssrGraphQLEndpoint])
 
   const [openSettings, setOpenSettings] = useState(false)
 
@@ -41,7 +47,8 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     if (cookie) {
       settings.setValues(JSON.parse(cookie))
     }
-  }, [settings])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.setValues])
 
   const handleSettingsUpdate = useCallback(
     async data => {
@@ -71,11 +78,6 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     setOpenSettings(false)
     toast.success('Using UIKit default settings.')
   }, [apolloClient, settings])
-
-  useMemo(() => {
-    const uri = ssrGraphQLEndpoint || '/__graphql'
-    apolloClient.setLink(new HttpLink({ uri }))
-  }, [apolloClient, ssrGraphQLEndpoint])
 
   return (
     <>

@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     createProxyMiddleware({
       auth,
       target: endpoint.origin,
-      changeOrigin: true,
+      changeOrigin: false,
       pathRewrite: { '^/__graphql': endpoint.pathname },
     })
   )
