@@ -38,8 +38,6 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     apolloClient.setLink(new HttpLink({ uri }))
   }, [apolloClient, ssrGraphQLEndpoint])
 
-  const [openSettings, setOpenSettings] = useState(false)
-
   const settings = useUIKitSettings()
 
   useEffect(() => {
@@ -49,6 +47,8 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settings.setValues])
+
+  const [openSettings, setOpenSettings] = useState(false)
 
   const handleSettingsUpdate = useCallback(
     async data => {
