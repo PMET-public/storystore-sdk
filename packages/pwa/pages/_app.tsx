@@ -1,13 +1,15 @@
 import { FunctionComponent, useMemo, useState, useCallback, useEffect } from 'react'
-import App, { AppContext, AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import Head from 'next/head'
-import { WKND } from '@storystore/ui-kit/experiences'
+import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
 import { Button, Dialog, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-kit/components'
 import NextLink from 'next/link'
 import { cookies } from '@storystore/toolbox'
+
+// Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
 
 initApolloClient(
@@ -102,7 +104,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
       <ApolloProvider client={apolloClient}>
         <UIProvider>
-          <WKND.App
+          <WKNDApp
             linkRoot={<Link />}
             homeLink={<Link href="/" />}
             passportLink={<Link href="/my-passport" />}
@@ -128,7 +130,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             ]}
           >
             <Component {...pageProps} />
-          </WKND.App>
+          </WKNDApp>
 
           <Dialog open={openSettings} onClose={() => setOpenSettings(false)}>
             <UIKitSettings

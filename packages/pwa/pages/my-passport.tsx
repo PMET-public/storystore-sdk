@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
-import { WKND } from '@storystore/ui-kit/experiences'
+import { MyPassport } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { MY_PASSPORT } from '../lib/variables'
 import { useEffect, useState } from 'react'
 
-const MyPassport: NextPage = () => {
+const MyPassportPage: NextPage = () => {
   const [passport, setPassport] = useState<{ checkIns?: string[]; bookmarks?: string[] }>({})
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const MyPassport: NextPage = () => {
     setPassport({ checkIns, bookmarks })
   }, [])
 
-  return <WKND.MyPassport checkIns={passport.checkIns} bookmarks={passport.bookmarks} />
+  return <MyPassport checkIns={passport.checkIns} bookmarks={passport.bookmarks} />
 }
 
-export default MyPassport
+export default MyPassportPage

@@ -1,22 +1,9 @@
-import { ButtonHTMLAttributes, FunctionComponent, ReactElement, ReactNode, isValidElement } from 'react'
+import { FunctionComponent, isValidElement } from 'react'
+import { ButtonProps } from './Button.d'
 import { classes, merge } from '../../lib'
-import style from './Button.module.css'
 
-export type ButtonProps = {
-  root?: ReactElement
-  /** Content. */
-  children: ReactNode
-  /** Visual styles. */
-  variant?: 'cta' | 'primary' | 'secondary' | 'text'
-  /** Whether the button should have a transparent background. */
-  transparent?: boolean
-  /** Loading state. */
-  loading?: boolean
-  /** Icon */
-  icon?: ReactElement
-  /** Size */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-} & ButtonHTMLAttributes<HTMLButtonElement>
+// Styles
+import style from './Button.module.css'
 
 export const Button: FunctionComponent<ButtonProps> = ({
   root = <button />,

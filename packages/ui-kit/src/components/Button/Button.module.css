@@ -67,6 +67,7 @@
 
 .icon {
   fill: currentColor;
-  width: 1.4em;
+  height: 1.4em;
+  width: auto;
   margin-right: 0.65em;
 }

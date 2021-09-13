@@ -10,3 +10,7 @@
 .empty {
   border: 2px dashed rgba(0, 0, 0, 0.12);
 }
+
+.heading svg {
+  margin-bottom: -0.125em;
+}

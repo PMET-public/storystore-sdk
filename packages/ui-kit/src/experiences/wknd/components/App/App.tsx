@@ -1,16 +1,10 @@
-import { FunctionComponent, ReactElement, useEffect, useMemo } from 'react'
-import LogoIcon from '../assets/wknd-adventures_logo.svg'
-import MapIcon from 'remixicon/icons/Map/road-map-fill.svg'
-import AppComponent from '../../../components/App'
-import { Header, Footer, HeaderMenuItem, Button } from '../../../components'
+import { FunctionComponent, useMemo } from 'react'
+import { AppProps } from './App.d'
+import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
 
-export type AppProps = {
-  linkRoot?: ReactElement
-  homeLink?: ReactElement
-  passportLink?: ReactElement
-  menu?: Array<ReactElement>
-  footerMenu?: Array<ReactElement>
-}
+// Icons
+import LogoIcon from '../../assets/wknd-adventures_logo.svg'
+import MapIcon from 'remixicon-react/RoadMapFillIcon'
 
 export const App: FunctionComponent<AppProps> = ({
   linkRoot,

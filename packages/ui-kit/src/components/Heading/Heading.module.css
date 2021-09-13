@@ -5,12 +5,6 @@
   font-weight: var(--font-semibold);
   line-height: 1.3;
   width: 100%;
-}
-
-.root svg {
-  margin-top: -0.15em;
-  height: 1em;
-  margin-right: var(--spacing-xs);
   vertical-align: middle;
 }
 

@@ -1,15 +1,12 @@
-import { FunctionComponent, ReactElement, HTMLAttributes, useRef } from 'react'
+import { FunctionComponent, useRef } from 'react'
+import { TabProps, TabPanelProps, TabsProps } from './Tabs.d'
 import { classes, merge } from '../../lib'
-import style from './Tabs.module.css'
 import { useTabList, useTab, useTabPanel } from '@react-aria/tabs'
-import { useTabListState, TabListState } from '@react-stately/tabs'
+import { useTabListState } from '@react-stately/tabs'
 import { Item } from '@react-stately/collections'
-import { AriaTabPanelProps, TabListProps } from '@react-types/tabs'
 
-type TabProps = HTMLAttributes<HTMLDivElement> & {
-  item: any
-  state: TabListState<{}>
-}
+// Styles
+import style from './Tabs.module.css'
 
 const Tab: FunctionComponent<TabProps> = ({ className, item, state }) => {
   const { key, rendered } = item
@@ -28,10 +25,6 @@ const Tab: FunctionComponent<TabProps> = ({ className, item, state }) => {
   )
 }
 
-type TabPanelProps = HTMLAttributes<HTMLDivElement> & {
-  state: TabListState<{}>
-} & AriaTabPanelProps
-
 const TabPanel: FunctionComponent<TabPanelProps> = ({ className, state, ...props }) => {
   const ref = useRef(null)
   const { tabPanelProps } = useTabPanel(props, state, ref)
@@ -42,8 +35,6 @@ const TabPanel: FunctionComponent<TabPanelProps> = ({ className, state, ...props
     </div>
   )
 }
-
-export type TabsProps = HTMLAttributes<HTMLDivElement> & TabListProps<{}> & { root?: ReactElement }
 
 export const Tabs: FunctionComponent<TabsProps> = ({ root = <div />, className, ...props }) => {
   const state = useTabListState(props)

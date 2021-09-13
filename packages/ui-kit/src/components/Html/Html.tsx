@@ -1,10 +1,9 @@
-import { FunctionComponent, HTMLAttributes } from 'react'
+import { FunctionComponent } from 'react'
+import { HtmlProps } from './Html.d'
 import { classes } from '../../lib'
-import style from './Html.module.css'
 
-export type HtmlProps = HTMLAttributes<HTMLDivElement> & {
-  htmlString: string
-}
+// Styles
+import style from './Html.module.css'
 
 export const Html: FunctionComponent<HtmlProps> = ({ className, htmlString, ...props }) => {
   return (

@@ -5,26 +5,27 @@
 .root h5,
 .root h6 {
   margin-bottom: 1em;
+  font-weight: var(--font-bold);
 }
 
 .root h1 {
-  font-size: var(--font-3xl);
-}
-
-.root h2 {
   font-size: var(--font-2xl);
 }
 
-.root h3 {
+.root h2 {
   font-size: var(--font-xl);
 }
 
-.root h4 {
+.root h3 {
   font-size: var(--font-lg);
 }
 
-.root h5 {
+.root h4 {
   font-size: var(--font-md);
+}
+
+.root h5 {
+  font-size: var(--font-sm);
 }
 
 .root h6 {

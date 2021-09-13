@@ -22,7 +22,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       auth,
       target,
       changeOrigin: false,
-      pathRewrite: { '^/__remote': '' },
     })
   )
 }

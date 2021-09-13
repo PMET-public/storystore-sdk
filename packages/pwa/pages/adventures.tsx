@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
-import { WKND } from '@storystore/ui-kit/experiences'
+import { Adventures } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { Block, Pills } from '@storystore/ui-kit/components'
 import { useState } from 'react'
 
-const Adventures: NextPage = props => {
+const AdventuresPage: NextPage = props => {
   const [filters, setFilters] = useState({})
 
   const handleOnFilterUpdate = (values: any) => {
@@ -41,10 +41,10 @@ const Adventures: NextPage = props => {
         onChange={handleOnFilterUpdate}
       />
       <div>
-        <WKND.Adventures filter={filters} {...props} />
+        <Adventures filter={filters} {...props} />
       </div>
     </Block>
   )
 }
 
-export default Adventures
+export default AdventuresPage

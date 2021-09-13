@@ -1,17 +1,17 @@
-import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent } from 'react'
+import { ErrorProps } from './Error.d'
 import { classes, merge } from '../../lib'
+
+// Styles
 import style from './Error.module.css'
-import LockIcon from 'remixicon/icons/System/lock-line.svg'
-import PlugIcon from 'remixicon/icons/Others/plug-line.svg'
-import ErrorIcon from 'remixicon/icons/System/error-warning-line.svg'
-import OfflineIcon from 'remixicon/icons/Device/wifi-off-line.svg'
 
-export type ErrorProps = HTMLAttributes<HTMLElement> & {
-  root?: ReactElement
-  status?: 401 | 403 | 404 | 504 | 'Offline'
-}
+// Icons
+import LockIcon from 'remixicon-react/LockLineIcon'
+import PlugIcon from 'remixicon-react/PlugLineIcon'
+import ErrorIcon from 'remixicon-react/ErrorWarningLineIcon'
+import OfflineIcon from 'remixicon-react/WifiOffLineIcon'
 
-const error = (status: number | string) => {
+const error = (status: string | number) => {
   const _status = status.toString()
 
   switch (_status) {
@@ -61,7 +61,7 @@ const error = (status: number | string) => {
   }
 }
 
-export const Error: FunctionComponent<ErrorProps> = ({ className, root = <div />, status = 500, ...props }) => {
+export const Error: FunctionComponent<ErrorProps> = ({ className, root = <div />, status = '500', ...props }) => {
   return (
     <root.type
       {...props}

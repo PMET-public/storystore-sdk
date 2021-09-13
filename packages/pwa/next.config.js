@@ -23,14 +23,15 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         source: '/workbox-:hash.js',
         destination: '/_next/static/workbox-:hash.js',
       },
-      /** Proxy to AEM. Images, etc */
-      {
-        source: '/__remote/:pathname*',
-        destination: '/api/remote',
-      },
+
       {
         source: '/__graphql/:pathname*',
         destination: '/api/graphql',
+      },
+      /** Proxy to AEM. Images, and other files */
+      {
+        source: '/content/dam/:site/:locale/:pathname*(.jpg|.png|.gif|.svg|.jpg|.jpeg|.pdf|.zip)',
+        destination: '/api/remote',
       },
       /** Adventure */
       {

@@ -1,12 +1,9 @@
-import { HTMLAttributes, FunctionComponent, ReactElement, useEffect, useState, useRef, useCallback } from 'react'
+import { FunctionComponent, useEffect, useState, useRef, useCallback } from 'react'
+import { DialogProps } from './Dialog.d'
 import { classes, merge } from '../../lib'
-import style from './Dialog.module.css'
 
-export type DialogProps = {
-  root?: ReactElement
-  open?: boolean
-  onClose?: (state: false) => any
-} & HTMLAttributes<HTMLDivElement>
+// Styles
+import style from './Dialog.module.css'
 
 export const Dialog: FunctionComponent<DialogProps> = ({
   root = <div />,

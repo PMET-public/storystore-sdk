@@ -1,18 +1,15 @@
-import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
-import style from './App.module.css'
+import { FunctionComponent } from 'react'
+import { AppProps } from './App.d'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
 import { useNetworkStatus } from '../../hooks'
 import { toast } from '../../components'
 
-import OfflineIcon from 'remixicon/icons/Device/wifi-off-line.svg'
+// Styles
+import style from './App.module.css'
 
-export type AppProps = HTMLAttributes<HTMLDivElement> & {
-  root?: ReactElement
-  header: ReactElement
-  footer: ReactElement
-  linkRoot?: ReactElement
-}
+// Icons
+import OfflineIcon from 'remixicon-react/WifiOffLineIcon'
 
 export const App: FunctionComponent<AppProps> = ({
   root = <div />,
@@ -23,13 +20,14 @@ export const App: FunctionComponent<AppProps> = ({
   footer,
   ...props
 }) => {
+  // Notify user when Network Online/Offline mode changes
   useNetworkStatus(online => {
     if (online) {
       toast.dismiss()
     } else {
       toast(
         <div className={style.toast}>
-          <OfflineIcon /> Your network is offline.
+          <OfflineIcon /> <span>Your network is offline.</span>
         </div>,
         { hideProgressBar: true, closeOnClick: true, autoClose: false, theme: 'dark' }
       )

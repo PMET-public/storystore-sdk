@@ -1,16 +1,15 @@
 {
   "name": "@storystore/pwa",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
-  "main": "lib/server.js",
-  "bin": "lib/server.js",
+  "bin": "bin/server.js",
   "author": "Carlos A. Cabrera @fnhipster",
   "description": "An AEM PWA Experience",
   "scripts": {
     "lint": "next lint",
-    "dev": "NODE_ENV=development PORT=6008 node lib/server.js",
+    "dev": "NODE_ENV=development PORT=6008 node bin/server.js",
     "build": "next build",
-    "start": "node lib/server.js",
+    "start": "next start",
     "prepare": "echo ✔️",
     "cleanup": "rimraf pkg .next",
     "prepkg": "rimraf pkg ; next build",
@@ -47,6 +46,7 @@
       "public/**/*",
       "../../node_modules/@surma/rollup-plugin-off-main-thread/loader.ejs",
       "../../node_modules/ts-invariant/process/*",
+      "../../node_modules/remixicon-react/*",
       "../../node_modules/react-hook-form/**/*"
     ],
     "targets": [

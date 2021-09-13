@@ -1,30 +1,19 @@
-import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } from 'react'
-import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
-import style from './Banner.module.css'
-import { ButtonProps } from '../Button'
+import { FunctionComponent } from 'react'
+import { BannerProps, BannerSkeletonProps } from './Banner.d'
+import { classes, merge, getBreakpointValues } from '../../lib'
 import Block from '../Block'
 import ContentLoader from 'react-content-loader'
 
-export type BannerProps = HTMLAttributes<HTMLDivElement> & {
-  root?: ReactElement
-  backgroundImage?: ReactElement<ImgHTMLAttributes<HTMLImageElement>>
-  backgroundColor?: string
-  textColor?: string
-  align?: 'left' | 'right' | 'center'
-  vAlign?: 'top' | 'bottom' | 'middle'
-  heading?: ReactElement<ButtonProps>
-  button?: ReactElement<ButtonProps>
-  contained?: boolean
-  width?: BreakpointValues<string>
-  height?: BreakpointValues<string>
-  screen?: 'dark' | 'darker' | 'light' | 'lighter'
-}
+// Styles
+import style from './Banner.module.css'
+
 export const Banner: FunctionComponent<BannerProps> = ({
   root = <div />,
   align = 'center',
   vAlign = 'middle',
   backgroundColor,
-  backgroundImage,
+  loading,
+  backgroundImage: _backgroundImage,
   button,
   children,
   className,
@@ -38,6 +27,14 @@ export const Banner: FunctionComponent<BannerProps> = ({
 }) => {
   const height = getBreakpointValues(_height)
   const width = getBreakpointValues(_width)
+
+  const backgroundImage = loading ? (
+    <ContentLoader width="100%" height="100%">
+      <rect width="100%" height="100%" />
+    </ContentLoader>
+  ) : (
+    _backgroundImage
+  )
 
   return (
     <root.type
@@ -71,14 +68,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
   )
 }
 
-export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
-  contained?: boolean
-  width?: BreakpointValues<string>
-  height?: BreakpointValues<string>
-  screen?: 'dark' | 'darker' | 'light' | 'lighter'
-  uniqueKey?: string
-}
-
+// Loader Skeleton
 export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
     <Banner

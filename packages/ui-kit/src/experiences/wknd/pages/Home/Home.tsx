@@ -1,61 +1,89 @@
-import { FunctionComponent, ReactElement } from 'react'
-import style from './Home.module.css'
-import { useQuery } from '@apollo/client'
+import { FunctionComponent } from 'react'
+import { HomeProps } from './Home.d'
+import { ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import Link from '../../../../components/Link'
-import Block from '../../../../components/Block'
-import Banner, { BannerSkeleton } from '../../../../components/Banner'
-import Carousel from '../../../../components/Carousel'
-import Tile, { TileSkeleton } from '../../../../components/Tile'
-import Heading from '../../../../components/Heading'
-import Button from '../../../../components/Button'
-import Error from '../../../../components/Error'
+import { AdventureTile, AdventureBanner } from '../../components'
+import { Error, Block, Banner, Carousel, Heading, Button } from '../../../../components'
 import gql from 'graphql-tag'
 
+// Styles
+import style from './Home.module.css'
+
+// GraphQL Query
 export const HOME_QUERY = gql`
   query HOME_QUERY {
+    # Beginner Carousel
     beginner: adventureList(filter: { adventureDifficulty: { _expressions: [{ value: "Beginner" }] } }) {
       items {
-        id: _path
+        _path
         adventureActivity
         adventureTitle
         adventureTripLength
         adventurePrimaryImage {
           ... on ImageRef {
-            id: _path
-            src: _path
+            _path
           }
         }
       }
     }
 
+    # Cycling Banner
+    cycling: adventureList(filter: { adventureTitle: { _expressions: [{ value: "Cycling Tuscany" }] } }) {
+      items {
+        _path
+        adventureType
+        adventureTitle
+        adventureTripLength
+        adventurePrimaryImage {
+          ... on ImageRef {
+            _path
+          }
+        }
+      }
+    }
+
+    # Camping Carousel
     camping: adventureList(
       filter: { adventureActivity: { _logOp: OR, _expressions: [{ value: "Cycling" }, { value: "Rock Climbing" }] } }
     ) {
       items {
-        id: _path
+        _path
         adventureActivity
         adventureTitle
         adventureTripLength
         adventurePrimaryImage {
           ... on ImageRef {
-            id: _path
-            src: _path
+            _path
           }
         }
       }
     }
 
+    # Overstay Carouse
     overstay: adventureList(filter: { adventureType: { _logOp: OR, _expressions: [{ value: "Overnight Trip" }] } }) {
       items {
-        id: _path
+        _path
         adventureActivity
         adventureTitle
         adventureTripLength
         adventurePrimaryImage {
           ... on ImageRef {
-            id: _path
-            src: _path
+            _path
+          }
+        }
+      }
+    }
+
+    # Surfing Banner
+    surfing: adventureList(filter: { adventureTitle: { _expressions: [{ value: "Surf Camp in Costa Rica" }] } }) {
+      items {
+        _path
+        adventureType
+        adventureTitle
+        adventureTripLength
+        adventurePrimaryImage {
+          ... on ImageRef {
+            _path
           }
         }
       }
@@ -63,107 +91,66 @@ export const HOME_QUERY = gql`
   }
 `
 
-export type HomeProps = {
-  heroCTA?: ReactElement
-}
-
 export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
+  // GraphQL Data
   const { error, loading, data } = useQuery(HOME_QUERY, { context: { clientName: 'aem' } })
 
+  // Network Online/Offline State
   const online = useNetworkStatus()
 
-  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
+  // Error View
+  if (error) {
+    const networkError = error.networkError as ServerError
+    return <Error status={online ? networkError.response?.status : 'Offline'} />
+  }
+
+  // Page Data
+  const beginnerAdventures = loading ? Array(4).fill({ loading }) : data?.beginner?.items
+  const campingAdventures = loading ? Array(4).fill({ loading }) : data?.camping?.items
+  const overstayAdventures = loading ? Array(4).fill({ loading }) : data?.overstay?.items
+  const cyclingAdventure = data?.cycling?.items[0]
+  const surfingAdventure = data?.surfing?.items[0]
 
   return (
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
-      {/* Hero */}
-      <Banner
-        backgroundColor="#f4ecea"
-        backgroundImage={
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
-            <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
-          </picture>
-        }
-        height={{ sm: '80vh', lg: '70vh' }}
-        heading={
-          <Heading root={<h2 />} size={{ sm: '4xl', md: '5xl' }} style={{ paddingRight: '100px' }}>
-            Not all who wander are lost.
-          </Heading>
-        }
-        button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
-        align="left"
-        contained
-      />
+      {/* Hero (Static Assets) */}
+      <Block root={<section />}>
+        <Banner
+          backgroundColor="#f4ecea"
+          backgroundImage={
+            <picture>
+              <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
+              <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
+            </picture>
+          }
+          height={{ sm: '80vh', lg: '70vh' }}
+          heading={
+            <Heading root={<h2 />} size={{ sm: '4xl', md: '5xl' }} style={{ paddingRight: '100px' }}>
+              Not all who wander are lost.
+            </Heading>
+          }
+          button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
+          align="left"
+          contained
+        />
+      </Block>
 
+      {/* Beginner Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
           Trying something new? Start easy.
         </Heading>
+
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-          {loading && !data?.beginner?.items
-            ? Array(4)
-                .fill(null)
-                .map((_, key) => <TileSkeleton key={key} uniqueKey={`beginner-carousel--${key}`} surface />)
-            : data.beginner.items.map(
-                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                  <Tile
-                    root={<Link href={id} />}
-                    key={id}
-                    image={
-                      <img
-                        loading="lazy"
-                        src={'/__remote' + adventurePrimaryImage?.src}
-                        width={400}
-                        height={400}
-                        alt={adventureTitle}
-                      />
-                    }
-                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                    tags={[`${adventureTripLength} ${adventureActivity}`]}
-                    surface
-                  />
-                )
-              )}
+          {beginnerAdventures?.map(({ ...adventure }, key) => (
+            <AdventureTile key={adventure._path ?? key} {...adventure} />
+          ))}
         </Carousel>
       </Block>
 
-      {/* Camping Banner */}
+      {/* Cycling Banner */}
       <Block contained padded>
-        {loading && !data?.camping?.items ? (
-          <BannerSkeleton uniqueKey="camping-banner" height={{ sm: '70vh', lg: '600px' }} />
-        ) : (
-          <Banner
-            height={{ sm: '70vh', lg: '600px' }}
-            align="left"
-            vAlign="bottom"
-            screen="dark"
-            textColor="white"
-            backgroundImage={
-              <img
-                src={'/__remote' + data.camping.items[0].adventurePrimaryImage?.src}
-                width={data.camping.items[0].adventurePrimaryImage?.width}
-                height={data.camping.items[0].adventurePrimaryImage?.height}
-                alt={data.camping.items[0].adventureTitle}
-              />
-            }
-            heading={
-              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
-                <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
-                  {data.camping.items[0].adventureTripLength} {data.camping.items[0].adventureType}
-                </Heading>
-                {data.camping.items[0].adventureTitle}
-              </Heading>
-            }
-            button={
-              data.camping.items[0] && (
-                <Button root={<Link href={data.camping.items[0].id} />} variant="cta">
-                  View Adventure
-                </Button>
-              )
-            }
-          />
-        )}
+        <AdventureBanner loading={loading} {...cyclingAdventure} />
       </Block>
 
       {/* Camping Carousel */}
@@ -171,70 +158,17 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
         <Heading root={<h2 />} size="2xl">
           For the outdoor kind.
         </Heading>
+
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-          {loading && !data?.camping?.items
-            ? Array(4)
-                .fill(null)
-                .map((_, key) => <TileSkeleton key={key} uniqueKey={`camping-carousel--${key}`} surface />)
-            : data.camping.items.map(
-                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                  <Tile
-                    root={<Link href={id} />}
-                    key={id}
-                    image={
-                      <img
-                        loading="lazy"
-                        src={'/__remote' + adventurePrimaryImage?.src}
-                        width={400}
-                        height={400}
-                        alt={adventureTitle}
-                      />
-                    }
-                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                    tags={[`${adventureTripLength} ${adventureActivity}`]}
-                    surface
-                  />
-                )
-              )}
+          {campingAdventures?.map(({ ...adventure }, key) => (
+            <AdventureTile key={adventure._path ?? key} {...adventure} />
+          ))}
         </Carousel>
       </Block>
 
-      {/* Overstay Banner */}
+      {/* Surfing Banner */}
       <Block contained padded>
-        {loading && !data?.overstay?.items ? (
-          <BannerSkeleton uniqueKey="overstay-banner" height={{ sm: '70vh', lg: '600px' }} />
-        ) : (
-          <Banner
-            height={{ sm: '70vh', lg: '600px' }}
-            align="left"
-            vAlign="bottom"
-            screen="dark"
-            textColor="white"
-            backgroundImage={
-              <img
-                src={'/__remote' + data.overstay.items[0].adventurePrimaryImage?.src}
-                width={data.overstay.items[0].adventurePrimaryImage?.width}
-                height={data.overstay.items[0].adventurePrimaryImage?.height}
-                alt={data.overstay.items[0].adventureTitle}
-              />
-            }
-            heading={
-              <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
-                <Heading root={<span />} size={{ sm: 'xl', lg: '2xl' }}>
-                  {data.overstay.items[0].adventureTripLength} {data.overstay.items[0].adventureType}
-                </Heading>
-                {data.overstay.items[0].adventureTitle}
-              </Heading>
-            }
-            button={
-              data.overstay.items[0] && (
-                <Button root={<Link href={data.overstay.items[0].id} />} variant="cta">
-                  View Adventure
-                </Button>
-              )
-            }
-          />
-        )}
+        <AdventureBanner loading={loading} {...surfingAdventure} />
       </Block>
 
       {/* Overstay Carousel */}
@@ -244,30 +178,9 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
-          {loading && !data?.overstay?.items
-            ? Array(4)
-                .fill(null)
-                .map((_, key) => <TileSkeleton key={key} uniqueKey={`overstay-carousel--${key}`} surface />)
-            : data.overstay.items.map(
-                ({ id, adventureTitle, adventureActivity, adventureTripLength, adventurePrimaryImage }: any) => (
-                  <Tile
-                    root={<Link href={id} />}
-                    key={id}
-                    image={
-                      <img
-                        loading="lazy"
-                        src={'/__remote' + adventurePrimaryImage?.src}
-                        width={400}
-                        height={400}
-                        alt={adventureTitle}
-                      />
-                    }
-                    heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                    tags={[`${adventureTripLength} ${adventureActivity}`]}
-                    surface
-                  />
-                )
-              )}
+          {overstayAdventures?.map(({ ...adventure }, key) => (
+            <AdventureTile key={adventure._path ?? key} {...adventure} />
+          ))}
         </Carousel>
       </Block>
     </Block>

@@ -1,22 +1,11 @@
-import { FunctionComponent, useState, useCallback, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent, useState, useCallback } from 'react'
+import { UIKitSettingsProps, SettingsValues } from './UIKitSettings.d'
 import { useForm } from '../../hooks'
 import { Block, Form, Heading, Button } from '../'
 import { version } from '../../../package.json'
-import StoryStoreIcon from 'remixicon/icons/Development/terminal-line.svg'
 
-export type SettingsValues<T = string> = {
-  AEM_GRAPHQL_URL: T
-  AEM_GRAPHQL_AUTH: T
-}
-
-export type UIKitSettingsProps = HTMLAttributes<HTMLDivElement> & {
-  root?: ReactElement
-  values?: SettingsValues
-  placeholders?: SettingsValues
-  errors?: SettingsValues<{ message: string }>
-  onSubmit: (data: any) => any
-  onReset: () => any
-}
+// Icons
+import StoryStoreIcon from 'remixicon-react/TerminalLineIcon'
 
 export const UIKitSettings: FunctionComponent<UIKitSettingsProps> = ({
   root = <div />,

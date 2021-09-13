@@ -17,8 +17,8 @@
 }
 
 .root svg {
-  color: currentColor;
   display: inline-block;
   margin-bottom: var(--spacing-sm);
   width: 6em;
+  height: auto;
 }

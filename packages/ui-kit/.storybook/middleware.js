@@ -25,7 +25,13 @@ module.exports = function expressMiddleware(router) {
     })(req, res, next)
   })
 
-  router.use('/__remote/', (req, res, next) => {
+  router.use('/__assets/:site/', (req, res, next) => {
+    const site = req.params.site
+    const pathname = path.join(__dirname, `../src/experiences/${site}/assets`)
+    express.static(pathname)(req, res, next)
+  })
+
+  router.use('/content/dam/:site/:locale/:pathname*(.jpg|.png|.gif|.svg|.jpg|.jpeg|.pdf|.zip)', (req, res, next) => {
     const cookie = cookies.getCookieValueFromString(req.headers.cookie, ADDON_ID)
     const settings = JSON.parse(cookie)
     const searchQuery = new URL(req.headers.referer).search
@@ -38,13 +44,6 @@ module.exports = function expressMiddleware(router) {
       auth,
       target: endpoint.origin,
       changeOrigin: false,
-      pathRewrite: { '^/__remote': '' },
     })(req, res, next)
-  })
-
-  router.use('/__assets/:site/', (req, res, next) => {
-    const site = req.params.site
-    const pathname = path.join(__dirname, `../src/experiences/${site}/assets`)
-    express.static(pathname)(req, res, next)
   })
 }
