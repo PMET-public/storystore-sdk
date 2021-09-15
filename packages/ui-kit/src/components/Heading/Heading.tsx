@@ -26,11 +26,11 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       {...merge(props, root.props)}
       className={classes([style.root, [style.accent, accent], className])}
       style={{
-        ['--heading-size-sm' as string]: `var(--font-${size.sm})`,
-        ['--heading-size-md' as string]: `var(--font-${size.md})`,
-        ['--heading-size-lg' as string]: `var(--font-${size.lg})`,
-        ['--heading-size-xl' as string]: `var(--font-${size.xl})`,
-        ['--heading-color' as string]: color ? `var(--color-${color})` : 'inherit',
+        ['--heading-size-sm']: `var(--font-${size.sm})`,
+        ['--heading-size-md']: `var(--font-${size.md})`,
+        ['--heading-size-lg']: `var(--font-${size.lg})`,
+        ['--heading-size-xl']: `var(--font-${size.xl})`,
+        ['--heading-color']: color ? `var(--color-${color})` : 'inherit',
         ...props.style,
       }}
     />

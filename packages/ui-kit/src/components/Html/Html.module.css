@@ -62,3 +62,7 @@
 .root b {
   font-weight: var(--font-bold);
 }
+
+.root em {
+  font-style: italic;
+}

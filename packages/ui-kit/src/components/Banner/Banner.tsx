@@ -56,16 +56,16 @@ export const Banner: FunctionComponent<BannerProps> = ({
       {...merge(props, root.props)}
       className={classes([style.root, [style.screen, screen], style[screen || 'dark'], style[vAlign], className])}
       style={{
-        ['--banner-bg-color' as string]: backgroundColor,
-        ['--banner-text-color' as string]: textColor,
-        ['--banner-sm-width' as string]: width.sm,
-        ['--banner-md-width' as string]: width.md,
-        ['--banner-lg-width' as string]: width.lg,
-        ['--banner-xl-width' as string]: width.xl,
-        ['--banner-sm-height' as string]: height.sm,
-        ['--banner-md-height' as string]: height.md,
-        ['--banner-lg-height' as string]: height.lg,
-        ['--banner-xl-height' as string]: height.xl,
+        ['--banner-bg-color']: backgroundColor,
+        ['--banner-text-color']: textColor,
+        ['--banner-sm-width']: width.sm,
+        ['--banner-md-width']: width.md,
+        ['--banner-lg-width']: width.lg,
+        ['--banner-xl-width']: width.xl,
+        ['--banner-sm-height']: height.sm,
+        ['--banner-md-height']: height.md,
+        ['--banner-lg-height']: height.lg,
+        ['--banner-xl-height']: height.xl,
         ...props.style,
       }}
     >

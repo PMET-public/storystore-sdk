@@ -1,0 +1,56 @@
+.root {
+  display: grid;
+  grid-gap: var(--spacing-sm) var(--spacing-md);
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto max-content auto;
+  grid-template-areas:
+    'image heading'
+    'image subheading'
+    'image description';
+}
+
+.image {
+  --size: 4rem;
+  align-self: flex-start;
+  background-color: var(--color-surface-darker);
+  border-radius: calc(var(--radius, 0) / 2);
+  grid-area: image;
+  height: var(--size);
+  object-fit: cover;
+  object-position: center;
+  width: var(--size);
+}
+
+.heading {
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+  grid-area: heading;
+  align-self: flex-end;
+}
+
+.subheading {
+  font-size: var(--font-md);
+  font-style: italic;
+  font-weight: var(--font-semibold);
+  grid-area: subheading;
+  align-self: flex-start;
+}
+
+.description {
+  font-size: var(--font-sm);
+  grid-area: description;
+  line-height: var(--leading-snug);
+  max-width: var(--sm);
+}
+
+@media (min-width: 640px) {
+  .image {
+    --size: 6rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .image {
+    --size: 8rem;
+  }
+}

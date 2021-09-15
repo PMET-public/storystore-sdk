@@ -1,0 +1,30 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import MediaItem from '.'
+
+<Meta title="UIComponents/MediaItem" component={MediaItem} />
+
+export const Template = args => {
+  return <MediaItem {...args} />
+}
+
+# MediaItem
+
+<Canvas withSource="open">
+  <Story
+    args={{
+      image: <img src="/__assets/wknd/bg-adventures-1.jpg" />,
+      imageRounded: 50,
+      heading: <h3>Jane Doe</h3>,
+      subheading: 'Artist',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    }}
+    name="MediaItem"
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { MediaItem } from '@storystore/ui-kit/components'
+```

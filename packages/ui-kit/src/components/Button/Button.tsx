@@ -34,7 +34,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
     <root.type
       {...merge(props, root.props)}
       className={classes([style.root, style[variant], [style.transparent, transparent], className])}
-      style={{ ['--size' as string]: `var(--font-${size})`, ...root.props.style, ...props.style }}
+      style={{ ['--size']: `var(--font-${size})`, ...root.props.style, ...props.style }}
     >
       {isValidElement(icon) && <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />}
       {children}
