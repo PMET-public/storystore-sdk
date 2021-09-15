@@ -1,11 +1,19 @@
-import { FunctionComponent, useCallback } from 'react'
-import { PillsProps } from './Pills.d'
+import { FunctionComponent, useCallback, HTMLAttributes, ReactElement } from 'react'
 import { useForm } from '../../hooks'
 import { Form } from '..'
 import { classes } from '../../lib'
 
 // Styles
 import style from './Pills.module.css'
+
+type Value = string | string[] | number | number[]
+
+export type PillsProps = HTMLAttributes<HTMLFormElement> & {
+  root?: ReactElement
+  variant?: 'single' | 'multi' | undefined
+  onChange?: (values: { [key: string]: Value }) => any
+  items: Array<{ id: string; label: string; value: Value }>
+}
 
 export const Pills: FunctionComponent<PillsProps> = ({ root = <form />, onChange, variant, items, ...props }) => {
   const { register, getValues } = useForm({ mode: 'onChange' })

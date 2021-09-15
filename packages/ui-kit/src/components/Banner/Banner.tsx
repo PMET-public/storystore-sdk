@@ -1,11 +1,26 @@
-import { FunctionComponent } from 'react'
-import { BannerProps, BannerSkeletonProps } from './Banner.d'
-import { classes, merge, getBreakpointValues } from '../../lib'
-import Block from '../Block'
+import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } from 'react'
+import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
+import { Block, ButtonProps } from '../'
 import ContentLoader from 'react-content-loader'
 
 // Styles
 import style from './Banner.module.css'
+
+export type BannerProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
+  backgroundImage?: ReactElement<ImgHTMLAttributes<HTMLImageElement>>
+  backgroundColor?: string
+  textColor?: string
+  align?: 'left' | 'right' | 'center'
+  vAlign?: 'top' | 'bottom' | 'middle'
+  heading?: ReactElement<ButtonProps>
+  button?: ReactElement<ButtonProps>
+  contained?: boolean
+  width?: BreakpointValues<string>
+  height?: BreakpointValues<string>
+  screen?: 'dark' | 'darker' | 'light' | 'lighter'
+  loading?: boolean
+}
 
 export const Banner: FunctionComponent<BannerProps> = ({
   root = <div />,
@@ -69,6 +84,14 @@ export const Banner: FunctionComponent<BannerProps> = ({
 }
 
 // Loader Skeleton
+export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
+  contained?: boolean
+  width?: BreakpointValues<string>
+  height?: BreakpointValues<string>
+  screen?: 'dark' | 'darker' | 'light' | 'lighter'
+  uniqueKey?: string
+}
+
 export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
     <Banner

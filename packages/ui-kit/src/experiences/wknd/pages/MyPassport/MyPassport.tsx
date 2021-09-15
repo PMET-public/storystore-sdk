@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react'
-import { MyPassportProps } from './MyPassport.d'
 import { ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { AdventureTile } from '../../components'
@@ -49,6 +48,11 @@ export const MY_PASSPORT_QUERY = gql`
 const getEmptySlotsQty = (from = 0, to = 4) => {
   const result = to - from
   return result < 0 ? 0 : result
+}
+
+export type MyPassportProps = {
+  checkIns?: string[]
+  bookmarks?: string[]
 }
 
 export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookmarks }) => {

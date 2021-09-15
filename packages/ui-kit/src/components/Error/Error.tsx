@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react'
-import { ErrorProps } from './Error.d'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
 
 // Styles
@@ -59,6 +58,11 @@ const error = (status: string | number) => {
         </span>
       )
   }
+}
+
+export type ErrorProps = HTMLAttributes<HTMLElement> & {
+  root?: ReactElement
+  status?: 401 | 403 | 404 | 504 | 'Offline' | number
 }
 
 export const Error: FunctionComponent<ErrorProps> = ({ className, root = <div />, status = '500', ...props }) => {

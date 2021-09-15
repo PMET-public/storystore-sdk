@@ -1,6 +1,16 @@
 import { FunctionComponent } from 'react'
-import { AdventureTileProps } from './AdventureTile.d'
 import { Tile, TileSkeleton, Heading, Link } from '../../../../components'
+
+export type AdventureTileProps = {
+  _path?: string
+  loading?: boolean
+  adventureActivity?: string
+  adventureTitle?: string
+  adventureTripLength?: string
+  adventurePrimaryImage?: {
+    _path: string
+  }
+}
 
 export const AdventureTile: FunctionComponent<AdventureTileProps> = ({
   _path,

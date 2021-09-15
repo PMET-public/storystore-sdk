@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react'
-import { HomeProps } from './Home.d'
+import { FunctionComponent, ReactElement } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { AdventureTile, AdventureBanner } from '../../components'
@@ -90,6 +89,10 @@ export const HOME_QUERY = gql`
     }
   }
 `
+
+export type HomeProps = {
+  heroCTA?: ReactElement
+}
 
 export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   // GraphQL Data

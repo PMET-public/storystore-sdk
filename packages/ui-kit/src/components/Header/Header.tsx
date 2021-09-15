@@ -1,12 +1,26 @@
-import { FunctionComponent, Children, isValidElement, cloneElement, useState, useRef } from 'react'
-import { HeaderMenuItemProps, HeaderProps } from './Header.d'
-import { classes, merge } from '../../lib'
+import {
+  FunctionComponent,
+  Children,
+  isValidElement,
+  cloneElement,
+  useState,
+  useRef,
+  HTMLAttributes,
+  ReactElement,
+} from 'react'
+import { classes, merge, Color } from '../../lib'
 import { Block } from '../'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import { useMeasure } from '../../hooks/useMeasure'
 
 // Styles
 import style from './Header.module.css'
+
+export type HeaderMenuItemProps = {
+  active?: boolean
+  compact?: boolean
+  variant?: 'link' | 'button' | 'icon' | 'fill'
+}
 
 export const HeaderMenuItem: FunctionComponent<HeaderMenuItemProps> = ({
   active = false,
@@ -30,6 +44,22 @@ export const HeaderMenuItem: FunctionComponent<HeaderMenuItemProps> = ({
       })}
     </>
   )
+}
+
+export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
+  /** React SVG Logo */
+  logo: ReactElement<HTMLAttributes<SVGElement>>
+  /** Menu Navigation */
+  menu?: ReactElement[]
+  /** Whether the button should have transparent background. */
+  transparent?: boolean
+  /** Visual styles. */
+  variant?: Color
+  /** Stick to the top while scrolling. */
+  sticky?: boolean
+  /** Centered content */
+  contained?: boolean
 }
 
 export const Header: FunctionComponent<HeaderProps> = ({

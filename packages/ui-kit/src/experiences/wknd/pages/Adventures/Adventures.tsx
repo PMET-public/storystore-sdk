@@ -30,6 +30,10 @@ export const ADVENTURES_QUERY = gql`
   }
 `
 
+export type AdventuresProps = {
+  filter?: unknown
+}
+
 export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
   // GraphQL Data
   const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, {

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react'
-import { AdventureProps } from './Adventure.d'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { Error, Block, Heading, Html, Button } from '../../../../components'
@@ -55,6 +54,14 @@ export const ADVENTURE_QUERY = gql`
     }
   }
 `
+
+export type AdventureProps = {
+  path: string
+  checkedIn?: boolean
+  bookmarked?: boolean
+  onCheckIn?: (id: string) => any
+  onBookmark?: (id: string) => any
+}
 
 export const Adventure: FunctionComponent<AdventureProps> = ({
   path,

@@ -1,5 +1,4 @@
-import { FunctionComponent, createContext, useContext } from 'react'
-import { LinkProps } from './Link.d'
+import { FunctionComponent, createContext, useContext, AnchorHTMLAttributes } from 'react'
 import { classes, merge } from '../../lib'
 
 const LinkContext = createContext(<a />)
@@ -7,6 +6,8 @@ const LinkContext = createContext(<a />)
 export const LinkProvider = LinkContext.Provider
 
 export const useLink = () => useContext(LinkContext)
+
+export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {}
 
 export const Link: FunctionComponent<LinkProps> = ({ className, children, ...props }) => {
   const link = useLink()

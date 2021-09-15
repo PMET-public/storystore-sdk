@@ -1,9 +1,17 @@
-import { FunctionComponent, Children } from 'react'
-import { CarouselProps } from './Carousel.d'
-import { classes, merge, getBreakpointValues } from '../../lib'
+import { FunctionComponent, Children, HTMLAttributes, ReactElement } from 'react'
+import { classes, merge, getBreakpointValues, BreakpointValues, Spacing } from '../../lib'
 
 // Styles
 import style from './Carousel.module.css'
+
+export type CarouselProps = HTMLAttributes<HTMLDivElement> & {
+  gap?: Spacing
+  hideScrollBar?: boolean
+  peak?: boolean
+  root?: ReactElement
+  show?: BreakpointValues<number>
+  padded?: boolean
+}
 
 export const Carousel: FunctionComponent<CarouselProps> = ({
   className,

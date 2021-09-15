@@ -1,6 +1,18 @@
 import { FunctionComponent } from 'react'
-import { AdventureBannerProps } from './AdventureBanner.d'
 import { Banner, BannerSkeleton, Heading, Button, Link } from '../../../../components'
+
+export type AdventureBannerProps = {
+  _path?: string
+  adventureTitle?: string
+  adventureTripLength?: string
+  adventureType?: string
+  loading?: boolean
+  adventurePrimaryImage?: {
+    _path: string
+    width: string | number
+    height: string | number
+  }
+}
 
 export const AdventureBanner: FunctionComponent<AdventureBannerProps> = ({
   _path,

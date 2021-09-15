@@ -1,5 +1,4 @@
-import { FunctionComponent } from 'react'
-import { AppProps } from './App.d'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
 import { useNetworkStatus } from '../../hooks'
@@ -10,6 +9,13 @@ import style from './App.module.css'
 
 // Icons
 import OfflineIcon from 'remixicon-react/WifiOffLineIcon'
+
+export type AppProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
+  header: ReactElement
+  footer: ReactElement
+  linkRoot?: ReactElement
+}
 
 export const App: FunctionComponent<AppProps> = ({
   root = <div />,

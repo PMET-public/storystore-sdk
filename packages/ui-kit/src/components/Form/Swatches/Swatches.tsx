@@ -1,9 +1,16 @@
-import { FunctionComponent } from 'react'
-import { SwatchesProps } from './Swatches.d'
-import { classes, merge } from '../../../lib'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { classes, merge, Color } from '../../../lib'
 
 // Styles
 import style from './Swatches.module.css'
+
+export type SwatchesProps = HTMLAttributes<HTMLElement> & {
+  root?: ReactElement
+  name: string
+  items: Array<HTMLAttributes<HTMLInputElement> & { label: ReactElement | string; value: any }>
+  variant?: 'multi' | 'single'
+  color?: Color
+}
 
 export const Swatches: FunctionComponent<SwatchesProps> = ({
   root = <div />,
