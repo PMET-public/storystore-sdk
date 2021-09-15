@@ -1,5 +1,4 @@
 import { FunctionComponent, useEffect } from 'react'
-import { AdventuresProps } from './Adventures.d'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { classes } from '../../../../lib'
 import { Error, Block } from '../../../../components'

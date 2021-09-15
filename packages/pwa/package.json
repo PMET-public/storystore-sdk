@@ -46,7 +46,8 @@
       "../../node_modules/@surma/rollup-plugin-off-main-thread/loader.ejs",
       "../../node_modules/ts-invariant/process/*",
       "../../node_modules/remixicon-react/*",
-      "../../node_modules/react-hook-form/**/*"
+      "../../node_modules/react-hook-form/**/*",
+      "../../node_modules/@apollo/client/link/context/*"
     ],
     "targets": [
       "node12-macos-x64"
