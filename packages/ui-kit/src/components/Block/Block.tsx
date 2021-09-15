@@ -1,5 +1,7 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge, BreakpointValues, Spacing, Color, getBreakpointValues } from '../../lib'
+
+// Styles
 import style from './Block.module.css'
 
 export type BlockProps = HTMLAttributes<HTMLDivElement> & {

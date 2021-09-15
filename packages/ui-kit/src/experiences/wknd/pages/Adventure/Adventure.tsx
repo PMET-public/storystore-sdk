@@ -1,29 +1,26 @@
 import { FunctionComponent } from 'react'
-import { gql, useQuery } from '@apollo/client'
-import style from './Adventure.module.css'
-import { Error, Block, Banner, BannerSkeleton, Heading, Html, Button } from '../../../../components'
+import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import MapIcon from 'remixicon/icons/Map/road-map-line.svg'
-import CalendarIcon from 'remixicon/icons/Business/calendar-check-line.svg'
-import LengthIcon from 'remixicon/icons/Business/calendar-fill.svg'
-import BagIcon from 'remixicon/icons/Business/briefcase-line.svg'
-import GroupIcon from 'remixicon/icons/User/group-fill.svg'
-import MedalIcon from 'remixicon/icons/Business/medal-2-fill.svg'
-import PriceIcon from 'remixicon/icons/Finance/price-tag-3-fill.svg'
-import CheckInIcon from 'remixicon/icons/System/check-line.svg'
-import CheckedInIcon from 'remixicon/icons/System/check-double-line.svg'
-import BookmarkIcon from 'remixicon/icons/Business/bookmark-line.svg'
-import BookmarkedIcon from 'remixicon/icons/Business/bookmark-fill.svg'
+import { Error, Block, Heading, Html, Button } from '../../../../components'
 import ContentLoader from 'react-content-loader'
 
-export type AdventureProps = {
-  path: string
-  checkedIn?: boolean
-  bookmarked?: boolean
-  onCheckIn?: (id: string) => any
-  onBookmark?: (id: string) => any
-}
+// Styles
+import style from './Adventure.module.css'
 
+// Icons
+import MapIcon from 'remixicon-react/RoadMapLineIcon'
+import CalendarIcon from 'remixicon-react/CalendarCheckLineIcon'
+import LengthIcon from 'remixicon-react/CalendarFillIcon'
+import BagIcon from 'remixicon-react/BriefcaseLineIcon'
+import GroupIcon from 'remixicon-react/GroupFillIcon'
+import MedalIcon from 'remixicon-react/MedalFillIcon'
+import PriceIcon from 'remixicon-react/PriceTag3FillIcon'
+import CheckInIcon from 'remixicon-react/CheckLineIcon'
+import CheckedInIcon from 'remixicon-react/CheckDoubleLineIcon'
+import BookmarkIcon from 'remixicon-react/Bookmark3LineIcon'
+import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
+
+// GraphQL Query
 export const ADVENTURE_QUERY = gql`
   query ADVENTURE_QUERY($path: String!) {
     adventureByPath(_path: $path) {
@@ -48,7 +45,7 @@ export const ADVENTURE_QUERY = gql`
         adventurePrimaryImage {
           ... on ImageRef {
             id: _path
-            src: _path
+            _path
             width
             height
           }
@@ -58,6 +55,14 @@ export const ADVENTURE_QUERY = gql`
   }
 `
 
+export type AdventureProps = {
+  path: string
+  checkedIn?: boolean
+  bookmarked?: boolean
+  onCheckIn?: (id: string) => any
+  onBookmark?: (id: string) => any
+}
+
 export const Adventure: FunctionComponent<AdventureProps> = ({
   path,
   checkedIn,
@@ -65,27 +70,36 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   bookmarked,
   onBookmark,
 }) => {
-  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { context: { clientName: 'aem' }, variables: { path } })
+  // GraphQL Data
+  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
+  // Network Online/Offline State
   const online = useNetworkStatus()
 
-  if (error) return <Error status={online ? 'Offline' : (error.networkError as any)?.response?.status} />
+  // Error View
+  if (error) {
+    const status = (error.networkError as ServerError).statusCode
+    return <Error status={online ? status : 'Offline'} />
+  }
 
+  // Adventure Object
   const adventure = data?.adventureByPath.item
 
   return (
-    <div className={style.root}>
-      {loading && !adventure ? (
-        <BannerSkeleton className={style.banner} uniqueKey="adventure-image" />
-      ) : (
-        <Banner
-          backgroundImage={<img src={'/__aem' + adventure.adventurePrimaryImage?.src} alt={adventure.adventureTitle} />}
-          className={style.banner}
-          screen="lighter"
-          vAlign="top"
-        />
-      )}
+    <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>
+      {/* Adventure Image */}
+      <div className={style.image}>
+        {adventure?.adventurePrimaryImage && (
+          <img
+            src={adventure.adventurePrimaryImage._path}
+            width={adventure.adventurePrimaryImage.width}
+            height={adventure.adventurePrimaryImage.height}
+            alt={adventure.adventureTitle}
+          />
+        )}
+      </div>
 
+      {/* Content */}
       <Block padded className={style.wrapper}>
         {loading && !adventure ? (
           <ContentLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
@@ -99,6 +113,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
           </ContentLoader>
         ) : (
           <Block gap="lg" className={style.content}>
+            {/* Title */}
             <header>
               <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
                 {adventure.adventureTripLength} {adventure.adventureType}
@@ -109,6 +124,13 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               </Heading>
             </header>
 
+            {/* 
+            <Block>
+              Add extra section here...
+            </Block> 
+            */}
+
+            {/* Buttons */}
             <Block gap="md" align="start" columns={{ sm: '1fr', md: '1fr 1fr', lg: '180px 180px' }}>
               <Button
                 variant="cta"
@@ -136,15 +158,18 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               </Button>
             </Block>
 
+            {/* Description */}
             <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <MapIcon /> {adventure.adventureActivity} Details
+                <MapIcon />
+                {adventure.adventureActivity} Details
               </Heading>
 
               <Html htmlString={adventure.adventureDescription.html} />
             </Block>
 
-            <div className={style.details}>
+            {/* Details List/Icons */}
+            <Block className={style.details} gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
               <span>
                 <strong>
                   <LengthIcon />
@@ -173,16 +198,19 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
                 </strong>
                 {adventure.adventurePrice}
               </span>
-            </div>
+            </Block>
 
+            {/* Itinerary Section */}
             <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <CalendarIcon /> Itinerary
+                <CalendarIcon />
+                Itinerary
               </Heading>
 
               <Html htmlString={adventure.adventureItinerary.html} />
             </Block>
 
+            {/* What to Bring Section */}
             <Block gap="md" className={style.section}>
               <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
                 <BagIcon />
@@ -191,9 +219,15 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
               <Html htmlString={adventure.adventureGearList.html} />
             </Block>
+
+            {/* 
+            <Block>
+              Add extra section here...
+            </Block> 
+            */}
           </Block>
         )}
       </Block>
-    </div>
+    </Block>
   )
 }

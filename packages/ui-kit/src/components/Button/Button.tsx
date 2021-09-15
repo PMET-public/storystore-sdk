@@ -1,5 +1,7 @@
-import { ButtonHTMLAttributes, FunctionComponent, ReactElement, ReactNode, isValidElement } from 'react'
+import { FunctionComponent, isValidElement, ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
 import { classes, merge } from '../../lib'
+
+// Styles
 import style from './Button.module.css'
 
 export type ButtonProps = {
@@ -13,7 +15,7 @@ export type ButtonProps = {
   /** Loading state. */
   loading?: boolean
   /** Icon */
-  icon?: ReactElement
+  icon?: ReactElement<any, 'svg'>
   /** Size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 } & ButtonHTMLAttributes<HTMLButtonElement>

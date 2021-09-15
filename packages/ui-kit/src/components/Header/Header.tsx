@@ -1,34 +1,20 @@
 import {
   FunctionComponent,
-  HTMLAttributes,
-  ReactElement,
   Children,
   isValidElement,
   cloneElement,
   useState,
   useRef,
+  HTMLAttributes,
+  ReactElement,
 } from 'react'
-import { classes, Color, merge } from '../../lib'
-import style from './Header.module.css'
-import Block from '../Block'
+import { classes, merge, Color } from '../../lib'
+import { Block } from '../'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import { useMeasure } from '../../hooks/useMeasure'
 
-export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
-  root?: ReactElement
-  /** React SVG Logo */
-  logo: ReactElement<HTMLAttributes<SVGElement>>
-  /** Menu Navigation */
-  menu?: ReactElement[]
-  /** Whether the button should have transparent background. */
-  transparent?: boolean
-  /** Visual styles. */
-  variant?: Color
-  /** Stick to the top while scrolling. */
-  sticky?: boolean
-  /** Centered content */
-  contained?: boolean
-}
+// Styles
+import style from './Header.module.css'
 
 export type HeaderMenuItemProps = {
   active?: boolean
@@ -58,6 +44,22 @@ export const HeaderMenuItem: FunctionComponent<HeaderMenuItemProps> = ({
       })}
     </>
   )
+}
+
+export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
+  root?: ReactElement
+  /** React SVG Logo */
+  logo: ReactElement<HTMLAttributes<SVGElement>>
+  /** Menu Navigation */
+  menu?: ReactElement[]
+  /** Whether the button should have transparent background. */
+  transparent?: boolean
+  /** Visual styles. */
+  variant?: Color
+  /** Stick to the top while scrolling. */
+  sticky?: boolean
+  /** Centered content */
+  contained?: boolean
 }
 
 export const Header: FunctionComponent<HeaderProps> = ({

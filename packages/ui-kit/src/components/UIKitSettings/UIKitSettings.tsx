@@ -2,7 +2,9 @@ import { FunctionComponent, useState, useCallback, HTMLAttributes, ReactElement 
 import { useForm } from '../../hooks'
 import { Block, Form, Heading, Button } from '../'
 import { version } from '../../../package.json'
-import StoryStoreIcon from 'remixicon/icons/Development/terminal-line.svg'
+
+// Icons
+import StoryStoreIcon from 'remixicon-react/TerminalLineIcon'
 
 export type SettingsValues<T = string> = {
   AEM_GRAPHQL_URL: T

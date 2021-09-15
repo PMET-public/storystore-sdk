@@ -1,10 +1,10 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
 import Adventure from '.'
-import { App } from '../App'
+import { App } from '../../components'
 import { settings } from '../../../../../.storybook/lib'
 
 <Meta
-  title="Experiences/WKND/Adventure"
+  title="Experiences/WKND/Pages/Adventure"
   component={Adventure}
   parameters={{
     layout: 'fullscreen',
@@ -25,7 +25,10 @@ export const Template = args => (
 <Canvas withSource="open">
   <Story
     name="Adventure"
-    args={{ path: '/content/dam/wknd/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica' }}
+    args={{
+      path: '/content/dam/wknd/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica',
+      /* path: '/content/dam/aem-demo-assets/en/adventures/surf-camp-in-costa-rica/surf-camp-costa-rica',  */
+    }}
     actions={{
       bookmark: false,
       checkedIn: false,

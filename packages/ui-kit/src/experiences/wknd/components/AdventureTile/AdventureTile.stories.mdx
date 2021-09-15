@@ -1,0 +1,25 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+import AdventureTile from '.'
+import { settings } from '../../../../../.storybook/lib'
+
+<Meta title="Experiences/WKND/Components/AdventureTile" component={AdventureTile} parameters={{ layout: 'centered' }} />
+
+export const Template = args => <AdventureTile {...args} />
+
+# AdventureTile
+
+<Canvas withSource="open">
+  <Story
+    name="AdventureTile"
+    args={{
+      adventureActivity: 'Cycling',
+      adventureTitle: 'Cycling Southern Utah',
+      adventureTripLength: '5 Days',
+      adventurePrimaryImage: {
+        _path: '/__assets/wknd/bg-adventures-1--small.jpg',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

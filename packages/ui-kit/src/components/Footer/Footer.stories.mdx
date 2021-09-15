@@ -1,9 +1,10 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Footer from '.'
-import LogoIcon from 'remixicon/icons/System/apps-fill.svg'
+
+import LogoIcon from 'remixicon-react/AppsFillIcon'
 
 <Meta
-  title="Components/Footer"
+  title="UIComponents/Footer"
   component={Footer}
   parameters={{
     layout: 'fullscreen',
@@ -22,7 +23,7 @@ Footers allow users to take actions with a single tap.
   <Story
     name="Footer"
     args={{
-      logo: <LogoIcon />,
+      logo: <LogoIcon size={40} />,
       menu: [<a href="#">Articles</a>, <a href="#">Adventures</a>, <a href="#">About</a>, <a href="#">Contacts</a>],
     }}
   >

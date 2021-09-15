@@ -1,16 +1,15 @@
 {
   "name": "@storystore/pwa",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
-  "main": "lib/server.js",
-  "bin": "lib/server.js",
+  "bin": "bin/server.js",
   "author": "Carlos A. Cabrera @fnhipster",
   "description": "An AEM PWA Experience",
   "scripts": {
     "lint": "next lint",
-    "dev": "NODE_ENV=development PORT=6008 node lib/server.js",
+    "dev": "NODE_ENV=development PORT=6008 node bin/server.js",
     "build": "next build",
-    "start": "node lib/server.js",
+    "start": "next start",
     "prepare": "echo ✔️",
     "cleanup": "rimraf pkg .next",
     "prepkg": "rimraf pkg ; next build",
@@ -24,7 +23,6 @@
     "graphql": "^15.3.0",
     "http-proxy-middleware": "^2.0.1",
     "next": "^11.1.0",
-    "next-absolute-url": "^1.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -47,7 +45,9 @@
       "public/**/*",
       "../../node_modules/@surma/rollup-plugin-off-main-thread/loader.ejs",
       "../../node_modules/ts-invariant/process/*",
-      "../../node_modules/react-hook-form/**/*"
+      "../../node_modules/remixicon-react/*",
+      "../../node_modules/react-hook-form/**/*",
+      "../../node_modules/@apollo/client/link/context/*"
     ],
     "targets": [
       "node12-macos-x64"

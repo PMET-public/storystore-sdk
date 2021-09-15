@@ -1,5 +1,7 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge, Color } from '../../../lib'
+
+// Styles
 import style from './Swatches.module.css'
 
 export type SwatchesProps = HTMLAttributes<HTMLElement> & {

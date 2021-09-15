@@ -1,5 +1,7 @@
-import { FunctionComponent, InputHTMLAttributes, ReactElement, forwardRef } from 'react'
-import { classes, merge } from '../../../lib'
+import { FunctionComponent, forwardRef, InputHTMLAttributes, ReactElement } from 'react'
+import { classes } from '../../../lib'
+
+// Styles
 import style from './Input.module.css'
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {

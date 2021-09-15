@@ -1,4 +1,4 @@
-import { FunctionComponent, AnchorHTMLAttributes, createContext, useContext } from 'react'
+import { FunctionComponent, createContext, useContext, AnchorHTMLAttributes } from 'react'
 import { classes, merge } from '../../lib'
 
 const LinkContext = createContext(<a />)

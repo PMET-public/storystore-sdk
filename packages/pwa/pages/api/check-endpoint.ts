@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { cookies, auth } from '@storystore/toolbox'
+import { auth } from '@storystore/toolbox'
 
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import gql from 'graphql-tag'

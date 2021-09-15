@@ -1,5 +1,2 @@
-export * from './pages/App'
-export * from './pages/Home'
-export * from './pages/Adventure'
-export * from './pages/Adventures'
-export * from './pages/MyPassport'
+export * as components from './components'
+export * as pages from './pages'

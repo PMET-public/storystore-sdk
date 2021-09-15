@@ -1,5 +1,7 @@
 import { FunctionComponent, HTMLAttributes } from 'react'
 import { classes } from '../../lib'
+
+// Styles
 import style from './Html.module.css'
 
 export type HtmlProps = HTMLAttributes<HTMLDivElement> & {

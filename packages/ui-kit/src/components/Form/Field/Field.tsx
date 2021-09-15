@@ -1,5 +1,7 @@
-import { FunctionComponent, HTMLAttributes, LabelHTMLAttributes, ReactElement, isValidElement } from 'react'
+import { FunctionComponent, HTMLAttributes, LabelHTMLAttributes, ReactElement } from 'react'
 import { classes } from '../../../lib'
+
+// Styles
 import style from './Field.module.css'
 
 export type FieldProps = HTMLAttributes<HTMLDivElement> & {

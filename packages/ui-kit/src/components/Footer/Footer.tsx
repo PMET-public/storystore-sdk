@@ -1,11 +1,15 @@
-import { FunctionComponent, HTMLAttributes, ReactElement, cloneElement, isValidElement } from 'react'
-import style from './Footer.module.css'
-import Block from '../Block'
+import { FunctionComponent, cloneElement, isValidElement, HTMLAttributes, ReactElement } from 'react'
+import { Block } from '..'
 import { classes, merge } from '../../lib'
-import FacebookIcon from 'remixicon/icons/Logos/facebook-fill.svg'
-import TwitterIcon from 'remixicon/icons/Logos/twitter-fill.svg'
-import InstagramIcon from 'remixicon/icons/Logos/instagram-fill.svg'
-import PinterestIcon from 'remixicon/icons/Logos/pinterest-fill.svg'
+
+// Styles
+import style from './Footer.module.css'
+
+// Icons
+import FacebookIcon from 'remixicon-react/FacebookFillIcon'
+import TwitterIcon from 'remixicon-react/TwitterFillIcon'
+import InstagramIcon from 'remixicon-react/InstagramFillIcon'
+import PinterestIcon from 'remixicon-react/PinterestFillIcon'
 
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement

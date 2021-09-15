@@ -1,5 +1,7 @@
-import { HTMLAttributes, FunctionComponent, ReactElement, useEffect, useState, useRef, useCallback } from 'react'
+import { FunctionComponent, useEffect, useState, useRef, useCallback, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
+
+// Styles
 import style from './Dialog.module.css'
 
 export type DialogProps = {

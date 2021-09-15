@@ -1,9 +1,10 @@
 import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } from 'react'
 import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
-import style from './Banner.module.css'
-import { ButtonProps } from '../Button'
-import Block from '../Block'
+import { Block, ButtonProps } from '../'
 import ContentLoader from 'react-content-loader'
+
+// Styles
+import style from './Banner.module.css'
 
 export type BannerProps = HTMLAttributes<HTMLDivElement> & {
   root?: ReactElement
@@ -18,13 +19,16 @@ export type BannerProps = HTMLAttributes<HTMLDivElement> & {
   width?: BreakpointValues<string>
   height?: BreakpointValues<string>
   screen?: 'dark' | 'darker' | 'light' | 'lighter'
+  loading?: boolean
 }
+
 export const Banner: FunctionComponent<BannerProps> = ({
   root = <div />,
   align = 'center',
   vAlign = 'middle',
   backgroundColor,
-  backgroundImage,
+  loading,
+  backgroundImage: _backgroundImage,
   button,
   children,
   className,
@@ -38,6 +42,14 @@ export const Banner: FunctionComponent<BannerProps> = ({
 }) => {
   const height = getBreakpointValues(_height)
   const width = getBreakpointValues(_width)
+
+  const backgroundImage = loading ? (
+    <ContentLoader width="100%" height="100%">
+      <rect width="100%" height="100%" />
+    </ContentLoader>
+  ) : (
+    _backgroundImage
+  )
 
   return (
     <root.type
@@ -71,6 +83,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
   )
 }
 
+// Loader Skeleton
 export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
   contained?: boolean
   width?: BreakpointValues<string>

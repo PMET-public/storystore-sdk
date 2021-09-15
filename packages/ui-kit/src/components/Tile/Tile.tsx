@@ -1,9 +1,11 @@
-import { FunctionComponent, HTMLAttributes, ReactElement, isValidElement } from 'react'
+import { FunctionComponent, isValidElement, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
-import style from './Tile.module.css'
 import ContentLoader from 'react-content-loader'
 
-type TileProps = HTMLAttributes<HTMLElement> & {
+// Styles
+import style from './Tile.module.css'
+
+export type TileProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
   image: ReactElement
   heading: ReactElement | string
@@ -59,6 +61,7 @@ export const Tile: FunctionComponent<TileProps> = ({
   )
 }
 
+// Loader Skeleton
 export type TileSkeletonProps = HTMLAttributes<HTMLElement> & {
   surface?: boolean
   uniqueKey?: string

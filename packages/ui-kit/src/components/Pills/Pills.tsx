@@ -1,8 +1,10 @@
 import { FunctionComponent, useCallback, HTMLAttributes, ReactElement } from 'react'
 import { useForm } from '../../hooks'
 import { Form } from '..'
-import style from './Pills.module.css'
 import { classes } from '../../lib'
+
+// Styles
+import style from './Pills.module.css'
 
 type Value = string | string[] | number | number[]
 

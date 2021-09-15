@@ -1,26 +1,27 @@
 import { FunctionComponent, useEffect } from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql, ServerError, useQuery } from '@apollo/client'
 import { classes } from '../../../../lib'
-import style from './Adventures.module.css'
-import { Error, Block, Tile, TileSkeleton, Link, Heading } from '../../../../components'
+import { Error, Block } from '../../../../components'
+import { AdventureTile } from '../../components'
 import { useNetworkStatus } from '../../../../hooks'
 
-export type AdventuresProps = {
-  filter?: unknown
-}
+// Styles
+import style from './Adventures.module.css'
 
+// GraphQL Query
 export const ADVENTURES_QUERY = gql`
   query ADVENTURES_QUERY($filter: AdventureModelFilter) {
     adventureList(filter: $filter) {
       items {
         id: _path
+        _path
         adventureActivity
         adventureTitle
         adventureTripLength
         adventurePrimaryImage {
           ... on ImageRef {
             id: _path
-            src: _path
+            _path
           }
         }
       }
@@ -28,56 +29,45 @@ export const ADVENTURES_QUERY = gql`
   }
 `
 
+export type AdventuresProps = {
+  filter?: unknown
+}
+
 export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
+  // GraphQL Data
   const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, {
-    context: { clientName: 'aem' },
     variables: { filter },
   })
 
+  // Network Online/Offline State
   const online = useNetworkStatus()
 
   useEffect(() => {
-    if (previousData) {
-      window.scrollTo(0, 0) // reset scroll
-    }
+    if (previousData) window.scrollTo(0, 0) // scroll to the top on data change
   }, [previousData])
 
-  if (error) return <Error status={!online ? 'Offline' : (error.networkError as any)?.response?.status} />
+  // Error View
+  if (error) {
+    const status = (error.networkError as ServerError).statusCode
+    return <Error status={online ? status : 'Offline'} />
+  }
+
+  // Adventures List
+  const adventures = loading ? Array(5).fill({ loading }) : data?.adventureList?.items
 
   return (
-    <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr ', lg: '1fr 1fr 1fr', xl: '1fr 1fr 1fr 1fr' }}>
-      {loading
-        ? Array(5)
-            .fill(null)
-            .map((_, key) => (
-              <TileSkeleton
-                key={key}
-                uniqueKey={`adventure--${key}`}
-                className={classes([style.tile, style.more])}
-                surface
-              />
-            ))
-        : data.adventureList.items.map(
-            ({ id, adventurePrimaryImage, adventureTitle, adventureTripLength, adventureActivity }: any) => (
-              <Tile
-                root={<Link href={id} />}
-                className={classes([style.tile, [style.more, data.adventureList.items.length > 3]])}
-                key={id}
-                image={
-                  <img
-                    loading="lazy"
-                    src={'/__aem' + adventurePrimaryImage?.src}
-                    width={400}
-                    height={400}
-                    alt={adventureTitle}
-                  />
-                }
-                heading={<Heading root={<h3 />}>{adventureTitle}</Heading>}
-                tags={[`${adventureTripLength} ${adventureActivity}`]}
-                surface
-              />
-            )
-          )}
+    <Block
+      className={style.root}
+      gap="md"
+      columns={{ sm: '1fr', md: '1fr 1fr ', lg: '1fr 1fr 1fr', xl: '1fr 1fr 1fr 1fr' }}
+    >
+      {adventures.map(({ ...adventure }: any, key: number) => (
+        <AdventureTile
+          key={adventure._path ?? key}
+          className={classes([style.tile, [style.more, adventures.length > 3]])}
+          {...adventure}
+        />
+      ))}
     </Block>
   )
 }

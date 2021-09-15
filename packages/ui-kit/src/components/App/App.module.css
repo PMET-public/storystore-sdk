@@ -9,7 +9,7 @@
 .toast {
   align-items: center;
   display: grid;
-  grid-gap: var(--spacing-sm);
+  grid-gap: 10px;
   grid-template-columns: auto 1fr;
 }
 

@@ -1,12 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { WKND } from '@storystore/ui-kit/experiences'
+import { Adventure, ADVENTURE_QUERY } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
-import { getServerSideGraphQlEndpoint } from '../lib/ssr-graphql-endpoint'
+import { getServerSideApolloClientContext } from '../lib/graphql-variables'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
 
-const Adventure: NextPage = ({ ...props }) => {
+const AdventurePage: NextPage = ({ ...props }) => {
   const { asPath } = useRouter()
 
   const [passport, setPassport] = useState({})
@@ -65,7 +65,7 @@ const Adventure: NextPage = ({ ...props }) => {
   )
 
   return (
-    <WKND.Adventure
+    <Adventure
       path={asPath}
       {...props}
       checkedIn={checkedIn}
@@ -79,19 +79,23 @@ const Adventure: NextPage = ({ ...props }) => {
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const apolloClient = getApolloClient()
 
-  const locale = query.locale
+  const { site, locale, pathname: _pathname } = query
 
-  const pathname = typeof query.pathname === 'string' ? query.pathname : query.pathname.join('/')
+  const pathname = typeof _pathname === 'string' ? _pathname : _pathname.join('/')
 
-  const path = `/content/dam/wknd/${locale}/adventures/${pathname}`
+  const path = `/content/dam/${site}/${locale}/adventures/${pathname}`
 
-  await apolloClient.query({ query: WKND.ADVENTURE_QUERY, context: { clientName: 'aem' }, variables: { path } })
+  try {
+    await apolloClient.query({
+      query: ADVENTURE_QUERY,
+      variables: { path },
+      context: { ...getServerSideApolloClientContext(req) },
+    })
+  } catch (error) {}
 
   return addApolloState(apolloClient, {
-    props: {
-      ...getServerSideGraphQlEndpoint(req),
-    },
+    props: {},
   })
 }
 
-export default Adventure
+export default AdventurePage
