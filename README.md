@@ -1,6 +1,6 @@
 <img src="storystore-sdk.png" width="100" height="100" />
 
-## v0.1.0
+## v0.1.1
 
 ### ✅ Pre-requisites
 
