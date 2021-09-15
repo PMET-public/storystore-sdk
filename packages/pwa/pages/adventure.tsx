@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Adventure, ADVENTURE_QUERY } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
-import { getServerSideGraphQlEndpoint } from '../lib/ssr-graphql-endpoint'
+import { getServerSideApolloClientContext } from '../lib/graphql-variables'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
 
@@ -85,12 +85,16 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
 
   const path = `/content/dam/${site}/${locale}/adventures/${pathname}`
 
-  await apolloClient.query({ query: ADVENTURE_QUERY, context: { clientName: 'aem' }, variables: { path } })
+  try {
+    await apolloClient.query({
+      query: ADVENTURE_QUERY,
+      variables: { path },
+      context: { ...getServerSideApolloClientContext(req) },
+    })
+  } catch (error) {}
 
   return addApolloState(apolloClient, {
-    props: {
-      ...getServerSideGraphQlEndpoint(req),
-    },
+    props: {},
   })
 }
 

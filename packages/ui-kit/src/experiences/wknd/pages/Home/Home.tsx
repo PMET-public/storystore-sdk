@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react'
 import { HomeProps } from './Home.d'
-import { ServerError, useQuery } from '@apollo/client'
+import { useQuery, ServerError } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { AdventureTile, AdventureBanner } from '../../components'
 import { Error, Block, Banner, Carousel, Heading, Button } from '../../../../components'
@@ -93,15 +93,15 @@ export const HOME_QUERY = gql`
 
 export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
   // GraphQL Data
-  const { error, loading, data } = useQuery(HOME_QUERY, { context: { clientName: 'aem' } })
+  const { loading, data, error } = useQuery(HOME_QUERY)
 
   // Network Online/Offline State
   const online = useNetworkStatus()
 
   // Error View
   if (error) {
-    const networkError = error.networkError as ServerError
-    return <Error status={online ? networkError.response?.status : 'Offline'} />
+    const status = (error.networkError as ServerError).statusCode
+    return <Error status={online ? status : 'Offline'} />
   }
 
   // Page Data

@@ -64,15 +64,15 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   onBookmark,
 }) => {
   // GraphQL Data
-  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { context: { clientName: 'aem' }, variables: { path } })
+  const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
   // Network Online/Offline State
   const online = useNetworkStatus()
 
   // Error View
   if (error) {
-    const networkError = error.networkError as ServerError
-    return <Error status={online ? networkError.response?.status : 'Offline'} />
+    const status = (error.networkError as ServerError).statusCode
+    return <Error status={online ? status : 'Offline'} />
   }
 
   // Adventure Object

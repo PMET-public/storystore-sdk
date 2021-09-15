@@ -1,16 +1,19 @@
-import { FunctionComponent, useMemo, useState, useCallback, useEffect } from 'react'
+import { FunctionComponent, useState, useCallback, useEffect, Fragment } from 'react'
 import { AppProps } from 'next/app'
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import Head from 'next/head'
 import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
-import { Button, Dialog, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-kit/components'
+import Head from 'next/head'
 import NextLink from 'next/link'
+import { Button, Dialog, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-kit/components'
+import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client'
+import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { cookies } from '@storystore/toolbox'
+import { setContext } from '@apollo/client/link/context'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
+
+let env: { uri?: string; basicAuth?: string }
 
 initApolloClient(
   new ApolloClient({
@@ -18,6 +21,28 @@ initApolloClient(
     queryDeduplication: true,
     ssrMode: !process.browser,
     cache: new InMemoryCache({}),
+    link: from([
+      setContext((_, prev) => {
+        env = prev.env
+      }),
+
+      new HttpLink({
+        uri: '/__graphql',
+        fetch: async (uri, options) => {
+          try {
+            return await fetch(env?.uri || uri, {
+              ...options,
+              headers: { ...options.headers, Authorization: env?.basicAuth },
+            })
+          } catch (error) {
+            if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+              return new Response(null, { status: 404 })
+            }
+            return new Response(null, { status: 500 })
+          }
+        },
+      }),
+    ]),
   })
 )
 
@@ -30,17 +55,9 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 }
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
-  const { ssrGraphQLEndpoint } = pageProps
+  const settings = useUIKitSettings()
 
   const apolloClient = useApollo(pageProps)
-
-  // Set CSR & SSR GraphQL Endpoint to App Proxy
-  useMemo(() => {
-    const uri = ssrGraphQLEndpoint || '/__graphql'
-    apolloClient.setLink(new HttpLink({ uri }))
-  }, [apolloClient, ssrGraphQLEndpoint])
-
-  const settings = useUIKitSettings()
 
   useEffect(() => {
     const cookie = cookies.get('STORYSTORE_SETTINGS')
@@ -48,7 +65,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
       settings.setValues(JSON.parse(cookie))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [settings.setValues])
+  }, [apolloClient, settings.setValues])
 
   const [openSettings, setOpenSettings] = useState(false)
 
@@ -59,9 +76,12 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
       if (success) {
         cookies.set('STORYSTORE_SETTINGS', JSON.stringify(data), 365)
-        apolloClient.resetStore()
+
         settings.setValues(data)
         settings.clearErrors()
+
+        apolloClient.resetStore().catch(() => {})
+
         setOpenSettings(false)
         toast.success('UIKit settings has been updated.')
       }
@@ -70,19 +90,22 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         settings.setErrors(errors)
       }
     },
-    [apolloClient, settings]
+    [settings, apolloClient]
   )
 
   const handleSettingsReset = useCallback(async () => {
     cookies.remove('STORYSTORE_SETTINGS')
+
     settings.reset()
-    apolloClient.resetStore()
+
+    apolloClient.resetStore().catch(() => {})
+
     setOpenSettings(false)
     toast.success('Using UIKit default settings.')
   }, [apolloClient, settings])
 
   return (
-    <>
+    <Fragment>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -142,7 +165,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           </Dialog>
         </UIProvider>
       </ApolloProvider>
-    </>
+    </Fragment>
   )
 }
 

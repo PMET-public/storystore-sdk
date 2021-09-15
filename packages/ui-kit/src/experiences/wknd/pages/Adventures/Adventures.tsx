@@ -33,7 +33,6 @@ export const ADVENTURES_QUERY = gql`
 export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
   // GraphQL Data
   const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, {
-    context: { clientName: 'aem' },
     variables: { filter },
   })
 
@@ -46,8 +45,8 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
 
   // Error View
   if (error) {
-    const networkError = error.networkError as ServerError
-    return <Error status={online ? networkError.response?.status : 'Offline'} />
+    const status = (error.networkError as ServerError).statusCode
+    return <Error status={online ? status : 'Offline'} />
   }
 
   // Adventures List

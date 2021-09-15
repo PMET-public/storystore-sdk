@@ -26,7 +26,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
 
       {
         source: '/__graphql/:pathname*',
-        destination: '/api/graphql',
+        destination: '/api/graphql/:pathname*',
       },
       /** Proxy to AEM. Images, and other files */
       {
