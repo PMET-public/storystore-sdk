@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { Error, Block, Heading, Html, Button } from '../../../../components'
+import { Contributor } from '../../components'
 import ContentLoader from 'react-content-loader'
 
 // Styles
@@ -25,7 +26,7 @@ export const ADVENTURE_QUERY = gql`
   query ADVENTURE_QUERY($path: String!) {
     adventureByPath(_path: $path) {
       item {
-        id: _path
+        _path
         adventureTitle
         adventureType
         adventureTripLength
@@ -36,12 +37,15 @@ export const ADVENTURE_QUERY = gql`
         adventureDescription {
           html
         }
+
         adventureItinerary {
           html
         }
+
         adventureGearList {
           html
         }
+
         adventurePrimaryImage {
           ... on ImageRef {
             id: _path
@@ -50,6 +54,24 @@ export const ADVENTURE_QUERY = gql`
             height
           }
         }
+
+        # Contributor
+        # You need to create this new Content Fragment First
+        # https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/content-fragment-models.html?lang=en#create-a-contributor-model
+
+        # contributor {
+        #   _path
+        #   fullName
+        #   biographyText {
+        #     html
+        #   }
+        #   pictureReference {
+        #     ... on ImageRef {
+        #       _path
+        #     }
+        #   }
+        #   occupation
+        # }
       }
     }
   }
@@ -219,6 +241,12 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
               <Html htmlString={adventure.adventureGearList.html} />
             </Block>
+
+            {/* 
+            <Block>
+              <Contributor {...adventure.contributor} />
+            </Block> 
+            */}
 
             {/* 
             <Block>

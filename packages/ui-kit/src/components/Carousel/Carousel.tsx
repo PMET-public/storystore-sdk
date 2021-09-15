@@ -33,12 +33,12 @@ export const Carousel: FunctionComponent<CarouselProps> = ({
       {...merge(props, root.props)}
       className={classes([style.root, [style.hideScrollBar, hideScrollBar], [style.padded, padded], className])}
       style={{
-        ['--carousel-show-sm' as string]: show.sm ? `calc(100% / ${show.sm} - ${padding})` : 'max-content',
-        ['--carousel-show-md' as string]: show.md ? `calc(100% / ${show.md} - ${padding})` : 'max-content',
-        ['--carousel-show-lg' as string]: show.lg ? `calc(100% / ${show.lg} - ${padding})` : 'max-content',
-        ['--carousel-show-xl' as string]: show.xl ? `calc(100% / ${show.xl} - ${padding})` : 'max-content',
-        ['--carousel-gap' as string]: gap,
-        ['--carousel-padding' as string]: padding,
+        ['--carousel-show-sm']: show.sm ? `calc(100% / ${show.sm} - ${padding})` : 'max-content',
+        ['--carousel-show-md']: show.md ? `calc(100% / ${show.md} - ${padding})` : 'max-content',
+        ['--carousel-show-lg']: show.lg ? `calc(100% / ${show.lg} - ${padding})` : 'max-content',
+        ['--carousel-show-xl']: show.xl ? `calc(100% / ${show.xl} - ${padding})` : 'max-content',
+        ['--carousel-gap']: gap,
+        ['--carousel-padding']: padding,
         ...props.style,
       }}
     >
