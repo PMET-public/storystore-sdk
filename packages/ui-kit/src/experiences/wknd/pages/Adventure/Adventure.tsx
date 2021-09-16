@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
 import { Error, Block, Heading, Html, Button } from '../../../../components'
-import { Contributor } from '../../components'
 import ContentLoader from 'react-content-loader'
 
 // Styles
@@ -20,6 +19,9 @@ import CheckInIcon from 'remixicon-react/CheckLineIcon'
 import CheckedInIcon from 'remixicon-react/CheckDoubleLineIcon'
 import BookmarkIcon from 'remixicon-react/Bookmark3LineIcon'
 import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
+
+// Lazy Components
+const Contributor = lazy(() => import('../../components/Contributor'))
 
 // GraphQL Query
 export const ADVENTURE_QUERY = gql`
@@ -56,9 +58,8 @@ export const ADVENTURE_QUERY = gql`
         }
 
         # Contributor
-        # You need to create this new Content Fragment First
+        # You need to create this new Content Fragment first:
         # https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/content-fragment-models.html?lang=en#create-a-contributor-model
-
         # contributor {
         #   _path
         #   fullName
@@ -106,6 +107,10 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
   // Adventure Object
   const adventure = data?.adventureByPath.item
+
+  const clientSideOnly = typeof window !== 'undefined'
+
+  console.log({ clientSideOnly })
 
   return (
     <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>
@@ -243,10 +248,16 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             </Block>
 
             {/* 
-            <Block>
-              <Contributor {...adventure.contributor} />
-            </Block> 
+              Contributor is lazy loaded only when the data is available. 
+              To enable, please make sure you add/uncomment the GraphQl query above  
             */}
+            {clientSideOnly && adventure.contributor && (
+              <Suspense fallback="">
+                <Block>
+                  <Contributor {...adventure.contributor} />
+                </Block>
+              </Suspense>
+            )}
 
             {/* 
             <Block>
