@@ -251,11 +251,13 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               Contributor is lazy loaded only when the data is available. 
               To enable, please make sure you add/uncomment the GraphQl query above  
             */}
-            {clientSideOnly && adventure.contributor && (
+            {clientSideOnly && (
               <Suspense fallback="">
-                <Block>
-                  <Contributor {...adventure.contributor} />
-                </Block>
+                {adventure.contributor && (
+                  <Block>
+                    <Contributor {...adventure.contributor} />
+                  </Block>
+                )}
               </Suspense>
             )}
 
