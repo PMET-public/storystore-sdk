@@ -48,7 +48,7 @@ export const Adventures: FunctionComponent<AdventuresProps> = ({ filter }) => {
 
   // Error View
   if (error) {
-    const status = (error.networkError as ServerError).statusCode
+    const status = (error.networkError as ServerError)?.statusCode
     return <Error status={online ? status : 'Offline'} />
   }
 
