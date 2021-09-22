@@ -100,7 +100,6 @@ export const HOME_QUERY = gql`
 export const Home: FunctionComponent = () => {
   // GraphQL Data
   const { loading, data, error } = useQuery(HOME_QUERY)
-  console.log(error)
 
   // Network Online/Offline State
   const online = useNetworkStatus()
