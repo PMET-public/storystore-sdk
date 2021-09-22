@@ -1,14 +1,19 @@
 export const settings = {
   fields: {
-    graphQlEndpoint: {
-      label: 'GraphQL URL',
+    AEMEndpoint: {
+      label: 'AEM URL',
       placeholder: 'https://...',
-      defaultValue: new URL(process.env.AEM_GRAPHQL_URL).href,
+      defaultValue: process.env.AEM_HOST,
     },
-    graphQlBasicAuth: {
-      label: 'GraphQL Auth',
+    AEMBasicAuth: {
+      label: 'AEM Auth',
       placeholder: 'username:password',
-      defaultValue: process.env.AEM_GRAPHQL_AUTH,
+      defaultValue: process.env.AEM_AUTH,
+    },
+    graphQlPath: {
+      label: 'AEM GraphQL Path',
+      placeholder: '/content/_cq_graphql/global/endpoint.json',
+      defaultValue: process.env.AEM_GRAPHQL_PATH,
     },
   },
 }

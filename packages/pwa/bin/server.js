@@ -33,7 +33,7 @@ app.prepare().then(() => {
     const url = `http://localhost:${PORT}`
     console.group()
     console.log(`${name} v${version}`)
-    console.log(`Serving ${process.env.AEM_GRAPHQL_URL}`)
+    console.log(`Serving ${process.env.AEM_HOST}`)
     console.log(`➡️  ${url}`)
     console.groupEnd()
 

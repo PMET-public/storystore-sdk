@@ -99,6 +99,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   // Network Online/Offline State
   const online = useNetworkStatus()
 
+  const clientSideOnly = typeof window !== 'undefined'
+
   // Error View
   if (error) {
     const status = (error.networkError as ServerError)?.statusCode
@@ -107,10 +109,6 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
   // Adventure Object
   const adventure = data?.adventureByPath.item
-
-  const clientSideOnly = typeof window !== 'undefined'
-
-  console.log({ clientSideOnly })
 
   return (
     <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>

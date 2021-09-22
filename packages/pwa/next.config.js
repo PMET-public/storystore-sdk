@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins')
 const withStoryStore = require('@storystore/ui-kit/nextjs')
 const withPWA = require('next-pwa')
+const WebpackAssetsManifest = require('webpack-assets-manifest')
 
 module.exports = withPlugins([withPWA, withStoryStore], {
   experimental: {
@@ -10,6 +11,19 @@ module.exports = withPlugins([withPWA, withStoryStore], {
   pwa: {
     dest: '.next/static',
     disable: process.env.NODE_ENV === 'development',
+  },
+
+  async headers() {
+    return [
+      {
+        source: '/(.*?)',
+        headers: [{ key: 'Access-Control-Allow-Origin', value: process.env.AEM_HOST }],
+      },
+      {
+        source: '/__graphql',
+        headers: [{ key: 'Access-Control-Allow-Methods', value: 'POST, GET, OPTIONS' }],
+      },
+    ]
   },
 
   async rewrites() {
@@ -24,19 +38,33 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         destination: '/_next/static/workbox-:hash.js',
       },
 
+      /** Asset Manifest */
       {
-        source: '/__graphql/:pathname*',
-        destination: '/api/graphql/:pathname*',
+        source: '/asset-manifest.json',
+        destination: '/_next/static/asset-manifest.json',
       },
-      /** Proxy to AEM. Images, and other files */
+
+      /** Proxy AEM GraphQL /__graphql */
       {
-        source: '/content/dam/:site/:locale/:pathname*(.jpg|.png|.gif|.svg|.jpg|.jpeg|.pdf|.zip)',
-        destination: '/api/remote',
+        source: '/__graphql/:path*',
+        destination: '/api/aem-proxy',
       },
-      /** Adventure */
+
+      // Proxy files with extensions
       {
-        source: '/content/dam/:site/:locale/adventures/:pathname*',
+        source: '/content/dam/:site/:locale/adventures/:path*.(.*)',
+        destination: '/api/aem-proxy',
+      },
+      /** Rewrite Adventure Details */
+      {
+        source: '/content/dam/:site/:locale/adventures/:path*',
         destination: '/adventure',
+      },
+
+      /** Proxy AEM Content /content */
+      {
+        source: '/content/:path*',
+        destination: '/api/aem-proxy',
       },
     ]
   },
@@ -56,6 +84,27 @@ module.exports = withPlugins([withPWA, withStoryStore], {
 
       return rule
     })
+
+    /**
+     * Asset Manifest
+     */
+    config.plugins.push(
+      new WebpackAssetsManifest({
+        output: 'static/asset-manifest.json',
+        transform: assets => {
+          const entrypoints = []
+          for (let file in assets) {
+            if (assets[file].endsWith('.js') || assets[file].endsWith('.css')) {
+              entrypoints.push(assets[file])
+            }
+          }
+          return {
+            files: assets,
+            entrypoints: entrypoints,
+          }
+        },
+      })
+    )
 
     return config
   },

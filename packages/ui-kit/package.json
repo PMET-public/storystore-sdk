@@ -26,6 +26,11 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@adobe/aem-core-components-react-base": "^1.1.8",
+    "@adobe/aem-core-components-react-spa": "^1.2.0",
+    "@adobe/aem-react-editable-components": "^1.1.10",
+    "@adobe/aem-spa-component-mapping": "^1.1.1",
+    "@adobe/aem-spa-page-model-manager": "^1.4.0",
     "@apollo/client": "^3.1.1",
     "@babel/cli": "^7.14.5",
     "@babel/core": "^7.14.6",

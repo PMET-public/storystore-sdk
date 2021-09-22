@@ -7,7 +7,7 @@ import style from './Button.module.css'
 export type ButtonProps = {
   root?: ReactElement
   /** Content. */
-  children: ReactNode
+  children?: ReactNode
   /** Visual styles. */
   variant?: 'cta' | 'primary' | 'secondary' | 'text'
   /** Whether the button should have a transparent background. */

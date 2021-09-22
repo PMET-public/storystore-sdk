@@ -1,12 +1,19 @@
-import { FunctionComponent, ReactElement } from 'react'
+import { FunctionComponent } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AdventureTile, AdventureBanner } from '../../components'
-import { Error, Block, Banner, Carousel, Heading, Button } from '../../../../components'
+import { AdventureTile, AdventureBanner, AEMImage, AEMTitle, AEMButton } from '../../components'
+import { Error, Block, Banner, Carousel, Heading } from '../../../../components'
 import gql from 'graphql-tag'
 
 // Styles
 import style from './Home.module.css'
+
+// AEM Remote SPA Model
+import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
+
+const site = process.env.NEXT_PUBLIC_AEM_SITE
+const modelClient = new ModelClient(new URL(process.env.NEXT_PUBLIC_URL).origin)
+ModelManager.initializeAsync({ modelClient, path: `/content/${site}/us/en/home` })
 
 // GraphQL Query
 export const HOME_QUERY = gql`
@@ -90,13 +97,10 @@ export const HOME_QUERY = gql`
   }
 `
 
-export type HomeProps = {
-  heroCTA?: ReactElement
-}
-
-export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
+export const Home: FunctionComponent = () => {
   // GraphQL Data
   const { loading, data, error } = useQuery(HOME_QUERY)
+  console.log(error)
 
   // Network Online/Offline State
   const online = useNetworkStatus()
@@ -120,19 +124,16 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
       <Block root={<section />}>
         <Banner
           backgroundColor="#f4ecea"
-          backgroundImage={
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-1--small.jpg" />
-              <img src="/__assets/wknd/bg-adventures-1.jpg" alt="" style={{ objectPosition: 'left' }} />
-            </picture>
-          }
-          height={{ sm: '80vh', lg: '70vh' }}
+          backgroundImage={<AEMImage pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-image" />}
+          height={{ sm: '500px', lg: '800px' }}
           heading={
-            <Heading root={<h2 />} size={{ sm: '4xl', md: '5xl' }} style={{ paddingRight: '100px' }}>
-              Not all who wander are lost.
-            </Heading>
+            <Heading
+              root={<AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-title" />}
+              size={{ sm: '4xl', md: '5xl' }}
+              style={{ paddingRight: '100px' }}
+            />
           }
-          button={heroCTA ? <Button root={<heroCTA.type />} {...heroCTA.props} /> : undefined}
+          button={<AEMButton pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-cta" />}
           align="left"
           contained
         />
@@ -140,9 +141,10 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
 
       {/* Beginner Carousel */}
       <Block root={<section />} gap="md" contained padded>
-        <Heading root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
-          Trying something new? Start easy.
-        </Heading>
+        <Heading
+          root={<AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="beginner/heading" />}
+          size={{ sm: 'lg', md: '2xl' }}
+        />
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
           {beginnerAdventures?.map(({ ...adventure }, key) => (
@@ -159,7 +161,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
       {/* Camping Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading root={<h2 />} size="2xl">
-          For the outdoor kind.
+          <AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="outdoor/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
@@ -177,7 +179,7 @@ export const Home: FunctionComponent<HomeProps> = ({ heroCTA }) => {
       {/* Overstay Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading root={<h2 />} size="2xl">
-          Time is a construct. Overstay.
+          <AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="overstay/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
