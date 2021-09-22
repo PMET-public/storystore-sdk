@@ -1,6 +1,6 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { ButtonV1IsEmptyFn } from '@adobe/aem-core-components-react-base'
-import { Button, Link } from '../../../../../components'
+import { Button, ButtonSkeleton, Link } from '../../../../../components'
 
 const resourceType = 'wknd-adventures/components/button'
 
@@ -9,19 +9,31 @@ const config = {
   resourceType,
 }
 
-const ButtonComponent = ({ id, link, icon, text, accessibilityLabel, className, style }) => {
+const ButtonComponent = ({
+  id,
+  link,
+  icon,
+  text,
+  accessibilityLabel,
+  className,
+  style,
+  itemPath,
+  dataLayer,
+  loading = !dataLayer,
+}) => {
   if (icon) console.warn('Button Icon attribute is not supported')
 
+  const Root = (p: any) =>
+    loading ? (
+      <ButtonSkeleton key={`skeleton--${itemPath}`} {...p} />
+    ) : (
+      <Button root={link ? <Link href={link} /> : <button />} {...p} />
+    )
+
   return (
-    <Button
-      id={id}
-      root={link ? <Link href={link} /> : <button />}
-      aria-label={accessibilityLabel}
-      className={className}
-      style={style}
-    >
+    <Root id={id} aria-label={accessibilityLabel} className={className} style={style}>
       {text}
-    </Button>
+    </Root>
   )
 }
 

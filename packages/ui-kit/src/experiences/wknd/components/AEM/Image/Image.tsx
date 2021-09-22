@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { ImageV2IsEmptyFn } from '@adobe/aem-core-components-react-base'
+import ContentLoader from 'react-content-loader'
 import { Link } from '../../../../../components'
 
 const resourceType = 'wknd-adventures/components/image'
@@ -10,12 +11,34 @@ const config = {
   resourceType,
 }
 
-const ImageComponent = ({ id, src, title, alt, className, lazyEnabled, link, style }) => {
-  const Root = (p: any) => (link ? <Link href={link} {...p} /> : <Fragment {...p} />)
+const ImageComponent = ({
+  id,
+  src,
+  title,
+  alt,
+  className,
+  lazyEnabled,
+  link,
+  style,
+  dataLayer,
+  key,
+  itemPath,
+  loading = !dataLayer,
+}) => {
+  const Wrapper = (p: any) => (link ? <Link href={link} {...p} /> : <Fragment {...p} />)
+
+  const Root = (p: any) =>
+    loading ? (
+      <ContentLoader uniqueKey={`skeleton--${itemPath}`} width="100%" height="100%" {...p}>
+        <rect width="100%" height="100%" />
+      </ContentLoader>
+    ) : (
+      <img {...p} />
+    )
 
   return (
-    <Root>
-      <img
+    <Wrapper>
+      <Root
         id={id}
         src={src}
         title={title}
@@ -24,7 +47,7 @@ const ImageComponent = ({ id, src, title, alt, className, lazyEnabled, link, sty
         className={className}
         style={style}
       />
-    </Root>
+    </Wrapper>
   )
 }
 

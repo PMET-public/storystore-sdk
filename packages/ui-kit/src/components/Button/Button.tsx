@@ -1,4 +1,5 @@
-import { FunctionComponent, isValidElement, ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
+import { FunctionComponent, isValidElement, ButtonHTMLAttributes, ReactElement, ReactNode, HTMLAttributes } from 'react'
+import ContentLoader from 'react-content-loader'
 import { classes, merge } from '../../lib'
 
 // Styles
@@ -39,5 +40,18 @@ export const Button: FunctionComponent<ButtonProps> = ({
       {isValidElement(icon) && <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />}
       {children}
     </root.type>
+  )
+}
+
+// Loader Skeleton
+export type ButtonSkeletonProps = HTMLAttributes<SVGAElement> & {
+  uniqueKey?: string
+}
+
+export const ButtonSkeleton: FunctionComponent<ButtonSkeletonProps> = ({ uniqueKey, ...props }) => {
+  return (
+    <ContentLoader uniqueKey={uniqueKey} width={250} height="3em" {...props}>
+      <rect width="100%" height="100%" />
+    </ContentLoader>
   )
 }

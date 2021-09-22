@@ -1,5 +1,6 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge, getBreakpointValues, Size, BreakpointValues, OnColor } from '../../lib'
+import ContentLoader from 'react-content-loader'
 
 // Styles
 import style from './Heading.module.css'
@@ -34,5 +35,18 @@ export const Heading: FunctionComponent<HeadingProps> = ({
         ...props.style,
       }}
     />
+  )
+}
+
+// Loader Skeleton
+export type BannerSkeletonProps = HTMLAttributes<SVGAElement> & {
+  uniqueKey?: string
+}
+
+export const HeadingSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
+  return (
+    <ContentLoader uniqueKey={uniqueKey} width="100%" height="1em" {...props}>
+      <rect width="100%" height="100%" />
+    </ContentLoader>
   )
 }

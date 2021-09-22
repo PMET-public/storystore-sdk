@@ -103,7 +103,9 @@
 }
 
 img.backgroundImage,
-.backgroundImage img {
+.backgroundImage img,
+svg.backgroundImage,
+.backgroundImage svg {
   height: 100%;
   object-fit: cover;
   object-position: center;
