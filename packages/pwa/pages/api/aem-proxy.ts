@@ -26,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       auth,
       changeOrigin: false,
       headers: {
+        ...(req.headers as any),
         origin,
       },
       pathRewrite: {
