@@ -2,7 +2,7 @@ import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { ButtonV1IsEmptyFn } from '@adobe/aem-core-components-react-base'
 import { Button, ButtonSkeleton, Link } from '../../../../../components'
 
-const resourceType = 'wknd-adventures/components/button'
+const resourceType = '/storystore/components/button'
 
 const config = {
   isEmpty: ButtonV1IsEmptyFn,

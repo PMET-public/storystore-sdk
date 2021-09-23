@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 import { ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AdventureTile } from '../../components'
-import { Block, Banner, TileSkeleton, Heading, Error, Carousel } from '../../../../components'
+import { AdventureTile, AEMBanner, AEMTitle } from '../../components'
+import { Block, TileSkeleton, Heading, Error, Carousel } from '../../../../components'
 import gql from 'graphql-tag'
 
 // Styles
@@ -55,12 +55,12 @@ export type MyPassportProps = {
   bookmarks?: string[]
 }
 
-export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookmarks }) => {
+export const MyPassport: FunctionComponent<MyPassportProps> = ({ AEMModelPath, checkIns, bookmarks }) => {
   // GraphQL Data
   const { error, loading, data } = useQuery(MY_PASSPORT_QUERY, {
     variables: {
-      checkIns: checkIns?.map(p => ({ value: p })),
-      bookmarks: bookmarks?.map(p => ({ value: p })),
+      checkIns: checkIns?.map(value => ({ value })),
+      bookmarks: bookmarks?.map(value => ({ value })),
     },
   })
 
@@ -81,25 +81,19 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
     <Block className={style.root} gap={{ sm: 'lg', lg: 'xl' }}>
       {/* Hero (Static Content) */}
       <Block>
-        <Banner
-          backgroundColor="#f4ecea"
-          backgroundImage={
-            <picture>
-              <source media="(max-width: 768px)" srcSet="/__assets/wknd/bg-adventures-2--small.jpg" />
-              <img src="/__assets/wknd/bg-adventures-2.jpg" alt="" style={{ objectPosition: 'top' }} />
-            </picture>
-          }
-          screen="lighter"
-          vAlign="top"
-          height={{ sm: '40vh', lg: '40vh' }}
-          contained
+        <AEMBanner
+          pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+          itemPath="hero/banner"
+          height="400px"
+          heightTablet="600px"
+          style={{ objectPosition: 'top' }}
         />
       </Block>
 
       {/* Saved for Later */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
-        <Heading className={style.heading} root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
-          <BookmarkedIcon color="red" /> It's not <em>if</em>, but <em>when</em>.
+        <Heading icon={<BookmarkedIcon color="red" />} size={{ sm: 'lg', md: '2xl' }}>
+          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/my-passport" itemPath="bookmarks/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
@@ -124,8 +118,8 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
 
       {/* Check-ins */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
-        <Heading className={style.heading} root={<h2 />} size={{ sm: 'lg', md: '2xl' }}>
-          <CheckedInIcon color="green" /> Been there, done that.
+        <Heading icon={<CheckedInIcon color="green" />} size={{ sm: 'lg', md: '2xl' }}>
+          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/my-passport" itemPath="checkins/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>

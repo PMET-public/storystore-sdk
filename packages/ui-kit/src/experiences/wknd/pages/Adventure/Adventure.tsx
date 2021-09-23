@@ -1,6 +1,7 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
+import { AEMTitle } from '../../components'
 import { Error, Block, Heading, Html, Button, SkeletonLoader } from '../../../../components'
 
 // Styles
@@ -31,7 +32,6 @@ export const ADVENTURE_QUERY = gql`
         adventureTitle
         adventureType
         adventureTripLength
-        adventureActivity
         adventureGroupSize
         adventureDifficulty
         adventurePrice
@@ -140,7 +140,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* Title */}
             <header>
               <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
-                {adventure.adventureTripLength} {adventure.adventureType}
+                {adventure.adventureTripLength} – {adventure.adventureType}
               </Heading>
 
               <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
@@ -184,51 +184,63 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
             {/* Description */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <MapIcon />
-                {adventure.adventureActivity} Details
+              <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/adventure" itemPath="details/heading" />
               </Heading>
 
               <Html htmlString={adventure.adventureDescription.html} />
             </Block>
 
             {/* Details List/Icons */}
-            <Block className={style.details} gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
-              <span>
-                <strong>
-                  <LengthIcon />
-                  Trip Length:
-                </strong>
-                {adventure.adventureTripLength}
-              </span>
-              <span>
-                <strong>
-                  <GroupIcon />
-                  Group Size:
-                </strong>
+            <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
+              <div className={style.detail}>
+                <Heading icon={<LengthIcon />}>
+                  <AEMTitle
+                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    itemPath="details/heading-duration"
+                  />
+                </Heading>
+                <span>{adventure.adventureTripLength}</span>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<GroupIcon />}>
+                  <AEMTitle
+                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    itemPath="details/heading-group-size"
+                  />
+                </Heading>
+
                 {adventure.adventureGroupSize}
-              </span>
-              <span>
-                <strong>
-                  <MedalIcon />
-                  Dificulty:
-                </strong>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<MedalIcon />}>
+                  <AEMTitle
+                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    itemPath="details/heading-difficulty"
+                  />
+                </Heading>
+
                 {adventure.adventureDifficulty}
-              </span>
-              <span>
-                <strong>
-                  <PriceIcon />
-                  Price:
-                </strong>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<PriceIcon />}>
+                  <AEMTitle
+                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    itemPath="details/heading-price"
+                  />
+                </Heading>
+
                 {adventure.adventurePrice}
-              </span>
+              </div>
             </Block>
 
             {/* Itinerary Section */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <CalendarIcon />
-                Itinerary
+              <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/adventure" itemPath="itinerary/heading" />
               </Heading>
 
               <Html htmlString={adventure.adventureItinerary.html} />
@@ -236,9 +248,11 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
             {/* What to Bring Section */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <BagIcon />
-                What to Bring
+              <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle
+                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  itemPath="what-to-bring/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureGearList.html} />

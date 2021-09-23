@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
-import { useNetworkStatus, useAEMModelManager } from '../../../../hooks'
-import { AdventureTile, AdventureBanner, AEMImage, AEMTitle, AEMButton, AEMBanner } from '../../components'
-import { Error, Block, Banner, Carousel, Heading } from '../../../../components'
+import { useNetworkStatus } from '../../../../hooks'
+import { AdventureTile, AdventureBanner, AEMTitle, AEMBanner } from '../../components'
+import { Error, Block, Carousel, Heading } from '../../../../components'
 import gql from 'graphql-tag'
 
 // Styles
@@ -90,14 +90,9 @@ export const HOME_QUERY = gql`
   }
 `
 
-export type HomeProps = {
-  AEMModelPath?: string
-}
+export type HomeProps = {}
 
-export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
-  // AEM SPA Data Model
-  useAEMModelManager(AEMModelPath)
-
+export const Home: FunctionComponent<HomeProps> = ({}) => {
   // GraphQL Data
   const { loading, data, error } = useQuery(HOME_QUERY)
 
@@ -122,7 +117,7 @@ export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
         <AEMBanner
-          pagePath="/content/wknd-adventures/us/en/home"
+          pagePath="/content/storystore/wknd-adventures/us/en/home"
           itemPath="hero/banner"
           height="800px"
           heightTablet="1000px"
@@ -132,7 +127,7 @@ export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
       {/* Beginner Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading
-          root={<AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="beginner/heading" />}
+          root={<AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="beginner/heading" />}
           size={{ sm: 'lg', md: '2xl' }}
         />
 
@@ -150,8 +145,8 @@ export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
 
       {/* Camping Carousel */}
       <Block root={<section />} gap="md" contained padded>
-        <Heading root={<h2 />} size="2xl">
-          <AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="outdoor/heading" />
+        <Heading size="2xl">
+          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="outdoor/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
@@ -168,8 +163,8 @@ export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
 
       {/* Overstay Carousel */}
       <Block root={<section />} gap="md" contained padded>
-        <Heading root={<h2 />} size="2xl">
-          <AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="overstay/heading" />
+        <Heading size="2xl">
+          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="overstay/heading" />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>

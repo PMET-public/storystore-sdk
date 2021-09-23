@@ -1,6 +1,6 @@
-import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement, isValidElement } from 'react'
 import { classes, merge, getBreakpointValues, Size, BreakpointValues, OnColor } from '../../lib'
-import SkeletonLoader from '../SkeletonLoader'
+import { SkeletonLoader, Block } from '..'
 
 // Styles
 import style from './Heading.module.css'
@@ -10,14 +10,17 @@ export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   size?: BreakpointValues<Size>
   accent?: boolean
   color?: OnColor
+  icon?: ReactElement<HTMLAttributes<SVGAElement>>
 }
 
 export const Heading: FunctionComponent<HeadingProps> = ({
-  root = <h2 />,
+  root = <div />,
   size: _size = 'normal',
   accent,
   className,
   color,
+  icon,
+  children,
   ...props
 }) => {
   const size = getBreakpointValues(_size)
@@ -34,7 +37,16 @@ export const Heading: FunctionComponent<HeadingProps> = ({
         ['--heading-color']: color ? `var(--color-${color})` : 'inherit',
         ...props.style,
       }}
-    />
+    >
+      {isValidElement(icon) ? (
+        <Block columns="max-content 1fr" gap="sm">
+          <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />
+          {children}
+        </Block>
+      ) : (
+        children
+      )}
+    </root.type>
   )
 }
 

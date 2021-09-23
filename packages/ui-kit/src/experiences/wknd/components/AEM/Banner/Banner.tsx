@@ -2,10 +2,10 @@ import { createElement } from 'react'
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { Banner, BannerSkeleton, Heading, Link, Button } from '../../../../../components'
 
-const resourceType = 'wknd-adventures/components/banner'
+const resourceType = 'storystore/components/banner'
 
 const config = {
-  isEmpty: ({ height }) => !!height,
+  isEmpty: ({ height }) => !height,
   resourceType,
 }
 

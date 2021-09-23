@@ -3,7 +3,7 @@ import { TitleV2IsEmptyFn } from '@adobe/aem-core-components-react-base'
 import { Fragment, createElement } from 'react'
 import { Link, SkeletonLoader } from '../../../../../components'
 
-const resourceType = 'wknd-adventures/components/title'
+const resourceType = 'storystore/components/title'
 
 const config = {
   isEmpty: TitleV2IsEmptyFn,
