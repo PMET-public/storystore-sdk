@@ -1,7 +1,6 @@
 import { FunctionComponent, ReactElement, ImgHTMLAttributes, HTMLAttributes } from 'react'
 import { classes, merge, BreakpointValues, getBreakpointValues } from '../../lib'
-import { Block, ButtonProps } from '../'
-import ContentLoader from 'react-content-loader'
+import { Block, ButtonProps, SkeletonLoader } from '../'
 
 // Styles
 import style from './Banner.module.css'
@@ -19,7 +18,6 @@ export type BannerProps = HTMLAttributes<HTMLDivElement> & {
   width?: BreakpointValues<string>
   height?: BreakpointValues<string>
   screen?: 'dark' | 'darker' | 'light' | 'lighter'
-  loading?: boolean
 }
 
 export const Banner: FunctionComponent<BannerProps> = ({
@@ -27,8 +25,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
   align = 'center',
   vAlign = 'middle',
   backgroundColor,
-  loading,
-  backgroundImage: _backgroundImage,
+  backgroundImage,
   button,
   children,
   className,
@@ -42,14 +39,6 @@ export const Banner: FunctionComponent<BannerProps> = ({
 }) => {
   const height = getBreakpointValues(_height)
   const width = getBreakpointValues(_width)
-
-  const backgroundImage = loading ? (
-    <ContentLoader width="100%" height="100%">
-      <rect width="100%" height="100%" />
-    </ContentLoader>
-  ) : (
-    _backgroundImage
-  )
 
   return (
     <root.type
@@ -90,15 +79,16 @@ export type BannerSkeletonProps = HTMLAttributes<HTMLElement> & {
   height?: BreakpointValues<string>
   screen?: 'dark' | 'darker' | 'light' | 'lighter'
   uniqueKey?: string
+  animate?: boolean
 }
 
-export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
+export const BannerSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, animate, ...props }) => {
   return (
     <Banner
       backgroundImage={
-        <ContentLoader uniqueKey={uniqueKey} width="100%" height="100%">
+        <SkeletonLoader uniqueKey={uniqueKey} animate={animate} width="100%" height="100%">
           <rect width="100%" height="100%" />
-        </ContentLoader>
+        </SkeletonLoader>
       }
       {...props}
     />

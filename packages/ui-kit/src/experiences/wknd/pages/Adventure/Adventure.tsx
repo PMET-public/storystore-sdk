@@ -1,8 +1,7 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { Error, Block, Heading, Html, Button } from '../../../../components'
-import ContentLoader from 'react-content-loader'
+import { Error, Block, Heading, Html, Button, SkeletonLoader } from '../../../../components'
 
 // Styles
 import style from './Adventure.module.css'
@@ -21,7 +20,7 @@ import BookmarkIcon from 'remixicon-react/Bookmark3LineIcon'
 import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 
 // Lazy Components
-const Contributor = lazy(() => import('../../components/Contributor'))
+const AdventureContributor = lazy(() => import('../../components/AdventureContributor'))
 
 // GraphQL Query
 export const ADVENTURE_QUERY = gql`
@@ -127,7 +126,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
       {/* Content */}
       <Block padded className={style.wrapper}>
         {loading && !adventure ? (
-          <ContentLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
+          <SkeletonLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
             <rect width="191.58" height="23.16" />
             <rect y="31.58" width="396.62" height="38.26" />
             <rect y="106.32" width="604.62" height="353.71" />
@@ -135,7 +134,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <rect y="575.79" width="295.2" height="61.96" />
             <rect x="308.42" y="492.63" width="295.2" height="61.96" />
             <rect x="308.42" y="575.79" width="295.2" height="61.96" />
-          </ContentLoader>
+          </SkeletonLoader>
         ) : (
           <Block gap="lg" className={style.content}>
             {/* Title */}
@@ -253,7 +252,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <Suspense fallback="">
                 {adventure.contributor && (
                   <Block>
-                    <Contributor {...adventure.contributor} />
+                    <AdventureContributor {...adventure.contributor} />
                   </Block>
                 )}
               </Suspense>

@@ -5,13 +5,21 @@ import { Banner, BannerSkeleton, Heading, Link, Button } from '../../../../../co
 const resourceType = 'wknd-adventures/components/banner'
 
 const config = {
-  isEmpty: ({ loaded = false }) => !loaded,
+  isEmpty: ({ height }) => !!height,
   resourceType,
 }
 
-const BannerComponent = ({ componentProperties, className, style, itemPath }) => {
+const BannerComponent = ({
+  componentProperties,
+  className,
+  style,
+  itemPath,
+  cqPath,
+  loading = !cqPath,
+  cqType,
+  loaded = !!cqType,
+}) => {
   const {
-    loaded = false,
     title,
     titleType = 'h2',
     fontSize,
@@ -33,11 +41,12 @@ const BannerComponent = ({ componentProperties, className, style, itemPath }) =>
     contained,
   } = componentProperties
 
-  if (!loaded)
+  if (loading || !loaded)
     return (
       <BannerSkeleton
         uniqueKey={`banner-skeleton--${itemPath}`}
         height={{ sm: height, md: heightTablet, lg: heightDesktop }}
+        animate={loading}
       />
     )
 

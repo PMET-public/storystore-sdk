@@ -1,6 +1,6 @@
 import { FunctionComponent, isValidElement, ButtonHTMLAttributes, ReactElement, ReactNode, HTMLAttributes } from 'react'
-import ContentLoader from 'react-content-loader'
 import { classes, merge } from '../../lib'
+import { SkeletonLoader } from '../'
 
 // Styles
 import style from './Button.module.css'
@@ -13,8 +13,6 @@ export type ButtonProps = {
   variant?: 'cta' | 'primary' | 'secondary' | 'text'
   /** Whether the button should have a transparent background. */
   transparent?: boolean
-  /** Loading state. */
-  loading?: boolean
   /** Icon */
   icon?: ReactElement<any, 'svg'>
   /** Size */
@@ -50,8 +48,8 @@ export type ButtonSkeletonProps = HTMLAttributes<SVGAElement> & {
 
 export const ButtonSkeleton: FunctionComponent<ButtonSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
-    <ContentLoader uniqueKey={uniqueKey} width={250} height="3em" {...props}>
+    <SkeletonLoader uniqueKey={uniqueKey} width={250} height="3em" {...props}>
       <rect width="100%" height="100%" />
-    </ContentLoader>
+    </SkeletonLoader>
   )
 }

@@ -1,6 +1,6 @@
 import { FunctionComponent, isValidElement, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
-import ContentLoader from 'react-content-loader'
+import { SkeletonLoader } from '../'
 
 // Styles
 import style from './Tile.module.css'
@@ -73,14 +73,14 @@ export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ uniqueKey, 
     <Tile
       image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
       heading={
-        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
+        <SkeletonLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />
-        </ContentLoader>
+        </SkeletonLoader>
       }
       tags={[
-        <ContentLoader uniqueKey={uniqueKey && `${uniqueKey}--tags`} width="30%" height="1em" animate={animate}>
+        <SkeletonLoader uniqueKey={uniqueKey && `${uniqueKey}--tags`} width="30%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />
-        </ContentLoader>,
+        </SkeletonLoader>,
       ]}
       {...props}
     />

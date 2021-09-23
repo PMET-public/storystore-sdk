@@ -1,0 +1,22 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Html from '.'
+
+<Meta title="UIComponents/Html" component={Html} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return <Html {...args} />
+}
+
+# Html
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="Html" args={{ htmlString: '<strong>Hello</strong> World!' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Html } from '@storystore/ui-kit/components'
+```

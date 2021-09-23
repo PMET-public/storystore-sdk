@@ -1,6 +1,6 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge, getBreakpointValues, Size, BreakpointValues, OnColor } from '../../lib'
-import ContentLoader from 'react-content-loader'
+import SkeletonLoader from '../SkeletonLoader'
 
 // Styles
 import style from './Heading.module.css'
@@ -45,8 +45,8 @@ export type HeadingSkeletonProps = HTMLAttributes<SVGAElement> & {
 
 export const HeadingSkeleton: FunctionComponent<HeadingSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
-    <ContentLoader uniqueKey={uniqueKey} width="100%" height="1em" {...props}>
+    <SkeletonLoader uniqueKey={uniqueKey} width="100%" height="1em" {...props}>
       <rect width="100%" height="100%" />
-    </ContentLoader>
+    </SkeletonLoader>
   )
 }

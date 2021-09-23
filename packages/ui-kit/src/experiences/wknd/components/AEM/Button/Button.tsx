@@ -10,22 +10,22 @@ const config = {
 }
 
 const ButtonComponent = ({
-  id,
-  link,
-  icon,
-  text,
-  accessibilityLabel,
+  componentProperties,
   className,
   style,
   itemPath,
-  dataLayer,
-  loading = !dataLayer,
+  cqPath,
+  loading = !cqPath,
+  cqType,
+  loaded = !!cqType,
 }) => {
+  const { id, link, icon, text, accessibilityLabel } = componentProperties
+
   if (icon) console.warn('Button Icon attribute is not supported')
 
   const Root = (p: any) =>
-    loading ? (
-      <ButtonSkeleton key={`skeleton--${itemPath}`} {...p} />
+    loading || !loaded ? (
+      <ButtonSkeleton key={`skeleton--${itemPath}`} animate={loading} {...p} />
     ) : (
       <Button root={link ? <Link href={link} /> : <button />} {...p} />
     )

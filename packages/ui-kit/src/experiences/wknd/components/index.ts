@@ -1,5 +1,5 @@
 export * from './App'
 export * from './AdventureBanner'
 export * from './AdventureTile'
-export * from './Contributor'
+export * from './AdventureContributor'
 export * from './AEM'

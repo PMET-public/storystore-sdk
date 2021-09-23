@@ -1,8 +1,7 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { TitleV2IsEmptyFn } from '@adobe/aem-core-components-react-base'
 import { Fragment, createElement } from 'react'
-import ContentLoader from 'react-content-loader'
-import { Link } from '../../../../../components'
+import { Link, SkeletonLoader } from '../../../../../components'
 
 const resourceType = 'wknd-adventures/components/title'
 
@@ -12,22 +11,22 @@ const config = {
 }
 
 const TitleComponent = ({
-  id,
-  linkDisabled,
-  link,
-  text,
-  type = 'h1',
+  componentProperties,
   className,
   style,
-  dataLayer,
-  loading = !dataLayer,
   itemPath,
+  cqPath,
+  loading = !cqPath,
+  cqType,
+  loaded = !!cqType,
 }) => {
+  const { id, linkDisabled, link, text, type = 'h1' } = componentProperties
+
   const Root = (p: any) =>
-    loading ? (
-      <ContentLoader uniqueKey={`skeleton--${itemPath}`} width="100%" height="1em" {...p}>
-        <rect width="100%" height="100%" />
-      </ContentLoader>
+    loading || !loaded ? (
+      <SkeletonLoader uniqueKey={`skeleton--${itemPath}`} animate={loading} width="100%" height="1em" {...p}>
+        <rect width="40%" height="100%" />
+      </SkeletonLoader>
     ) : (
       createElement(type, p)
     )
