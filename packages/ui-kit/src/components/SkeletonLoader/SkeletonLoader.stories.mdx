@@ -1,22 +1,26 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
-import Html from '.'
+import SkeletonLoader from '.'
 
-<Meta title="UIComponents/Html" component={Html} parameters={{ layout: 'centered' }} />
+<Meta title="UIComponents/SkeletonLoader" component={SkeletonLoader} parameters={{ layout: 'centered' }} />
 
 export const Template = args => {
-  return <Html {...args} />
+  return (
+    <SkeletonLoader {...args}>
+      <rect width="100%" height="100%" />
+    </SkeletonLoader>
+  )
 }
 
-# Html
+# SkeletonLoader
 
 WIP
 
 <Canvas withSource="open">
-  <Story name="Html" args={{ htmlString: '<strong>Hello</strong> World!' }}>
+  <Story name="SkeletonLoader" args={{ animate: true }}>
     {Template.bind({})}
   </Story>
 </Canvas>
 
 ```
-import { Html } from '@storystore/ui-kit/components'
+import { SkeletonLoader } from '@storystore/ui-kit/components'
 ```
