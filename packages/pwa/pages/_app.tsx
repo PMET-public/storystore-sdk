@@ -60,15 +60,15 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           <WKNDApp
             linkRoot={<Link />}
             homeLink={<Link href="/" />}
-            passportLink={<Link href={getSiteURLFromPath('/my-passport/')} />}
+            passportLink={<Link href={getSiteURLFromPath('/my-passport')} />}
             footerMenu={[
               <Link key="home" href={getSiteURLFromPath('/')}>
                 Home
               </Link>,
-              <Link key="adventures" href={getSiteURLFromPath('/adventures/')}>
+              <Link key="adventures" href={getSiteURLFromPath('/adventures')}>
                 Adventures
               </Link>,
-              <Link key="my-trips" href={getSiteURLFromPath('/my-passport/')}>
+              <Link key="my-trips" href={getSiteURLFromPath('/my-passport')}>
                 My Passport
               </Link>,
             ]}
