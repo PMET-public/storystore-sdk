@@ -1,7 +1,11 @@
 import { FunctionComponent } from 'react'
 import { ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AdventureTile, AEMBanner, AEMTitle } from '../../components'
+// WKND Components
+import { AdventureTile } from '../../components'
+// AEM Components
+import { AEMBanner, AEMTitle } from '../../../components'
+// UI Components
 import { Block, TileSkeleton, Heading, Error, Carousel } from '../../../../components'
 import gql from 'graphql-tag'
 
@@ -55,7 +59,7 @@ export type MyPassportProps = {
   bookmarks?: string[]
 }
 
-export const MyPassport: FunctionComponent<MyPassportProps> = ({ AEMModelPath, checkIns, bookmarks }) => {
+export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookmarks }) => {
   // GraphQL Data
   const { error, loading, data } = useQuery(MY_PASSPORT_QUERY, {
     variables: {
@@ -82,6 +86,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ AEMModelPath, c
       {/* Hero (Static Content) */}
       <Block>
         <AEMBanner
+          key="hero-banner"
           pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
           itemPath="hero/banner"
           height="400px"
@@ -93,7 +98,11 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ AEMModelPath, c
       {/* Saved for Later */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<BookmarkedIcon color="red" />} size={{ sm: 'lg', md: '2xl' }}>
-          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/my-passport" itemPath="bookmarks/heading" />
+          <AEMTitle
+            key="bookmark-heading"
+            pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+            itemPath="bookmarks/heading"
+          />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
@@ -119,7 +128,11 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ AEMModelPath, c
       {/* Check-ins */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<CheckedInIcon color="green" />} size={{ sm: 'lg', md: '2xl' }}>
-          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/my-passport" itemPath="checkins/heading" />
+          <AEMTitle
+            key="checkins-heading"
+            pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+            itemPath="checkins/heading"
+          />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>

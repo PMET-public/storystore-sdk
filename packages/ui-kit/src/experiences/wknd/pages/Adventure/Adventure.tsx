@@ -1,7 +1,9 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AEMTitle } from '../../components'
+// AEM Components
+import { AEMTitle } from '../../../components'
+// UI Components
 import { Error, Block, Heading, Html, Button, SkeletonLoader } from '../../../../components'
 
 // Styles
@@ -185,7 +187,11 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* Description */}
             <Block gap="md" className={style.section}>
               <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
-                <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/adventure" itemPath="details/heading" />
+                <AEMTitle
+                  key="details-heading"
+                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  itemPath="details/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureDescription.html} />
@@ -196,6 +202,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<LengthIcon />}>
                   <AEMTitle
+                    key="details-heading-duration"
                     pagePath="/content/storystore/wknd-adventures/us/en/adventure"
                     itemPath="details/heading-duration"
                   />
@@ -206,6 +213,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<GroupIcon />}>
                   <AEMTitle
+                    key="details-heading-group-size"
                     pagePath="/content/storystore/wknd-adventures/us/en/adventure"
                     itemPath="details/heading-group-size"
                   />
@@ -217,6 +225,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<MedalIcon />}>
                   <AEMTitle
+                    key="details-heading-difficulty"
                     pagePath="/content/storystore/wknd-adventures/us/en/adventure"
                     itemPath="details/heading-difficulty"
                   />
@@ -228,6 +237,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<PriceIcon />}>
                   <AEMTitle
+                    key="details-heading-price"
                     pagePath="/content/storystore/wknd-adventures/us/en/adventure"
                     itemPath="details/heading-price"
                   />
@@ -240,7 +250,11 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* Itinerary Section */}
             <Block gap="md" className={style.section}>
               <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
-                <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/adventure" itemPath="itinerary/heading" />
+                <AEMTitle
+                  key="itinerary-heading"
+                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  itemPath="itinerary/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureItinerary.html} />
@@ -250,6 +264,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  key="what-to-bring-heading"
                   pagePath="/content/storystore/wknd-adventures/us/en/adventure"
                   itemPath="what-to-bring/heading"
                 />

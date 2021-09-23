@@ -1,7 +1,11 @@
 import { FunctionComponent } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AdventureTile, AdventureBanner, AEMTitle, AEMBanner } from '../../components'
+// WKND Components
+import { AdventureTile, AdventureBanner } from '../../components'
+// AEM Components
+import { AEMTitle, AEMBanner } from '../../../components'
+// UI Components
 import { Error, Block, Carousel, Heading } from '../../../../components'
 import gql from 'graphql-tag'
 
@@ -117,6 +121,7 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
         <AEMBanner
+          key="her0-banne"
           pagePath="/content/storystore/wknd-adventures/us/en/home"
           itemPath="hero/banner"
           height="800px"
@@ -127,7 +132,13 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       {/* Beginner Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading
-          root={<AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="beginner/heading" />}
+          root={
+            <AEMTitle
+              key="beginner-heading"
+              pagePath="/content/storystore/wknd-adventures/us/en/home"
+              itemPath="beginner/heading"
+            />
+          }
           size={{ sm: 'lg', md: '2xl' }}
         />
 
@@ -146,7 +157,11 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       {/* Camping Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
-          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="outdoor/heading" />
+          <AEMTitle
+            key="outdoor-heading"
+            pagePath="/content/storystore/wknd-adventures/us/en/home"
+            itemPath="outdoor/heading"
+          />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
@@ -164,7 +179,11 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       {/* Overstay Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
-          <AEMTitle pagePath="/content/storystore/wknd-adventures/us/en/home" itemPath="overstay/heading" />
+          <AEMTitle
+            key="overstay-heading"
+            pagePath="/content/storystore/wknd-adventures/us/en/home"
+            itemPath="overstay/heading"
+          />
         </Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak hideScrollBar>
