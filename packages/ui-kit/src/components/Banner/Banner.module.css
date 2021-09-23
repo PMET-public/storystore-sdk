@@ -74,7 +74,7 @@
   justify-content: center;
   padding: var(--spacing-lg) var(--padded);
   position: relative;
-  width: 100%;
+  width: auto;
   z-index: 1;
 }
 

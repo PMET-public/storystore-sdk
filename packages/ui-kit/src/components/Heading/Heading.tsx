@@ -39,11 +39,11 @@ export const Heading: FunctionComponent<HeadingProps> = ({
 }
 
 // Loader Skeleton
-export type BannerSkeletonProps = HTMLAttributes<SVGAElement> & {
+export type HeadingSkeletonProps = HTMLAttributes<SVGAElement> & {
   uniqueKey?: string
 }
 
-export const HeadingSkeleton: FunctionComponent<BannerSkeletonProps> = ({ uniqueKey, ...props }) => {
+export const HeadingSkeleton: FunctionComponent<HeadingSkeletonProps> = ({ uniqueKey, ...props }) => {
   return (
     <ContentLoader uniqueKey={uniqueKey} width="100%" height="1em" {...props}>
       <rect width="100%" height="100%" />

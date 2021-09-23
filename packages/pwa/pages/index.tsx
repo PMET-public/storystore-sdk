@@ -3,7 +3,7 @@ import { Home, HOME_QUERY } from '@storystore/ui-kit/dist/experiences/wknd/pages
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
 
 const HomePage: NextPage = ({ ...props }) => {
-  return <Home {...props} />
+  return <Home AEMModelPath="/content/wknd-adventures/us/en/home" {...props} />
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {

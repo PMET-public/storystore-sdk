@@ -21,7 +21,6 @@ const ImageComponent = ({
   link,
   style,
   dataLayer,
-  key,
   itemPath,
   loading = !dataLayer,
 }) => {

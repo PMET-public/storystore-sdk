@@ -1,19 +1,12 @@
 import { FunctionComponent } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
-import { useNetworkStatus } from '../../../../hooks'
-import { AdventureTile, AdventureBanner, AEMImage, AEMTitle, AEMButton } from '../../components'
-import { Error, Block, Banner, Carousel, Heading, ButtonSkeleton } from '../../../../components'
+import { useNetworkStatus, useAEMModelManager } from '../../../../hooks'
+import { AdventureTile, AdventureBanner, AEMImage, AEMTitle, AEMButton, AEMBanner } from '../../components'
+import { Error, Block, Banner, Carousel, Heading } from '../../../../components'
 import gql from 'graphql-tag'
 
 // Styles
 import style from './Home.module.css'
-
-// AEM Remote SPA Model
-import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
-
-const site = process.env.NEXT_PUBLIC_AEM_SITE
-const modelClient = new ModelClient(new URL(process.env.NEXT_PUBLIC_URL).origin)
-ModelManager.initializeAsync({ modelClient, path: `/content/${site}/us/en/home` })
 
 // GraphQL Query
 export const HOME_QUERY = gql`
@@ -97,7 +90,14 @@ export const HOME_QUERY = gql`
   }
 `
 
-export const Home: FunctionComponent = () => {
+export type HomeProps = {
+  AEMModelPath?: string
+}
+
+export const Home: FunctionComponent<HomeProps> = ({ AEMModelPath }) => {
+  // AEM SPA Data Model
+  useAEMModelManager(AEMModelPath)
+
   // GraphQL Data
   const { loading, data, error } = useQuery(HOME_QUERY)
 
@@ -121,20 +121,11 @@ export const Home: FunctionComponent = () => {
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
-        <Banner
-          backgroundColor="#f4ecea"
-          backgroundImage={<AEMImage pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-image" />}
-          height={{ sm: '500px', lg: '800px' }}
-          heading={
-            <Heading
-              root={<AEMTitle pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-title" />}
-              size={{ sm: '4xl', md: '5xl' }}
-              style={{ paddingRight: '100px' }}
-            />
-          }
-          button={<AEMButton pagePath="/content/wknd-adventures/us/en/home" itemPath="hero/banner-cta" />}
-          align="left"
-          contained
+        <AEMBanner
+          pagePath="/content/wknd-adventures/us/en/home"
+          itemPath="hero/banner"
+          height="800px"
+          heightTablet="1000px"
         />
       </Block>
 
