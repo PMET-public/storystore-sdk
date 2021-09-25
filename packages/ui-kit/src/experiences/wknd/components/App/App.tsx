@@ -8,7 +8,7 @@ import MapIcon from 'remixicon-react/RoadMapFillIcon'
 // AEM Model Manager
 import { ModelClient, ModelManager } from '@adobe/aem-spa-page-model-manager'
 const modelClient = new ModelClient(new URL(process.env.NEXT_PUBLIC_URL).origin)
-ModelManager.initializeAsync({ modelClient, path: '/content/storystore/' })
+ModelManager.initializeAsync({ modelClient, path: '/content/storystore' })
 
 export type AppProps = {
   linkRoot?: ReactElement

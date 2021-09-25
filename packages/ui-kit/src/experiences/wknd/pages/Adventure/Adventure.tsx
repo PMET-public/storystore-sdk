@@ -25,6 +25,9 @@ import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 // Lazy Components
 const AdventureContributor = lazy(() => import('../../components/AdventureContributor'))
 
+// AEM Model Path
+export const ADVENTURE_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/adventure'
+
 // GraphQL Query
 export const ADVENTURE_QUERY = gql`
   query ADVENTURE_QUERY($path: String!) {
@@ -80,6 +83,7 @@ export const ADVENTURE_QUERY = gql`
 `
 
 export type AdventureProps = {
+  model: any
   path: string
   checkedIn?: boolean
   bookmarked?: boolean
@@ -89,6 +93,7 @@ export type AdventureProps = {
 
 export const Adventure: FunctionComponent<AdventureProps> = ({
   path,
+  model,
   checkedIn,
   onCheckIn,
   bookmarked,
@@ -188,8 +193,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  {...model?.details?.heading}
                   key="details-heading"
-                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                   itemPath="details/heading"
                 />
               </Heading>
@@ -202,8 +208,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<LengthIcon />}>
                   <AEMTitle
+                    {...model?.details?.['heading-duration']}
                     key="details-heading-duration"
-                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-duration"
                   />
                 </Heading>
@@ -214,7 +221,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
                 <Heading icon={<GroupIcon />}>
                   <AEMTitle
                     key="details-heading-group-size"
-                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-group-size"
                   />
                 </Heading>
@@ -225,8 +232,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<MedalIcon />}>
                   <AEMTitle
+                    {...model?.details?.['heading-difficulty']}
                     key="details-heading-difficulty"
-                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-difficulty"
                   />
                 </Heading>
@@ -238,7 +246,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
                 <Heading icon={<PriceIcon />}>
                   <AEMTitle
                     key="details-heading-price"
-                    pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-price"
                   />
                 </Heading>
@@ -251,8 +259,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  {...model?.itinerary?.heading}
                   key="itinerary-heading"
-                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                   itemPath="itinerary/heading"
                 />
               </Heading>
@@ -264,8 +273,9 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  {...model?.['what-to-bring']?.heading}
                   key="what-to-bring-heading"
-                  pagePath="/content/storystore/wknd-adventures/us/en/adventure"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                   itemPath="what-to-bring/heading"
                 />
               </Heading>

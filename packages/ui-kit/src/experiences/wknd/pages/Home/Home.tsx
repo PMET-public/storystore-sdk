@@ -94,9 +94,12 @@ export const HOME_QUERY = gql`
   }
 `
 
-export type HomeProps = {}
+// AEM Model Path
+export const HOME_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/home'
 
-export const Home: FunctionComponent<HomeProps> = ({}) => {
+export type HomeProps = { model: any }
+
+export const Home: FunctionComponent<HomeProps> = ({ model }) => {
   // GraphQL Data
   const { loading, data, error } = useQuery(HOME_QUERY)
 
@@ -121,8 +124,9 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
         <AEMBanner
-          key="her0-banne"
-          pagePath="/content/storystore/wknd-adventures/us/en/home"
+          {...model?.hero?.banner}
+          key="hero-banner"
+          pagePath={HOME_AEM_MODEL_PAGE_PATH}
           itemPath="hero/banner"
           height="800px"
           heightTablet="1000px"
@@ -134,8 +138,9 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
         <Heading
           root={
             <AEMTitle
+              {...model?.beginner?.heading}
               key="beginner-heading"
-              pagePath="/content/storystore/wknd-adventures/us/en/home"
+              pagePath={HOME_AEM_MODEL_PAGE_PATH}
               itemPath="beginner/heading"
             />
           }
@@ -158,8 +163,9 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
           <AEMTitle
+            {...model?.outdoor?.heading}
             key="outdoor-heading"
-            pagePath="/content/storystore/wknd-adventures/us/en/home"
+            pagePath={HOME_AEM_MODEL_PAGE_PATH}
             itemPath="outdoor/heading"
           />
         </Heading>
@@ -180,8 +186,9 @@ export const Home: FunctionComponent<HomeProps> = ({}) => {
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
           <AEMTitle
+            {...model?.overstay?.heading}
             key="overstay-heading"
-            pagePath="/content/storystore/wknd-adventures/us/en/home"
+            pagePath={HOME_AEM_MODEL_PAGE_PATH}
             itemPath="overstay/heading"
           />
         </Heading>

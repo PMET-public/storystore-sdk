@@ -1,9 +1,10 @@
-import { NextPage } from 'next'
-import { MyPassport } from '@storystore/ui-kit/dist/experiences/wknd/pages'
+import { GetServerSideProps, NextPage } from 'next'
+import { MyPassport, MY_PASSPORT_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/pages'
+import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
 import { MY_PASSPORT } from '../lib/variables'
 import { useEffect, useState } from 'react'
 
-const MyPassportPage: NextPage = () => {
+const MyPassportPage: NextPage = ({ ...props }) => {
   const [passport, setPassport] = useState<{ checkIns?: string[]; bookmarks?: string[] }>({})
 
   useEffect(() => {
@@ -20,7 +21,15 @@ const MyPassportPage: NextPage = () => {
     setPassport({ checkIns, bookmarks })
   }, [])
 
-  return <MyPassport checkIns={passport.checkIns} bookmarks={passport.bookmarks} />
+  return <MyPassport checkIns={passport.checkIns} bookmarks={passport.bookmarks} {...props} />
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const model = await getPropsFromAEMModelPath(MY_PASSPORT_AEM_MODEL_PAGE_PATH)
+
+  return {
+    props: { model },
+  }
 }
 
 export default MyPassportPage

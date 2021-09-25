@@ -16,6 +16,9 @@ import style from './MyPassport.module.css'
 import CheckedInIcon from 'remixicon-react/CheckDoubleLineIcon'
 import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 
+// AEM Model Path
+export const MY_PASSPORT_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/my-passport'
+
 // GraphQL Query
 export const MY_PASSPORT_QUERY = gql`
   query MY_PASSPORT_QUERY($checkIns: [IDFilterExpression] = [], $bookmarks: [IDFilterExpression] = []) {
@@ -55,11 +58,12 @@ const getEmptySlotsQty = (from = 0, to = 4) => {
 }
 
 export type MyPassportProps = {
+  model?: any
   checkIns?: string[]
   bookmarks?: string[]
 }
 
-export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookmarks }) => {
+export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns, bookmarks }) => {
   // GraphQL Data
   const { error, loading, data } = useQuery(MY_PASSPORT_QUERY, {
     variables: {
@@ -86,8 +90,9 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
       {/* Hero (Static Content) */}
       <Block>
         <AEMBanner
+          {...model?.hero?.banner}
           key="hero-banner"
-          pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+          pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
           itemPath="hero/banner"
           height="400px"
           heightTablet="600px"
@@ -99,8 +104,9 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<BookmarkedIcon color="red" />} size={{ sm: 'lg', md: '2xl' }}>
           <AEMTitle
-            key="bookmark-heading"
-            pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+            {...model?.bookmarks?.heading}
+            key="bookmarks-heading"
+            pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
             itemPath="bookmarks/heading"
           />
         </Heading>
@@ -130,7 +136,8 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ checkIns, bookm
         <Heading icon={<CheckedInIcon color="green" />} size={{ sm: 'lg', md: '2xl' }}>
           <AEMTitle
             key="checkins-heading"
-            pagePath="/content/storystore/wknd-adventures/us/en/my-passport"
+            {...model?.checkins?.heading}
+            pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
             itemPath="checkins/heading"
           />
         </Heading>

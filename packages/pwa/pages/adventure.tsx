@@ -1,7 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { Adventure, ADVENTURE_QUERY } from '@storystore/ui-kit/dist/experiences/wknd/pages'
+import {
+  Adventure,
+  ADVENTURE_QUERY,
+  ADVENTURE_AEM_MODEL_PAGE_PATH,
+} from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
+import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
 
@@ -65,8 +70,8 @@ const AdventurePage: NextPage = ({ ...props }) => {
 
   return (
     <Adventure
-      path={asPath}
       {...props}
+      path={asPath}
       checkedIn={checkedIn}
       onCheckIn={handleOnCheckIn}
       bookmarked={bookmarked}
@@ -89,8 +94,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     })
   } catch (error) {}
 
+  const model = await getPropsFromAEMModelPath(ADVENTURE_AEM_MODEL_PAGE_PATH)
+
   return addApolloState(apolloClient, {
-    props: {},
+    props: { model },
   })
 }
 
