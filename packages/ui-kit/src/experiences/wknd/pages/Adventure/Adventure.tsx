@@ -1,6 +1,8 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
+import { AEMModelProps } from '../../../../lib'
+
 // AEM Components
 import { AEMTitle } from '../../../components'
 // UI Components
@@ -83,7 +85,7 @@ export const ADVENTURE_QUERY = gql`
 `
 
 export type AdventureProps = {
-  model: any
+  model?: AEMModelProps
   path: string
   checkedIn?: boolean
   bookmarked?: boolean

@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
 import { ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
+import { AEMModelProps } from '../../../../lib'
+
 // WKND Components
 import { AdventureTile } from '../../components'
 // AEM Components
@@ -58,7 +60,7 @@ const getEmptySlotsQty = (from = 0, to = 4) => {
 }
 
 export type MyPassportProps = {
-  model?: any
+  model?: AEMModelProps
   checkIns?: string[]
   bookmarks?: string[]
 }

@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
 import { useQuery, ServerError } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
+import { AEMModelProps } from '../../../../lib'
+
 // WKND Components
 import { AdventureTile, AdventureBanner } from '../../components'
 // AEM Components
@@ -97,7 +99,7 @@ export const HOME_QUERY = gql`
 // AEM Model Path
 export const HOME_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/home'
 
-export type HomeProps = { model: any }
+export type HomeProps = { model?: AEMModelProps }
 
 export const Home: FunctionComponent<HomeProps> = ({ model }) => {
   // GraphQL Data
