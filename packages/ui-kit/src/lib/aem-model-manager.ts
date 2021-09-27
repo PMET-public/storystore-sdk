@@ -1,4 +1,10 @@
-import { Model, ModelManager } from '@adobe/aem-spa-page-model-manager'
+import { Model, ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
+
+export const initAEMModel = (apiHost: string) => {
+  const modelClient = new ModelClient(apiHost)
+  ModelManager.initializeAsync({ modelClient })
+  console.log('✨ AEM Model Initialized', ModelManager.rootPath)
+}
 
 export type AEMModelProps = {
   [pathId: string]: AEMModelProps | undefined

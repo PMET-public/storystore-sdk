@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo, ReactElement } from 'react'
+import { initAEMModel } from '../../../../lib'
 import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
 
 // Icons
@@ -6,9 +7,7 @@ import LogoIcon from '../../assets/wknd-adventures_logo.svg'
 import MapIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
-import { ModelClient, ModelManager } from '@adobe/aem-spa-page-model-manager'
-const modelClient = new ModelClient(new URL(process.env.NEXT_PUBLIC_URL).origin)
-ModelManager.initializeAsync({ modelClient, path: '/content/storystore' })
+initAEMModel(new URL(process.env.NEXT_PUBLIC_URL).origin)
 
 export type AppProps = {
   linkRoot?: ReactElement
