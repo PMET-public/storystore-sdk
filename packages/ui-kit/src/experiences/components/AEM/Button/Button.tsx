@@ -1,6 +1,6 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { ButtonV1IsEmptyFn } from '@adobe/aem-core-components-react-base'
-import { Button, ButtonSkeleton, Link } from '../../../../../components'
+import { Button, ButtonSkeleton, Link } from '../../../../components'
 
 const resourceType = '/storystore/components/button'
 

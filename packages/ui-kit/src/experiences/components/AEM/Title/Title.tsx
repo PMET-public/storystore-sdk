@@ -1,7 +1,7 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { TitleV2IsEmptyFn } from '@adobe/aem-core-components-react-base'
 import { Fragment, createElement } from 'react'
-import { Link, SkeletonLoader } from '../../../../../components'
+import { Link, SkeletonLoader } from '../../../../components'
 
 const resourceType = 'storystore/components/title'
 

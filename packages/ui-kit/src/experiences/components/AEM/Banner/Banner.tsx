@@ -1,6 +1,6 @@
 import { createElement } from 'react'
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
-import { Banner, BannerSkeleton, Heading, Link, Button } from '../../../../../components'
+import { Banner, BannerSkeleton, Heading, Link, Button } from '../../../../components'
 
 const resourceType = 'storystore/components/banner'
 
