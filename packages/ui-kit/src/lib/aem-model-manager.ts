@@ -1,8 +1,12 @@
 import { Model, ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
+import { ModelManagerConfiguration } from '@adobe/aem-spa-page-model-manager/dist/ModelManager'
 
-export const initAEMModel = (apiHost: string) => {
+export const initAEMModel = (options?: ModelManagerConfiguration) => {
+  const apiHost = new URL(process.env.NEXT_PUBLIC_URL).origin
   const modelClient = new ModelClient(apiHost)
-  ModelManager.initializeAsync({ modelClient })
+
+  ModelManager.initializeAsync({ modelClient, ...options })
+
   console.log('✨ AEM Model Initialized', ModelManager.rootPath)
 }
 

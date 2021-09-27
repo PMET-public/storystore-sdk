@@ -7,7 +7,7 @@ import LogoIcon from '../../assets/wknd-adventures_logo.svg'
 import MapIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
-initAEMModel(new URL(process.env.NEXT_PUBLIC_URL).origin)
+initAEMModel()
 
 export type AppProps = {
   linkRoot?: ReactElement
