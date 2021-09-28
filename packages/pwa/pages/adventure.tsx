@@ -10,8 +10,16 @@ import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
 
+const getPathFromQuery = (query: any) => {
+  const { site, locale, path } = query
+  const pathAsString = typeof path === 'string' ? path : path.join('/')
+  return `/content/dam/${site}/${locale}/adventures/${pathAsString}`
+}
+
 const AdventurePage: NextPage = ({ ...props }) => {
-  const { asPath } = useRouter()
+  const { query } = useRouter()
+
+  const path = getPathFromQuery(query)
 
   const [passport, setPassport] = useState({})
 
@@ -19,8 +27,8 @@ const AdventurePage: NextPage = ({ ...props }) => {
     setPassport(JSON.parse(localStorage.getItem(MY_PASSPORT) || '{}'))
   }, [])
 
-  const bookmarked = !!passport[asPath]?.bookmark
-  const checkedIn = !!passport[asPath]?.checkIn
+  const bookmarked = !!passport[path]?.bookmark
+  const checkedIn = !!passport[path]?.checkIn
 
   const handleOnCheckIn = useCallback(
     (id: string) => {
@@ -71,7 +79,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
   return (
     <Adventure
       {...props}
-      path={asPath}
+      path={path}
       checkedIn={checkedIn}
       onCheckIn={handleOnCheckIn}
       bookmarked={bookmarked}
@@ -83,21 +91,19 @@ const AdventurePage: NextPage = ({ ...props }) => {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const apolloClient = getApolloClient()
 
-  const { site, locale, path: _path } = query
-
-  const path = typeof _path === 'string' ? _path : _path.join('/')
+  const { site, locale, path } = query
 
   try {
     await apolloClient.query({
       query: ADVENTURE_QUERY,
-      variables: { path: `/content/dam/${site}/${locale}/adventures/${path}` },
+      variables: { path: getPathFromQuery({ site, locale, path }) },
     })
   } catch (error) {}
 
   const model = await getPropsFromAEMModelPath(ADVENTURE_AEM_MODEL_PAGE_PATH)
 
   return addApolloState(apolloClient, {
-    props: { model },
+    props: { model, path },
   })
 }
 
