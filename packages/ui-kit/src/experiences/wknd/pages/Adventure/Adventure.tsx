@@ -89,6 +89,7 @@ export type AdventureProps = {
   path: string
   checkedIn?: boolean
   bookmarked?: boolean
+  editing?: boolean
   onCheckIn?: (id: string) => any
   onBookmark?: (id: string) => any
 }
@@ -100,6 +101,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   onCheckIn,
   bookmarked,
   onBookmark,
+  editing,
 }) => {
   // GraphQL Data
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
@@ -121,7 +123,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   return (
     <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>
       {/* Adventure Image */}
-      <div className={style.image}>
+      <div className={style.image} style={{ ['--header-image-height' as string]: editing ? '100%' : '100vh' }}>
         {adventure?.adventurePrimaryImage && (
           <img
             src={adventure.adventurePrimaryImage._path}
