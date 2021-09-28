@@ -224,6 +224,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<GroupIcon />}>
                   <AEMTitle
+                    {...model?.details?.['heading-group-size']}
                     key="details-heading-group-size"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-group-size"
@@ -249,6 +250,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<PriceIcon />}>
                   <AEMTitle
+                    {...model?.details?.['heading-price']}
                     key="details-heading-price"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
                     itemPath="details/heading-price"
