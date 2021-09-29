@@ -9,7 +9,7 @@ export const initAEMModel = (options?: ModelManagerConfiguration) => {
 
   const editing = AuthoringUtils.isInEditor()
 
-  console.log('✨ AEM Model Initialized', ModelManager.rootPath, `(${editing ? 'Editing' : 'Viewing'})`)
+  console.log(`✨ AEM Model Initialized (${editing ? 'Editing' : 'Viewing'})`)
 
   return { editing }
 }
