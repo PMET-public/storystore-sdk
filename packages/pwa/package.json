@@ -1,6 +1,6 @@
 {
   "name": "@storystore/pwa",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "license": "MIT",
   "bin": "bin/server.js",
   "author": "Carlos A. Cabrera @fnhipster",
