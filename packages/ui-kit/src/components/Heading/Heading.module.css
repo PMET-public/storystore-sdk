@@ -8,6 +8,11 @@
   vertical-align: middle;
 }
 
+.icon {
+  width: auto;
+  height: 1.1em;
+}
+
 .root em {
   font-style: italic;
 }

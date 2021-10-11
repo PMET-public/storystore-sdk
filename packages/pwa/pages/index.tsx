@@ -1,25 +1,23 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { Home, HOME_QUERY } from '@storystore/ui-kit/dist/experiences/wknd/pages'
-import { Link } from '@storystore/ui-kit'
+import { Home, HOME_QUERY, HOME_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/pages'
+import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
-import { getServerSideApolloClientContext } from '../lib/graphql-variables'
 
 const HomePage: NextPage = ({ ...props }) => {
-  return <Home heroCTA={<Link href="/adventures">View Adventures</Link>} {...props} />
+  return <Home {...props} />
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = getApolloClient()
 
   try {
-    await apolloClient.query({
-      query: HOME_QUERY,
-      context: { ...getServerSideApolloClientContext(req) },
-    })
+    await apolloClient.query({ query: HOME_QUERY })
   } catch (error) {}
 
+  const model = await getPropsFromAEMModelPath(HOME_AEM_MODEL_PAGE_PATH)
+
   return addApolloState(apolloClient, {
-    props: {},
+    props: { model },
   })
 }
 

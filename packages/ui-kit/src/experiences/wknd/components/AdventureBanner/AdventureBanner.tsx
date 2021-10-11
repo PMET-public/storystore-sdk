@@ -27,7 +27,7 @@ export const AdventureBanner: FunctionComponent<AdventureBannerProps> = ({
 
   return (
     <Banner
-      height={{ sm: '70vh', lg: '600px' }}
+      height="600px"
       align="left"
       vAlign="bottom"
       screen="dark"

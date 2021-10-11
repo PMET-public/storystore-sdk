@@ -1,16 +1,20 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import Contributor from '.'
+import AdventureContributor from '.'
 import { settings } from '../../../../../.storybook/lib'
 
-<Meta title="Experiences/WKND/Components/Contributor" component={Contributor} parameters={{ layout: 'centered' }} />
+<Meta
+  title="Experiences/WKND/Components/AdventureContributor"
+  component={AdventureContributor}
+  parameters={{ layout: 'centered' }}
+/>
 
-export const Template = args => <Contributor {...args} />
+export const Template = args => <AdventureContributor {...args} />
 
-# Contributor
+# AdventureContributor
 
 <Canvas withSource="open">
   <Story
-    name="Contributor"
+    name="AdventureContributor"
     args={{
       loading: false,
       fullName: 'Jane Doe',

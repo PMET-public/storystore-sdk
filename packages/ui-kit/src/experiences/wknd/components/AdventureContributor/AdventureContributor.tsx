@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react'
 import { MediaItem, Html } from '../../../../components'
 
-export type ContributorProps = {
+export type AdventureContributorProps = {
   loading?: boolean
   fullName?: string
   biographyText?: { html: string }
@@ -11,7 +11,7 @@ export type ContributorProps = {
   }
 }
 
-export const Contributor: FunctionComponent<ContributorProps> = ({
+export const AdventureContributor: FunctionComponent<AdventureContributorProps> = ({
   loading,
   fullName,
   biographyText,

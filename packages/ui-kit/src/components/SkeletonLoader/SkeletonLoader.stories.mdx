@@ -1,0 +1,26 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import SkeletonLoader from '.'
+
+<Meta title="UIComponents/SkeletonLoader" component={SkeletonLoader} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return (
+    <SkeletonLoader {...args}>
+      <rect width="100%" height="100%" />
+    </SkeletonLoader>
+  )
+}
+
+# SkeletonLoader
+
+WIP
+
+<Canvas withSource="open">
+  <Story name="SkeletonLoader" args={{ animate: true }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { SkeletonLoader } from '@storystore/ui-kit/components'
+```

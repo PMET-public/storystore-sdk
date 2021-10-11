@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createProxyMiddleware } from 'http-proxy-middleware'
 import { runMiddleware } from '../../lib/run-middleware'
-import { getEnvironmentVariables } from '../../lib/graphql-variables'
-import { auth } from '@storystore/toolbox'
 import { URL } from 'url'
 
 export const config = {
@@ -12,19 +10,30 @@ export const config = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { AEM_GRAPHQL_URL, AEM_GRAPHQL_AUTH } = getEnvironmentVariables(req)
+  const target = new URL(process.env.AEM_HOST).origin
+
+  const origin = new URL(process.env.NEXT_PUBLIC_URL).origin
+
+  const auth = process.env.AEM_AUTH
+
+  const graphQLPath = process.env.AEM_GRAPHQL_PATH
 
   await runMiddleware(
     req,
     res,
     createProxyMiddleware({
-      target: new URL(AEM_GRAPHQL_URL).origin,
+      target,
+      auth,
       changeOrigin: false,
       headers: {
-        Authorization: AEM_GRAPHQL_AUTH && auth.getBasicAuthenticationHeader(AEM_GRAPHQL_AUTH.split(':')),
+        ...(req.headers as any),
+        origin,
       },
-      // @ts-ignore
-      onError: ({ code }) => {
+      pathRewrite: {
+        '/__graphql': graphQLPath,
+      },
+
+      onError: ({ code }: any) => {
         if (code === 'ECONNREFUSED' || code === 'ENOTFOUND') {
           res.status(404)
           res.send({})

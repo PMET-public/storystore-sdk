@@ -1,19 +1,11 @@
 .root {
   --header-height: 85px;
-  min-height: 100vh;
+  min-height: calc(100% + var(--header-height));
   margin-top: calc(var(--header-height) * -1);
 }
 
-.heading svg {
-  vertical-align: middle;
-  margin-right: var(--spacing-sm);
-  height: 1em;
-  width: auto;
-  margin-top: -0.125em;
-}
-
 .image {
-  height: 80vh;
+  height: calc(var(--header-image-height) - 200px);
   position: sticky;
   top: 0;
   z-index: -1;
@@ -46,21 +38,14 @@
   padding: var(--spacing-lg) 0;
 }
 
-.details span {
-  align-items: center;
+.detail {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-  display: grid;
-  grid-gap: var(--spacing-sm);
-  grid-template-columns: max-content max-content;
   padding: var(--spacing-md);
-}
-
-.details strong {
   display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: var(--spacing-sm);
   align-items: center;
-  grid-template-columns: max-content max-content;
-  grid-gap: var(--spacing-md);
 }
 
 .section {
@@ -71,8 +56,7 @@
 
 @media (min-width: 1024px) {
   .image {
-    height: 100vh;
-    top: 0;
+    height: var(--header-image-height);
   }
 
   .wrapper {

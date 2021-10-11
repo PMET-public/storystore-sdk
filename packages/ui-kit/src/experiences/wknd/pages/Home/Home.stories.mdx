@@ -22,12 +22,5 @@ export const Template = args => (
 # Home
 
 <Canvas withSource="open">
-  <Story
-    name="Home"
-    args={{
-      heroCTA: <a>View Adventures</a>,
-    }}
-  >
-    {Template.bind({})}
-  </Story>
+  <Story name="Home">{Template.bind({})}</Story>
 </Canvas>

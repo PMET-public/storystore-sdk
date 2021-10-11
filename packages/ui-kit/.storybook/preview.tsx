@@ -69,10 +69,16 @@ const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ 
 
 export const decorators = [
   (Story: FunctionComponent) => {
-    const { graphQlEndpoint, graphQlBasicAuth } = useVariables()
+    const {
+      AEMEndpoint = process.env.AEM_HOST,
+      AEMBasicAuth = process.env.AEM_AUTH,
+      graphQlPath = process.env.AEM_GRAPHQL_PATH,
+    } = useVariables()
+
+    const uri = new URL(graphQlPath, AEMEndpoint).href
 
     return (
-      <ApolloProviderWrapper uri={graphQlEndpoint} basicAuth={graphQlBasicAuth}>
+      <ApolloProviderWrapper uri={uri} basicAuth={AEMBasicAuth}>
         <UIProvider>
           <Story />
         </UIProvider>

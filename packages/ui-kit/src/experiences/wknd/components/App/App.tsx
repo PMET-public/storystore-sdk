@@ -1,9 +1,13 @@
-import { FunctionComponent, useMemo, ReactElement } from 'react'
+import { FunctionComponent, useMemo, ReactElement, cloneElement, isValidElement } from 'react'
+import { initAEMModel } from '../../../../lib'
 import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
 
 // Icons
 import LogoIcon from '../../assets/wknd-adventures_logo.svg'
 import MapIcon from 'remixicon-react/RoadMapFillIcon'
+
+// AEM Model Manager
+const { editing } = initAEMModel()
 
 export type AppProps = {
   linkRoot?: ReactElement
@@ -19,6 +23,7 @@ export const App: FunctionComponent<AppProps> = ({
   passportLink = <a href="#" />,
   menu: _menu = [],
   footerMenu,
+  children,
   ...props
 }) => {
   const menu = useMemo(
@@ -59,6 +64,8 @@ export const App: FunctionComponent<AppProps> = ({
         />
       }
       footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
-    />
+    >
+      {isValidElement(children) ? cloneElement(children, { editing }) : children}
+    </AppComponent>
   )
 }

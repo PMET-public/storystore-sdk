@@ -1,8 +1,12 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { Error, Block, Heading, Html, Button } from '../../../../components'
-import ContentLoader from 'react-content-loader'
+import { AEMModelProps } from '../../../../lib'
+
+// AEM Components
+import { AEMTitle } from '../../../components'
+// UI Components
+import { Error, Block, Heading, Html, Button, SkeletonLoader } from '../../../../components'
 
 // Styles
 import style from './Adventure.module.css'
@@ -21,7 +25,10 @@ import BookmarkIcon from 'remixicon-react/Bookmark3LineIcon'
 import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 
 // Lazy Components
-const Contributor = lazy(() => import('../../components/Contributor'))
+const AdventureContributor = lazy(() => import('../../components/AdventureContributor'))
+
+// AEM Model Path
+export const ADVENTURE_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/adventure'
 
 // GraphQL Query
 export const ADVENTURE_QUERY = gql`
@@ -32,7 +39,6 @@ export const ADVENTURE_QUERY = gql`
         adventureTitle
         adventureType
         adventureTripLength
-        adventureActivity
         adventureGroupSize
         adventureDifficulty
         adventurePrice
@@ -79,25 +85,31 @@ export const ADVENTURE_QUERY = gql`
 `
 
 export type AdventureProps = {
+  model?: AEMModelProps
   path: string
   checkedIn?: boolean
   bookmarked?: boolean
+  editing?: boolean
   onCheckIn?: (id: string) => any
   onBookmark?: (id: string) => any
 }
 
 export const Adventure: FunctionComponent<AdventureProps> = ({
   path,
+  model,
   checkedIn,
   onCheckIn,
   bookmarked,
   onBookmark,
+  editing,
 }) => {
   // GraphQL Data
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
 
   // Network Online/Offline State
   const online = useNetworkStatus()
+
+  const clientSideOnly = typeof window !== 'undefined'
 
   // Error View
   if (error) {
@@ -108,14 +120,10 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   // Adventure Object
   const adventure = data?.adventureByPath.item
 
-  const clientSideOnly = typeof window !== 'undefined'
-
-  console.log({ clientSideOnly })
-
   return (
     <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>
       {/* Adventure Image */}
-      <div className={style.image}>
+      <div className={style.image} style={{ ['--header-image-height' as string]: editing ? '100%' : '100vh' }}>
         {adventure?.adventurePrimaryImage && (
           <img
             src={adventure.adventurePrimaryImage._path}
@@ -129,7 +137,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
       {/* Content */}
       <Block padded className={style.wrapper}>
         {loading && !adventure ? (
-          <ContentLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
+          <SkeletonLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
             <rect width="191.58" height="23.16" />
             <rect y="31.58" width="396.62" height="38.26" />
             <rect y="106.32" width="604.62" height="353.71" />
@@ -137,13 +145,13 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <rect y="575.79" width="295.2" height="61.96" />
             <rect x="308.42" y="492.63" width="295.2" height="61.96" />
             <rect x="308.42" y="575.79" width="295.2" height="61.96" />
-          </ContentLoader>
+          </SkeletonLoader>
         ) : (
           <Block gap="lg" className={style.content}>
             {/* Title */}
             <header>
               <Heading root={<span />} size={{ sm: 'md', lg: 'lg' }}>
-                {adventure.adventureTripLength} {adventure.adventureType}
+                {adventure.adventureTripLength} – {adventure.adventureType}
               </Heading>
 
               <Heading root={<h2 />} size={{ sm: '2xl', lg: '4xl' }}>
@@ -187,51 +195,81 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
             {/* Description */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <MapIcon />
-                {adventure.adventureActivity} Details
+              <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle
+                  {...model?.details?.heading}
+                  key="details-heading"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                  itemPath="details/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureDescription.html} />
             </Block>
 
             {/* Details List/Icons */}
-            <Block className={style.details} gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
-              <span>
-                <strong>
-                  <LengthIcon />
-                  Trip Length:
-                </strong>
-                {adventure.adventureTripLength}
-              </span>
-              <span>
-                <strong>
-                  <GroupIcon />
-                  Group Size:
-                </strong>
+            <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
+              <div className={style.detail}>
+                <Heading icon={<LengthIcon />}>
+                  <AEMTitle
+                    {...model?.details?.['heading-duration']}
+                    key="details-heading-duration"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                    itemPath="details/heading-duration"
+                  />
+                </Heading>
+                <span>{adventure.adventureTripLength}</span>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<GroupIcon />}>
+                  <AEMTitle
+                    {...model?.details?.['heading-group-size']}
+                    key="details-heading-group-size"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                    itemPath="details/heading-group-size"
+                  />
+                </Heading>
+
                 {adventure.adventureGroupSize}
-              </span>
-              <span>
-                <strong>
-                  <MedalIcon />
-                  Dificulty:
-                </strong>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<MedalIcon />}>
+                  <AEMTitle
+                    {...model?.details?.['heading-difficulty']}
+                    key="details-heading-difficulty"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                    itemPath="details/heading-difficulty"
+                  />
+                </Heading>
+
                 {adventure.adventureDifficulty}
-              </span>
-              <span>
-                <strong>
-                  <PriceIcon />
-                  Price:
-                </strong>
+              </div>
+
+              <div className={style.detail}>
+                <Heading icon={<PriceIcon />}>
+                  <AEMTitle
+                    {...model?.details?.['heading-price']}
+                    key="details-heading-price"
+                    pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                    itemPath="details/heading-price"
+                  />
+                </Heading>
+
                 {adventure.adventurePrice}
-              </span>
+              </div>
             </Block>
 
             {/* Itinerary Section */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <CalendarIcon />
-                Itinerary
+              <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle
+                  {...model?.itinerary?.heading}
+                  key="itinerary-heading"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                  itemPath="itinerary/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureItinerary.html} />
@@ -239,9 +277,13 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
             {/* What to Bring Section */}
             <Block gap="md" className={style.section}>
-              <Heading root={<h3 />} className={style.heading} size={{ sm: 'xl', lg: '2xl' }}>
-                <BagIcon />
-                What to Bring
+              <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+                <AEMTitle
+                  {...model?.['what-to-bring']?.heading}
+                  key="what-to-bring-heading"
+                  pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
+                  itemPath="what-to-bring/heading"
+                />
               </Heading>
 
               <Html htmlString={adventure.adventureGearList.html} />
@@ -255,7 +297,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <Suspense fallback="">
                 {adventure.contributor && (
                   <Block>
-                    <Contributor {...adventure.contributor} />
+                    <AdventureContributor {...adventure.contributor} />
                   </Block>
                 )}
               </Suspense>

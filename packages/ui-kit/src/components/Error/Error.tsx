@@ -24,7 +24,8 @@ const error = (status: string | number) => {
       return (
         <span>
           <LockIcon />
-          The GraphQL credentials provided are incorrect. Please check your configuration.
+          You don't seem to have access to this environment. <br />
+          Please check your configuration.
         </span>
       )
     case '404':
