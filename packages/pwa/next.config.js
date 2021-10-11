@@ -8,6 +8,8 @@ module.exports = withPlugins([withPWA, withStoryStore], {
     esmExternals: 'loose',
   },
 
+  assetPrefix: process.env.NEXT_PUBLIC_URL,
+
   pwa: {
     dest: '.next/static',
     disable: process.env.NODE_ENV === 'development',
@@ -17,11 +19,11 @@ module.exports = withPlugins([withPWA, withStoryStore], {
     return [
       {
         source: '/(.*?)',
-        headers: [{ key: 'Access-Control-Allow-Origin', value: process.env.AEM_HOST }],
-      },
-      {
-        source: '/__graphql',
-        headers: [{ key: 'Access-Control-Allow-Methods', value: 'POST, GET, OPTIONS' }],
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: process.env.AEM_HOST },
+          { key: 'Access-Control-Allow-Methods', value: '*' },
+          { key: 'Access-Control-Allow-Headers', value: '*' },
+        ],
       },
     ]
   },

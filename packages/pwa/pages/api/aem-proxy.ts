@@ -12,8 +12,6 @@ export const config = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const target = new URL(process.env.AEM_HOST).origin
 
-  const origin = new URL(process.env.NEXT_PUBLIC_URL).origin
-
   const auth = process.env.AEM_AUTH
 
   const graphQLPath = process.env.AEM_GRAPHQL_PATH
@@ -24,11 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     createProxyMiddleware({
       target,
       auth,
-      changeOrigin: false,
-      headers: {
-        ...(req.headers as any),
-        origin,
-      },
+      changeOrigin: true,
       pathRewrite: {
         '/__graphql': graphQLPath,
       },
