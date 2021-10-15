@@ -4,8 +4,6 @@ const express = require('express')
 const path = require('path')
 const { cookies } = require('@storystore/toolbox')
 
-const ADDON_ID = 'storybook-variables'
-
 module.exports = function expressMiddleware(router) {
   /** Static Assets */
   router.use('/__assets/:site/', (req, res, next) => {
@@ -16,21 +14,21 @@ module.exports = function expressMiddleware(router) {
 
   /** AEM Proxy */
   router.use(['^/__graphql', '^/content'], (req, res, next) => {
-    const cookie = cookies.getCookieValueFromString(req.headers.cookie, ADDON_ID)
+    const cookie = cookies.getCookieValueFromString(req.headers.cookie, 'storybook-variables')
     const settings = JSON.parse(cookie)
     const searchQuery = new URL(req.headers.referer).search
     const id = new URLSearchParams(searchQuery).get('id')
 
     const {
-      AEMEndpoint = process.env.AEM_HOST,
-      AEMBasicAuth = process.env.AEM_AUTH,
-      graphQlPath = process.env.AEM_GRAPHQL_PATH,
+      AEM_HOST = process.env.AEM_HOST,
+      AEM_AUTH = process.env.AEM_AUTH,
+      AEM_GRAPHQL_PATH = process.env.AEM_GRAPHQL_PATH,
     } = (settings || {})[id] || {}
 
-    const endpoint = new URL(graphQlPath, AEMEndpoint)
+    const endpoint = new URL(AEM_GRAPHQL_PATH, AEM_HOST)
 
     createProxyMiddleware({
-      auth: AEMBasicAuth,
+      auth: AEM_AUTH,
       target: endpoint.origin,
       changeOrigin: false,
       onProxyReq: fixRequestBody,

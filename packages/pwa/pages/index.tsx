@@ -7,11 +7,18 @@ const HomePage: NextPage = ({ ...props }) => {
   return <Home {...props} />
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const apolloClient = getApolloClient()
 
   try {
-    await apolloClient.query({ query: HOME_QUERY })
+    const { data } = await apolloClient.query({
+      query: HOME_QUERY,
+      context: {
+        headers: {
+          cookie: req.headers.cookie,
+        },
+      },
+    })
   } catch (error) {}
 
   const model = await getPropsFromAEMModelPath(HOME_AEM_MODEL_PAGE_PATH)
