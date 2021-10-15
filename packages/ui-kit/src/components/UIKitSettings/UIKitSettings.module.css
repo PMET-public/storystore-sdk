@@ -1,0 +1,21 @@
+.checkbox {
+  font-weight: var(--font-semibold);
+  align-items: center;
+  display: grid;
+  font-size: var(--font-xs);
+  grid-gap: var(--spacing-xs);
+  grid-template-columns: auto 1fr;
+}
+
+.checkbox > input {
+  accent-color: currentcolor;
+  height: 1.2em;
+  width: 1.2em;
+}
+
+.checkbox > span {
+  opacity: 0.5;
+}
+.checkbox > input:checked + span {
+  opacity: 1;
+}

@@ -7,6 +7,7 @@
   color: var(--button-text);
   cursor: var(--cursor);
   display: inline-flex;
+  grid-gap: var(--spacing-sm);
   font-size: var(--size);
   font-weight: var(--font-semibold);
   height: 3em;
@@ -69,5 +70,4 @@
   fill: currentColor;
   height: 1.4em;
   width: auto;
-  margin-right: 0.65em;
 }

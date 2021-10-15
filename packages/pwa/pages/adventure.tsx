@@ -88,7 +88,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
   const apolloClient = getApolloClient()
 
   const { site, locale, path } = query
@@ -97,6 +97,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     await apolloClient.query({
       query: ADVENTURE_QUERY,
       variables: { path: getPathFromQuery({ site, locale, path }) },
+      context: {
+        headers: {
+          cookie: req.headers.cookie,
+        },
+      },
     })
   } catch (error) {}
 

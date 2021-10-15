@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 
 export const Template = args => {
   const { register, watch } = useForm()
-  console.log(watch('input'))
   return <Input {...args} name="firstName" />
 }
 

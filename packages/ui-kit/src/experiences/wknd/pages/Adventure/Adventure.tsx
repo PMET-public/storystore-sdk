@@ -135,7 +135,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
       </div>
 
       {/* Content */}
-      <Block padded className={style.wrapper}>
+      <Block columns="1fr" padded className={style.wrapper}>
         {loading && !adventure ? (
           <SkeletonLoader uniqueKey="adventure-details" viewBox="0 0 604.62 637.75">
             <rect width="191.58" height="23.16" />
@@ -166,7 +166,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             */}
 
             {/* Buttons */}
-            <Block gap="md" align="start" columns={{ sm: '1fr', md: '1fr 1fr', lg: '180px 180px' }}>
+            <Block gap="md" align="start" columns={{ sm: '1fr', md: '1fr 1fr' }}>
               <Button
                 variant="cta"
                 disabled={!onCheckIn}
