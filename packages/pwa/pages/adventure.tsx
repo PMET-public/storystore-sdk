@@ -55,6 +55,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
       googleAnalytics.event({
         category: 'Adventure',
         action: 'Checked-In',
+        label: id,
       })
     },
     [passport]
@@ -84,6 +85,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
       googleAnalytics.event({
         category: 'Adventure',
         action: 'Bookmarked',
+        label: id,
       })
     },
     [passport]
