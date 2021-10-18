@@ -17,7 +17,7 @@ export const useInitGoogleAnalytics = (uid?: string) => {
   useEffect(() => {
     if (!uid) return
 
-    googleAnalytics.initialize(uid, { debug: true })
+    googleAnalytics.initialize(uid, { debug: false })
 
     googleAnalytics.ga((tracker: any) => {
       setClientId(tracker.get('clientId'))
