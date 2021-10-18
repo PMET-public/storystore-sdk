@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { Adventures } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { Block, Pills } from '@storystore/ui-kit/components'
 import { useState } from 'react'
+import { googleAnalytics } from '../hooks/useGoogleAnalytics'
 
 const AdventuresPage: NextPage = props => {
   const [filters, setFilters] = useState({})
@@ -24,6 +25,13 @@ const AdventuresPage: NextPage = props => {
     }, {})
 
     setFilters(_filters)
+
+    /** Track reset variables */
+    googleAnalytics.event({
+      category: 'Adventures',
+      action: 'Filtered',
+      label: values.adventureActivity,
+    })
   }
 
   return (
