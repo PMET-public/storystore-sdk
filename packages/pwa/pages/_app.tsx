@@ -9,6 +9,7 @@ import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/c
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import { cookies } from '@storystore/toolbox'
+import { useInitGoogleAnalytics, googleAnalytics } from '../hooks/useGoogleAnalytics'
 
 // Icon
 import TerminalIcon from 'remixicon-react/TerminalBoxFillIcon'
@@ -38,6 +39,9 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 }
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
+  /** Initialize Google Analytics (production only) */
+  useInitGoogleAnalytics(process.env.NODE_ENV === 'development' ? null : process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS)
+
   const apolloClient = useApollo(pageProps)
 
   const settings = useUIKitSettings(JSON.parse(cookies.get('STORYSTORE_SETTINGS') || '{}'))
@@ -58,9 +62,13 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         <meta name="keywords" content="Keywords" />
         <meta name="apple-mobile-web-app-title" content="WKND Adventures" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+
         <link rel="shortcut icon" type="image/png" href={getSiteURLFromPath('/favicon.ico')} />
         <link rel="apple-touch-icon" href={getSiteURLFromPath('/icons/apple-touch-icon.png')} />
         <link rel="manifest" href={getSiteURLFromPath('/manifest.webmanifest')} crossOrigin="use-credentials" />
+
+        {/* Google Analytics */}
+        <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
       </Head>
 
       <ApolloProvider client={apolloClient}>
@@ -82,7 +90,12 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
               <Button
                 key="settings"
                 icon={<TerminalIcon aria-label="StoryStore SDK" />}
-                onClick={() => settingsDialog.setOpen(true)}
+                onClick={() => {
+                  settingsDialog.setOpen(true)
+
+                  /** Track Settings being used */
+                  googleAnalytics.modalview('aem-environment-modal')
+                }}
               >
                 AEM Environment
               </Button>,
@@ -93,17 +106,30 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             <Dialog closeOnClickOutside {...settingsDialog}>
               <UIKitSettings
                 {...settings}
-                onSubmit={async (values: unknown) => {
+                onSubmit={async (values: any) => {
                   settings.onSubmit(values)
                   cookies.set('STORYSTORE_SETTINGS', JSON.stringify(values), 30)
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
+
+                  /** Track changed variables */
+                  googleAnalytics.event({
+                    category: 'AEM Environment',
+                    action: 'Changed',
+                    label: values.AEM_HOST,
+                  })
                 }}
                 onReset={async () => {
                   settings.onReset()
                   cookies.remove('STORYSTORE_SETTINGS')
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
+
+                  /** Track reset variables */
+                  googleAnalytics.event({
+                    category: 'AEM Environment',
+                    action: 'Reset',
+                  })
                 }}
               />
             </Dialog>
