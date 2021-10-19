@@ -111,6 +111,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   cookies.set('STORYSTORE_SETTINGS', JSON.stringify(values), 30)
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
+                  window.location.reload()
 
                   /** Track changed variables */
                   trackEvent({
@@ -124,6 +125,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   cookies.remove('STORYSTORE_SETTINGS')
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
+                  window.location.reload()
 
                   /** Track reset variables */
                   trackEvent({
