@@ -8,8 +8,8 @@ import NextLink from 'next/link'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { getSiteURLFromPath } from '../lib/get-site-path'
+import { useTrackers, trackEvent, trackModal } from '../lib/tracker'
 import { cookies } from '@storystore/toolbox'
-import { useInitGoogleAnalytics, googleAnalytics } from '../hooks/useGoogleAnalytics'
 
 // Icon
 import TerminalIcon from 'remixicon-react/TerminalBoxFillIcon'
@@ -40,7 +40,7 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
   /** Initialize Google Analytics (production only) */
-  useInitGoogleAnalytics(process.env.NODE_ENV === 'development' ? null : process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS)
+  useTrackers()
 
   const apolloClient = useApollo(pageProps)
 
@@ -94,7 +94,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   settingsDialog.setOpen(true)
 
                   /** Track Settings being used */
-                  googleAnalytics.modalview('aem-environment-modal')
+                  trackModal('aem-environment-modal')
                 }}
               >
                 AEM Environment
@@ -113,7 +113,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   settingsDialog.setOpen(false)
 
                   /** Track changed variables */
-                  googleAnalytics.event({
+                  trackEvent({
                     category: 'AEM Environment',
                     action: 'Changed',
                     label: values.AEM_HOST,
@@ -126,7 +126,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   settingsDialog.setOpen(false)
 
                   /** Track reset variables */
-                  googleAnalytics.event({
+                  trackEvent({
                     category: 'AEM Environment',
                     action: 'Reset',
                   })
