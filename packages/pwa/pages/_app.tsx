@@ -10,6 +10,7 @@ import { initApolloClient, useApollo } from '@storystore/next-apollo'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import { useTrackers, trackEvent, trackModal } from '../lib/tracker'
 import { cookies } from '@storystore/toolbox'
+import { useRouter } from 'next/router'
 
 // Icon
 import TerminalIcon from 'remixicon-react/TerminalBoxFillIcon'
@@ -39,6 +40,8 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 }
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter()
+
   /** Initialize Google Analytics (production only) */
   useTrackers()
 
@@ -111,7 +114,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   cookies.set('STORYSTORE_SETTINGS', JSON.stringify(values), 30)
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
-                  window.location.reload()
+                  router.reload()
 
                   /** Track changed variables */
                   trackEvent({
@@ -125,7 +128,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                   cookies.remove('STORYSTORE_SETTINGS')
                   await apolloClient.resetStore()
                   settingsDialog.setOpen(false)
-                  window.location.reload()
+                  router.reload()
 
                   /** Track reset variables */
                   trackEvent({
