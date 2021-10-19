@@ -9,7 +9,7 @@ import { addApolloState, getApolloClient } from '@storystore/next-apollo'
 import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
-import { googleAnalytics } from '../hooks/useGoogleAnalytics'
+import { trackEvent } from '../lib/tracker'
 
 const getPathFromQuery = (query: any) => {
   const { site, locale, path } = query
@@ -52,7 +52,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
       localStorage.setItem(MY_PASSPORT, JSON.stringify(newValues))
 
       /** Track reset variables */
-      googleAnalytics.event({
+      trackEvent({
         category: 'Adventure',
         action: 'Checked-In',
         label: id,
@@ -82,7 +82,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
       localStorage.setItem(MY_PASSPORT, JSON.stringify(newValues))
 
       /** Track reset variables */
-      googleAnalytics.event({
+      trackEvent({
         category: 'Adventure',
         action: 'Bookmarked',
         label: id,
