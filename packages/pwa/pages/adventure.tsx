@@ -6,7 +6,7 @@ import {
   ADVENTURE_AEM_MODEL_PAGE_PATH,
 } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
-import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
+import { getPropsFromAEMModel } from '@storystore/ui-kit/lib'
 import { useCallback, useEffect, useState } from 'react'
 import { MY_PASSPORT } from '../lib/variables'
 import { trackEvent } from '../lib/tracker'
@@ -104,12 +104,13 @@ const AdventurePage: NextPage = ({ ...props }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+  /** Get GraphQL Queries */
   const apolloClient = getApolloClient()
 
   const { site, locale, path } = query
 
-  try {
-    await apolloClient.query({
+  await apolloClient
+    .query({
       query: ADVENTURE_QUERY,
       variables: { path: getPathFromQuery({ site, locale, path }) },
       context: {
@@ -118,12 +119,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
         },
       },
     })
-  } catch (error) {}
+    .catch(() => {})
 
-  const model = await getPropsFromAEMModelPath(ADVENTURE_AEM_MODEL_PAGE_PATH)
+  /** Get AEM Model */
+  const model = await fetch(new URL(ADVENTURE_AEM_MODEL_PAGE_PATH + '.model.json', process.env.NEXT_PUBLIC_URL).href, {
+    headers: { cookie: req.headers.cookie },
+  })
+    .then(async res => await res.json())
+    .catch(() => undefined)
 
   return addApolloState(apolloClient, {
-    props: { model, path },
+    props: { model: getPropsFromAEMModel(model), path },
   })
 }
 

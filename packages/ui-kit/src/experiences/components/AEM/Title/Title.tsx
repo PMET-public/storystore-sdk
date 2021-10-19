@@ -10,20 +10,11 @@ const config = {
   resourceType,
 }
 
-const TitleComponent = ({
-  componentProperties,
-  className,
-  style,
-  itemPath,
-  cqPath,
-  loading = !cqPath,
-  cqType,
-  loaded = !!cqType,
-}) => {
+const TitleComponent = ({ componentProperties, className, style, itemPath, cqPath, loading = !cqPath }) => {
   const { id, linkDisabled, link, text, type = 'h1' } = componentProperties
 
   const Root = (p: any) =>
-    loading || !loaded ? (
+    loading ? (
       <SkeletonLoader uniqueKey={`skeleton--${itemPath}`} animate={loading} width="100%" height="1em" {...p}>
         <rect width="40%" height="100%" />
       </SkeletonLoader>

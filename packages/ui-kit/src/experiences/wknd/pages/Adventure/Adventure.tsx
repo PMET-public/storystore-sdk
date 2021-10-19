@@ -197,6 +197,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  text="Overview"
+                  type="h3"
                   {...model?.details?.heading}
                   key="details-heading"
                   pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -212,6 +214,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<LengthIcon />}>
                   <AEMTitle
+                    text="Duration"
+                    type="h3"
                     {...model?.details?.['heading-duration']}
                     key="details-heading-duration"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -224,6 +228,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<GroupIcon />}>
                   <AEMTitle
+                    text="Group Size"
+                    type="h3"
                     {...model?.details?.['heading-group-size']}
                     key="details-heading-group-size"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -237,6 +243,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<MedalIcon />}>
                   <AEMTitle
+                    text="Difficulty"
+                    type="h3"
                     {...model?.details?.['heading-difficulty']}
                     key="details-heading-difficulty"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -250,6 +258,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <div className={style.detail}>
                 <Heading icon={<PriceIcon />}>
                   <AEMTitle
+                    text="Price"
+                    type="h3"
                     {...model?.details?.['heading-price']}
                     key="details-heading-price"
                     pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -265,6 +275,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  text="Itinerary"
+                  type="h3"
                   {...model?.itinerary?.heading}
                   key="itinerary-heading"
                   pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}
@@ -279,6 +291,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" className={style.section}>
               <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
                 <AEMTitle
+                  text="What to Bring"
+                  type="h3"
                   {...model?.['what-to-bring']?.heading}
                   key="what-to-bring-heading"
                   pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}

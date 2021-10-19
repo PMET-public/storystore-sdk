@@ -9,16 +9,7 @@ const config = {
   resourceType,
 }
 
-const BannerComponent = ({
-  componentProperties,
-  className,
-  style,
-  itemPath,
-  cqPath,
-  loading = !cqPath,
-  cqType,
-  loaded = !!cqType,
-}) => {
+const BannerComponent = ({ componentProperties, className, style, itemPath, cqPath, loading = !cqPath }) => {
   const {
     title,
     titleType = 'h2',
@@ -41,7 +32,7 @@ const BannerComponent = ({
     contained,
   } = componentProperties
 
-  if (loading || !loaded)
+  if (loading)
     return (
       <BannerSkeleton
         uniqueKey={`banner-skeleton--${itemPath}`}
