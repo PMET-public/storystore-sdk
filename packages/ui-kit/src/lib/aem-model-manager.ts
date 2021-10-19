@@ -2,8 +2,8 @@ import { Model, ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa
 import { ModelManagerConfiguration } from '@adobe/aem-spa-page-model-manager/dist/ModelManager'
 
 export const initAEMModel = (options?: ModelManagerConfiguration) => {
-  const apiHost = new URL(process.env.NEXT_PUBLIC_URL).origin
-  const modelClient = new ModelClient(apiHost)
+  const apitHost = new URL(process.env.NEXT_PUBLIC_URL).origin
+  const modelClient = new ModelClient(apitHost)
 
   ModelManager.initializeAsync({ modelClient, ...options })
 
@@ -18,7 +18,7 @@ export type AEMModelProps = {
   [pathId: string]: AEMModelProps | undefined
 }
 
-const recursive = (model: Model) => {
+const recursive = (model: Model): AEMModelProps => {
   return Object.entries(model?.[':items'] || {}).reduce((obj, item) => {
     const [key, value] = item
     return {
@@ -28,8 +28,4 @@ const recursive = (model: Model) => {
   }, {})
 }
 
-export const getPropsFromAEMModelPath = async (path: string): Promise<AEMModelProps> => {
-  const model = await ModelManager.getData(path)
-  const props = recursive(model)
-  return props
-}
+export const getPropsFromAEMModel = (model: Model): AEMModelProps => recursive(model)

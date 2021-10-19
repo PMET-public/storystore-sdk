@@ -86,7 +86,7 @@ export const UIKitSettings: FunctionComponent<UIKitSettingsProps> = ({
                   shouldUnregister: true,
                   required: !env?.AEM_HOST,
                   pattern: {
-                    value: /^http:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/,
+                    value: /^https?:\/\/\w+(\.\w+)*(:[0-9]+)?\/?(\/[.\w]*)*$/,
                     message: 'Please enter a valid URL.',
                   },
                 })}

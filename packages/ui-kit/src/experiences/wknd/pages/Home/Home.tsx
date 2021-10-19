@@ -14,6 +14,9 @@ import gql from 'graphql-tag'
 // Styles
 import style from './Home.module.css'
 
+// Assets
+import heroImage from '@storystore/ui-kit/dist/experiences/wknd/assets/bg-adventures-1.jpg'
+
 // GraphQL Query
 export const HOME_QUERY = gql`
   query HOME_QUERY {
@@ -126,6 +129,19 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
         <AEMBanner
+          title="Not all who wander are lost."
+          titleType="h2"
+          fontSize="2xl"
+          fontSizeTablet="3xl"
+          fontSizeDesktop="5xl"
+          backgroundFileReference={heroImage.src}
+          backgroundImageLazy={false}
+          backgroundColor="#f4ecea"
+          buttonLabel="View Adventures"
+          buttonLink="/adventures"
+          align="left"
+          vAlign="middle"
+          contained
           {...model?.hero?.banner}
           key="hero-banner"
           pagePath={HOME_AEM_MODEL_PAGE_PATH}
@@ -140,6 +156,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
         <Heading
           root={
             <AEMTitle
+              text="Trying something new? Start easy."
               {...model?.beginner?.heading}
               key="beginner-heading"
               pagePath={HOME_AEM_MODEL_PAGE_PATH}
@@ -165,6 +182,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
           <AEMTitle
+            text="For the outdoor kind."
             {...model?.outdoor?.heading}
             key="outdoor-heading"
             pagePath={HOME_AEM_MODEL_PAGE_PATH}
@@ -188,6 +206,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
           <AEMTitle
+            text="Time is a construct. Overstay."
             {...model?.overstay?.heading}
             key="overstay-heading"
             pagePath={HOME_AEM_MODEL_PAGE_PATH}

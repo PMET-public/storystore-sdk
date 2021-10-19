@@ -18,6 +18,9 @@ import style from './MyPassport.module.css'
 import CheckedInIcon from 'remixicon-react/CheckDoubleLineIcon'
 import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 
+// Assets
+import heroImage from '@storystore/ui-kit/dist/experiences/wknd/assets/bg-adventures-2.jpg'
+
 // AEM Model Path
 export const MY_PASSPORT_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/my-passport'
 
@@ -92,6 +95,11 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
       {/* Hero (Static Content) */}
       <Block>
         <AEMBanner
+          backgroundFileReference={heroImage.src}
+          screen="lighter"
+          backgroundImageLazy={false}
+          backgroundColor="#f4ecea"
+          contained
           {...model?.hero?.banner}
           key="hero-banner"
           pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
@@ -106,6 +114,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<BookmarkedIcon color="red" />} size={{ sm: 'lg', md: '2xl' }}>
           <AEMTitle
+            text="It's not if, but when–Now!"
             {...model?.bookmarks?.heading}
             key="bookmarks-heading"
             pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
@@ -138,6 +147,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
         <Heading icon={<CheckedInIcon color="green" />} size={{ sm: 'lg', md: '2xl' }}>
           <AEMTitle
             key="checkins-heading"
+            text="Been there, done that."
             {...model?.checkins?.heading}
             pagePath={MY_PASSPORT_AEM_MODEL_PAGE_PATH}
             itemPath="checkins/heading"

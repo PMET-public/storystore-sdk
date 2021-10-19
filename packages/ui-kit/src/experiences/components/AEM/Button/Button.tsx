@@ -9,22 +9,13 @@ const config = {
   resourceType,
 }
 
-const ButtonComponent = ({
-  componentProperties,
-  className,
-  style,
-  itemPath,
-  cqPath,
-  loading = !cqPath,
-  cqType,
-  loaded = !!cqType,
-}) => {
+const ButtonComponent = ({ componentProperties, className, style, itemPath, cqPath, loading = !cqPath }) => {
   const { id, link, icon, text, accessibilityLabel } = componentProperties
 
   if (icon) console.warn('Button Icon attribute is not supported')
 
   const Root = (p: any) =>
-    loading || !loaded ? (
+    loading ? (
       <ButtonSkeleton key={`skeleton--${itemPath}`} animate={loading} {...p} />
     ) : (
       <Button root={link ? <Link href={link} /> : <button />} {...p} />

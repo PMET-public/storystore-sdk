@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { Home, HOME_QUERY, HOME_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/pages'
-import { getPropsFromAEMModelPath } from '@storystore/ui-kit/lib'
+import { getPropsFromAEMModel } from '@storystore/ui-kit/lib'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
 
 const HomePage: NextPage = ({ ...props }) => {
@@ -8,10 +8,11 @@ const HomePage: NextPage = ({ ...props }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  /** Get GraphQL Queries */
   const apolloClient = getApolloClient()
 
-  try {
-    const { data } = await apolloClient.query({
+  await apolloClient
+    .query({
       query: HOME_QUERY,
       context: {
         headers: {
@@ -19,12 +20,17 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
         },
       },
     })
-  } catch (error) {}
+    .catch(() => {})
 
-  const model = await getPropsFromAEMModelPath(HOME_AEM_MODEL_PAGE_PATH)
+  /** Get AEM Model */
+  const model = await fetch(new URL(HOME_AEM_MODEL_PAGE_PATH + '.model.json', process.env.NEXT_PUBLIC_URL).href, {
+    headers: { cookie: req.headers.cookie },
+  })
+    .then(async res => await res.json())
+    .catch(() => undefined)
 
   return addApolloState(apolloClient, {
-    props: { model },
+    props: { model: getPropsFromAEMModel(model) },
   })
 }
 
