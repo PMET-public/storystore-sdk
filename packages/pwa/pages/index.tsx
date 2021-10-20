@@ -14,6 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   await apolloClient
     .query({
       query: HOME_QUERY,
+      fetchPolicy: 'no-cache',
       context: {
         headers: {
           cookie: req.headers.cookie,

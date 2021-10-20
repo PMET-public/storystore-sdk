@@ -28,9 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   /** Get AEM Model */
   const model = await fetch(
     new URL(MY_PASSPORT_AEM_MODEL_PAGE_PATH + '.model.json', process.env.NEXT_PUBLIC_URL).href,
-    {
-      headers: { cookie: req.headers.cookie },
-    }
+    { headers: { cookie: req.headers.cookie } }
   )
     .then(async res => await res.json())
     .catch(() => undefined)
