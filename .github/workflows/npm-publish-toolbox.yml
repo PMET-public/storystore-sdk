@@ -1,0 +1,31 @@
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+    paths:
+      - packages/toolbox/**
+
+jobs:
+  publish-toolbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      # Install dependencies
+      - run: (cd packages/toolbox && npm ci)
+
+      # Check if packages version should be updated
+      - uses: MeilCli/npm-update-check-action@v4
+        id: outdated
+
+      # Publish to NPM
+      - run: (cd packages/toolbox && npm publish)
+        if: steps.outdated.outputs.has_npm_update != 'false'
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
