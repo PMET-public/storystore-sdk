@@ -32,4 +32,4 @@ jobs:
         run: (cd packages/toolbox && npm publish)
         if: steps.outdated.outputs.has_npm_update != 'false'
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
