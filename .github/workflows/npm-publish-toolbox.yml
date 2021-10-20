@@ -3,7 +3,7 @@ on:
     types:
       - closed
     branches:
-      - master
+      - main
     paths:
       - packages/toolbox/**
 
