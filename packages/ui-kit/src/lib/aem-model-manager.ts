@@ -1,17 +1,17 @@
 import { Model, ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import { ModelManagerConfiguration } from '@adobe/aem-spa-page-model-manager/dist/ModelManager'
 
+export const isInEditor = AuthoringUtils.isInEditor
+
 export const initAEMModel = (options?: ModelManagerConfiguration) => {
   const apitHost = new URL(process.env.NEXT_PUBLIC_URL).origin
   const modelClient = new ModelClient(apitHost)
 
   ModelManager.initializeAsync({ modelClient, ...options })
 
-  const editing = AuthoringUtils.isInEditor()
+  const editing = isInEditor()
 
   console.log(`✨ AEM Model Initialized (${editing ? 'Editing' : 'Viewing'})`)
-
-  return { editing }
 }
 
 export type AEMModelProps = {

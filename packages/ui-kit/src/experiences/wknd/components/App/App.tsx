@@ -7,7 +7,7 @@ import LogoIcon from '../../assets/wknd-adventures_logo.svg'
 import MapIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
-const { editing } = initAEMModel()
+initAEMModel()
 
 export type AppProps = {
   linkRoot?: ReactElement
@@ -65,7 +65,7 @@ export const App: FunctionComponent<AppProps> = ({
       }
       footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
     >
-      {isValidElement(children) ? cloneElement(children, { editing }) : children}
+      {children}
     </AppComponent>
   )
 }

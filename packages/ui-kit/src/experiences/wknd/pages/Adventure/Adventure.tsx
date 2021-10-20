@@ -1,7 +1,7 @@
 import { FunctionComponent, lazy, Suspense } from 'react'
 import { gql, ServerError, useQuery } from '@apollo/client'
 import { useNetworkStatus } from '../../../../hooks'
-import { AEMModelProps } from '../../../../lib'
+import { AEMModelProps, isInEditor } from '../../../../lib'
 
 // AEM Components
 import { AEMTitle } from '../../../components'
@@ -89,7 +89,6 @@ export type AdventureProps = {
   path: string
   checkedIn?: boolean
   bookmarked?: boolean
-  editing?: boolean
   onCheckIn?: (id: string) => any
   onBookmark?: (id: string) => any
 }
@@ -101,7 +100,6 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
   onCheckIn,
   bookmarked,
   onBookmark,
-  editing,
 }) => {
   // GraphQL Data
   const { data, loading, error } = useQuery(ADVENTURE_QUERY, { variables: { path } })
@@ -119,6 +117,8 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
   // Adventure Object
   const adventure = data?.adventureByPath.item
+
+  const editing = isInEditor()
 
   return (
     <Block className={style.root} columns={{ sm: '1fr', lg: '1fr 1fr' }}>
