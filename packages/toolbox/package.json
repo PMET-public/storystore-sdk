@@ -1,6 +1,6 @@
 {
   "name": "@storystore/toolbox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A set of JS libraries",
   "main": "index.js",
   "author": "Carlos A. Cabrera @fnhipster",
