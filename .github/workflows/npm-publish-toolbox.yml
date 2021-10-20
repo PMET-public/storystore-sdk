@@ -21,7 +21,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install dependencies
-      - run: yarn workspace @storystore/toolbox install --quiet
+        run: yarn workspace @storystore/toolbox install --quiet
 
       # Check if packages version should be updated
       - uses: MeilCli/npm-update-check-action@v4
