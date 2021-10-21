@@ -108,7 +108,7 @@ export const UIKitSettings: FunctionComponent<UIKitSettingsProps> = ({
                   shouldUnregister: true,
                   required: !env?.AEM_GRAPHQL_PATH,
                   pattern: {
-                    value: /^(\/\w+){0,2}\/?$/,
+                    value: /^(.+)\/([^\/]+)$/,
                     message: 'Please enter a valid path.',
                   },
                 })}
