@@ -10,8 +10,6 @@ export const initAEMModel = (options?: ModelManagerConfiguration) => {
   ModelManager.initializeAsync({ modelClient, ...options })
 
   const editing = isInEditor()
-
-  console.log(`✨ AEM Model Initialized (${editing ? 'Editing' : 'Viewing'})`)
 }
 
 export type AEMModelProps = {

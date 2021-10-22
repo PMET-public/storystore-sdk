@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { createProxyMiddleware } from 'http-proxy-middleware'
+import { createProxyMiddleware, responseInterceptor } from 'http-proxy-middleware'
 import { cookies } from '@storystore/toolbox'
 import { runMiddleware } from '../../lib/run-middleware'
 import { URL } from 'url'
 
 export const config = {
   api: {
+    externalResolver: true,
     bodyParser: false,
   },
 }
@@ -18,16 +19,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const AEM_AUTH = settings?.AEM_AUTH ?? process.env.AEM_AUTH
   const AEM_GRAPHQL_PATH = settings?.AEM_GRAPHQL_PATH ?? process.env.AEM_GRAPHQL_PATH
 
-  await runMiddleware(
+  return runMiddleware(
     req,
     res,
     createProxyMiddleware({
+      logLevel: process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       target: new URL(AEM_HOST).origin,
       auth: AEM_AUTH,
       changeOrigin: true,
+      selfHandleResponse: true,
+      ws: true,
       pathRewrite: {
         '/__graphql': AEM_GRAPHQL_PATH,
       },
+
+      onProxyRes: responseInterceptor(async responseBuffer => {
+        return responseBuffer
+      }),
+
       onError({ code }: any) {
         if (code === 'ECONNREFUSED' || code === 'ENOTFOUND') {
           res.status(404).json({})
