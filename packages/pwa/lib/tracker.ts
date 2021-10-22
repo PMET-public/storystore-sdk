@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 const GOOGLE_ANALYTICS_UID = process.env.NEXT_PUBLIC_TRACKER_GA
 
@@ -41,6 +41,8 @@ const handleRouteChange = (url: string, { shallow }) => {
 }
 
 export const useTrackers = () => {
+  const router = useRouter()
+
   const [gaGlientId, setGAClientId] = useState()
 
   /** Initialize */
@@ -67,7 +69,7 @@ export const useTrackers = () => {
     }
 
     /** Track page view on load */
-    trackPageView(window.location.pathname)
+    trackPageView(router.asPath || router.pathname)
 
     /** track page view on Next.js route change */
     Router.events.on('routeChangeComplete', handleRouteChange)
@@ -75,5 +77,5 @@ export const useTrackers = () => {
     return () => {
       Router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [gaGlientId])
+  }, [gaGlientId, router])
 }

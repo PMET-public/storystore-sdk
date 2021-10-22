@@ -54,6 +54,10 @@
   padding: var(--spacing-md);
 }
 
+.section img {
+  max-width: 100%;
+}
+
 @media (min-width: 1024px) {
   .image {
     height: var(--header-image-height);

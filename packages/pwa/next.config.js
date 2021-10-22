@@ -20,7 +20,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
       {
         source: '/(.*?)',
         headers: [
-          { key: 'Access-Control-Allow-Origin', value: process.env.AEM_HOST },
+          { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Access-Control-Allow-Methods', value: '*' },
           { key: 'Access-Control-Allow-Headers', value: '*' },
         ],
