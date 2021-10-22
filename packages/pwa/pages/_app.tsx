@@ -26,7 +26,7 @@ initApolloClient(
     cache: new InMemoryCache({}),
     link: new HttpLink({
       uri: getSiteURLFromPath('/__graphql'),
-      credentials: 'same-origin',
+      credentials: 'include',
     }),
   })
 )

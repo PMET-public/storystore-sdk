@@ -112,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, query }) => 
   await apolloClient
     .query({
       query: ADVENTURE_QUERY,
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'network-only',
       variables: { path: getPathFromQuery({ site, locale, path }) },
       context: {
         headers: {

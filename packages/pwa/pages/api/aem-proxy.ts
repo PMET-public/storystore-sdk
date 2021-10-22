@@ -30,8 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
       onError({ code }: any) {
         if (code === 'ECONNREFUSED' || code === 'ENOTFOUND') {
-          res.status(404)
-          res.send({})
+          res.status(404).json({})
         }
       },
     })
