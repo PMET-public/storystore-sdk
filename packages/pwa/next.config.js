@@ -15,19 +15,6 @@ module.exports = withPlugins([withPWA, withStoryStore], {
     disable: process.env.NODE_ENV === 'development',
   },
 
-  async headers() {
-    return [
-      {
-        source: '/(.*?)',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: '*' },
-          { key: 'Access-Control-Allow-Headers', value: '*' },
-        ],
-      },
-    ]
-  },
-
   async rewrites() {
     return [
       /** Service Worker (Workbox) */
