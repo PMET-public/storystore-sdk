@@ -1,8 +1,6 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Button from '.'
 
-import Icon from 'remixicon-react/RoadMapLineIcon'
-
 <Meta title="UIComponents/Button" component={Button} parameters={{ layout: 'centered' }} />
 
 export const Template = args => {
@@ -14,7 +12,7 @@ export const Template = args => {
 Buttons allow users to take actions with a single tap.
 
 <Canvas withSource="open">
-  <Story name="Button" args={{ children: 'Button', icon: <Icon /> }}>
+  <Story name="Button" args={{ children: 'Button', icon: 'Home2FillIcon' }}>
     {Template.bind({})}
   </Story>
 </Canvas>

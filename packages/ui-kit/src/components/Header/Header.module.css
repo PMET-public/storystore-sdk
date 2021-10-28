@@ -105,7 +105,8 @@
   width: auto;
 }
 
-.logoWrapper svg {
+.logoWrapper svg,
+.logoWrapper img {
   fill: var(--header-logo-color);
   transition: all 300ms ease;
   height: var(--header-logo-size);
@@ -152,7 +153,8 @@
 }
 
 .menuItem.icon svg,
-svg.menuItem.icon {
+.menuItem.icon img svg.menuItem.icon,
+img.menuItem.icon {
   fill: currentColor;
   height: 1.875rem;
   width: auto;

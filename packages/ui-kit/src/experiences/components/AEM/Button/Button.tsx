@@ -2,7 +2,7 @@ import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 import { ButtonV1IsEmptyFn } from '@adobe/aem-core-components-react-base'
 import { Button, ButtonSkeleton, Link } from '../../../../components'
 
-const resourceType = '/storystore/components/button'
+const resourceType = 'storystore/components/button'
 
 const config = {
   isEmpty: ButtonV1IsEmptyFn,
@@ -12,13 +12,11 @@ const config = {
 const ButtonComponent = ({ componentProperties, className, style, itemPath, cqPath, loading = !cqPath }) => {
   const { id, link, icon, text, accessibilityLabel } = componentProperties
 
-  if (icon) console.warn('Button Icon attribute is not supported')
-
   const Root = (p: any) =>
     loading ? (
       <ButtonSkeleton key={`skeleton--${itemPath}`} animate={loading} {...p} />
     ) : (
-      <Button root={link ? <Link href={link} /> : <button />} {...p} />
+      <Button root={link ? <Link href={link} /> : <button />} icon={icon} {...p} />
     )
 
   return (

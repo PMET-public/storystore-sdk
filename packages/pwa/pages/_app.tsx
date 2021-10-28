@@ -12,9 +12,6 @@ import { useTrackers, trackEvent, trackModal } from '../lib/tracker'
 import { cookies } from '@storystore/toolbox'
 import { useRouter } from 'next/router'
 
-// Icon
-import TerminalIcon from 'remixicon-react/TerminalBoxFillIcon'
-
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
 
@@ -78,21 +75,10 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         <UIProvider>
           <WKNDApp
             linkRoot={<Link />}
-            homeLink={<Link href="/" />}
             passportLink={<Link href={getSiteURLFromPath('/my-passport')} />}
             footerMenu={[
-              <Link key="home" href={getSiteURLFromPath('/')}>
-                Home
-              </Link>,
-              <Link key="adventures" href={getSiteURLFromPath('/adventures')}>
-                Adventures
-              </Link>,
-              <Link key="my-trips" href={getSiteURLFromPath('/my-passport')}>
-                My Passport
-              </Link>,
               <Button
                 key="settings"
-                icon={<TerminalIcon aria-label="StoryStore SDK" />}
                 onClick={() => {
                   settingsDialog.setOpen(true)
 

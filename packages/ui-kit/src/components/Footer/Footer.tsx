@@ -5,6 +5,9 @@ import { classes, merge } from '../../lib'
 // Styles
 import style from './Footer.module.css'
 
+// Default Logo
+import { AdobeLogo } from './AdobeLogo'
+
 // Icons
 import FacebookIcon from 'remixicon-react/FacebookFillIcon'
 import TwitterIcon from 'remixicon-react/TwitterFillIcon'
@@ -18,7 +21,7 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   /** Site description */
   description?: string
   /** React SVG Logo */
-  logo: ReactElement<HTMLAttributes<SVGElement>>
+  logo?: ReactElement<HTMLAttributes<SVGElement>>
   /** Menu Navigation */
   menu?: Array<ReactElement>
   /** Centered content */
@@ -40,7 +43,13 @@ export const Footer: FunctionComponent<FooterProps> = ({
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
       <Block className={style.wrapper} contained={contained} padded>
-        <div>{isValidElement(logo) ? cloneElement(logo, { className: style.logo }) : null}</div>
+        <div>
+          {isValidElement(logo) ? (
+            cloneElement(logo, { className: style.logo })
+          ) : (
+            <AdobeLogo aria-label="Adobe" className={style.logo} />
+          )}
+        </div>
 
         <div className={style.menu}>
           {menu?.map((item, key) => {

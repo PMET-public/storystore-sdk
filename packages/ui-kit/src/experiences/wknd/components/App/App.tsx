@@ -1,17 +1,18 @@
-import { FunctionComponent, useMemo, ReactElement, cloneElement, isValidElement } from 'react'
+import { FunctionComponent, useMemo, ReactElement } from 'react'
 import { initAEMModel } from '../../../../lib'
 import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
+import * as AEM from '../../../components/AEM'
 
 // Icons
-import LogoIcon from '../../assets/wknd-adventures_logo.svg'
-import MapIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
 initAEMModel()
 
+// AEM Model Path
+export const APP_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures'
+
 export type AppProps = {
   linkRoot?: ReactElement
-  homeLink?: ReactElement
   passportLink?: ReactElement
   menu?: Array<ReactElement>
   footerMenu?: Array<ReactElement>
@@ -19,32 +20,26 @@ export type AppProps = {
 
 export const App: FunctionComponent<AppProps> = ({
   linkRoot,
-  homeLink = <a href="#" />,
   passportLink = <a href="#" />,
   menu: _menu = [],
   footerMenu,
   children,
   ...props
 }) => {
-  const menu = useMemo(
-    () =>
-      passportLink
-        ? [
-            ..._menu,
-            <HeaderMenuItem variant="icon" compact>
-              <Button
-                root={<passportLink.type {...passportLink.props} />}
-                icon={<MapIcon aria-label="My Passport" />}
-                variant="text"
-                transparent
-              >
-                <span className="hide-sm-only">My Passport</span>
-              </Button>
-            </HeaderMenuItem>,
-          ]
-        : [..._menu],
-    [passportLink, _menu]
-  )
+  // const menu = useMemo(
+  //   () =>
+  //     passportLink
+  //       ? [
+  //           ..._menu,
+  //           <HeaderMenuItem variant="icon" compact>
+  //             <Button root={<passportLink.type {...passportLink.props} />} variant="text" transparent>
+  //               <span className="hide-sm-only">My Passport</span>
+  //             </Button>
+  //           </HeaderMenuItem>,
+  //         ]
+  //       : [..._menu],
+  //   [passportLink, _menu]
+  // )
 
   return (
     <AppComponent
@@ -53,18 +48,24 @@ export const App: FunctionComponent<AppProps> = ({
       header={
         <Header
           logo={
-            <homeLink.type {...homeLink.props}>
-              <LogoIcon aria-label="WKND" />
-            </homeLink.type>
+            <AEM.AEMImage
+              src="/__assets/wknd/logo.svg"
+              alt="WKND Adventures"
+              pagePath={APP_AEM_MODEL_PAGE_PATH}
+              itemPath="header/logo"
+            />
           }
-          menu={menu}
+          // menu={menu}
           transparent
           sticky
           style={{ ['--header-text' as string]: 'var(--color-on-surface)' }}
         />
       }
-      footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
+      footer={<Footer menu={footerMenu} />}
     >
+      {/* <div style={{ background: '#ccc' }}>
+        <AEM.AEMResponsiveGrid pagePath={APP_AEM_MODEL_PAGE_PATH} itemPath="header/nav" />
+      </div> */}
       {children}
     </AppComponent>
   )
