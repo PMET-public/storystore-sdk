@@ -14,7 +14,7 @@ export type ButtonProps = {
   /** Whether the button should have a transparent background. */
   transparent?: boolean
   /** Icon */
-  icon?: ReactElement<any, 'svg'> | string
+  icon?: ReactElement<any, 'svg'>
   /** Size */
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -25,33 +25,17 @@ export const Button: FunctionComponent<ButtonProps> = ({
   transparent = false,
   children,
   className,
-  icon: _icon,
+  icon,
   size = 'md',
   ...props
 }) => {
-  let Icon = null
-
-  if (typeof _icon === 'string' && _icon !== '') {
-    try {
-      Icon = require(`remixicon-react/${_icon}.js`)
-    } catch (_) {
-      console.log(
-        `Icon ${_icon} not found. Just search for an icon on remixicon.com and look for its name. The name translates to PascalCase followed by the suffix Icon in remixicon-react.`
-      )
-    }
-  }
-
   return (
     <root.type
       {...merge(props, root.props)}
       className={classes([style.root, style[variant], [style.transparent, transparent], className])}
       style={{ ['--size']: `var(--font-${size})`, ...root.props.style, ...props.style }}
     >
-      {isValidElement(_icon) ? (
-        <_icon.type {..._icon.props} className={classes([style.icon, _icon.props.className])} />
-      ) : (
-        Icon && <Icon className={style.icon} />
-      )}
+      {isValidElement(icon) && <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />}
       {children}
     </root.type>
   )

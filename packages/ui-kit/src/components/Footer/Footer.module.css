@@ -21,7 +21,7 @@
     grid-template-areas:
       'logo menu social'
       'disclaimer disclaimer disclaimer';
-    grid-column-gap: var(--spacing-sm);
+    grid-column-gap: var(--spacing-lg);
     grid-template-columns: auto 1fr auto;
   }
 }
@@ -37,6 +37,7 @@
 
 .logo {
   grid-area: logo;
+  fill: currentColor;
   height: 3.125rem;
 }
 

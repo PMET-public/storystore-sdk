@@ -1,5 +1,3 @@
-export * from './Banner'
 export * from './Button'
-export * from './ResponsiveGrid'
 export * from './Title'
-export * from './Image'
+export * from './Banner'
