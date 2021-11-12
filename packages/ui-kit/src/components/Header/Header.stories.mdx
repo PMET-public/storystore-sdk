@@ -1,5 +1,5 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
-import Header, { HeaderMenuItem } from '.'
+import Header from '.'
 
 import LogoIcon from 'remixicon-react/AppsFillIcon'
 import HeartIcon from 'remixicon-react/HeartFillIcon'
@@ -15,36 +15,21 @@ import CheckInIcon from 'remixicon-react/CheckDoubleLineIcon'
 
 export const Template = args => <Header {...args} />
 
-export const menu = [
-  <HeaderMenuItem variant="fill" />,
-  <HeaderMenuItem active>
-    <a href="#">Home</a>
-  </HeaderMenuItem>,
-  <HeaderMenuItem>
-    <a href="#">Articles</a>
-  </HeaderMenuItem>,
-  <HeaderMenuItem>
-    <a href="#">Contact</a>
-  </HeaderMenuItem>,
-  <HeaderMenuItem variant="fill" />,
-  <HeaderMenuItem variant="icon" compact>
-    <a href="#">
-      <HeartIcon aria-label="Likes" />
-    </a>
-  </HeaderMenuItem>,
-  <HeaderMenuItem variant="icon" compact>
-    <a href="#">
-      <CheckInIcon aria-label="Check-ins" />
-    </a>
-  </HeaderMenuItem>,
-]
+export const nav = (
+  <nav>
+    <a href="#">Menu Item 1</a>
+    <a href="#">Menu Item 2</a>
+    <a href="#">Menu Item 3</a>
+    <a href="#">Menu Item 4</a>
+  </nav>
+)
 
 # Header
 
 App Header.
 
 <Canvas withSource="open">
-  <Story name="Header" args={{ logo: <LogoIcon />, menu }}>
+  <Story name="Header" args={{ logo: <LogoIcon />, nav }}>
     {Template.bind({})}
   </Story>
 </Canvas>
@@ -60,35 +45,35 @@ import { Header, HeaderNavItem, HeaderNavFill } from '@storystore/ui-kit/compone
 ### Primary
 
 <Canvas>
-  <Template variant="primary" logo={<LogoIcon />} menu={menu} />
+  <Template variant="primary" logo={<LogoIcon />} nav={nav} />
 </Canvas>
 
 ### Transparent Primary
 
 <Canvas>
-  <Template variant="primary" transparent logo={<LogoIcon />} menu={menu} />
+  <Template variant="primary" transparent logo={<LogoIcon />} nav={nav} />
 </Canvas>
 
 ### Secondary
 
 <Canvas>
-  <Template variant="secondary" logo={<LogoIcon />} menu={menu} />
+  <Template variant="secondary" logo={<LogoIcon />} nav={nav} />
 </Canvas>
 
 ### Transparent Secondary
 
 <Canvas>
-  <Template variant="secondary" transparent logo={<LogoIcon />} menu={menu} />
+  <Template variant="secondary" transparent logo={<LogoIcon />} nav={nav} />
 </Canvas>
 
 ### Accent
 
 <Canvas>
-  <Template variant="accent" logo={<LogoIcon />} menu={menu} />
+  <Template variant="accent" logo={<LogoIcon />} nav={nav} />
 </Canvas>
 
 ### Transparent Accent
 
 <Canvas>
-  <Template variant="accent" transparent logo={<LogoIcon />} menu={menu} />
+  <Template variant="accent" transparent logo={<LogoIcon />} nav={nav} />
 </Canvas>

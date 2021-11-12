@@ -9,7 +9,7 @@
   grid-gap: var(--spacing-lg);
   grid-template-areas:
     'logo'
-    'menu'
+    'nav'
     'social'
     'disclaimer';
   padding-bottom: var(--spacing-lg);
@@ -19,9 +19,9 @@
 @media (min-width: 768px) {
   .wrapper {
     grid-template-areas:
-      'logo menu social'
+      'logo nav social'
       'disclaimer disclaimer disclaimer';
-    grid-column-gap: var(--spacing-sm);
+    grid-column-gap: var(--spacing-lg);
     grid-template-columns: auto 1fr auto;
   }
 }
@@ -40,17 +40,18 @@
   height: 3.125rem;
 }
 
-.menu {
+.nav {
   align-items: center;
   display: grid;
   font-size: var(--font-sm);
-  grid-area: menu;
-  grid-gap: var(--spacing-md);
+  grid-area: nav;
   grid-auto-columns: max-content;
+  grid-gap: var(--spacing-md);
+  height: 100%;
 }
 
 @media (min-width: 1024px) {
-  .menu {
+  .nav {
     grid-auto-flow: column;
     grid-gap: var(--spacing-lg);
   }

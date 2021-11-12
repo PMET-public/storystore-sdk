@@ -24,7 +24,14 @@ Footers allow users to take actions with a single tap.
     name="Footer"
     args={{
       logo: <LogoIcon size={40} />,
-      menu: [<a href="#">Articles</a>, <a href="#">Adventures</a>, <a href="#">About</a>, <a href="#">Contacts</a>],
+      nav: (
+        <nav>
+          <a href="#">Articles</a>
+          <a href="#">Adventures</a>
+          <a href="#">About</a>
+          <a href="#">Contacts</a>
+        </nav>
+      ),
     }}
   >
     {Template.bind({})}

@@ -5,7 +5,6 @@ const resourceType = 'wcm/foundation/components/responsivegrid'
 const config = {
   emptyLabel: 'Layout Container', // The component placeholder in AEM SPA Editor
   isEmpty: function (props: any) {
-    console.group(props.cqItemsOrder == null || props.cqItemsOrder.length === 0, { props })
     return props.cqItemsOrder == null || props.cqItemsOrder.length === 0
   },
   resourceType,

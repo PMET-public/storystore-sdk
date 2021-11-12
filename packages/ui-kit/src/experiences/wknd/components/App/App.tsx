@@ -1,9 +1,7 @@
-import { FunctionComponent, useMemo, ReactElement } from 'react'
+import { FunctionComponent, ReactElement } from 'react'
 import { initAEMModel } from '../../../../lib'
-import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
-import * as AEM from '../../../components/AEM'
-
-// Icons
+import { App as AppComponent, Header, Footer } from '../../../../components'
+import { AEM } from '../../../components'
 
 // AEM Model Manager
 initAEMModel()
@@ -26,21 +24,6 @@ export const App: FunctionComponent<AppProps> = ({
   children,
   ...props
 }) => {
-  // const menu = useMemo(
-  //   () =>
-  //     passportLink
-  //       ? [
-  //           ..._menu,
-  //           <HeaderMenuItem variant="icon" compact>
-  //             <Button root={<passportLink.type {...passportLink.props} />} variant="text" transparent>
-  //               <span className="hide-sm-only">My Passport</span>
-  //             </Button>
-  //           </HeaderMenuItem>,
-  //         ]
-  //       : [..._menu],
-  //   [passportLink, _menu]
-  // )
-
   return (
     <AppComponent
       linkRoot={linkRoot}
@@ -48,24 +31,25 @@ export const App: FunctionComponent<AppProps> = ({
       header={
         <Header
           logo={
-            <AEM.AEMImage
+            <AEM.Image
               src="/__assets/wknd/logo.svg"
               alt="WKND Adventures"
               pagePath={APP_AEM_MODEL_PAGE_PATH}
               itemPath="header/logo"
             />
           }
-          // menu={menu}
+          nav={
+            <nav>
+              <AEM.Button pagePath={APP_AEM_MODEL_PAGE_PATH} itemPath="header/nav/my-passport" />
+            </nav>
+          }
           transparent
           sticky
           style={{ ['--header-text' as string]: 'var(--color-on-surface)' }}
         />
       }
-      footer={<Footer menu={footerMenu} />}
+      footer={<Footer nav={<div>{footerMenu}</div>} />}
     >
-      {/* <div style={{ background: '#ccc' }}>
-        <AEM.AEMResponsiveGrid pagePath={APP_AEM_MODEL_PAGE_PATH} itemPath="header/nav" />
-      </div> */}
       {children}
     </AppComponent>
   )

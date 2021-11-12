@@ -4,7 +4,7 @@ import { useNetworkStatus } from '../../../../hooks'
 import { AEMModelProps, isInEditor } from '../../../../lib'
 
 // AEM Components
-import { AEMTitle } from '../../../components'
+import { AEM } from '../../../components'
 // UI Components
 import { Error, Block, Heading, Html, Button, SkeletonLoader } from '../../../../components'
 
@@ -28,7 +28,7 @@ import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 const AdventureContributor = lazy(() => import('../../components/AdventureContributor'))
 
 // AEM Model Path
-export const ADVENTURE_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/adventure'
+export const ADVENTURE_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/adventure'
 
 // GraphQL Query
 export const ADVENTURE_QUERY = gql`
@@ -196,7 +196,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* Description */}
             <Block gap="md" className={style.section}>
               <Heading icon={<MapIcon />} size={{ sm: 'xl', lg: '2xl' }}>
-                <AEMTitle
+                <AEM.Title
                   text="Overview"
                   type="h3"
                   {...model?.details?.heading}
@@ -213,7 +213,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
               <div className={style.detail}>
                 <Heading icon={<LengthIcon />}>
-                  <AEMTitle
+                  <AEM.Title
                     text="Duration"
                     type="h3"
                     {...model?.details?.['heading-duration']}
@@ -227,7 +227,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
               <div className={style.detail}>
                 <Heading icon={<GroupIcon />}>
-                  <AEMTitle
+                  <AEM.Title
                     text="Group Size"
                     type="h3"
                     {...model?.details?.['heading-group-size']}
@@ -242,7 +242,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
               <div className={style.detail}>
                 <Heading icon={<MedalIcon />}>
-                  <AEMTitle
+                  <AEM.Title
                     text="Difficulty"
                     type="h3"
                     {...model?.details?.['heading-difficulty']}
@@ -257,7 +257,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
 
               <div className={style.detail}>
                 <Heading icon={<PriceIcon />}>
-                  <AEMTitle
+                  <AEM.Title
                     text="Price"
                     type="h3"
                     {...model?.details?.['heading-price']}
@@ -274,7 +274,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* Itinerary Section */}
             <Block gap="md" className={style.section}>
               <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
-                <AEMTitle
+                <AEM.Title
                   text="Itinerary"
                   type="h3"
                   {...model?.itinerary?.heading}
@@ -290,7 +290,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
             {/* What to Bring Section */}
             <Block gap="md" className={style.section}>
               <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
-                <AEMTitle
+                <AEM.Title
                   text="What to Bring"
                   type="h3"
                   {...model?.['what-to-bring']?.heading}

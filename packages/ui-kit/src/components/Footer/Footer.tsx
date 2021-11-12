@@ -23,7 +23,7 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   /** React SVG Logo */
   logo?: ReactElement<HTMLAttributes<SVGElement>>
   /** Menu Navigation */
-  menu?: Array<ReactElement>
+  nav?: ReactElement
   /** Centered content */
   contained?: boolean
 }
@@ -34,7 +34,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
   logo,
   description,
   contained,
-  menu,
+  nav,
   className,
   ...props
 }) => {
@@ -52,9 +52,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
         </div>
 
         <div className={style.menu}>
-          {menu?.map((item, key) => {
-            return item ? <item.type key={item.key ?? key} {...item.props} /> : null
-          })}
+          {nav && <nav.type {...nav.props} className={classes([style.nav, nav.props.className])} />}
         </div>
 
         <div className={style.disclaimer}>
@@ -62,7 +60,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
           <div>
             <p>WKND is a fictitious adventure and travel PWA created by Adobe.</p>
             <p>
-              Many of the beautiful images in the WKND site are available for purchase via{' '}
+              Many of the beautiful images in the WKND site are available for purchase via
               <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
                 Adobe Stock.
               </a>
