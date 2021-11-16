@@ -8,9 +8,8 @@
   display: grid;
   grid-gap: var(--spacing-lg);
   grid-template-areas:
-    'logo'
     'nav'
-    'social'
+    'logo'
     'disclaimer';
   padding-bottom: var(--spacing-lg);
   padding-top: var(--spacing-lg);
@@ -19,10 +18,10 @@
 @media (min-width: 768px) {
   .wrapper {
     grid-template-areas:
-      'logo nav social'
-      'disclaimer disclaimer disclaimer';
-    grid-column-gap: var(--spacing-lg);
-    grid-template-columns: auto 1fr auto;
+      'nav nav'
+      'logo disclaimer';
+    grid-column-gap: var(--spacing-md);
+    grid-template-columns: auto 1fr;
   }
 }
 
@@ -62,28 +61,15 @@
   line-height: 1.5;
   font-size: var(--font-sm);
   display: grid;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-xs);
 }
 
 .disclaimer > div {
   opacity: 0.65;
   font-style: normal;
+  font-size: var(--font-xs);
 }
 
 .disclaimer > div p:not(:last-of-type) {
   margin-bottom: var(--spacing-xs);
-}
-
-.social {
-  align-items: start;
-  grid-area: social;
-  display: grid;
-  grid-auto-columns: max-content;
-  grid-auto-flow: column;
-  grid-gap: var(--spacing-md);
-}
-
-.social svg {
-  fill: currentColor;
-  width: 1.875em;
 }

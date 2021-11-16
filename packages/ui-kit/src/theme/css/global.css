@@ -1,6 +1,6 @@
 :root {
-  background-color: var(--ui-color-body, #f3f3f3);
-  color: var(--ui-color-on-body, #000);
+  background-color: #f3f3f3;
+  color: #000;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

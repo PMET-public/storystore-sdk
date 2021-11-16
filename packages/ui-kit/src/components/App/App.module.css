@@ -1,8 +1,10 @@
 .root {
   --app-header-height: unset;
+  background-color: var(--color-body);
+  color: var(--color-on-body);
   display: grid;
-  grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
   min-height: calc(100vh);
 }
 

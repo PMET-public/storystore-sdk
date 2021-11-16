@@ -1,21 +1,6 @@
 import { Model, ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import { ModelManagerConfiguration } from '@adobe/aem-spa-page-model-manager/dist/ModelManager'
 
-type Theme = {
-  logoFile: string
-  logoText: string
-  colorBody: string
-  colorOnBody: string
-  colorSurface: string
-  colorOnSurface: string
-  colorAccent: string
-  colorOnAccent: string
-  colorPrimary: string
-  colorOnPrimary: string
-  colorSecondary: string
-  colorOnSecondary: string
-}
-
 export const isInEditor = AuthoringUtils.isInEditor
 
 export const initAEMModel = (options?: ModelManagerConfiguration) => {
@@ -29,7 +14,7 @@ export type AEMModelProps = {
   [pathId: string]: AEMModelProps | undefined
 }
 
-const recursive = (model: Model): AEMModelProps => {
+const recursive = (model: AEMModelProps): AEMModelProps => {
   return Object.entries(model?.[':items'] || {}).reduce((obj, item) => {
     const [key, value] = item
     return {
@@ -39,21 +24,36 @@ const recursive = (model: Model): AEMModelProps => {
   }, {})
 }
 
-export const getPropsFromAEMModel = (model: Model): AEMModelProps => recursive(model)
+export const getPropsFromAEMModel = (model: any) => ({
+  __pagePath: model[':path'],
 
-export const getThemePropsFromAEMModel = (model: any): Theme => {
-  return {
-    logoFile: model?.logoFile ?? null,
-    logoText: model?.logoText ?? null,
-    colorBody: model?.colorBody ?? null,
-    colorOnBody: model?.colorOnBody ?? null,
-    colorSurface: model?.colorSurface ?? null,
-    colorOnSurface: model?.colorOnSurface ?? null,
-    colorAccent: model?.colorAccent ?? null,
-    colorOnAccent: model?.colorOnAccent ?? null,
-    colorPrimary: model?.colorPrimary ?? null,
-    colorOnPrimary: model?.colorOnPrimary ?? null,
-    colorSecondary: model?.colorSecondary ?? null,
-    colorOnSecondary: model?.colorOnSecondary ?? null,
-  }
+  page: {
+    title: model.title ?? null,
+    description: model.description ?? null,
+    keywords: model.keywords ?? null,
+    siteName: model.siteName ?? null,
+    logoFile: model.logoFile ?? null,
+    colorBody: model.colorBody ?? null,
+    colorOnBody: model.colorOnBody ?? null,
+    colorSurface: model.colorSurface ?? null,
+    colorOnSurface: model.colorOnSurface ?? null,
+    colorAccent: model.colorAccent ?? null,
+    colorOnAccent: model.colorOnAccent ?? null,
+    colorPrimary: model.colorPrimary ?? null,
+    colorOnPrimary: model.colorOnPrimary ?? null,
+    colorSecondary: model.colorSecondary ?? null,
+    colorOnSecondary: model.colorOnSecondary ?? null,
+  },
+
+  ...recursive(model),
+})
+
+export const fetchAEMModel = async (pagePath: string) => {
+  if (!pagePath) throw Error('Missing pagePath')
+
+  const model = await fetch(new URL(pagePath + '.model.json', process.env.NEXT_PUBLIC_URL).href)
+    .then(async res => await res.json())
+    .catch(() => undefined)
+
+  return getPropsFromAEMModel(model)
 }
