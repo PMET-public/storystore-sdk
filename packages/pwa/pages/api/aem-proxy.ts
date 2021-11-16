@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       auth: AEM_AUTH,
       changeOrigin: true,
       selfHandleResponse: true,
-      ws: true,
+      // ws: true,
       pathRewrite: {
         '/__graphql': AEM_GRAPHQL_PATH,
       },

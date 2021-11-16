@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { initAEMModel } from '../../../../lib'
 import { App as AppComponent, Header, Footer } from '../../../../components'
 import { AEM } from '../../../components'
@@ -9,7 +9,8 @@ initAEMModel()
 // AEM Model Path
 export const APP_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures'
 
-export type AppProps = {
+export type AppProps = HTMLAttributes<HTMLDivElement> & {
+  logo?: { src?: string; alt?: string }
   linkRoot?: ReactElement
   passportLink?: ReactElement
   menu?: Array<ReactElement>
@@ -17,6 +18,7 @@ export type AppProps = {
 }
 
 export const App: FunctionComponent<AppProps> = ({
+  logo,
   linkRoot,
   passportLink = <a href="#" />,
   menu: _menu = [],
@@ -24,20 +26,14 @@ export const App: FunctionComponent<AppProps> = ({
   children,
   ...props
 }) => {
+  console.log({ logo })
   return (
     <AppComponent
       linkRoot={linkRoot}
       {...props}
       header={
         <Header
-          logo={
-            <AEM.Image
-              src="/__assets/wknd/logo.svg"
-              alt="WKND Adventures"
-              pagePath={APP_AEM_MODEL_PAGE_PATH}
-              itemPath="header/logo"
-            />
-          }
+          logo={<img src="/__assets/wknd/logo.svg" {...logo} />}
           nav={
             <nav>
               <AEM.Button pagePath={APP_AEM_MODEL_PAGE_PATH} itemPath="header/nav/my-passport" />

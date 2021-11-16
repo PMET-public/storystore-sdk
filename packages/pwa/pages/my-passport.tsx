@@ -1,10 +1,13 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { MyPassport, MY_PASSPORT_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/pages'
-import { getPropsFromAEMModel } from '@storystore/ui-kit/lib'
+import { getPropsFromAEMModel, getThemePropsFromAEMModel } from '@storystore/ui-kit/lib'
 import { MY_PASSPORT } from '../lib/variables'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { themeVar } from './_app'
 
-const MyPassportPage: NextPage = ({ ...props }) => {
+const MyPassportPage: NextPage<any> = ({ theme, ...props }) => {
+  useMemo(() => themeVar(theme), [theme])
+
   const [passport, setPassport] = useState<{ checkIns?: string[]; bookmarks?: string[] }>({})
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     .catch(() => undefined)
 
   return {
-    props: { model: getPropsFromAEMModel(model) },
+    props: { model: getPropsFromAEMModel(model), theme: getThemePropsFromAEMModel(model) },
   }
 }
 

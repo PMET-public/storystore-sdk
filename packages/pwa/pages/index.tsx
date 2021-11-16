@@ -1,9 +1,13 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { Home, HOME_QUERY, HOME_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/pages'
-import { getPropsFromAEMModel } from '@storystore/ui-kit/lib'
+import { getPropsFromAEMModel, getThemePropsFromAEMModel } from '@storystore/ui-kit/lib'
 import { addApolloState, getApolloClient } from '@storystore/next-apollo'
+import { themeVar } from './_app'
+import { useMemo } from 'react'
 
-const HomePage: NextPage = ({ ...props }) => {
+const HomePage: NextPage<any> = ({ theme, ...props }) => {
+  useMemo(() => themeVar(theme), [theme])
+
   return <Home {...props} />
 }
 
@@ -31,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     .catch(() => undefined)
 
   return addApolloState(apolloClient, {
-    props: { model: getPropsFromAEMModel(model) },
+    props: { model: getPropsFromAEMModel(model), theme: getThemePropsFromAEMModel(model) },
   })
 }
 

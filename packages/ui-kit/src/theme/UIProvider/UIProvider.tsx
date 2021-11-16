@@ -7,9 +7,7 @@ import ToastContainer from '../../components/Toast'
 // TODO: Moved to App wrapper until Next.js allows for global css import from other files.
 // import '../css/global.css'
 
-export type UIProvider = {}
-
-export const UIProvider: FunctionComponent<UIProvider> = ({ children, ...props }) => {
+export const UIProvider: FunctionComponent = ({ children, ...props }) => {
   const { isFocusVisible } = useFocusVisible({ isTextInput: true })
 
   return (
