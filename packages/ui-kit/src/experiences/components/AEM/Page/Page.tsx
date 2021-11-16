@@ -1,5 +1,5 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
-import { App, Header, Footer } from '../../../../components'
+import { App, Header, Footer, SkeletonLoader } from '../../../../components'
 
 const resourceType = 'storystore/components/remotepage'
 
@@ -32,7 +32,15 @@ const PageComponent = ({ componentProperties, className, style, children, linkRo
       linkRoot={linkRoot}
       header={
         <Header
-          logo={<img src={logoFile || '/__assets/wknd/logo.svg'} alt={siteName} />}
+          logo={
+            logoFile ? (
+              <img src={logoFile} alt={siteName} />
+            ) : (
+              <SkeletonLoader uniqueKey="header--logo" width={250} height={100}>
+                <rect width="100%" height="100%" />
+              </SkeletonLoader>
+            )
+          }
           transparent
           sticky
           style={{ ['--header-text' as string]: 'var(--color-on-surface)' }}
