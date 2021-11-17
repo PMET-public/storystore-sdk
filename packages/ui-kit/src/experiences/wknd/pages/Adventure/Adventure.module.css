@@ -31,6 +31,7 @@
 
 .wrapper {
   background-color: var(--color-body);
+  font-size: var(--font-sm);
   z-index: 1;
 }
 

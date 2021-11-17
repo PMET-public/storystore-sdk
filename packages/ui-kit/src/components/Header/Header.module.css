@@ -31,7 +31,7 @@
 }
 
 .root.surface.transparent.scrolled {
-  --header-bg: var(--color-surface-transparent);
+  --header-bg: var(--color-surface);
   --header-text: var(--color-on-surface);
 }
 
@@ -46,7 +46,7 @@
 }
 
 .root.primary.transparent.scrolled {
-  --header-bg: var(--color-primary-transparent);
+  --header-bg: var(--color-primary);
   --header-text: var(--color-on-primary);
 }
 
@@ -61,7 +61,7 @@
 }
 
 .root.secondary.transparent.scrolled {
-  --header-bg: var(--color-secondary-transparent);
+  --header-bg: var(--color-secondary);
   --header-text: var(--color-on-secondary);
 }
 
@@ -76,7 +76,7 @@
 }
 
 .root.accent.transparent.scrolled {
-  --header-bg: var(--color-accent-transparent);
+  --header-bg: var(--color-accent);
   --header-text: var(--color-on-accent);
 }
 

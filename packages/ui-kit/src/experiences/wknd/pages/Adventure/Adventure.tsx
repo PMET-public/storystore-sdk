@@ -170,7 +170,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
               <Button
                 variant="cta"
                 disabled={!onCheckIn}
-                icon={checkedIn ? <CheckedInIcon style={{ fill: 'green' }} /> : <CheckInIcon />}
+                icon={checkedIn ? <CheckedInIcon /> : <CheckInIcon />}
                 onClick={() => onCheckIn?.(path)}
               >
                 Check In
@@ -182,7 +182,7 @@ export const Adventure: FunctionComponent<AdventureProps> = ({
                 disabled={!onBookmark}
                 icon={
                   bookmarked ? (
-                    <BookmarkedIcon aria-label="Saved for later" style={{ fill: 'red' }} />
+                    <BookmarkedIcon aria-label="Saved for later" />
                   ) : (
                     <BookmarkIcon aria-label="Save for later" />
                   )

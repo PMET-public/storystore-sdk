@@ -25,6 +25,8 @@ const PageComponent = ({ componentProperties, className, style, children, linkRo
     colorOnAccent,
   }: any = componentProperties
 
+  const link = linkRoot ?? <a />
+
   return (
     <App
       id={id}
@@ -34,16 +36,21 @@ const PageComponent = ({ componentProperties, className, style, children, linkRo
         <Header
           logo={
             logoFile ? (
-              <img src={logoFile} alt={siteName} />
+              <link.type {...link.props} href="/">
+                <img src={logoFile} alt={siteName} />
+              </link.type>
             ) : (
               <SkeletonLoader uniqueKey="header--logo" width={250} height={100}>
                 <rect width="100%" height="100%" />
               </SkeletonLoader>
             )
           }
+          variant="surface"
           transparent
           sticky
-          style={{ ['--header-text' as string]: 'var(--color-on-surface)' }}
+          style={{
+            ['--header-text' as string]: 'var(--color-on-surface)',
+          }}
         />
       }
       footer={<Footer />}
