@@ -5,8 +5,8 @@ import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
 import { Dialog, UIKitSettings, useUIKitSettings, useDialog } from '@storystore/ui-kit/components'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache, gql, useQuery } from '@apollo/client'
-import { initApolloClient, useApollo } from '@storystore/next-apollo'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import { useTrackers, trackEvent, trackModal } from '../lib/tracker'
 import { cookies } from '@storystore/toolbox'
@@ -14,19 +14,6 @@ import { useRouter } from 'next/router'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
-
-initApolloClient(
-  new ApolloClient({
-    connectToDevTools: process.browser,
-    queryDeduplication: true,
-    ssrMode: !process.browser,
-    cache: new InMemoryCache({}),
-    link: new HttpLink({
-      uri: getSiteURLFromPath('/__graphql'),
-      credentials: 'same-origin',
-    }),
-  })
-)
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (

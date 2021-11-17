@@ -1,22 +1,27 @@
 import { useMemo } from 'react'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from '@apollo/client'
+import { getSiteURLFromPath } from '../get-site-path'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
-let createApolloClient: () => ApolloClient<NormalizedCacheObject>
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
-export const initApolloClient = (_createApolloClient: ApolloClient<NormalizedCacheObject>) => {
-  createApolloClient = () => _createApolloClient
+const createApolloClient = () => {
+  return new ApolloClient({
+    connectToDevTools: process.browser,
+    queryDeduplication: true,
+    ssrMode: !process.browser,
+    cache: new InMemoryCache({}),
+    link: new HttpLink({
+      uri: getSiteURLFromPath('/__graphql'),
+      credentials: 'same-origin',
+    }),
+  })
 }
 
-export function getApolloClient(initialState: { [key: string]: any } | null = null) {
-  if (!createApolloClient) {
-    throw Error('Apollo Client has not been initialized. "initApolloClient(new ApolloClient..."')
-  }
-
+export const initializeApollo = (initialState: { [key: string]: any } | null = null) => {
   const _apolloClient = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -55,6 +60,6 @@ export function addApolloState(client: any, pageProps: any) {
 
 export function useApollo(pageProps: any) {
   const state = pageProps[APOLLO_STATE_PROP_NAME]
-  const store = useMemo(() => getApolloClient(state), [state])
+  const store = useMemo(() => initializeApollo(state), [state])
   return store
 }
