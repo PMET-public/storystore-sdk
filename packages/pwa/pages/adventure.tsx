@@ -7,8 +7,11 @@ import { MY_PASSPORT } from '../lib/variables'
 import { trackEvent } from '../lib/tracker'
 
 const getPathFromQuery = (query: any) => {
+  if (!query?.path) return
+
   const { site, locale, path } = query
   const pathAsString = typeof path === 'string' ? path : path.join('/')
+
   return `/content/dam/${site}/${locale}/adventures/${pathAsString}`
 }
 
@@ -98,7 +101,7 @@ const AdventurePage: NextPage = ({ ...props }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({}) => {
   /** Get AEM Page Model */
   const model = await fetchAEMModel(ADVENTURE_AEM_MODEL_PAGE_PATH).catch(() => {})
 
