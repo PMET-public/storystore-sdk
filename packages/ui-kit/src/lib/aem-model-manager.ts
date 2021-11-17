@@ -24,29 +24,31 @@ const recursive = (model: AEMModelProps): AEMModelProps => {
   }, {})
 }
 
-export const getPropsFromAEMModel = (model: any) => ({
-  __pagePath: model[':path'],
+export const getPropsFromAEMModel = (model: any = {}) => {
+  return {
+    __pagePath: model[':path'] ?? '',
 
-  page: {
-    title: model.title ?? null,
-    description: model.description ?? null,
-    keywords: model.keywords ?? null,
-    siteName: model.siteName ?? null,
-    logoFile: model.logoFile ?? null,
-    colorBody: model.colorBody ?? null,
-    colorOnBody: model.colorOnBody ?? null,
-    colorSurface: model.colorSurface ?? null,
-    colorOnSurface: model.colorOnSurface ?? null,
-    colorAccent: model.colorAccent ?? null,
-    colorOnAccent: model.colorOnAccent ?? null,
-    colorPrimary: model.colorPrimary ?? null,
-    colorOnPrimary: model.colorOnPrimary ?? null,
-    colorSecondary: model.colorSecondary ?? null,
-    colorOnSecondary: model.colorOnSecondary ?? null,
-  },
+    page: {
+      title: model.title ?? null,
+      description: model.description ?? null,
+      keywords: model.keywords ?? null,
+      siteName: model.siteName ?? null,
+      logoFile: model.logoFile ?? null,
+      colorBody: model.colorBody ?? null,
+      colorOnBody: model.colorOnBody ?? null,
+      colorSurface: model.colorSurface ?? null,
+      colorOnSurface: model.colorOnSurface ?? null,
+      colorAccent: model.colorAccent ?? null,
+      colorOnAccent: model.colorOnAccent ?? null,
+      colorPrimary: model.colorPrimary ?? null,
+      colorOnPrimary: model.colorOnPrimary ?? null,
+      colorSecondary: model.colorSecondary ?? null,
+      colorOnSecondary: model.colorOnSecondary ?? null,
+    },
 
-  ...recursive(model),
-})
+    ...recursive(model),
+  }
+}
 
 export const fetchAEMModel = async (pagePath: string) => {
   if (!pagePath) throw Error('Missing pagePath')

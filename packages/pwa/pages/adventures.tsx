@@ -3,10 +3,10 @@ import { Adventures } from '@storystore/ui-kit/dist/experiences/wknd/pages'
 import { Block, Pills } from '@storystore/ui-kit/components'
 import { useState } from 'react'
 import { trackEvent } from '../lib/tracker'
+import { fetchAEMModel } from '@storystore/ui-kit/dist/lib'
 import { APP_AEM_MODEL_PAGE_PATH } from '@storystore/ui-kit/dist/experiences/wknd/components'
-import { fetchAEMModel } from '@storystore/ui-kit/lib'
 
-const AdventuresPage: NextPage = props => {
+const AdventuresPage: NextPage = ({ ...props }) => {
   const [filters, setFilters] = useState({})
 
   const handleOnFilterUpdate = (values: any) => {
@@ -57,9 +57,9 @@ const AdventuresPage: NextPage = props => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({}) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   /** Get AEM Page Model */
-  const model = await fetchAEMModel(APP_AEM_MODEL_PAGE_PATH).catch(() => {})
+  const model = await fetchAEMModel(APP_AEM_MODEL_PAGE_PATH)
 
   return {
     props: { model },
