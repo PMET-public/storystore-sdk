@@ -27,6 +27,7 @@
   padding: var(--spacing-sm) var(--spacing-xs);
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .input:not(:disabled):hover ~ .decorator {

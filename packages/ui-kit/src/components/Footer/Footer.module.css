@@ -8,7 +8,6 @@
   display: grid;
   grid-gap: var(--spacing-lg);
   grid-template-areas:
-    'nav'
     'logo'
     'disclaimer';
   padding-bottom: var(--spacing-lg);
@@ -17,9 +16,7 @@
 
 @media (min-width: 768px) {
   .wrapper {
-    grid-template-areas:
-      'nav nav'
-      'logo disclaimer';
+    grid-template-areas: 'logo disclaimer';
     grid-column-gap: var(--spacing-md);
     grid-template-columns: auto 1fr;
   }
@@ -39,37 +36,18 @@
   height: 3.125rem;
 }
 
-.nav {
-  align-items: center;
-  display: grid;
-  font-size: var(--font-sm);
-  grid-area: nav;
-  grid-auto-columns: max-content;
-  grid-gap: var(--spacing-md);
-  height: 100%;
-}
-
-@media (min-width: 1024px) {
-  .nav {
-    grid-auto-flow: column;
-    grid-gap: var(--spacing-lg);
-  }
-}
-
 .disclaimer {
   grid-area: disclaimer;
   line-height: 1.5;
-  font-size: var(--font-sm);
-  display: grid;
-  grid-gap: var(--spacing-xs);
-}
-
-.disclaimer > div {
-  opacity: 0.65;
-  font-style: normal;
   font-size: var(--font-xs);
+  display: grid;
+  grid-gap: var(--spacing-sm);
 }
 
-.disclaimer > div p:not(:last-of-type) {
+.disclaimerCopy {
+  opacity: 0.65;
+}
+
+.disclaimerCopy p:not(:last-of-type) {
   margin-bottom: var(--spacing-xs);
 }
