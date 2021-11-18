@@ -1,44 +1,17 @@
 .colors {
   /* Surface */
   --color-surface: #fafafa;
-  --color-surface-darker: #c7c7c7;
-  --color-surface-lighter: #ffffff;
-  --color-surface-transparent: rgba(249, 249, 249, 0.5);
-
   --color-on-surface: #222;
-  --color-on-surface-darker: #000;
-  --color-on-surface-lighter: #666;
 
-  /* Accent */
-  --color-accent: #fdd835;
-  --color-accent-darker: #c6a700;
-  --color-accent-lighter: #ffff6b;
-  --color-accent-transparent: rgba(253, 216, 53, 0.5);
-
-  --color-on-accent: #222;
-  --color-on-accent-darker: #000;
-  --color-on-accent-lighter: #999;
-
-  /* Secondary */
+  /* Primary */
   --color-primary: #212121;
-  --color-primary-darker: #000000;
-  --color-primary-lighter: #484848;
-  --color-primary-transparent: rgba(33, 33, 33, 0.5);
-
   --color-on-primary: #ffffff;
-  --color-on-primary-darker: #ffffff;
-  --color-on-primary-lighter: #ffffff;
 
   /* Secondary */
-  --color-secondary: #fafafa;
-  --color-secondary-darker: #c7c7c7;
-  --color-secondary-lighter: #ffffff;
-  --color-secondary-transparent: rgba(249, 249, 249, 0.5);
-
+  --color-secondary: #fdd835;
   --color-on-secondary: #222;
-  --color-on-secondary-darker: #000;
-  --color-on-secondary-lighter: #999;
 
+  /** Utilities **/
   --color-error: red;
-  --color-skeleton: #e6e6e6;
+  --color-skeleton: rgba(0, 0, 0, 0.25);
 }

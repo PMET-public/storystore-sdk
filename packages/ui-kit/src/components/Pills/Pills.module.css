@@ -1,6 +1,6 @@
 .root {
   -webkit-overflow-scrolling: touch;
-  background-color: var(--ui-color-body);
+  background-color: var(--color-body);
   flex-wrap: nowrap;
   overflow-x: auto;
   padding: var(--spacing-md) 0;

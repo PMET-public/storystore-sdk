@@ -13,6 +13,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
   pwa: {
     dest: '.next/static',
     disable: process.env.NODE_ENV === 'development',
+    maximumFileSizeToCacheInBytes: 3000000,
   },
 
   async rewrites() {

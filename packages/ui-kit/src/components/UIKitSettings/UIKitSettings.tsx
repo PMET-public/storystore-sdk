@@ -140,7 +140,7 @@ export const UIKitSettings: FunctionComponent<UIKitSettingsProps> = ({
             <Button variant="primary" type="submit">
               Save
             </Button>
-            <Button variant="secondary" type="reset">
+            <Button transparent type="reset">
               Reset
             </Button>
           </Block>

@@ -21,7 +21,7 @@
 .content {
   margin-top: var(--spacing-sm);
   display: grid;
-  grid-gap: var(--spacing-xs);
+  grid-gap: var(--spacing-sm);
 }
 
 .surface .content {
@@ -39,7 +39,7 @@
 }
 
 .tag {
-  color: var(--color-on-surface-lighter);
+  filter: opacity(0.5);
 }
 
 a.tag:hover {

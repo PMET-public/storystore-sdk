@@ -6,7 +6,7 @@ import { AEMModelProps } from '../../../../lib'
 // WKND Components
 import { AdventureTile, AdventureBanner } from '../../components'
 // AEM Components
-import { AEMTitle, AEMBanner } from '../../../components'
+import { AEM } from '../../../components'
 // UI Components
 import { Error, Block, Carousel, Heading } from '../../../../components'
 import gql from 'graphql-tag'
@@ -100,7 +100,7 @@ export const HOME_QUERY = gql`
 `
 
 // AEM Model Path
-export const HOME_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/home'
+export const HOME_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/home'
 
 export type HomeProps = { model?: AEMModelProps }
 
@@ -128,7 +128,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
     <Block gap={{ sm: 'lg', lg: 'xl' }} className={style.root}>
       {/* Hero (Static Assets) */}
       <Block root={<section />}>
-        <AEMBanner
+        <AEM.Banner
           title="Not all who wander are lost."
           titleType="h2"
           fontSize="2xl"
@@ -155,7 +155,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       <Block root={<section />} gap="md" contained padded>
         <Heading
           root={
-            <AEMTitle
+            <AEM.Title
               text="Trying something new? Start easy."
               {...model?.beginner?.heading}
               key="beginner-heading"
@@ -181,7 +181,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       {/* Camping Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
-          <AEMTitle
+          <AEM.Title
             text="For the outdoor kind."
             {...model?.outdoor?.heading}
             key="outdoor-heading"
@@ -205,7 +205,7 @@ export const Home: FunctionComponent<HomeProps> = ({ model }) => {
       {/* Overstay Carousel */}
       <Block root={<section />} gap="md" contained padded>
         <Heading size="2xl">
-          <AEMTitle
+          <AEM.Title
             text="Time is a construct. Overstay."
             {...model?.overstay?.heading}
             key="overstay-heading"

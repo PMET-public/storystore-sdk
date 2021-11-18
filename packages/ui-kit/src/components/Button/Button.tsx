@@ -10,7 +10,7 @@ export type ButtonProps = {
   /** Content. */
   children?: ReactNode
   /** Visual styles. */
-  variant?: 'cta' | 'primary' | 'secondary' | 'text'
+  variant?: 'cta' | 'primary' | 'text'
   /** Whether the button should have a transparent background. */
   transparent?: boolean
   /** Icon */

@@ -12,7 +12,6 @@
 .image {
   --size: 4rem;
   align-self: flex-start;
-  background-color: var(--color-surface-darker);
   border-radius: calc(var(--radius, 0) / 2);
   grid-area: image;
   height: var(--size);

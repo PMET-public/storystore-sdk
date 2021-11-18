@@ -6,7 +6,6 @@
     "packages/toolbox",
     "packages/storybook-variables",
     "packages/ui-kit",
-    "packages/next-apollo",
     "packages/pwa"
   ],
   "devDependencies": {

@@ -44,12 +44,10 @@ export const Block = ({ ...props }) => (
 
 export const Spacing = ({ spacing, ...props }) => (
   <div style={{ display: 'grid', gridGap: `var(${spacing})`, gridTemplateColumns: '1fr 1fr' }}>
-    <div
-      style={{ background: 'var(--color-surface-darker)', height: 50, padding: '0.5rem', fontSize: 'var(--font-xs)' }}
-    >
+    <div style={{ background: 'var(--color-surface)', height: 50, padding: '0.5rem', fontSize: 'var(--font-xs)' }}>
       {spacing}
     </div>
-    <div style={{ background: 'var(--color-surface-darker)', height: 50 }} />
+    <div style={{ background: 'var(--color-surface)', height: 50 }} />
   </div>
 )
 
@@ -60,18 +58,9 @@ export const Spacing = ({ spacing, ...props }) => (
 `colors.module.css`
 
 <Block>
-  <Color variant="surface-lighter" />
   <Color variant="surface" />
-  <Color variant="surface-darker" />
-  <Color variant="accent-lighter" />
-  <Color variant="accent" />
-  <Color variant="accent-darker" />
-  <Color variant="primary-lighter" />
   <Color variant="primary" />
-  <Color variant="primary-darker" />
-  <Color variant="secondary-lighter" />
   <Color variant="secondary" />
-  <Color variant="secondary-darker" />
 </Block>
 
 ## Spacing

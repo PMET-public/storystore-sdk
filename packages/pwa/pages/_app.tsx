@@ -2,34 +2,15 @@ import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
-import { Dialog, UIKitSettings, useUIKitSettings, useDialog, Button } from '@storystore/ui-kit/components'
 import Head from 'next/head'
 import NextLink from 'next/link'
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { initApolloClient, useApollo } from '@storystore/next-apollo'
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
-import { useTrackers, trackEvent, trackModal } from '../lib/tracker'
-import { cookies } from '@storystore/toolbox'
-import { useRouter } from 'next/router'
-
-// Icon
-import TerminalIcon from 'remixicon-react/TerminalBoxFillIcon'
+import { useTrackers } from '../lib/tracker'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
-
-initApolloClient(
-  new ApolloClient({
-    connectToDevTools: process.browser,
-    queryDeduplication: true,
-    ssrMode: !process.browser,
-    cache: new InMemoryCache({}),
-    link: new HttpLink({
-      uri: getSiteURLFromPath('/__graphql'),
-      credentials: 'same-origin',
-    }),
-  })
-)
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
@@ -40,30 +21,27 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 }
 
 const AppRoot = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter()
+  const apolloClient = useApollo(pageProps)
 
   /** Initialize Google Analytics (production only) */
   useTrackers()
 
-  const apolloClient = useApollo(pageProps)
-
-  const settings = useUIKitSettings(JSON.parse(cookies.get('STORYSTORE_SETTINGS') || '{}'))
-
-  const settingsDialog = useDialog(false)
+  const { model = {} } = pageProps
 
   return (
     <>
       <Head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="theme-color" content="#ecd96f" />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=no"
         />
-        <meta name="description" content="Description" />
-        <meta name="keywords" content="Keywords" />
-        <meta name="apple-mobile-web-app-title" content="WKND Adventures" />
+        <meta name="apple-mobile-web-app-title" content={model.page?.siteName || ''} />
+        <title>{model.page ? `${model.page.siteName} | ${model.page.title}` : ''}</title>
+        <meta name="description" content={model.page?.description || ''} />
+        <meta name="keywords" content={model.page?.keywords || ''} />
+
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
         <link rel="shortcut icon" type="image/png" href={getSiteURLFromPath('/favicon.ico')} />
@@ -72,72 +50,26 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
         {/* Google Analytics */}
         <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
-      </Head>
 
+        {model.page?.colorSecondary && <meta name="theme-color" content={model.page.colorSecondary} />}
+
+        {model.page && (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+              :root {
+                background-color: ${model.page.colorBody};
+                color: ${model.page.colorOnBody};
+              }
+            `,
+            }}
+          />
+        )}
+      </Head>
       <ApolloProvider client={apolloClient}>
         <UIProvider>
-          <WKNDApp
-            linkRoot={<Link />}
-            homeLink={<Link href="/" />}
-            passportLink={<Link href={getSiteURLFromPath('/my-passport')} />}
-            footerMenu={[
-              <Link key="home" href={getSiteURLFromPath('/')}>
-                Home
-              </Link>,
-              <Link key="adventures" href={getSiteURLFromPath('/adventures')}>
-                Adventures
-              </Link>,
-              <Link key="my-trips" href={getSiteURLFromPath('/my-passport')}>
-                My Passport
-              </Link>,
-              <Button
-                key="settings"
-                icon={<TerminalIcon aria-label="StoryStore SDK" />}
-                onClick={() => {
-                  settingsDialog.setOpen(true)
-
-                  /** Track Settings being used */
-                  trackModal('aem-environment-modal')
-                }}
-              >
-                AEM Environment
-              </Button>,
-            ]}
-          >
+          <WKNDApp pagePath={model.__pagePath} myPassportLink={<Link href="/my-passport" />} {...model.page}>
             <Component {...pageProps} />
-
-            <Dialog closeOnClickOutside {...settingsDialog}>
-              <UIKitSettings
-                {...settings}
-                onSubmit={async (values: any) => {
-                  settings.onSubmit(values)
-                  cookies.set('STORYSTORE_SETTINGS', JSON.stringify(values), 30)
-                  await apolloClient.resetStore()
-                  settingsDialog.setOpen(false)
-                  router.reload()
-
-                  /** Track changed variables */
-                  trackEvent({
-                    category: 'AEM Environment',
-                    action: 'Changed',
-                    label: values.AEM_HOST,
-                  })
-                }}
-                onReset={async () => {
-                  settings.onReset()
-                  cookies.remove('STORYSTORE_SETTINGS')
-                  await apolloClient.resetStore()
-                  settingsDialog.setOpen(false)
-                  router.reload()
-
-                  /** Track reset variables */
-                  trackEvent({
-                    category: 'AEM Environment',
-                    action: 'Reset',
-                  })
-                }}
-              />
-            </Dialog>
           </WKNDApp>
         </UIProvider>
       </ApolloProvider>

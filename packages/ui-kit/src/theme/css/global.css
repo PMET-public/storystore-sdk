@@ -1,9 +1,6 @@
 :root {
-  --ui-color-body: #f3f3f3;
-  --ui-color-body-transparent: rgba(243, 243, 243, 0.6);
-  --ui-color-on-body: #000;
-  background-color: var(--ui-color-body);
-  color: var(--ui-color-on-body);
+  background-color: #f3f3f3;
+  color: #000;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

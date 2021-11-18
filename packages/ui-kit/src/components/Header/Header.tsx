@@ -1,13 +1,4 @@
-import {
-  FunctionComponent,
-  Children,
-  isValidElement,
-  cloneElement,
-  useState,
-  useRef,
-  HTMLAttributes,
-  ReactElement,
-} from 'react'
+import { FunctionComponent, useState, useRef, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge, Color } from '../../lib'
 import { Block } from '../'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
@@ -16,42 +7,12 @@ import { useMeasure } from '../../hooks/useMeasure'
 // Styles
 import style from './Header.module.css'
 
-export type HeaderMenuItemProps = {
-  active?: boolean
-  compact?: boolean
-  variant?: 'link' | 'button' | 'icon' | 'fill'
-}
-
-export const HeaderMenuItem: FunctionComponent<HeaderMenuItemProps> = ({
-  active = false,
-  compact = false,
-  variant = 'link',
-  children,
-  ...props
-}) => {
-  if (variant === 'fill') return <span className={classes([style.menuItem, style.fill])} />
-
-  return (
-    <>
-      {Children.map(children, child => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {
-            className: classes([style.menuItem, style[variant], [style.active, active], [style.compact, compact]]),
-            ...props,
-          })
-        }
-        return child
-      })}
-    </>
-  )
-}
-
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
   root?: ReactElement
   /** React SVG Logo */
   logo: ReactElement<HTMLAttributes<SVGElement>>
-  /** Menu Navigation */
-  menu?: ReactElement[]
+  /** Navigation Container */
+  nav?: ReactElement
   /** Whether the button should have transparent background. */
   transparent?: boolean
   /** Visual styles. */
@@ -65,7 +26,7 @@ export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 export const Header: FunctionComponent<HeaderProps> = ({
   root = <header />,
   logo,
-  menu,
+  nav,
   transparent = false,
   variant = 'surface',
   sticky = false,
@@ -110,11 +71,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
             <logo.type {...logo.props} className={classes([style.logo, logo.props.className])} />
           </div>
 
-          {menu && (
-            <div className={style.menuWrapper}>
-              <nav className={style.menu}>{menu?.map((item, key) => cloneElement(item, { key }))}</nav>
-            </div>
-          )}
+          {nav && <nav.type {...nav.props} className={classes([style.nav, nav.props.className])} />}
         </div>
       </Block>
     </root.type>

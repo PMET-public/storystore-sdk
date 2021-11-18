@@ -45,7 +45,7 @@
 }
 
 .tab.selected {
-  --border-bottom-color: var(--color-accent);
+  --border-bottom-color: var(--color-secondary);
   --opacity: 1;
 }
 
@@ -56,5 +56,12 @@
 
 .panel {
   margin-top: -0.1rem;
-  border-top: 0.1rem solid var(--color-surface-darker);
+  position: relative;
+}
+
+.panel::before {
+  content: '';
+  display: block;
+  border-top: 0.1rem solid var(--color-on-surface);
+  opacity: 0.3;
 }

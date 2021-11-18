@@ -1,32 +1,57 @@
 .root {
-  --bg: var(--color-surface-lighter);
-  --text: var(--color-on-surface);
-  --border: var(--color-surface-darker);
-  background-color: var(--bg);
-  color: var(--text);
-  border-width: 0 0 1px;
+  position: relative;
+}
+
+.decorator {
+  --border: var(--color-on-surface);
+  --opacity: 0.45;
+  background-color: var(--color-surface);
   border-color: var(--border);
   border-style: solid;
-  padding: var(--spacing-sm) var(--spacing-xs);
+  border-width: 0 0 1px;
+  filter: brightness(1.1);
+  opacity: var(--opacity);
+  position: absolute;
   transition: all 300ms ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
 }
 
-.root:not(:disabled):hover {
-  --border: var(--color-on-surface-lighter);
+.input {
+  background: transparent;
+  border: 0 none;
+  color: var(--text);
+  padding: var(--spacing-sm) var(--spacing-xs);
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
-.root:not(:disabled):focus {
-  --border: var(--color-accent);
+.input:not(:disabled):hover ~ .decorator {
+  --opacity: 0.75;
 }
 
-.root:disabled {
+.input:not(:disabled):focus ~ .decorator {
+  --opacity: 1;
+  --border: var(--color-secondary);
+}
+
+.input:disabled {
   opacity: 0.5;
 }
 
-.root::placeholder {
+.input:disabled ~ .decorator {
+  --opacity: 0.25;
+}
+
+.input::placeholder {
   opacity: 0.6;
 }
 
-.root.error {
+.input.error + .decorator {
+  --opacity: 0.75;
   --border: var(--color-error) !important;
 }

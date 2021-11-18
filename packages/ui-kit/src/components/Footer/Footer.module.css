@@ -9,8 +9,6 @@
   grid-gap: var(--spacing-lg);
   grid-template-areas:
     'logo'
-    'menu'
-    'social'
     'disclaimer';
   padding-bottom: var(--spacing-lg);
   padding-top: var(--spacing-lg);
@@ -18,11 +16,9 @@
 
 @media (min-width: 768px) {
   .wrapper {
-    grid-template-areas:
-      'logo menu social'
-      'disclaimer disclaimer disclaimer';
-    grid-column-gap: var(--spacing-lg);
-    grid-template-columns: auto 1fr auto;
+    grid-template-areas: 'logo disclaimer';
+    grid-column-gap: var(--spacing-md);
+    grid-template-columns: auto 1fr;
   }
 }
 
@@ -41,49 +37,18 @@
   height: 3.125rem;
 }
 
-.menu {
-  align-items: center;
-  display: grid;
-  font-size: var(--font-sm);
-  grid-area: menu;
-  grid-gap: var(--spacing-md);
-  grid-auto-columns: max-content;
-}
-
-@media (min-width: 1024px) {
-  .menu {
-    grid-auto-flow: column;
-    grid-gap: var(--spacing-lg);
-  }
-}
-
 .disclaimer {
   grid-area: disclaimer;
   line-height: 1.5;
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
   display: grid;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-sm);
 }
 
-.disclaimer > div {
+.disclaimerCopy {
   opacity: 0.65;
-  font-style: normal;
 }
 
-.disclaimer > div p:not(:last-of-type) {
+.disclaimerCopy p:not(:last-of-type) {
   margin-bottom: var(--spacing-xs);
-}
-
-.social {
-  align-items: start;
-  grid-area: social;
-  display: grid;
-  grid-auto-columns: max-content;
-  grid-auto-flow: column;
-  grid-gap: var(--spacing-md);
-}
-
-.social svg {
-  fill: currentColor;
-  width: 1.875em;
 }

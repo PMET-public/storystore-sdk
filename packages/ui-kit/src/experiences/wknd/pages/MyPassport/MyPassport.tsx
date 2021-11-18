@@ -6,7 +6,7 @@ import { AEMModelProps } from '../../../../lib'
 // WKND Components
 import { AdventureTile } from '../../components'
 // AEM Components
-import { AEMBanner, AEMTitle } from '../../../components'
+import { AEM } from '../../../components'
 // UI Components
 import { Block, TileSkeleton, Heading, Error, Carousel } from '../../../../components'
 import gql from 'graphql-tag'
@@ -22,7 +22,7 @@ import BookmarkedIcon from 'remixicon-react/Bookmark3FillIcon'
 import heroImage from '@storystore/ui-kit/dist/experiences/wknd/assets/bg-adventures-2.jpg'
 
 // AEM Model Path
-export const MY_PASSPORT_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/us/en/my-passport'
+export const MY_PASSPORT_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures/my-passport'
 
 // GraphQL Query
 export const MY_PASSPORT_QUERY = gql`
@@ -94,7 +94,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
     <Block className={style.root} gap={{ sm: 'lg', lg: 'xl' }}>
       {/* Hero (Static Content) */}
       <Block>
-        <AEMBanner
+        <AEM.Banner
           backgroundFileReference={heroImage.src}
           screen="lighter"
           backgroundImageLazy={false}
@@ -113,7 +113,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
       {/* Saved for Later */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<BookmarkedIcon color="red" />} size={{ sm: 'lg', md: '2xl' }}>
-          <AEMTitle
+          <AEM.Title
             text="It's not if, but when–Now!"
             {...model?.bookmarks?.heading}
             key="bookmarks-heading"
@@ -145,7 +145,7 @@ export const MyPassport: FunctionComponent<MyPassportProps> = ({ model, checkIns
       {/* Check-ins */}
       <Block root={<section />} gap={{ sm: 'md', lg: 'md' }} contained padded>
         <Heading icon={<CheckedInIcon color="green" />} size={{ sm: 'lg', md: '2xl' }}>
-          <AEMTitle
+          <AEM.Title
             key="checkins-heading"
             text="Been there, done that."
             {...model?.checkins?.heading}

@@ -1,5 +1,6 @@
 import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
 import Footer from '.'
+import Block from '../Block'
 
 import LogoIcon from 'remixicon-react/AppsFillIcon'
 
@@ -24,7 +25,14 @@ Footers allow users to take actions with a single tap.
     name="Footer"
     args={{
       logo: <LogoIcon size={40} />,
-      menu: [<a href="#">Articles</a>, <a href="#">Adventures</a>, <a href="#">About</a>, <a href="#">Contacts</a>],
+      legal: (
+        <Block>
+          <a href="#">Articles</a>
+          <a href="#">Adventures</a>
+          <a href="#">About</a>
+          <a href="#">Contacts</a>
+        </Block>
+      ),
     }}
   >
     {Template.bind({})}
