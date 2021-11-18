@@ -13,7 +13,7 @@
 
 .root.focusVisible *:focus {
   outline-style: solid;
-  outline-color: var(--color-accent);
+  outline-color: var(--color-secondary);
   outline-width: 0.2rem;
   outline-offset: 0.3rem;
 }

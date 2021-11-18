@@ -19,8 +19,6 @@ export const PageContext = createContext({
   colorOnPrimary: null,
   colorSecondary: null,
   colorOnSecondary: null,
-  colorAccent: null,
-  colorOnAccent: null,
 })
 
 const PageComponent = ({ componentProperties, className, style, children }) => {
@@ -36,8 +34,6 @@ const PageComponent = ({ componentProperties, className, style, children }) => {
     colorOnPrimary,
     colorSecondary,
     colorOnSecondary,
-    colorAccent,
-    colorOnAccent,
   }: any = componentProperties
 
   return (
@@ -53,8 +49,6 @@ const PageComponent = ({ componentProperties, className, style, children }) => {
         colorOnPrimary,
         colorSecondary,
         colorOnSecondary,
-        colorAccent,
-        colorOnAccent,
       }}
     >
       <div
@@ -70,8 +64,6 @@ const PageComponent = ({ componentProperties, className, style, children }) => {
           ['--color-on-primary']: colorOnPrimary,
           ['--color-secondary']: colorSecondary,
           ['--color-on-secondary']: colorOnSecondary,
-          ['--color-accent']: colorAccent,
-          ['--color-on-accent']: colorOnAccent,
           ...style,
         }}
       >

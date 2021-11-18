@@ -1,5 +1,4 @@
 .root {
-  --header-accent: var(--color-accent);
   --header-bg: var(--color-surface);
   --header-link: var(--header-text);
   --header-text: var(--color-on-surface);
@@ -63,21 +62,6 @@
 .root.secondary.transparent.scrolled {
   --header-bg: var(--color-secondary);
   --header-text: var(--color-on-secondary);
-}
-
-.root.accent {
-  --header-bg: var(--color-accent);
-  --header-text: var(--color-on-accent);
-}
-
-.root.accent.transparent {
-  --header-bg: transparent;
-  --header-text: var(--color-accent);
-}
-
-.root.accent.transparent.scrolled {
-  --header-bg: var(--color-accent);
-  --header-text: var(--color-on-accent);
 }
 
 .root.sticky {

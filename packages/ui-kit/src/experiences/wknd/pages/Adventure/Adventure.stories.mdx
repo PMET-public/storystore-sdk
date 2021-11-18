@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import Adventure from '.'
+import Adventure, { ADVENTURE_AEM_MODEL_PAGE_PATH } from '.'
 import { App } from '../../components'
 import { settings } from '../../../../../.storybook/lib'
 
@@ -15,7 +15,7 @@ import { settings } from '../../../../../.storybook/lib'
 />
 
 export const Template = args => (
-  <App>
+  <App pagePath={ADVENTURE_AEM_MODEL_PAGE_PATH}>
     <Adventure {...args} />
   </App>
 )

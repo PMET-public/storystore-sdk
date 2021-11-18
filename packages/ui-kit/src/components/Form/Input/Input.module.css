@@ -36,7 +36,7 @@
 
 .input:not(:disabled):focus ~ .decorator {
   --opacity: 1;
-  --border: var(--color-accent);
+  --border: var(--color-secondary);
 }
 
 .input:disabled {

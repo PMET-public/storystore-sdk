@@ -45,7 +45,7 @@
 }
 
 .tab.selected {
-  --border-bottom-color: var(--color-accent);
+  --border-bottom-color: var(--color-secondary);
   --opacity: 1;
 }
 

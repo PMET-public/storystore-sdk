@@ -51,7 +51,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         {/* Google Analytics */}
         <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
 
-        {model.page?.colorAccent && <meta name="theme-color" content={model.page.colorAccent} />}
+        {model.page?.colorSecondary && <meta name="theme-color" content={model.page.colorSecondary} />}
 
         {model.page && (
           <style

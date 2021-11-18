@@ -3,16 +3,12 @@
   --color-surface: #fafafa;
   --color-on-surface: #222;
 
-  /* Accent */
-  --color-accent: #fdd835;
-  --color-on-accent: #222;
-
   /* Primary */
   --color-primary: #212121;
   --color-on-primary: #ffffff;
 
   /* Secondary */
-  --color-secondary: #fafafa;
+  --color-secondary: #fdd835;
   --color-on-secondary: #222;
 
   /** Utilities **/

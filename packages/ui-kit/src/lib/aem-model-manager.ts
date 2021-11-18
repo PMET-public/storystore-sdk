@@ -38,8 +38,6 @@ export const getPropsFromAEMModel = (model: any = {}) => {
       colorOnBody: model.colorOnBody ?? null,
       colorSurface: model.colorSurface ?? null,
       colorOnSurface: model.colorOnSurface ?? null,
-      colorAccent: model.colorAccent ?? null,
-      colorOnAccent: model.colorOnAccent ?? null,
       colorPrimary: model.colorPrimary ?? null,
       colorOnPrimary: model.colorOnPrimary ?? null,
       colorSecondary: model.colorSecondary ?? null,
