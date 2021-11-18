@@ -5,9 +5,6 @@ import { classes, merge } from '../../lib'
 // Styles
 import style from './Footer.module.css'
 
-// Default Logo
-import { AdobeLogo } from './AdobeLogo'
-
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
   /** Name of the website */
@@ -43,7 +40,23 @@ export const Footer: FunctionComponent<FooterProps> = ({
           {isValidElement(logo) ? (
             cloneElement(logo, { className: style.logo })
           ) : (
-            <AdobeLogo aria-label="Adobe" className={style.logo} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 425.1 425.1"
+              aria-label="Adobe Experience Cloud"
+              className={style.logo}
+            >
+              <path
+                fill="#fa0f00"
+                d="M103.8,37.4H396.1a66.36,66.36,0,0,1,66.4,66.4V396.1a66.36,66.36,0,0,1-66.4,66.4H103.8a66.36,66.36,0,0,1-66.4-66.4V103.8A66.36,66.36,0,0,1,103.8,37.4Z"
+                transform="translate(-37.4 -37.4)"
+              />
+              <path
+                fill="#fff"
+                d="M283.6,133.5l102.2,233H313.3L250,222.3l-38.5,87.9h45.2l24.7,56.3H114.2l102.2-233Z"
+                transform="translate(-37.4 -37.4)"
+              />
+            </svg>
           )}
           <div className={style.disclaimer}>
             Ⓒ {year}, {name}. {description}

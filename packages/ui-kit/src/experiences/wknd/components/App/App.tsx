@@ -4,7 +4,7 @@ import { AEM } from '../../../components'
 import { PageContext } from '../../../components/AEM/Page'
 import { App as AppComponent, Header, Footer, SkeletonLoader, Button } from '../../../../components'
 
-import MyPassportIcon from 'remixicon-react/Map2LineIcon'
+import MyPassportIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
 initAEMModel()

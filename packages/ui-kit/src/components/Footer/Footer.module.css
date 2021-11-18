@@ -33,6 +33,7 @@
 
 .logo {
   grid-area: logo;
+  fill: currentColor;
   height: 3.125rem;
 }
 
