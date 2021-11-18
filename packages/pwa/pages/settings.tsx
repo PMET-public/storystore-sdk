@@ -3,14 +3,11 @@ import { Block, UIKitSettings, useUIKitSettings, toast } from '@storystore/ui-ki
 import { cookies } from '@storystore/toolbox'
 import { trackEvent } from '../lib/tracker'
 import { useApolloClient } from '@apollo/client'
-import { useRouter } from 'next/router'
 
 const SettingsPage: NextPage<any> = ({}) => {
   const settings = useUIKitSettings(JSON.parse(cookies.get('STORYSTORE_SETTINGS') || '{}'))
 
   const apolloClient = useApolloClient()
-
-  const router = useRouter()
 
   return (
     <Block contained style={{ height: '100%', alignItems: 'center' }}>
@@ -26,12 +23,9 @@ const SettingsPage: NextPage<any> = ({}) => {
           toast('Your updates have been saved.', {
             hideProgressBar: true,
             closeOnClick: true,
-            autoClose: false,
             theme: 'light',
             type: 'success',
           })
-
-          router.reload()
 
           /** Track changed variables */
           trackEvent({
@@ -46,8 +40,6 @@ const SettingsPage: NextPage<any> = ({}) => {
           cookies.remove('STORYSTORE_SETTINGS')
 
           await apolloClient.resetStore()
-
-          router.reload()
 
           toast('Your updates have been saved.', {
             hideProgressBar: true,
