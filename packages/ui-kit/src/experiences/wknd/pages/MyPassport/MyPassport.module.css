@@ -11,6 +11,10 @@
   border: 2px dashed rgba(0, 0, 0, 0.12);
 }
 
+.empty > * {
+  opacity: 0.25;
+}
+
 .heading svg {
   margin-bottom: -0.125em;
 }
