@@ -6,7 +6,7 @@
 
 .item label {
   --bg: transparent;
-  --border: var(--color-on-surface-lighter);
+  --border: var(--color-on-surface);
   --text: var(--color-on-surface);
   background-color: var(--bg);
   border: 1px solid var(--border);

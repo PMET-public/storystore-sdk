@@ -8,7 +8,7 @@
   margin-bottom: var(--spacing-sm);
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-lg);
   position: relative;
   scroll-padding: var(--carousel-padding);
   scroll-snap-type: x mandatory;
@@ -39,14 +39,14 @@
 }
 
 .root::-webkit-scrollbar-track {
-  margin: 0 20vw;
+  margin: 20vw 0;
   border-radius: 0.625rem;
-  background: var(--color-surface-darker);
+  background: var(--color-surface);
 }
 
 .root::-webkit-scrollbar-thumb {
   border-radius: 0.625rem;
-  background: var(--color-on-surface-lighter);
+  background: var(--color-on-surface);
 }
 
 .root.hideScrollBar {

@@ -29,13 +29,13 @@
 }
 
 .cta {
-  --button-bg: var(--color-accent);
+  --button-bg: var(--color-secondary);
   --button-border: 0 none;
-  --button-text: var(--color-on-accent);
+  --button-text: var(--color-on-secondary);
 }
 
 .cta.transparent {
-  --button-text: var(--color-accent);
+  --button-text: var(--color-secondary);
 }
 
 .primary {

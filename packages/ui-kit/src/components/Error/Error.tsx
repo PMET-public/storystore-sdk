@@ -17,7 +17,7 @@ const error = (status: string | number) => {
     case '401':
       return (
         <span>
-          <LockIcon /> You must provide GraphQL credentials to access this endpoint.
+          <LockIcon /> You must provide credentials to access this environment.
         </span>
       )
     case '403':
@@ -32,14 +32,14 @@ const error = (status: string | number) => {
       return (
         <span>
           <PlugIcon />
-          The GraphQL endpoint provided can't be found.
+          Yikes! I couldn't what you were looking for.
         </span>
       )
     case '504':
       return (
         <span>
           <PlugIcon />
-          Can't connect to the GraphQL endpoint.
+          Can't connect to the environment's endpoint.
           <br /> Please make sure AEM is running.
         </span>
       )

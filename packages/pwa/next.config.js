@@ -13,19 +13,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
   pwa: {
     dest: '.next/static',
     disable: process.env.NODE_ENV === 'development',
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/(.*?)',
-        headers: [
-          { key: 'Access-Control-Allow-Origin', value: process.env.AEM_HOST },
-          { key: 'Access-Control-Allow-Methods', value: '*' },
-          { key: 'Access-Control-Allow-Headers', value: '*' },
-        ],
-      },
-    ]
+    maximumFileSizeToCacheInBytes: 3000000,
   },
 
   async rewrites() {

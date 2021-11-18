@@ -1,5 +1,4 @@
 .root {
-  --header-accent: var(--color-accent);
   --header-bg: var(--color-surface);
   --header-link: var(--header-text);
   --header-text: var(--color-on-surface);
@@ -31,7 +30,7 @@
 }
 
 .root.surface.transparent.scrolled {
-  --header-bg: var(--color-surface-transparent);
+  --header-bg: var(--color-surface);
   --header-text: var(--color-on-surface);
 }
 
@@ -46,7 +45,7 @@
 }
 
 .root.primary.transparent.scrolled {
-  --header-bg: var(--color-primary-transparent);
+  --header-bg: var(--color-primary);
   --header-text: var(--color-on-primary);
 }
 
@@ -61,23 +60,8 @@
 }
 
 .root.secondary.transparent.scrolled {
-  --header-bg: var(--color-secondary-transparent);
+  --header-bg: var(--color-secondary);
   --header-text: var(--color-on-secondary);
-}
-
-.root.accent {
-  --header-bg: var(--color-accent);
-  --header-text: var(--color-on-accent);
-}
-
-.root.accent.transparent {
-  --header-bg: transparent;
-  --header-text: var(--color-accent);
-}
-
-.root.accent.transparent.scrolled {
-  --header-bg: var(--color-accent-transparent);
-  --header-text: var(--color-on-accent);
 }
 
 .root.sticky {
@@ -105,7 +89,8 @@
   width: auto;
 }
 
-.logoWrapper svg {
+.logoWrapper svg,
+.logoWrapper img {
   fill: var(--header-logo-color);
   transition: all 300ms ease;
   height: var(--header-logo-size);
@@ -123,64 +108,19 @@
   display: none;
 }
 
-.menu {
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
+/* .nav, */
+.nav {
   align-items: center;
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+  grid-gap: var(--spacing-md);
+  height: 100%;
+  justify-content: flex-end;
   white-space: nowrap;
 }
 
-.menuItem {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  color: currentColor;
-  text-decoration: none;
-}
-
-.menuItem:not(:last-of-type) {
-  margin-right: var(--spacing-md);
-}
-
-.menuItem.compact:not(:last-of-type) {
-  margin-right: var(--spacing-sm);
-}
-
-.menuItem.fill {
-  flex-grow: 1;
-}
-
-.menuItem.icon svg,
-svg.menuItem.icon {
-  fill: currentColor;
-  height: 1.875rem;
-  width: auto;
-}
-
-.menuItem.link {
-  align-self: center;
+.nav > a {
   color: var(--header-link);
-  padding: var(--spacing-xs) var(--spacing-xxs);
-  position: relative;
-  transition: color 0.3s cubic-bezier(0.11, 0.7, 0, 1);
-  z-index: 1;
-}
-
-.menuItem.link::after {
-  background-color: var(--header-accent);
-  bottom: 0;
-  content: '';
-  display: block;
-  height: 0.2rem;
-  left: 0;
-  position: absolute;
-  transform: scale(0);
-  transition: transform 0.3s cubic-bezier(0.11, 0.7, 0, 1);
-  width: 100%;
-}
-
-.menuItem.link.active::after,
-.menuItem.link:hover::after {
-  transform: scale(1);
+  font-weight: var(--font-semibold);
 }

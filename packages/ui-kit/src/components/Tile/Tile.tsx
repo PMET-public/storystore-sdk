@@ -36,11 +36,12 @@ export const Tile: FunctionComponent<TileProps> = ({
             <span className={style.heading}>{heading}</span>
           )}
 
-          {isValidElement(subheading) ? (
-            <subheading.type {...merge(subheading.props, { className: style.subheading })} />
-          ) : (
-            <span className={style.subheading}>{subheading}</span>
-          )}
+          {subheading &&
+            (isValidElement(subheading) ? (
+              <subheading.type {...merge(subheading.props, { className: style.subheading })} />
+            ) : (
+              <span className={style.subheading}>{subheading}</span>
+            ))}
 
           {tags && (
             <div className={style.tags}>

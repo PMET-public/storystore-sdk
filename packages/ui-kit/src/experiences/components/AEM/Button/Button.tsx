@@ -10,7 +10,7 @@ const config = {
 }
 
 const ButtonComponent = ({ componentProperties, className, style, itemPath, cqPath, loading = !cqPath }) => {
-  const { id, link, icon, text, accessibilityLabel } = componentProperties
+  const { id, link, icon, text = 'Button', size, variant, transparent, accessibilityLabel } = componentProperties
 
   if (icon) console.warn('Button Icon attribute is not supported')
 
@@ -22,7 +22,15 @@ const ButtonComponent = ({ componentProperties, className, style, itemPath, cqPa
     )
 
   return (
-    <Root id={id} aria-label={accessibilityLabel} className={className} style={style}>
+    <Root
+      id={id}
+      aria-label={accessibilityLabel}
+      size={size}
+      variant={variant}
+      transparent={transparent}
+      className={className}
+      style={style}
+    >
       {text}
     </Root>
   )

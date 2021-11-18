@@ -5,12 +5,6 @@ import { classes, merge } from '../../lib'
 // Styles
 import style from './Footer.module.css'
 
-// Icons
-import FacebookIcon from 'remixicon-react/FacebookFillIcon'
-import TwitterIcon from 'remixicon-react/TwitterFillIcon'
-import InstagramIcon from 'remixicon-react/InstagramFillIcon'
-import PinterestIcon from 'remixicon-react/PinterestFillIcon'
-
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
   /** Name of the website */
@@ -18,9 +12,9 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   /** Site description */
   description?: string
   /** React SVG Logo */
-  logo: ReactElement<HTMLAttributes<SVGElement>>
+  logo?: ReactElement<HTMLAttributes<SVGElement>>
   /** Menu Navigation */
-  menu?: Array<ReactElement>
+  legal?: ReactElement
   /** Centered content */
   contained?: boolean
 }
@@ -31,49 +25,52 @@ export const Footer: FunctionComponent<FooterProps> = ({
   logo,
   description,
   contained,
-  menu,
+  children,
   className,
+  legal,
   ...props
 }) => {
   const year = new Date().getFullYear()
 
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
-      <Block className={style.wrapper} contained={contained} padded>
-        <div>{isValidElement(logo) ? cloneElement(logo, { className: style.logo }) : null}</div>
-
-        <div className={style.menu}>
-          {menu?.map((item, key) => {
-            return item ? <item.type key={item.key ?? key} {...item.props} /> : null
-          })}
-        </div>
-
-        <div className={style.disclaimer}>
-          Ⓒ {year}, {name}. {description}
-          <div>
-            <p>WKND is a fictitious adventure and travel PWA created by Adobe.</p>
-            <p>
-              Many of the beautiful images in the WKND site are available for purchase via{' '}
-              <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
-                Adobe Stock.
-              </a>
-            </p>
+      <Block contained={contained} padded>
+        {children}
+        <div className={style.wrapper}>
+          {isValidElement(logo) ? (
+            cloneElement(logo, { className: style.logo })
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 425.1 425.1"
+              aria-label="Adobe Experience Cloud"
+              className={style.logo}
+            >
+              <path
+                fill="#fa0f00"
+                d="M103.8,37.4H396.1a66.36,66.36,0,0,1,66.4,66.4V396.1a66.36,66.36,0,0,1-66.4,66.4H103.8a66.36,66.36,0,0,1-66.4-66.4V103.8A66.36,66.36,0,0,1,103.8,37.4Z"
+                transform="translate(-37.4 -37.4)"
+              />
+              <path
+                fill="#fff"
+                d="M283.6,133.5l102.2,233H313.3L250,222.3l-38.5,87.9h45.2l24.7,56.3H114.2l102.2-233Z"
+                transform="translate(-37.4 -37.4)"
+              />
+            </svg>
+          )}
+          <div className={style.disclaimer}>
+            Ⓒ {year}, {name}. {description}
+            <div className={style.disclaimerCopy}>
+              <p>
+                This is a fictitious PWA created by Adobe. <br /> Many of the beautiful images in this site are
+                available for purchase via{' '}
+                <a href="https://stock.adobe.com" target="_blank" rel="noreferrer">
+                  Adobe Stock.
+                </a>
+              </p>
+            </div>
+            {legal}
           </div>
-        </div>
-
-        <div className={style.social}>
-          <a href="https://facebook.com" target="_blank" rel="noreferrer">
-            <FacebookIcon aria-label="Facebook" />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer">
-            <TwitterIcon aria-label="Twitter" />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
-            <InstagramIcon aria-label="Instagram" />
-          </a>
-          <a href="https://pinterest.com" target="_blank" rel="noreferrer">
-            <PinterestIcon aria-label="Pinterest" />
-          </a>
         </div>
       </Block>
     </root.type>

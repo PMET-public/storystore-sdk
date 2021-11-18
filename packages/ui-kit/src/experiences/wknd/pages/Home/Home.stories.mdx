@@ -1,5 +1,5 @@
 import { Meta, Story, Canvas } from '@storybook/addon-docs'
-import Home from '.'
+import Home, { HOME_AEM_MODEL_PAGE_PATH } from '.'
 import { App } from '../../components'
 import { settings } from '../../../../../.storybook/lib'
 
@@ -14,7 +14,7 @@ import { settings } from '../../../../../.storybook/lib'
 />
 
 export const Template = args => (
-  <App>
+  <App pagePath={HOME_AEM_MODEL_PAGE_PATH}>
     <Home {...args} />
   </App>
 )

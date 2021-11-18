@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, HTMLAttributes } from 'react'
 import { useFocusVisible } from '@react-aria/interactions'
 import style from './UIProvider.module.css'
 import { classes } from '../../lib'
@@ -7,9 +7,9 @@ import ToastContainer from '../../components/Toast'
 // TODO: Moved to App wrapper until Next.js allows for global css import from other files.
 // import '../css/global.css'
 
-export type UIProvider = {}
+export type UIProviderProps = HTMLAttributes<HTMLDivElement>
 
-export const UIProvider: FunctionComponent<UIProvider> = ({ children, ...props }) => {
+export const UIProvider: FunctionComponent<UIProviderProps> = ({ children, ...props }) => {
   const { isFocusVisible } = useFocusVisible({ isTextInput: true })
 
   return (

@@ -1,71 +1,86 @@
-import { FunctionComponent, useMemo, ReactElement, cloneElement, isValidElement } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { initAEMModel } from '../../../../lib'
-import { App as AppComponent, Header, Footer, HeaderMenuItem, Button } from '../../../../components'
+import { AEM } from '../../../components'
+import { PageContext } from '../../../components/AEM/Page'
+import { App as AppComponent, Header, Footer, SkeletonLoader, Button } from '../../../../components'
 
-// Icons
-import LogoIcon from '../../assets/wknd-adventures_logo.svg'
-import MapIcon from 'remixicon-react/RoadMapFillIcon'
+import MyPassportIcon from 'remixicon-react/RoadMapFillIcon'
 
 // AEM Model Manager
 initAEMModel()
 
-export type AppProps = {
+// AEM Model Path
+export const APP_AEM_MODEL_PAGE_PATH = '/content/storystore/wknd-adventures'
+
+export type AppProps = HTMLAttributes<HTMLDivElement> & {
+  pagePath?: string
   linkRoot?: ReactElement
-  homeLink?: ReactElement
-  passportLink?: ReactElement
-  menu?: Array<ReactElement>
-  footerMenu?: Array<ReactElement>
 }
 
 export const App: FunctionComponent<AppProps> = ({
   linkRoot,
-  homeLink = <a href="#" />,
-  passportLink = <a href="#" />,
-  menu: _menu = [],
-  footerMenu,
+  pagePath = APP_AEM_MODEL_PAGE_PATH,
   children,
   ...props
 }) => {
-  const menu = useMemo(
-    () =>
-      passportLink
-        ? [
-            ..._menu,
-            <HeaderMenuItem variant="icon" compact>
-              <Button
-                root={<passportLink.type {...passportLink.props} />}
-                icon={<MapIcon aria-label="My Passport" />}
-                variant="text"
-                transparent
-              >
-                <span className="hide-sm-only">My Passport</span>
-              </Button>
-            </HeaderMenuItem>,
-          ]
-        : [..._menu],
-    [passportLink, _menu]
-  )
+  const link = linkRoot ?? <a />
 
   return (
-    <AppComponent
-      linkRoot={linkRoot}
-      {...props}
-      header={
-        <Header
-          logo={
-            <homeLink.type {...homeLink.props}>
-              <LogoIcon aria-label="WKND" />
-            </homeLink.type>
-          }
-          menu={menu}
-          transparent
-          sticky
-          style={{ ['--header-text' as string]: 'var(--color-on-surface)' }}
-        />
-      }
-      footer={<Footer logo={<LogoIcon />} menu={footerMenu} />}
-    >
-      {children}
-    </AppComponent>
+    <AEM.Page pagePath={pagePath} {...props}>
+      <PageContext.Consumer>
+        {({ logoFile, siteName }) => (
+          <AppComponent
+            linkRoot={linkRoot}
+            header={
+              <Header
+                variant="surface"
+                transparent
+                sticky
+                logo={
+                  logoFile ? (
+                    <link.type {...link.props} href="/">
+                      <img src={logoFile} alt={siteName} />
+                    </link.type>
+                  ) : (
+                    <SkeletonLoader uniqueKey="header--logo" width={250} height={100}>
+                      <rect width="100%" height="100%" />
+                    </SkeletonLoader>
+                  )
+                }
+                nav={
+                  <nav>
+                    <Button
+                      root={<link.type {...link.props} href="/my-passport" />}
+                      icon={<MyPassportIcon />}
+                      size="sm"
+                      variant="text"
+                    >
+                      My Passport
+                    </Button>
+                  </nav>
+                }
+                style={{
+                  ['--header-text' as string]: 'var(--color-on-surface)',
+                  ...props.style,
+                }}
+              />
+            }
+            footer={
+              <Footer
+                legal={
+                  <nav>
+                    <link.type {...link.props} href="/settings">
+                      UIKit Settings
+                    </link.type>
+                  </nav>
+                }
+              />
+            }
+          >
+            {children}
+          </AppComponent>
+        )}
+      </PageContext.Consumer>
+    </AEM.Page>
   )
 }
