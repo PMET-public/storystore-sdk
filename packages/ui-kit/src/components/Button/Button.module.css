@@ -7,13 +7,14 @@
   color: var(--button-text);
   cursor: var(--cursor);
   display: inline-flex;
-  grid-gap: var(--spacing-sm);
   font-size: var(--size);
   font-weight: var(--font-semibold);
+  grid-gap: var(--spacing-sm);
   height: 3em;
   justify-content: center;
   line-height: var(--leading-none);
   padding: 1.2em;
+  text-decoration: none;
   transition-duration: 305ms;
   transition-property: opacity, color, background-color, filter;
   transition-timing-function: ease;

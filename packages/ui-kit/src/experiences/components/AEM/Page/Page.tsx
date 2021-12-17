@@ -1,5 +1,5 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
-import { createContext, useContext } from 'react'
+import { createContext } from 'react'
 
 const resourceType = 'storystore/components/remotepage'
 
