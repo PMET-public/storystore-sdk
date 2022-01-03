@@ -15,7 +15,7 @@ export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
 
 export const Heading: FunctionComponent<HeadingProps> = ({
   root = <div />,
-  size: _size = 'normal',
+  size: _size = 'xl',
   accent,
   className,
   color,
