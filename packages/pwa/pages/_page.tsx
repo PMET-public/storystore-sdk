@@ -5,7 +5,7 @@ import { AEMComponent } from '@storystore/ui-kit/AEM'
 const DynamicPage: NextPage<any> = () => {
   const { asPath } = useRouter()
 
-  return <AEMComponent.Page pagePath={asPath} />
+  return <AEMComponent.Page key={asPath} pagePath={asPath} />
 }
 
 export default DynamicPage
