@@ -1,16 +1,21 @@
 import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
+import { App, Header, Footer } from '@storystore/ui-kit/components'
+import { initAEMModelManager, AEMComponent } from '@storystore/ui-kit/AEM'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import { useTrackers } from '../lib/tracker'
+import LogoIcon from 'remixicon-react/AppsFillIcon'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
+
+// Initialize AEM Model Manager and AEM SPA Components
+initAEMModelManager()
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
@@ -26,7 +31,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   /** Initialize Google Analytics (production only) */
   useTrackers()
 
-  const { model = {} } = pageProps
+  const { pageModel } = pageProps
 
   return (
     <>
@@ -37,10 +42,12 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=no"
         />
-        <meta name="apple-mobile-web-app-title" content={model.page?.siteName || ''} />
-        <title>{model.page ? `${model.page.siteName} | ${model.page.title}` : ''}</title>
-        <meta name="description" content={model.page?.description || ''} />
-        <meta name="keywords" content={model.page?.keywords || ''} />
+        <meta name="apple-mobile-web-app-title" content={pageModel?.branding?.siteName || ''} />
+        <title>
+          {pageModel?.branding?.siteName} | {pageModel?.title}
+        </title>
+        <meta name="description" content={pageModel?.description || ''} />
+        <meta name="keywords" content={pageModel?.keywords || ''} />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -51,26 +58,76 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         {/* Google Analytics */}
         <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
 
-        {model.page?.colorSecondary && <meta name="theme-color" content={model.page.colorSecondary} />}
+        {pageModel?.branding?.colorSecondary && <meta name="theme-color" content={pageModel.branding.colorSecondary} />}
 
-        {model.page && (
+        {pageModel?.branding && (
           <style
             dangerouslySetInnerHTML={{
               __html: `
               :root {
-                background-color: ${model.page.colorBody};
-                color: ${model.page.colorOnBody};
+                background-color: ${pageModel.branding.colorBody};
+                color: ${pageModel.branding.colorOnBody};
               }
             `,
             }}
           />
         )}
       </Head>
+
       <ApolloProvider client={apolloClient}>
         <UIProvider>
-          <WKNDApp pagePath={model.__pagePath} myPassportLink={<Link href="/my-passport" />} {...model.page}>
-            <Component {...pageProps} />
-          </WKNDApp>
+          <App
+            linkRoot={<Link />}
+            header={
+              <Header
+                // variant="surface"
+                // transparent
+                sticky
+                logo={
+                  <Link href="/">
+                    {pageModel?.branding?.logoFile ? (
+                      <img src={pageModel.branding.logoFile} alt={pageModel.branding.siteName} />
+                    ) : (
+                      <LogoIcon />
+                    )}
+                  </Link>
+                }
+                nav={
+                  <AEMComponent.ExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/header/master" />
+                }
+                // nav={
+                //   <nav>
+                //     <Button
+                //       root={<link.type {...link.props} href="/my-passport" />}
+                //       icon={<MyPassportIcon />}
+                //       size="sm"
+                //       variant="text"
+                //     >
+                //       My Passport
+                //     </Button>
+                //   </nav>
+                // }
+              />
+            }
+            footer={
+              <Footer>
+                <AEMComponent.ExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/footer/master" />
+              </Footer>
+            }
+            // footer={
+            //   <Footer
+            //     legal={
+            //       <nav>
+            //         <link.type {...link.props} href="/settings">
+            //           UIKit Settings
+            //         </link.type>
+            //       </nav>
+            //     }
+            //   />
+            // }
+          >
+            <Component {...pageProps} pageModel={pageModel} />
+          </App>
         </UIProvider>
       </ApolloProvider>
     </>

@@ -17,19 +17,20 @@ module.exports = function withStoryStore(nextConfig = {}) {
     },
 
     webpack: (config, options) => {
-      config.plugins.push(
-        new CopyWebpackPlugin({
-          patterns: [
-            {
-              from: path.resolve(require.resolve('@storystore/ui-kit/dist/lib'), '../../experiences/**/assets/*'),
-              to({ absoluteFilename }) {
-                const site = absoluteFilename.match(/experiences\/(.*)\/assets/)[1]
-                return `static/__assets/${site}/[name][ext]`
-              },
-            },
-          ],
-        })
-      )
+      config.plugins
+        .push
+        // new CopyWebpackPlugin({
+        //   patterns: [
+        //     {
+        //       from: path.resolve(require.resolve('@storystore/ui-kit/dist/lib'), '../../experiences/**/assets/*'),
+        //       to({ absoluteFilename }) {
+        //         const site = absoluteFilename.match(/experiences\/(.*)\/assets/)[1]
+        //         return `static/__assets/${site}/[name][ext]`
+        //       },
+        //     },
+        //   ],
+        // })
+        ()
 
       // Overload the Webpack config if it was already overloaded
       if (typeof nextConfig.webpack === 'function') {

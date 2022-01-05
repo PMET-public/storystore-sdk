@@ -53,21 +53,15 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         destination: '/api/aem-proxy',
       },
 
-      // Proxy files with extensions
+      /** Proxy to AEM /content */
       {
-        source: '/content/dam/:site/:locale/adventures/:path*.(.*)',
+        source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf)',
         destination: '/api/aem-proxy',
       },
-      /** Rewrite Adventure Details */
-      {
-        source: '/content/dam/:site/:locale/adventures/:path*',
-        destination: '/adventure',
-      },
-
-      /** Proxy AEM Content /content */
+      // Pages
       {
         source: '/content/:path*',
-        destination: '/api/aem-proxy',
+        destination: '/_page',
       },
     ]
   },
