@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { App, Header, Footer } from '@storystore/ui-kit/components'
-import { initAEMModelManager, AEMComponent } from '@storystore/ui-kit/AEM'
+import { initAEMModelManager, AEMComponent, useAEMPageModel } from '@storystore/ui-kit/AEM'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
@@ -13,6 +13,7 @@ import LogoIcon from 'remixicon-react/AppsFillIcon'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
+import { useRouter } from 'next/router'
 
 // Initialize AEM Model Manager and AEM SPA Components
 initAEMModelManager()
@@ -31,7 +32,10 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   /** Initialize Google Analytics (production only) */
   useTrackers()
 
-  const { pageModel } = pageProps
+  /** Get Page Model */
+  const { asPath } = useRouter()
+
+  const pageModel = useAEMPageModel(asPath)
 
   return (
     <>
@@ -75,12 +79,23 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
       </Head>
 
       <ApolloProvider client={apolloClient}>
-        <UIProvider>
+        <UIProvider
+          style={{
+            ['--color-body' as string]: pageModel?.branding.colorBody,
+            ['--color-on-body' as string]: pageModel?.branding.colorOnBody,
+            ['--color-surface' as string]: pageModel?.branding.colorSurface,
+            ['--color-on-surface' as string]: pageModel?.branding.colorOnSurface,
+            ['--color-primary' as string]: pageModel?.branding.colorPrimary,
+            ['--color-on-primary' as string]: pageModel?.branding.colorOnPrimary,
+            ['--color-secondary' as string]: pageModel?.branding.colorSecondary,
+            ['--color-on-secondary' as string]: pageModel?.branding.colorOnSecondary,
+          }}
+        >
           <App
             linkRoot={<Link />}
             header={
               <Header
-                // variant="surface"
+                variant="secondary"
                 // transparent
                 sticky
                 logo={
