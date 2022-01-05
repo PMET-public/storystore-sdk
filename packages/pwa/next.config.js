@@ -58,6 +58,10 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf)',
         destination: '/api/aem-proxy',
       },
+      {
+        source: '/etc.clientlibs/:path*',
+        destination: '/api/aem-proxy',
+      },
       // Pages
       {
         source: '/content/:path*',
