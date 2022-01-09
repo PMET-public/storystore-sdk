@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { App, Header, Footer } from '@storystore/ui-kit/components'
-import { initAEMModelManager, AEMComponent, useAEMPageModel } from '@storystore/ui-kit/AEM'
+import { initAEMModelManager, useAEMPageModel } from '@storystore/ui-kit/AEM'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
@@ -13,6 +13,8 @@ import LogoIcon from 'remixicon-react/AppsFillIcon'
 
 // Global Styles
 import '@storystore/ui-kit/dist/theme/css/global.css'
+import '@storystore/ui-kit/dist/theme/css/aem.css'
+
 import { useRouter } from 'next/router'
 
 // Initialize AEM Model Manager and AEM SPA Components
@@ -83,16 +85,18 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
       <ApolloProvider client={apolloClient}>
         <UIProvider
-          style={{
-            ['--color-body' as string]: pageModel?.branding.colorBody,
-            ['--color-on-body' as string]: pageModel?.branding.colorOnBody,
-            ['--color-surface' as string]: pageModel?.branding.colorSurface,
-            ['--color-on-surface' as string]: pageModel?.branding.colorOnSurface,
-            ['--color-primary' as string]: pageModel?.branding.colorPrimary,
-            ['--color-on-primary' as string]: pageModel?.branding.colorOnPrimary,
-            ['--color-secondary' as string]: pageModel?.branding.colorSecondary,
-            ['--color-on-secondary' as string]: pageModel?.branding.colorOnSecondary,
-          }}
+          style={
+            pageModel?.branding && {
+              ['--color-body' as string]: pageModel.branding.colorBody,
+              ['--color-on-body' as string]: pageModel.branding.colorOnBody,
+              ['--color-surface' as string]: pageModel.branding.colorSurface,
+              ['--color-on-surface' as string]: pageModel.branding.colorOnSurface,
+              ['--color-primary' as string]: pageModel.branding.colorPrimary,
+              ['--color-on-primary' as string]: pageModel.branding.colorOnPrimary,
+              ['--color-secondary' as string]: pageModel.branding.colorSecondary,
+              ['--color-on-secondary' as string]: pageModel.branding.colorOnSecondary,
+            }
+          }
         >
           <App
             linkRoot={<Link />}
@@ -110,9 +114,9 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                     )}
                   </Link>
                 }
-                nav={
-                  <AEMComponent.ExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/header/master" />
-                }
+                // nav={
+                //   <AEMExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/header/master" />
+                // }
                 // nav={
                 //   <nav>
                 //     <Button
@@ -129,7 +133,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             }
             footer={
               <Footer>
-                <AEMComponent.ExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/footer/master" />
+                {/* <AEMCExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/footer/master" /> */}
               </Footer>
             }
             // footer={
@@ -144,7 +148,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             //   />
             // }
           >
-            <Component {...pageProps} pageModel={pageModel} />
+            <Component {...pageProps} />
           </App>
         </UIProvider>
       </ApolloProvider>

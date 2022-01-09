@@ -5,7 +5,7 @@ import { classes } from '../../lib'
 import style from './Html.module.css'
 
 export type HtmlProps = HTMLAttributes<HTMLDivElement> & {
-  htmlString: string
+  htmlString?: string
 }
 
 export const Html: FunctionComponent<HtmlProps> = ({ className, htmlString, ...props }) => {

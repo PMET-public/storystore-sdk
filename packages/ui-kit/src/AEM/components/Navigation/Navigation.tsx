@@ -20,7 +20,7 @@ const EditConfig = {
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 
-export const NavigationRoot: FunctionComponent<NavigationProps> = ({
+export const Navigation: FunctionComponent<NavigationProps> = ({
   id,
   items,
   className,
@@ -48,6 +48,6 @@ export const NavigationRoot: FunctionComponent<NavigationProps> = ({
   )
 }
 
-MapTo(RESOURCE_TYPE)(NavigationRoot, EditConfig)
+MapTo(RESOURCE_TYPE)(Navigation, EditConfig)
 
-export const Navigation = withMappable(NavigationRoot, EditConfig)
+export const AEMNavigation = withMappable(Navigation, EditConfig)

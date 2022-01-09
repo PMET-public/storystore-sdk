@@ -1,9 +1,10 @@
 .root {
-  --width: var(--banner-sm-width);
   --height: var(--banner-sm-height);
+  --width: var(--banner-sm-width);
   align-items: center;
   background-color: var(--banner-bg-color, var(--color-surface));
   color: var(--banner-text-color, var(--color-on-surface));
+  display: block;
   height: var(--height);
   max-width: 100%;
   overflow: hidden;

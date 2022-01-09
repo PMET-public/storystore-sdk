@@ -1,7 +1,7 @@
 import { TextV2IsEmptyFn, TextV2Model } from '@adobe/aem-core-components-react-base'
-import { SkeletonLoader, Html, HtmlProps } from '../../../components'
+import { SkeletonLoader } from '../../../components'
 import { MappedComponentProperties } from '@adobe/aem-react-editable-components'
-import { FunctionComponent } from 'react'
+import { FunctionComponent, HTMLAttributes } from 'react'
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 
 // The sling:resourceType for which this Core Component is registered with in AEM
@@ -13,37 +13,45 @@ const EditConfig = {
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 
-type TextProps = HtmlProps &
+type TextProps = HTMLAttributes<HTMLDivElement> &
   TextV2Model &
   MappedComponentProperties & {
     loading?: boolean
   }
 
-export const TextRoot: FunctionComponent<TextProps> = ({
-  id,
+export const Text: FunctionComponent<TextProps> = ({
   text,
   richText,
   className,
   style,
   cqPath,
-  loading = !cqPath,
+  isInEditor,
+  loading = !isInEditor && !cqPath,
 }) => {
-  const Root = (p: any) =>
-    loading ? (
-      <SkeletonLoader uniqueKey={`skeleton--${cqPath}`} animate={loading} width="100%" height="1em" {...p}>
-        <rect width="40%" height="100%" />
-      </SkeletonLoader>
-    ) : richText ? (
-      <Html htmlString={text} {...p} />
-    ) : (
-      <div {...p}>{text}</div>
-    )
-
-  return <Root id={id} className={className} style={style} />
+  return loading ? (
+    <SkeletonLoader uniqueKey={`skeleton--${cqPath}`} animate={loading} width="100%" height="1em" {...p}>
+      <rect width="40%" height="100%" />
+    </SkeletonLoader>
+  ) : richText ? (
+    <div
+      id={cqPath.replace(/\/|:/g, '_')}
+      className={className}
+      style={style}
+      data-cq-resource-type="storystore/components/text"
+      data-rte-editelement
+      dangerouslySetInnerHTML={{
+        __html: text,
+      }}
+    />
+  ) : (
+    <div className={className} style={style}>
+      {text}
+    </div>
+  )
 }
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo(RESOURCE_TYPE)(TextRoot, EditConfig)
+MapTo(RESOURCE_TYPE)(Text, EditConfig)
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMResponsiveGrid .../>
-export const Text = withMappable(TextRoot, EditConfig)
+export const AEMText = withMappable(Text, EditConfig)

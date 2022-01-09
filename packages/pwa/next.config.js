@@ -55,7 +55,7 @@ module.exports = withPlugins([withPWA, withStoryStore], {
 
       /** Proxy to AEM /content */
       {
-        source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf)',
+        source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf|js|json|css)',
         destination: '/api/aem-proxy',
       },
       {

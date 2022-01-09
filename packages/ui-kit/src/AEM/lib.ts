@@ -1,4 +1,4 @@
-import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
+import { AuthoringUtils, ModelClient } from '@adobe/aem-spa-page-model-manager'
 import { useEffect, useState } from 'react'
 import { PageModel } from '@adobe/aem-react-editable-components'
 import { ModelManager } from '@adobe/aem-spa-page-model-manager'
@@ -37,4 +37,8 @@ export const useAEMPageModel = (pagePath: string, defaultValues?: PageModelPros)
 
 export const isInEditor = AuthoringUtils.isInEditor
 
-export const initAEMModelManager = () => ModelManager.initializeAsync()
+export const initAEMModelManager = (apiHost?: string) => {
+  const modelClient = apiHost && new ModelClient(apiHost)
+
+  ModelManager.initializeAsync({ modelClient })
+}

@@ -1,0 +1,28 @@
+.root {
+  --gap: var(--grid-gap-sm);
+  height: 100px;
+}
+
+.root :global(.aem-container) {
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-row-gap: var(--gap);
+}
+
+@media (min-width: 768px) {
+  .root {
+    --gap: var(--grid-gap-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    --gap: var(--grid-gap-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    --gap: var(--grid-gap-xl);
+  }
+}

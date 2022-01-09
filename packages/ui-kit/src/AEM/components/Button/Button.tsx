@@ -1,7 +1,7 @@
 // Import the withMappable API provided bu the AEM SPA Editor JS SDK
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 
-import { ButtonV1IsEmptyFn, ButtonV1Model } from '@adobe/aem-core-components-react-base'
+import { ButtonV1Model } from '@adobe/aem-core-components-react-base'
 import { MappedComponentProperties } from '@adobe/aem-react-editable-components'
 import { FunctionComponent } from 'react'
 import {
@@ -17,7 +17,7 @@ const RESOURCE_TYPE = 'storystore/components/button'
 // Create an EditConfig to allow the AEM SPA Editor to properly render the component in the Editor's context
 const EditConfig = {
   emptyLabel: 'Button', // The component placeholder in AEM SPA Editor
-  isEmpty: ButtonV1IsEmptyFn, // The function to determine if this component has been authored
+  isEmpty: (props: any) => !props.text, // The function to determine if this component has been authored
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 
@@ -28,11 +28,11 @@ type ButtonProps = ButtonComponentProps &
     loading?: boolean
   }
 
-const ButtonRoot: FunctionComponent<ButtonProps> = ({
+const Button: FunctionComponent<ButtonProps> = ({
   id,
   link,
   icon,
-  text = 'Button',
+  text,
   size,
   variant,
   transparent,
@@ -40,8 +40,12 @@ const ButtonRoot: FunctionComponent<ButtonProps> = ({
   className,
   style,
   cqPath,
+  isInEditor,
   loading = !cqPath,
+  ...rest
 }) => {
+  if (!text) return null
+
   if (icon) console.warn('Button Icon attribute is not supported')
 
   const Root = (p: any) =>
@@ -67,7 +71,7 @@ const ButtonRoot: FunctionComponent<ButtonProps> = ({
 }
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo(RESOURCE_TYPE)(ButtonRoot, EditConfig)
+MapTo(RESOURCE_TYPE)(Button, EditConfig)
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMResponsiveGrid .../>
-export const Button = withMappable(ButtonRoot, EditConfig)
+export const AEMButton = withMappable(Button, EditConfig)

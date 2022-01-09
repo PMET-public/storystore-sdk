@@ -12,4 +12,4 @@ const ExperienceFragmentVariationConfig = {
 
 MapTo(RESOURCE_TYPE)(withComponentMappingContext(Container), ExperienceFragmentVariationConfig)
 
-export const ExperienceFragment = withMappable(Container, ExperienceFragmentVariationConfig)
+export const AEMExperienceFragment = withMappable(Container, ExperienceFragmentVariationConfig)

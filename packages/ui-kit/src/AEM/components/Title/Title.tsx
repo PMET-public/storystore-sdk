@@ -19,7 +19,7 @@ type TitleProps = HeadingProps &
     loading?: boolean
   }
 
-export const TitleRoot: FunctionComponent<TitleProps> = ({
+export const Title: FunctionComponent<TitleProps> = ({
   id,
   linkDisabled,
   link,
@@ -49,6 +49,6 @@ export const TitleRoot: FunctionComponent<TitleProps> = ({
   )
 }
 
-MapTo(RESOURCE_TYPE)(TitleRoot, EditConfig)
+MapTo(RESOURCE_TYPE)(Title, EditConfig)
 
-export const Title = withMappable(TitleRoot, EditConfig)
+export const AEMTitle = withMappable(Title, EditConfig)
