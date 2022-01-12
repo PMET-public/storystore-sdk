@@ -29,7 +29,7 @@ export const Text: FunctionComponent<TextProps> = ({
   loading = !isInEditor && !cqPath,
 }) => {
   return loading ? (
-    <SkeletonLoader uniqueKey={`skeleton--${cqPath}`} animate={loading} width="100%" height="1em" {...p}>
+    <SkeletonLoader uniqueKey={`skeleton--${cqPath}`} animate={loading} width="100%" height="1em">
       <rect width="40%" height="100%" />
     </SkeletonLoader>
   ) : richText ? (

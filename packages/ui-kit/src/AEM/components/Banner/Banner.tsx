@@ -1,12 +1,11 @@
 import { createElement } from 'react'
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
-import { Banner as BannerRoot, BannerSkeleton, Heading, Link, Button } from '../../../../components'
+import { Banner as BannerRoot, BannerSkeleton, Heading, Link, Button } from '../../../components'
 
 const resourceType = 'storystore/components/banner'
 
 const config = {
-  //   isEmpty: ({ height }) => !height,
-  isEmtpy: () => false,
+  isEmpty: ({ height }) => !height,
   resourceType,
 }
 
