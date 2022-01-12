@@ -5,7 +5,7 @@ import { Banner as BannerRoot, BannerSkeleton, Heading, Link, Button } from '../
 const resourceType = 'storystore/components/banner'
 
 const config = {
-  isEmpty: ({ height }) => !height,
+  isEmpty: () => false,
   resourceType,
 }
 

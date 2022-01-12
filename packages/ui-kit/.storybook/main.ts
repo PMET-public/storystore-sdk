@@ -8,7 +8,7 @@ export default {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     'storybook-css-modules-preset',
-    '@storystore/storybook-variables',
+    './storybook-variables',
   ],
   webpackFinal: (config: any) => {
     const mdxIndex = config.module.rules.findIndex((x: any) => new RegExp(x.test).test('stories.mdx'))

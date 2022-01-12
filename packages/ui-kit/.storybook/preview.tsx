@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useMemo } from 'react'
 import { themes } from '@storybook/theming'
 import { DocsContainer } from '@storybook/addon-docs'
-import { useVariables } from '@storystore/storybook-variables/lib'
+import { useVariables } from './storybook-variables/lib'
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { MockedProvider } from '@apollo/client/testing'
 import UIProvider from '../src/theme/UIProvider'

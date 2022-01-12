@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { AEMResponsiveGrid, AEMPage } from '@storystore/ui-kit/AEM'
+import { AEMPage } from '@storystore/ui-kit/AEM'
 import { Fragment } from 'react'
 
 const DynamicPage: NextPage<any> = () => {
@@ -9,7 +9,7 @@ const DynamicPage: NextPage<any> = () => {
 
   return (
     <Fragment key={asPath}>
-      <AEMResponsiveGrid pagePath={path} itemPath="root/responsivegrid" />
+      <AEMPage pagePath={path} />
     </Fragment>
   )
 }

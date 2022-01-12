@@ -67,6 +67,11 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         source: '/content/:path*',
         destination: '/_page',
       },
+      // Pages
+      {
+        source: '/_author',
+        destination: '/_page',
+      },
     ]
   },
 
