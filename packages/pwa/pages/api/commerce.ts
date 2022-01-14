@@ -15,22 +15,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const cookie = cookies.getCookieValueFromString(req.headers.cookie, 'STORYSTORE_SETTINGS')
   const settings = JSON.parse(cookie)
 
-  const AEM_HOST = settings?.AEM_HOST ?? process.env.AEM_HOST
-  const AEM_AUTH = settings?.AEM_AUTH ?? process.env.AEM_AUTH
-  const AEM_GRAPHQL_PATH = settings?.AEM_GRAPHQL_PATH ?? process.env.AEM_GRAPHQL_PATH
+  const COMMERCE_HOST = settings?.COMMERCE_HOST ?? process.env.COMMERCE_HOST
 
   return runMiddleware(
     req,
     res,
     createProxyMiddleware({
       logLevel: process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-      target: new URL(AEM_HOST).origin,
-      auth: AEM_AUTH,
+      target: new URL('/graphql', COMMERCE_HOST).origin,
       changeOrigin: true,
       selfHandleResponse: true,
       // ws: true,
       pathRewrite: {
-        '/__graphql': AEM_GRAPHQL_PATH,
+        '/api/commerce': '',
       },
 
       onProxyRes: responseInterceptor(async responseBuffer => {

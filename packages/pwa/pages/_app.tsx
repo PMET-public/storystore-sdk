@@ -18,7 +18,7 @@ import '@storystore/ui-kit/dist/theme/css/aem.css'
 import { useRouter } from 'next/router'
 
 // Initialize AEM Model Manager and AEM SPA Components
-initAEMModelManager()
+initAEMModelManager(process.env.NEXT_PUBLIC_URL)
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (

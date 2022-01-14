@@ -11,7 +11,7 @@ const RESOURCE_TYPE = 'wcm/foundation/components/responsivegrid'
 const EditConfig = {
   emptyLabel: 'Layout Container', // The component placeholder in AEM SPA Editor
   isEmpty: function (props: ResponsiveGridProperties) {
-    return props.cqItemsOrder == null || props.cqItemsOrder.length === 0
+    return props.cqItemsOrder?.length === 0
   }, // The function to determine if this component has been authored
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }

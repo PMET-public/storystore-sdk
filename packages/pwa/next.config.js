@@ -47,29 +47,35 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         destination: '/_next/static/asset-manifest.json',
       },
 
-      /** Proxy AEM GraphQL /__graphql */
+      /** Proxy AEM GraphQL */
       {
-        source: '/__graphql/:path*',
-        destination: '/api/aem-proxy',
+        source: '/api/aem/graphql/:path*',
+        destination: '/api/aem',
       },
 
       /** Proxy to AEM /content */
       {
         source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf|js|json|css)',
-        destination: '/api/aem-proxy',
+        destination: '/api/aem',
       },
       {
         source: '/etc.clientlibs/:path*',
-        destination: '/api/aem-proxy',
+        destination: '/api/aem',
       },
-      // Pages
+
+      /** Proxy Commerce */
       {
-        source: '/content/:path*',
-        destination: '/_page',
+        source: '/api/commerce/graphql/:path*',
+        destination: '/api/commerce',
       },
-      // Pages
+
+      /** Pages */
       {
         source: '/_author',
+        destination: '/_page',
+      },
+      {
+        source: '/:path*',
         destination: '/_page',
       },
     ]
