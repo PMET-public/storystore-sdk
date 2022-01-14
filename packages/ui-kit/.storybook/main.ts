@@ -4,12 +4,7 @@ export default {
     '../src/**/*.stories.mdx',
     //  '../src/**/*.stories.@(js|jsx|ts|tsx)' <- Only MDX stories for now. Gotta update babel and types buidls in packages.json if *.tsx enabled.
   ],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    'storybook-css-modules-preset',
-    './storybook-variables',
-  ],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', 'storybook-css-modules-preset'],
   webpackFinal: (config: any) => {
     const mdxIndex = config.module.rules.findIndex((x: any) => new RegExp(x.test).test('stories.mdx'))
     if (mdxIndex > -1) {

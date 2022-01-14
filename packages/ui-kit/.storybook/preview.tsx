@@ -1,9 +1,6 @@
-import React, { FunctionComponent, useEffect, useMemo } from 'react'
+import React, { FunctionComponent } from 'react'
 import { themes } from '@storybook/theming'
 import { DocsContainer } from '@storybook/addon-docs'
-import { useVariables } from './storybook-variables/lib'
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
-import { MockedProvider } from '@apollo/client/testing'
 import UIProvider from '../src/theme/UIProvider'
 
 // TODO: Moved to App wrapper until Next.js allows for global css import from other files.
@@ -33,56 +30,12 @@ export const parameters = {
   },
 }
 
-type ApolloProviderWrapperProps = {
-  uri?: string
-  basicAuth?: string
-}
-
-const ApolloProviderWrapper: FunctionComponent<ApolloProviderWrapperProps> = ({ children, uri, basicAuth }) => {
-  useEffect(() => {
-    /** Enable Apollo Client Dev Chrome Ext from Story iframes */
-    if (window.parent !== window) {
-      // @ts-ignore
-      window.parent.__APOLLO_CLIENT__ = window.__APOLLO_CLIENT__
-    }
-  }, [])
-
-  const client = useMemo(
-    () =>
-      uri &&
-      new ApolloClient({
-        connectToDevTools: true,
-        queryDeduplication: true,
-        ssrMode: false,
-        link: new HttpLink({
-          uri: '/__graphql',
-        }),
-        cache: new InMemoryCache({}),
-      }),
-    [uri, basicAuth]
-  )
-
-  if (!uri) return <MockedProvider>{children}</MockedProvider>
-
-  return <ApolloProvider client={client}>{children}</ApolloProvider>
-}
-
 export const decorators = [
   (Story: FunctionComponent) => {
-    const {
-      AEM_HOST = process.env.AEM_HOST,
-      AEM_AUTH = process.env.AEM_AUTH,
-      AEM_GRAPHQL_PATH = process.env.AEM_GRAPHQL_PATH,
-    } = useVariables()
-
-    const uri = new URL(AEM_GRAPHQL_PATH, AEM_HOST).href
-
     return (
-      <ApolloProviderWrapper uri={uri} basicAuth={AEM_AUTH}>
-        <UIProvider>
-          <Story />
-        </UIProvider>
-      </ApolloProviderWrapper>
+      <UIProvider>
+        <Story />
+      </UIProvider>
     )
   },
 ]
