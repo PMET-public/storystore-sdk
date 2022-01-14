@@ -1,0 +1,30 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Price from '.'
+
+<Meta title="UIComponents/Price" component={Price} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return <Price {...args} />
+}
+
+# Price
+
+<Canvas withSource="open">
+  <Story
+    name="Price"
+    args={{
+      label: 'Starting at',
+      currency: 'USD',
+      regular: 4.99,
+      special: 2.49,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Price } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Price" />
