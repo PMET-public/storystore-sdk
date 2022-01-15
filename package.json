@@ -16,6 +16,7 @@
     "prepare": "yarn workspaces run prepare",
     "ui-kit": "yarn workspace @storystore/ui-kit dev",
     "pwa": "yarn workspace @storystore/pwa dev",
+    "sdk": "concurrently --names \"UIKit,PWA\" \"yarn ui-kit\" \"yarn pwa\"",
     "pkg": "yarn prepare && yarn workspace @storystore/pwa pkg"
   },
   "engines": {

@@ -1,5 +1,5 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
-import { classes, merge } from '../../../dist/lib'
+import { classes, merge } from '../../lib'
 
 // Style
 import style from './Price.module.css'
