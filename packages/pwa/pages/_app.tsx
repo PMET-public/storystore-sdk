@@ -1,24 +1,24 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useState } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { App, Header, Footer } from '@storystore/ui-kit/components'
-import { initAEMModelManager, useAEMPageModel } from '@storystore/ui-kit/AEM'
+import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
-import { useTrackers } from '../lib/tracker'
-import LogoIcon from 'remixicon-react/AppsFillIcon'
+import { useRouter } from 'next/router'
 
-// Global Styles
+/** Global Styles */
 import '@storystore/ui-kit/dist/theme/css/global.css'
 import '@storystore/ui-kit/dist/theme/css/aem.css'
 
-import { useRouter } from 'next/router'
+/** Load AEM Components */
+import '../components'
 
-// Initialize AEM Model Manager and AEM SPA Components
-initAEMModelManager(process.env.NEXT_PUBLIC_URL)
+/** Initialize AEM Model */
+ModelManager.initializeAsync({ modelClient: new ModelClient(process.env.NEXT_PUBLIC_URL) })
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
@@ -31,15 +31,12 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 const AppRoot = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)
 
-  /** Initialize Google Analytics (production only) */
-  useTrackers()
+  const { pageModel } = pageProps
 
-  /** Get Page Model */
-  const { asPath } = useRouter()
-
-  const pageModel = useAEMPageModel(asPath)
+  console.log('_app, PageModel', pageModel)
 
   const branding = {
+    siteName: 'Kriss+',
     colorBody: '#fff',
     colorOnBody: '#222',
     colorSurface: '#f6f6f6',

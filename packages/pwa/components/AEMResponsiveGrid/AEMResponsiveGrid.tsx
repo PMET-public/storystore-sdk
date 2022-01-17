@@ -1,5 +1,5 @@
 // Import the withMappable API provided bu the AEM SPA Editor JS SDK
-import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
+import { withMappable } from '@adobe/aem-react-editable-components'
 
 // Import the base ResponsiveGrid component
 import { ResponsiveGrid, ResponsiveGridProperties } from '@adobe/aem-react-editable-components'
@@ -8,16 +8,11 @@ import { ResponsiveGrid, ResponsiveGridProperties } from '@adobe/aem-react-edita
 const RESOURCE_TYPE = 'wcm/foundation/components/responsivegrid'
 
 // Create an EditConfig to allow the AEM SPA Editor to properly render the component in the Editor's context
-const EditConfig = {
+export const AEMResponsiveGridConfig = {
   emptyLabel: 'Layout Container', // The component placeholder in AEM SPA Editor
-  isEmpty: function (props: ResponsiveGridProperties) {
-    return props.cqItemsOrder?.length === 0
-  }, // The function to determine if this component has been authored
+  isEmpty: (props: ResponsiveGridProperties) => props.cqItemsOrder?.length === 0, // The function to determine if this component has been authored
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 
-// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo(RESOURCE_TYPE)(ResponsiveGrid, EditConfig)
-
 // withMappable allows the component to be hardcoded into the SPA; <AEMResponsiveGrid .../>
-export const AEMResponsiveGrid = withMappable(ResponsiveGrid, EditConfig)
+export const AEMResponsiveGrid = withMappable(ResponsiveGrid, AEMResponsiveGridConfig)

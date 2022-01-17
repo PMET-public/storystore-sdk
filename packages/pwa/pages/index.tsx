@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import { Block, Carousel, Heading, Link, Price, Tile } from '@storystore/ui-kit/components'
-import { AEMExperienceFragment } from '@storystore/ui-kit/AEM'
+import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
 
 const COMMERCE_QUERY = gql`
@@ -76,8 +76,8 @@ const HomePage: NextPage = () => {
         <Block gap="md" contained>
           <Heading>New Arrivals</Heading>
           <Carousel gap="lg" show={{ sm: 1, md: 3, xl: 4 }} padded peak>
-            {data.products.items.map(({ id, name, url_key, media_gallery, price_range }) => (
-              <ProductItem key={id} {...{ id, name, url_key, media_gallery, price_range }} />
+            {data.products.items.map(({ name, url_key, media_gallery, price_range }) => (
+              <ProductItem key={url_key} {...{ name, url_key, media_gallery, price_range }} />
             ))}
           </Carousel>
         </Block>
@@ -87,8 +87,8 @@ const HomePage: NextPage = () => {
         <Block gap="md" contained>
           <Heading>New Arrivals</Heading>
           <Carousel gap="lg" show={{ sm: 1, md: 3, xl: 4 }} padded peak>
-            {data.products.items.map(({ id, name, url_key, media_gallery, price_range }) => (
-              <ProductItem key={id} {...{ id, name, url_key, media_gallery, price_range }} />
+            {data.products.items.map(({ name, url_key, media_gallery, price_range }) => (
+              <ProductItem key={url_key} {...{ name, url_key, media_gallery, price_range }} />
             ))}
           </Carousel>
         </Block>

@@ -17,6 +17,11 @@
     "pkg": "pkg . --no-bytecode --public-packages \"*\" --public --compress GZip --output pkg/PWA"
   },
   "dependencies": {
+    "@adobe/aem-core-components-react-base": "^1.1.8",
+    "@adobe/aem-core-components-react-spa": "^1.2.0",
+    "@adobe/aem-react-editable-components": "^1.1.10",
+    "@adobe/aem-spa-component-mapping": "^1.1.1",
+    "@adobe/aem-spa-page-model-manager": "^1.4.0",
     "@apollo/client": "^3.1.1",
     "@storystore/toolbox": "^0.1.0",
     "@storystore/ui-kit": "^1.0.2",
