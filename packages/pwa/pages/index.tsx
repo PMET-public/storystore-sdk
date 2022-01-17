@@ -5,15 +5,10 @@ import { NextPage } from 'next'
 
 const COMMERCE_QUERY = gql`
   query COMMERCE_QUERY {
-    storeConfig {
-      id
-      base_url
-    }
-
     products(search: "", pageSize: 9) {
       total_count
       items {
-        id
+        uid: id
         url_key
         name
         media_gallery {

@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "next lint",
     "server": "NODE_ENV=development node ./bin/server.js",
-    "dev": "next dev",
+    "dev": "PORT=6007 next dev",
     "build": "next build",
     "start": "next start",
     "prepare": "echo ✔️",
