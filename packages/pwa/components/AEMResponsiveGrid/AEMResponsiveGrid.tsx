@@ -2,7 +2,7 @@
 import { withMappable } from '@adobe/aem-react-editable-components'
 
 // Import the base ResponsiveGrid component
-import { ResponsiveGrid, ResponsiveGridProperties } from '@adobe/aem-react-editable-components'
+import { ResponsiveGrid } from '@adobe/aem-react-editable-components'
 
 // The sling:resourceType for which this Core Component is registered with in AEM
 const RESOURCE_TYPE = 'wcm/foundation/components/responsivegrid'
@@ -10,7 +10,7 @@ const RESOURCE_TYPE = 'wcm/foundation/components/responsivegrid'
 // Create an EditConfig to allow the AEM SPA Editor to properly render the component in the Editor's context
 export const AEMResponsiveGridConfig = {
   emptyLabel: 'Layout Container', // The component placeholder in AEM SPA Editor
-  isEmpty: (props: ResponsiveGridProperties) => props.cqItemsOrder?.length === 0, // The function to determine if this component has been authored
+  isEmpty: (props: any) => props.cqItemsOrder?.length === 0, // The function to determine if this component has been authored
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 

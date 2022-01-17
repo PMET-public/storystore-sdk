@@ -1,4 +1,4 @@
-import { Container, withMappable } from '@adobe/aem-react-editable-components'
+import { Container, withMappable, ContainerProperties } from '@adobe/aem-react-editable-components'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
