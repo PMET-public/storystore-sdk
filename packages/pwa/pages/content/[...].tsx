@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { AEMResponsiveGrid } from '../components/AEMResponsiveGrid'
+import { AEMResponsiveGrid } from '../../components/AEMResponsiveGrid'
 import { Fragment } from 'react'
 import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
 import { Error } from '@storystore/ui-kit'

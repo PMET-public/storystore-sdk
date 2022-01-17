@@ -41,14 +41,14 @@ const PRODUCT_QUERY = gql`
 const ProductPage: NextPage = ({ ...props }) => {
   const router = useRouter()
 
-  const { key } = router.query
+  const { url_key } = router.query
 
   const { loading, data, error } = useQuery(PRODUCT_QUERY, {
-    skip: !key,
+    skip: !url_key,
     variables: {
       filter: {
         url_key: {
-          eq: key,
+          eq: url_key,
         },
       },
     },
