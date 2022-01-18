@@ -1,1 +1,1 @@
-export * from './TemplateWithMedia2Columns'
+export * from './ProductTemplate'

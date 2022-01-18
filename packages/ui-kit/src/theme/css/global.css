@@ -1,6 +1,8 @@
 :root {
-  background-color: #f3f3f3;
-  color: #000;
+  --color-body: #f3f3f3;
+  --color-on-body: #000;
+  background-color: var(--color-body);
+  color: var(--color-on-body);
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -728,7 +730,6 @@ a {
 }
 
 @keyframes Toastify__bounceInRight {
-
   from,
   60%,
   75%,
@@ -773,7 +774,6 @@ a {
 }
 
 @keyframes Toastify__bounceInLeft {
-
   from,
   60%,
   75%,
@@ -818,7 +818,6 @@ a {
 }
 
 @keyframes Toastify__bounceInUp {
-
   from,
   60%,
   75%,
@@ -868,7 +867,6 @@ a {
 }
 
 @keyframes Toastify__bounceInDown {
-
   from,
   60%,
   75%,

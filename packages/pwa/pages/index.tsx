@@ -5,7 +5,7 @@ import { NextPage } from 'next'
 
 const COMMERCE_QUERY = gql`
   query COMMERCE_QUERY {
-    products(search: "", pageSize: 9) {
+    products(search: "", pageSize: 9, filter: { category_id: { eq: "42" } }) {
       total_count
       items {
         uid: id

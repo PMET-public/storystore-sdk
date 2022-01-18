@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto 1fr auto;
-  min-height: calc(100vh);
 }
 
 .toast {
@@ -18,4 +17,17 @@
 .toast svg {
   width: 1.6em;
   fill: currentColor;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.body {
+  z-index: 1;
+  background: var(--color-body);
+  min-height: calc(100vh - var(--app-header-height));
+  box-shadow: 0 3px 10px;
 }

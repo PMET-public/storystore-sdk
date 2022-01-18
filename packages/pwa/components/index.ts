@@ -18,16 +18,12 @@ import {
   ButtonV1IsEmptyFn,
   DownloadV1,
   DownloadV1IsEmptyFn,
-  ImageV2,
-  ImageV2IsEmptyFn,
   LanguageNavigationV1,
   ListV2,
   ListV2IsEmptyFn,
   NavigationV1,
   SeparatorV1,
   SeparatorV1IsEmptyFn,
-  TeaserV1,
-  TeaserV1IsEmptyFn,
   TextV2,
   TextV2IsEmptyFn,
   TitleV2,
@@ -36,6 +32,9 @@ import {
 
 import { AEMResponsiveGrid, AEMResponsiveGridConfig } from './AEMResponsiveGrid'
 import { AEMExperienceFragment, AEMExperienceFragmentConfig } from './AEMExperienceFragment'
+import { AEMTeaser, AEMTeaserConfig } from './AEMTeaser/AEMTeaser'
+import { AEMCarousel, AEMCarouselConfig } from './AEMCarousel/AEMCarousel'
+import { AEMImage, AEMImageConfig } from './AEMImage/AEMImage'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -45,16 +44,16 @@ MapTo<any>(`${site}/components/download`)(DownloadV1, { isEmpty: DownloadV1IsEmp
 MapTo<any>(`${site}/components/list`)(ListV2, { isEmpty: ListV2IsEmptyFn })
 MapTo(`${site}/components/separator`)(SeparatorV1, { isEmpty: SeparatorV1IsEmptyFn })
 MapTo(`${site}/components/button`)(ButtonV1, { isEmpty: ButtonV1IsEmptyFn })
-MapTo<any>(`${site}/components/teaser`)(TeaserV1, { isEmpty: TeaserV1IsEmptyFn })
-MapTo<any>(`${site}/components/image`)(ImageV2, { isEmpty: ImageV2IsEmptyFn })
 MapTo<any>(`${site}/components/title`)(TitleV2, { isEmpty: TitleV2IsEmptyFn })
 MapTo<any>(`${site}/components/breadcrumb`)(BreadCrumbV2, { isEmpty: BreadCrumbV2IsEmptyFn })
 MapTo<any>(`${site}/components/navigation`)(NavigationV1)
 MapTo<any>(`${site}/components/languagenavigation`)(LanguageNavigationV1)
 MapTo(`${site}/components/tabs`)(TabsV1, { isEmpty: TabsV1IsEmptyFn })
 MapTo(`${site}/components/accordion`)(AccordionV1, { isEmpty: AccordionV1IsEmptyFn })
-MapTo(`${site}/components/carousel`)(CarouselV1, { isEmpty: CarouselV1IsEmptyFn })
 MapTo(`${site}/components/container`)(ContainerV1, { isEmpty: ContainerV1IsEmptyFn })
 
 MapTo(AEMResponsiveGridConfig.resourceType)(AEMResponsiveGrid, AEMResponsiveGridConfig)
 MapTo(AEMExperienceFragmentConfig.resourceType)(AEMExperienceFragment, AEMExperienceFragmentConfig)
+MapTo(AEMTeaserConfig.resourceType)(AEMTeaser, AEMTeaserConfig)
+MapTo(AEMCarouselConfig.resourceType)(AEMCarousel, AEMCarouselConfig)
+MapTo(AEMImageConfig.resourceType)(AEMImage, AEMImageConfig)
