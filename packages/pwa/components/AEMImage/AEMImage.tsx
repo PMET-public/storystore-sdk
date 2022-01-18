@@ -1,4 +1,7 @@
-import { withMappable, Container } from '@adobe/aem-react-editable-components'
+import { withMappable } from '@adobe/aem-react-editable-components'
+
+// Style
+import style from './AEMImage.module.css'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -11,8 +14,7 @@ export const AEMImageConfig = {
 }
 
 const Image = ({ id, lazyEnabled, src, ...props }) => {
-  console.log('Image', props)
-  return <img id={id} loading={lazyEnabled ? 'lazy' : 'eager'} src={src} />
+  return <img id={id} loading={lazyEnabled ? 'lazy' : 'eager'} src={src} className={style.root} />
 }
 
 export const AEMImage = withMappable(Image, AEMImageConfig)

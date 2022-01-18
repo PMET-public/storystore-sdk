@@ -14,7 +14,7 @@ export const ProductTemplate: FunctionComponent<ProductTemplateProps> = ({ media
     <Block
       {...props}
       className={classes([style.root, className])}
-      columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1.5fr' }}
+      columns={{ sm: '1fr', md: '1fr 1fr', xl: '1.5fr 1fr' }}
       rows={{ sm: 'auto 1fr', md: '1fr' }}
     >
       {/* Media (Mobile) */}

@@ -34,6 +34,7 @@ img.image,
 /* Tablet */
 @media (min-width: 768px) {
   .media {
+    align-items: center;
     display: grid;
     grid-auto-flow: row;
     gap: 0.5rem;
