@@ -29,5 +29,4 @@
   z-index: 1;
   background: var(--color-body);
   min-height: calc(100vh - var(--app-header-height));
-  box-shadow: 0 3px 10px;
 }

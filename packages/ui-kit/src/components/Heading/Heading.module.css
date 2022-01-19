@@ -8,6 +8,11 @@
   vertical-align: middle;
 }
 
+.padded {
+  padding-left: var(--padded);
+  padding-right: var(--padded);
+}
+
 .icon {
   width: auto;
   height: 1.1em;

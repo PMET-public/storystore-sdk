@@ -37,14 +37,15 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
   const branding = {
     siteName: 'Kriss+',
-    colorBody: '#f6f6f6',
+    colorBody: '#fff',
     colorOnBody: '#222',
-    colorSurface: '#fff',
+    colorSurface: '#f3f3f3',
     colorOnSurface: '#222',
-    colorPrimary: '#FCB034',
+    colorPrimary: '#222',
     colorOnPrimary: '#fff',
     colorSecondary: '#233266',
     colorOnSecondary: '#fff',
+    rounded: 'var(--rounded-2xl)',
     ...pageModel?.branding,
   }
 
@@ -104,14 +105,15 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             ['--color-on-primary' as string]: branding.colorOnPrimary,
             ['--color-secondary' as string]: branding.colorSecondary,
             ['--color-on-secondary' as string]: branding.colorOnSecondary,
+            ['--rounded' as string]: branding.rounded,
           }}
         >
           <App
             linkRoot={<Link />}
             header={
               <Header
-                variant="secondary"
-                // contained
+                variant="primary"
+                contained
                 // transparent
                 sticky
                 logo={
@@ -151,7 +153,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
               />
             }
             footer={
-              <Footer>
+              <Footer contained>
                 {/* <AEMCExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/footer/master" /> */}
               </Footer>
             }

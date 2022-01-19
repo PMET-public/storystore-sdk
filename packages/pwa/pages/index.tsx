@@ -4,8 +4,8 @@ import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
 
 const COMMERCE_QUERY = gql`
-  query COMMERCE_QUERY {
-    products(search: "", pageSize: 9, filter: { category_id: { eq: "42" } }) {
+  query COMMERCE_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
+    products(search: $search, filter: $filter, pageSize: $pageSize) {
       total_count
       items {
         uid: id
@@ -39,6 +39,7 @@ const COMMERCE_QUERY = gql`
 
 const ProductItem = ({ name, url_key, media_gallery, price_range }) => (
   <Tile
+    surface
     root={<Link href={`/product/${url_key}`} />}
     heading={<Heading size="sm">{name}</Heading>}
     image={
@@ -62,7 +63,14 @@ const ProductItem = ({ name, url_key, media_gallery, price_range }) => (
 )
 
 const HomePage: NextPage = () => {
-  const { loading, data, error } = useQuery(COMMERCE_QUERY, { context: { clientName: 'commerce' } })
+  const { loading, data, error } = useQuery(COMMERCE_QUERY, {
+    variables: {
+      search: '',
+      // filter: null,
+      pageSize: 9,
+    },
+    context: { clientName: 'commerce' },
+  })
 
   if (loading) return <h1>⏳ Loading</h1>
 
@@ -74,8 +82,8 @@ const HomePage: NextPage = () => {
 
       {data?.products?.items && (
         <Block gap="md" contained>
-          <Heading>New Arrivals</Heading>
-          <Carousel gap="xl" show={{ sm: 1, md: 3, xl: 4 }} padded peak>
+          <Heading padded>New Arrivals</Heading>
+          <Carousel gap="md" show={{ sm: 1, md: 3 }} padded peak>
             {data.products.items.map(({ name, url_key, media_gallery, price_range }) => (
               <ProductItem key={url_key} {...{ name, url_key, media_gallery, price_range }} />
             ))}

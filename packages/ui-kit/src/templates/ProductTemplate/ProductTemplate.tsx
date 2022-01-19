@@ -16,6 +16,7 @@ export const ProductTemplate: FunctionComponent<ProductTemplateProps> = ({ media
       className={classes([style.root, className])}
       columns={{ sm: '1fr', md: '1fr 1fr', xl: '1.5fr 1fr' }}
       rows={{ sm: 'auto 1fr', md: '1fr' }}
+      contained
     >
       {/* Media (Mobile) */}
       <div className={style.mediaWrapperMobile}>
