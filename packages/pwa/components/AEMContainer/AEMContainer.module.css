@@ -39,32 +39,6 @@
   padding-left: var(--padded);
 }
 
-@media (min-width: 768px) {
-  .gridList > :global(.aem-container) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .carousel > :global(.aem-container) {
-    --show: var(--carousel-show-md);
-  }
-}
-
-@media (min-width: 1024px) {
-  .gridList > :global(.aem-container) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .carousel > :global(.aem-container) {
-    --show: var(--carousel-show-lg);
-  }
-}
-
-@media (min-width: 1280px) {
-  .carousel > :global(.aem-container) {
-    --show: var(--carousel-show-xl);
-  }
-}
-
 .carousel > :global(.aem-container)::-webkit-scrollbar {
   height: 0.125rem;
   width: 0.125rem;
@@ -97,4 +71,30 @@
 
 .carousel > :global(.aem-container) > div {
   scroll-snap-align: center;
+}
+
+@media (min-width: 768px) {
+  .gridList > :global(.aem-container) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .carousel > :global(.aem-container) {
+    --show: var(--carousel-show-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridList > :global(.aem-container) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .carousel > :global(.aem-container) {
+    --show: var(--carousel-show-lg);
+  }
+}
+
+@media (min-width: 1280px) {
+  .carousel > :global(.aem-container) {
+    --show: var(--carousel-show-xl);
+  }
 }

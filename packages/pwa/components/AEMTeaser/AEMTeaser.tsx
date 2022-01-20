@@ -15,10 +15,22 @@ export const AEMTeaserConfig = {
   resourceType: RESOURCE_TYPE,
 }
 
-const Teaser = ({ id, titleType, title, pretitle, linkURL, actionsEnabled, actions, description, imagePath }) => {
+const Teaser = ({
+  id,
+  titleType,
+  title,
+  pretitle,
+  linkURL,
+  actionsEnabled,
+  actions,
+  description,
+  imagePath,
+  ...props
+}) => {
+  console.log(props)
   return (
     <Tile
-      root={linkURL && !actionsEnabled ? <Link href={linkURL} /> : undefined}
+      root={linkURL && !actions.length ? <Link href={linkURL} /> : undefined}
       id={id}
       image={<img src={imagePath} alt="" loading="lazy" className={style.image} />}
       className={style.root}
