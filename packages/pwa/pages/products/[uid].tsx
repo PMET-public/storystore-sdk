@@ -84,7 +84,7 @@ const ProductsPage: NextPage = () => {
   const category = data?.categoryList?.[0]
 
   return (
-    <Block padded contained>
+    <Block padded contained style={{ paddingBottom: 'var(--spacing-xl)' }}>
       <Pills
         label={
           <Heading size="md">
