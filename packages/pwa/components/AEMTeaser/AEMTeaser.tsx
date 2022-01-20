@@ -1,6 +1,9 @@
 import { withMappable } from '@adobe/aem-react-editable-components'
-import { Banner, Heading, Button, Link, Block } from '@storystore/ui-kit'
+import { Tile, Heading, Button, Link, Block, Text, Html } from '@storystore/ui-kit'
 import { createElement } from 'react'
+
+// Styles
+import style from './AEMTeaser.module.css'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -12,40 +15,52 @@ export const AEMTeaserConfig = {
   resourceType: RESOURCE_TYPE,
 }
 
-const Teaser = ({ titleType, title, pretitle, linkURL, actionsEnabled, actions, ...props }) => {
-  console.log('Teaser', props)
+const Teaser = ({
+  id,
+  titleType,
+  title,
+  pretitle,
+  linkURL,
+  actionsEnabled,
+  actions,
+  description,
+  imagePath,
+  ...props
+}) => {
   return (
-    <Banner
+    <Tile
       root={linkURL && !actionsEnabled ? <Link href={linkURL} /> : undefined}
-      //   backgroundImage={<img src={MISSING} />}
+      id={id}
+      image={<img src={imagePath} alt="" loading="lazy" className={style.image} />}
+      className={style.root}
       heading={
-        <>
+        <Block gap="xs">
           {pretitle && (
-            <Heading root={<div />} size={{ sm: 'md', lg: 'lg' }}>
+            <Heading root={<div />} size="sm">
               {pretitle}
             </Heading>
           )}
 
-          <Heading root={titleType && createElement(titleType)} size={{ sm: '2xl', lg: '5xl' }}>
+          <Heading root={titleType && createElement(titleType)} size="md">
             {title}
           </Heading>
-        </>
-      }
-      button={
-        actions && (
-          <Block
-            columns={{ sm: 'max-content', md: 'repeat(auto-fit, minmax(100px, 1fr))' }}
-            align="center"
-            gap="sm"
-            contained
-          >
-            {actions.map(({ id, title, url }) => (
-              <Button key={id} root={<Link href={url} />} variant="cta">
-                {title}
-              </Button>
-            ))}
-          </Block>
-        )
+
+          <Text root={<Html htmlString={description} />} size="sm" />
+          {actions && (
+            <Block
+              columns={{ sm: 'max-content', md: 'repeat(auto-fit, minmax(100px, 1fr))' }}
+              align="center"
+              gap="sm"
+              contained
+            >
+              {actions.map(({ id, title, url }) => (
+                <Button key={id} root={<Link href={url} />} variant="cta">
+                  {title}
+                </Button>
+              ))}
+            </Block>
+          )}
+        </Block>
       }
     />
   )

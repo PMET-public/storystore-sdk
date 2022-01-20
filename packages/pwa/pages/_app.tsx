@@ -1,14 +1,13 @@
-import { FunctionComponent, useEffect, useState } from 'react'
+import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import { App, Header, Footer } from '@storystore/ui-kit/components'
+import { App, Header, Footer, Button } from '@storystore/ui-kit/components'
 import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
-import { useRouter } from 'next/router'
 
 /** Global Styles */
 import '@storystore/ui-kit/dist/theme/css/global.css'
@@ -33,17 +32,15 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
   const { pageModel } = pageProps
 
-  console.log('_app, PageModel', pageModel)
-
   const branding = {
     siteName: 'Kriss+',
     colorBody: '#fff',
     colorOnBody: '#222',
     colorSurface: '#f3f3f3',
     colorOnSurface: '#222',
-    colorPrimary: '#222',
+    colorPrimary: '#00266b',
     colorOnPrimary: '#fff',
-    colorSecondary: '#233266',
+    colorSecondary: '#ff9f00',
     colorOnSecondary: '#fff',
     rounded: 'var(--rounded-2xl)',
     ...pageModel?.branding,
@@ -114,7 +111,6 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
               <Header
                 variant="primary"
                 contained
-                // transparent
                 sticky
                 logo={
                   <Link href="/">
@@ -135,39 +131,9 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                     )}
                   </Link>
                 }
-                // nav={
-                //   <AEMExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/header/master" />
-                // }
-                // nav={
-                //   <nav>
-                //     <Button
-                //       root={<link.type {...link.props} href="/my-passport" />}
-                //       icon={<MyPassportIcon />}
-                //       size="sm"
-                //       variant="text"
-                //     >
-                //       My Passport
-                //     </Button>
-                //   </nav>
-                // }
               />
             }
-            footer={
-              <Footer contained>
-                {/* <AEMCExperienceFragment pagePath="/content/experience-fragments/storystore/us/en/site/footer/master" /> */}
-              </Footer>
-            }
-            // footer={
-            //   <Footer
-            //     legal={
-            //       <nav>
-            //         <link.type {...link.props} href="/settings">
-            //           UIKit Settings
-            //         </link.type>
-            //       </nav>
-            //     }
-            //   />
-            // }
+            footer={<Footer contained></Footer>}
           >
             <Component {...pageProps} />
           </App>

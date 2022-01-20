@@ -1,7 +1,7 @@
 .root {
   display: flex;
-  gap: var(--spacing-sm);
   flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
 .item label {
@@ -9,12 +9,15 @@
   --border: var(--color-on-surface);
   --text: var(--color-on-surface);
   background-color: var(--bg);
+  border-radius: var(--rounded);
   border: 1px solid var(--border);
   color: var(--text);
   display: inline-block;
   padding: var(--spacing-sm);
   transition: all 300ms ease;
   white-space: nowrap;
+  font-weight: var(--font-medium);
+  font-size: var(--font-sm);
 }
 
 .item input {

@@ -40,11 +40,17 @@
   }
 }
 
-.root.accent::after {
-  background-color: var(--color-secondary);
+.root.accent {
+  position: relative;
+  padding-left: calc(var(--spacing-sm) + 0.75em);
+}
+
+.root.accent::before {
   content: '';
-  display: block;
-  height: 0.185rem;
-  margin-top: 0.15em;
-  width: 2rem;
+  position: absolute;
+  left: var(--spacing-sm);
+  top: 0;
+  width: 0.15em;
+  height: 100%;
+  background-color: var(--color-secondary);
 }

@@ -13,6 +13,8 @@ const PRODUCT_QUERY = gql`
         url_key
         name
         sku
+        new
+        sale
         description {
           html
         }
@@ -63,7 +65,6 @@ const ProductPage: NextPage = () => {
 
   if (loading && !product) return <h1>Loading</h1>
 
-  console.log(product)
   return (
     <ProductTemplate
       media={product?.media_gallery?.map(({ url, label }, key) => (

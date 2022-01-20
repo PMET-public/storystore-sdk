@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, HTMLAttributes, ReactElement } from 'react'
+import { FunctionComponent, useCallback, HTMLAttributes, ReactElement, isValidElement } from 'react'
 import { useForm } from '../../hooks'
 import { Form } from '..'
 import { classes } from '../../lib'
@@ -10,21 +10,30 @@ type Value = string | string[] | number | number[]
 
 export type PillsProps = HTMLAttributes<HTMLFormElement> & {
   root?: ReactElement
+  name?: string
+  label?: ReactElement<HTMLAttributes<HTMLDivElement>>
   variant?: 'single' | 'multi' | undefined
-  onChange?: (values: { [key: string]: Value }) => any
+  onChange?: (values: string[]) => any
   items: Array<{ id: string; label: string; value: Value }>
 }
 
-export const Pills: FunctionComponent<PillsProps> = ({ root = <form />, onChange, variant, items, ...props }) => {
+export const Pills: FunctionComponent<PillsProps> = ({
+  root = <form />,
+  onChange,
+  label,
+  variant,
+  name,
+  items,
+  ...props
+}) => {
   const { register, getValues } = useForm({ mode: 'onChange' })
 
   const handleOnChange = useCallback(() => {
     const _values = getValues()
 
-    const values = Object.entries(_values).reduce((acumm, [key, _value]: any) => {
-      const value = _value.split(',')
-      return { ...acumm, [key]: value.length > 1 ? value : value[0] }
-    }, {})
+    const values = Object.entries(_values).reduce((acumm, [key, value]: any) => {
+      return value ? [...acumm, value] : [...acumm]
+    }, [])
 
     onChange?.(values)
   }, [])
@@ -36,8 +45,10 @@ export const Pills: FunctionComponent<PillsProps> = ({ root = <form />, onChange
       onChange={handleOnChange}
       className={classes([style.root, root.props, props.className])}
     >
+      {isValidElement(label) && <label.type {...label.props} />}
       <Form.Swatches
-        name="pills"
+        color="secondary"
+        name={name}
         variant={variant}
         className={style.swatches}
         items={items?.map(({ id, value, label }) => ({ label, value, ...register(id) }))}

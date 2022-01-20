@@ -1,7 +1,10 @@
 import { gql, useQuery } from '@apollo/client'
-import { Block, Carousel, Heading, Link, Price, Tile } from '@storystore/ui-kit/components'
+import { Block, Button, Carousel, Heading, Link, Price, Text, Tile } from '@storystore/ui-kit/components'
 import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
+
+import StoreIcons from 'remixicon-react/Store3LineIcon'
+import DealsIcon from 'remixicon-react/PriceTag3LineIcon'
 
 const COMMERCE_QUERY = gql`
   query COMMERCE_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
@@ -11,8 +14,11 @@ const COMMERCE_QUERY = gql`
         uid: id
         url_key
         name
-        media_gallery {
-          id: url
+        categories {
+          name
+        }
+
+        thumbnail {
           label
           url
         }
@@ -37,31 +43,6 @@ const COMMERCE_QUERY = gql`
   }
 `
 
-const ProductItem = ({ name, url_key, media_gallery, price_range }) => (
-  <Tile
-    surface
-    root={<Link href={`/product/${url_key}`} />}
-    heading={<Heading size="sm">{name}</Heading>}
-    image={
-      <img width={400} height={500} loading="lazy" alt={media_gallery[0].label || name} src={media_gallery[0].url} />
-    }
-    subheading={
-      <Price
-        currency={price_range.minimum_price.regular_price.currency}
-        label={
-          price_range.minimum_price.regular_price < price_range.maximum_price.regular_price ? 'Starting at' : undefined
-        }
-        regular={price_range.minimum_price.regular_price.value}
-        special={
-          price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
-            ? price_range.minimum_price.final_price.value
-            : undefined
-        }
-      />
-    }
-  />
-)
-
 const HomePage: NextPage = () => {
   const { loading, data, error } = useQuery(COMMERCE_QUERY, {
     variables: {
@@ -77,19 +58,79 @@ const HomePage: NextPage = () => {
   if (error) return <div>💩 {error.message}</div>
 
   return (
-    <Block gap="xl">
+    <Block gap="3xl">
+      {/* Hero */}
       <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa" />
 
+      {/* Deals */}
+      <Block gap="lg" contained>
+        <Block columns="1fr auto" vAlign="center">
+          <Block root={<Heading size="2xl" accent padded />}>
+            <div>Highlights</div>
+            <Text size="md">Deals you may like</Text>
+          </Block>
+          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="sm" variant="text">
+            View All
+          </Button>
+        </Block>
+
+        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/deals/pwa-home" />
+      </Block>
+
+      {/* Products */}
       {data?.products?.items && (
-        <Block gap="md" contained>
-          <Heading padded>New Arrivals</Heading>
-          <Carousel gap="md" show={{ sm: 1, md: 3 }} padded peak>
-            {data.products.items.map(({ name, url_key, media_gallery, price_range }) => (
-              <ProductItem key={url_key} {...{ name, url_key, media_gallery, price_range }} />
+        <Block gap="lg" contained>
+          <Block columns="1fr auto" vAlign="center">
+            <Block root={<Heading size="2xl" accent padded />}>
+              <div>New Arrivals</div>
+              <Text size="md">Shop the widest range of products</Text>
+            </Block>
+            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcons />} size="sm" variant="text">
+              View All
+            </Button>
+          </Block>
+
+          <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} padded peak>
+            {data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+              <Tile
+                key={url_key}
+                surface
+                vignette
+                root={<Link href={`/product/${url_key}`} />}
+                heading={<Heading size="xs">{name}</Heading>}
+                image={
+                  <img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />
+                }
+                subheading={
+                  <Price
+                    currency={price_range.minimum_price.regular_price.currency}
+                    label={
+                      price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
+                        ? 'Starting at'
+                        : undefined
+                    }
+                    regular={price_range.minimum_price.regular_price.value}
+                    special={
+                      price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
+                        ? price_range.minimum_price.final_price.value
+                        : undefined
+                    }
+                  />
+                }
+                tags={categories?.map(({ name }) => `#${name}`)}
+              />
             ))}
           </Carousel>
         </Block>
       )}
+
+      {/* Our Partners */}
+      <Block gap="md" contained>
+        <Heading accent padded>
+          Our Partners in Hong Kong
+        </Heading>
+        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/deals/pwa-home" />
+      </Block>
     </Block>
   )
 }

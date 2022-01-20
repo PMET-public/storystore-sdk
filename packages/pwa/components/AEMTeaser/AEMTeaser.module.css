@@ -1,0 +1,8 @@
+.root {
+  border-radius: unset;
+}
+
+.image {
+  border-radius: var(--rounded);
+  overflow: hidden;
+}

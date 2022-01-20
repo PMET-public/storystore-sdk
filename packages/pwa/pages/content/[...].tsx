@@ -20,8 +20,6 @@ const DynamicPage: NextPage<PageProps> = ({ pageModel, error }) => {
 
   if (error) return <Error status={error} />
 
-  console.log('Page', pageModel)
-
   return (
     <Fragment key={asPath}>
       <AEMResponsiveGrid pagePath={path} itemPath="root/responsivegrid" {...pageModel} />
@@ -30,8 +28,6 @@ const DynamicPage: NextPage<PageProps> = ({ pageModel, error }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  console.log(req.url)
-
   let pageModel = {}
   let error: any
 

@@ -5,8 +5,6 @@ import {
   AccordionV1IsEmptyFn,
   CarouselV1,
   CarouselV1IsEmptyFn,
-  ContainerV1,
-  ContainerV1IsEmptyFn,
   TabsV1,
   TabsV1IsEmptyFn,
 } from '@adobe/aem-core-components-react-spa'
@@ -35,6 +33,7 @@ import { AEMExperienceFragment, AEMExperienceFragmentConfig } from './AEMExperie
 import { AEMTeaser, AEMTeaserConfig } from './AEMTeaser/AEMTeaser'
 import { AEMCarousel, AEMCarouselConfig } from './AEMCarousel/AEMCarousel'
 import { AEMImage, AEMImageConfig } from './AEMImage/AEMImage'
+import { AEMContainer, AEMContainerConfig } from './AEMContainer/AEMContainer'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -50,10 +49,10 @@ MapTo<any>(`${site}/components/navigation`)(NavigationV1)
 MapTo<any>(`${site}/components/languagenavigation`)(LanguageNavigationV1)
 MapTo(`${site}/components/tabs`)(TabsV1, { isEmpty: TabsV1IsEmptyFn })
 MapTo(`${site}/components/accordion`)(AccordionV1, { isEmpty: AccordionV1IsEmptyFn })
-MapTo(`${site}/components/container`)(ContainerV1, { isEmpty: ContainerV1IsEmptyFn })
 
 MapTo(AEMResponsiveGridConfig.resourceType)(AEMResponsiveGrid, AEMResponsiveGridConfig)
 MapTo(AEMExperienceFragmentConfig.resourceType)(AEMExperienceFragment, AEMExperienceFragmentConfig)
 MapTo(AEMTeaserConfig.resourceType)(AEMTeaser, AEMTeaserConfig)
 MapTo(AEMCarouselConfig.resourceType)(AEMCarousel, AEMCarouselConfig)
 MapTo(AEMImageConfig.resourceType)(AEMImage, AEMImageConfig)
+MapTo(AEMContainerConfig.resourceType)(AEMContainer, AEMContainerConfig)

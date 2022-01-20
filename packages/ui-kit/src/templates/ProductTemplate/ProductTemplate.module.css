@@ -58,7 +58,7 @@ img.image,
   }
 
   .wrapperContent {
-    --offset: 82px;
+    --offset: var(--app-header-height);
     align-items: center;
     border-radius: unset;
     box-shadow: unset;

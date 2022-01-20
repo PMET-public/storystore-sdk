@@ -3,6 +3,8 @@
   grid-auto-columns: max-content;
   grid-auto-flow: column;
   grid-gap: 0.35em;
+  font-size: var(--font-sm);
+  font-weight: var(--font-semibold);
 }
 
 .special {

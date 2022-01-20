@@ -7,6 +7,13 @@
   position: sticky;
   scrollbar-width: none;
   top: 0;
+  z-index: 20;
+
+  display: grid;
+  grid-gap: var(--spacing-sm);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
 }
 
 .root::-webkit-scrollbar {

@@ -12,6 +12,7 @@ export type TileProps = HTMLAttributes<HTMLElement> & {
   subheading?: ReactElement | string
   tags?: Array<ReactElement | string>
   surface?: boolean
+  vignette?: boolean
 }
 
 export const Tile: FunctionComponent<TileProps> = ({
@@ -22,12 +23,19 @@ export const Tile: FunctionComponent<TileProps> = ({
   subheading,
   tags,
   surface,
+  vignette,
   ...props
 }) => {
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, [style.surface, surface], className])}>
       <div className={style.wrapper}>
-        <image.type {...merge(image.props, { className: style.image })} />
+        <div className={classes([[style.vignette, vignette]])}>
+          <image.type
+            {...merge(image.props, {
+              className: classes([style.image, image.props.className]),
+            })}
+          />
+        </div>
 
         <div className={style.content}>
           {isValidElement(heading) ? (

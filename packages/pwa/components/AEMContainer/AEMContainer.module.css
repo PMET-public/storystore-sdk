@@ -1,5 +1,15 @@
-.root {
+.rowsGrid > :global(.aem-container) {
+  display: grid;
+  grid-gap: var(--spacing-xl);
+  grid-auto-rows: max-content;
+}
+
+/* Carousel  */
+.carousel > :global(.aem-container) {
   --show: var(--carousel-show-sm);
+  --carousel-padding: var(--spacing-lg);
+  --carousel-gap: var(--spacing-md);
+
   -webkit-overflow-scrolling: touch;
   display: grid;
   grid-auto-columns: var(--show);
@@ -13,49 +23,51 @@
   scroll-padding: var(--carousel-padding);
   scroll-snap-type: x mandatory;
   scrollbar-width: 1px;
+
+  padding-left: var(--padded);
 }
 
 @media (min-width: 768px) {
-  .root {
+  .carousel > :global(.aem-container) {
     --show: var(--carousel-show-md);
   }
 }
 
 @media (min-width: 1024px) {
-  .root {
+  .carousel > :global(.aem-container) {
     --show: var(--carousel-show-lg);
   }
 }
 
 @media (min-width: 1280px) {
-  .root {
+  .carousel > :global(.aem-container) {
     --show: var(--carousel-show-xl);
   }
 }
 
-.root::-webkit-scrollbar {
+.carousel > :global(.aem-container)::-webkit-scrollbar {
   height: 0.125rem;
   width: 0.125rem;
 }
 
-.root::-webkit-scrollbar-track {
+.carousel > :global(.aem-container)::-webkit-scrollbar-track {
   margin: 20vw 0;
   border-radius: 0.625rem;
   background: var(--color-surface);
 }
 
-.root::-webkit-scrollbar-thumb {
+.carousel > :global(.aem-container)::-webkit-scrollbar-thumb {
   border-radius: 0.625rem;
   background: var(--color-scrollbar);
 }
 
-.root.hideScrollBar {
+.carousel > :global(.aem-container).hideScrollBar {
   padding-bottom: unset;
   scrollbar-width: none;
   margin-bottom: 0;
 }
 
-.root.hideScrollBar::-webkit-scrollbar {
+.carousel > :global(.aem-container).hideScrollBar::-webkit-scrollbar {
   display: none;
 }
 
@@ -63,6 +75,6 @@
   padding-left: var(--padded);
 }
 
-.item {
+.carousel > :global(.aem-container) > div {
   scroll-snap-align: center;
 }
