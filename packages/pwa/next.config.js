@@ -76,6 +76,14 @@ module.exports = withPlugins([withPWA, withStoryStore], {
     })
 
     /**
+     * GraphQL Queries
+     */
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      loader: 'graphql-tag/loader',
+    })
+
+    /**
      * Asset Manifest
      */
     config.plugins.push(

@@ -1,0 +1,10 @@
+query CATEGORIES_QUERY($filters: CategoryFilterInput) {
+  categoryList(filters: $filters) {
+    uid
+    name
+    children {
+      uid
+      name
+    }
+  }
+}

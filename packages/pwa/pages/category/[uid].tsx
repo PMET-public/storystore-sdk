@@ -1,88 +1,25 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Block, Button, Heading, Link, Price, SkeletonLoader, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import PRODUCTS_QUERY from '../../graphql/products.graphql'
+import CATEGORIES_QUERY from '../../graphql/categories.graphql'
 
 // Styles
 import style from './products.module.css'
-
-const COMMERCE_PRODUCTS_QUERY = gql`
-  query COMMERCE_PRODUCTS_QUERY(
-    $categories: CategoryFilterInput
-    $products: ProductAttributeFilterInput
-    $pageSize: Int
-  ) {
-    categoryList(filters: $categories) {
-      id: uid
-      name
-      children {
-        id: uid
-        uid
-        name
-        __typename
-      }
-      __typename
-    }
-
-    products(filter: $products, pageSize: $pageSize) {
-      items {
-        uid: id
-        url_key
-        name
-        categories {
-          name
-          uid
-          __typename
-        }
-        thumbnail {
-          label
-          url
-          __typename
-        }
-        price_range {
-          minimum_price {
-            final_price {
-              currency
-              value
-              __typename
-            }
-            regular_price {
-              value
-              __typename
-            }
-            __typename
-          }
-          maximum_price {
-            regular_price {
-              value
-              __typename
-            }
-            __typename
-          }
-          __typename
-        }
-        __typename
-      }
-      __typename
-    }
-  }
-`
 
 const ProductsPage: NextPage = () => {
   const router = useRouter()
 
   const { uid = 'NDI=' } = router.query
 
-  const { loading, data, error } = useQuery(COMMERCE_PRODUCTS_QUERY, {
+  const categoriesQuery = useQuery(CATEGORIES_QUERY, { variables: { filters: { category_uid: { eq: uid } } } })
+
+  const productsQuery = useQuery(PRODUCTS_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     variables: {
-      categories: {
-        category_uid: {
-          eq: uid,
-        },
-      },
-      products: {
+      filter: {
         category_uid: {
           eq: uid,
         },
@@ -91,24 +28,24 @@ const ProductsPage: NextPage = () => {
     },
   })
 
-  if (error) return <div>💩 {error.message}</div>
+  console.log(productsQuery.error, categoriesQuery.error)
 
-  const category = data?.categoryList?.[0]
-  const products = data?.products
+  const categories = categoriesQuery.data?.categoryList?.[0]
+  const products = productsQuery.data?.products
 
   return (
     <Block padded contained style={{ paddingBottom: 'var(--spacing-xl)' }}>
       <div className={style.categories}>
         <Heading size="md">
-          {category?.name || (
+          {categories?.name || (
             <SkeletonLoader animate width="10em" height="1em">
               <rect width="100%" height="100%" />
             </SkeletonLoader>
           )}
         </Heading>
 
-        {category?.children?.map(({ name, uid }) => (
-          <Button key={uid} root={<Link href={`/products/${uid}`} />} transparent size="xs">
+        {categories?.children?.map(({ name, uid }) => (
+          <Button key={uid} root={<Link href={`/category/${uid}`} />} transparent size="xs">
             {name}
           </Button>
         ))}
@@ -116,7 +53,7 @@ const ProductsPage: NextPage = () => {
 
       {/* Products */}
       <Block columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1fr 1fr' }} gap="md">
-        {loading && !products?.items ? (
+        {productsQuery.loading && !products?.items ? (
           <>
             <TileSkeleton animate />
             <TileSkeleton animate />

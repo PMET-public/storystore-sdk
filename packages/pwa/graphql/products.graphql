@@ -1,0 +1,44 @@
+query PRODUCTS_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
+  products(search: $search, filter: $filter, pageSize: $pageSize)
+    @connection(key: "Products", filter: ["filter", "search"]) {
+    total_count
+    items {
+      uid
+      url_key
+      name
+      sku
+      description {
+        html
+      }
+      # Gallery
+      media_gallery {
+        label
+        url
+      }
+
+      # Thumbnail
+      thumbnail {
+        label
+        url
+      }
+
+      # Price
+      price_range {
+        minimum_price {
+          final_price {
+            currency
+            value
+          }
+          regular_price {
+            value
+          }
+        }
+        maximum_price {
+          regular_price {
+            value
+          }
+        }
+      }
+    }
+  }
+}

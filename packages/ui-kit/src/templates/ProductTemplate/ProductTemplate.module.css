@@ -18,7 +18,6 @@ img.image,
 .image img {
   width: 100%;
   height: auto;
-  max-height: 70vh;
 }
 
 .wrapperContent {
@@ -51,9 +50,9 @@ img.image,
 
   img.image,
   .image img {
-    height: 100%;
+    height: auto;
     max-height: 70vh;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
   }
 
@@ -71,15 +70,3 @@ img.image,
     top: var(--offset);
   }
 }
-
-/* Desktop */
-/* @media (min-width: 1280px) {
-  .media {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .image:first-child,
-  .image:last-child:nth-child(even) {
-    grid-column-end: span 2;
-  }
-} */
