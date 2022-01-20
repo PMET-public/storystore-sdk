@@ -21,6 +21,7 @@ img.image,
   object-fit: cover;
   object-position: center;
   width: 100%;
+  height: auto;
   /* flex-grow: 1; */
 }
 
