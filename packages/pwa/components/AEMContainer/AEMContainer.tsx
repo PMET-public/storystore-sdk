@@ -38,9 +38,17 @@ const Container: FunctionComponent<ContainerProps> = ({ ...props }) => {
     ['--carousel-show-xl' as string]: show.xl ? `calc(100% / ${show.xl} - var(--spacing-lg))` : 'max-content',
   }
 
+  // Grid List
+  const gridList = !!props.appliedCssClassNames?.match(/\b(container--grid-list)\b/i)
+
   return (
     <div
-      className={classes([style.root, [style.carousel, carousel], [style.rowsGrid, rowsGrid]])}
+      className={classes([
+        style.root,
+        [style.carousel, carousel],
+        [style.rowsGrid, rowsGrid],
+        [style.gridList, gridList],
+      ])}
       style={{ ...carouselStyle }}
     >
       <AllowedComponentsContainer {...props} />

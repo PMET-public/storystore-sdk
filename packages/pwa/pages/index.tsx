@@ -3,7 +3,9 @@ import { Block, Button, Carousel, Heading, Link, Price, Text, Tile } from '@stor
 import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
 
-import StoreIcons from 'remixicon-react/Store3LineIcon'
+import style from './index.module.css'
+
+import StoreIcon from 'remixicon-react/Store3LineIcon'
 import DealsIcon from 'remixicon-react/PriceTag3LineIcon'
 
 const COMMERCE_QUERY = gql`
@@ -47,7 +49,6 @@ const HomePage: NextPage = () => {
   const { loading, data, error } = useQuery(COMMERCE_QUERY, {
     variables: {
       search: '',
-      // filter: null,
       pageSize: 9,
     },
     context: { clientName: 'commerce' },
@@ -58,18 +59,21 @@ const HomePage: NextPage = () => {
   if (error) return <div>💩 {error.message}</div>
 
   return (
-    <Block gap="3xl">
+    <Block gap="3xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
       {/* Hero */}
-      <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa" />
+      <div className={style.hero}>
+        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa" />
+      </div>
 
       {/* Deals */}
       <Block gap="lg" contained>
-        <Block columns="1fr auto" vAlign="center">
-          <Block root={<Heading size="2xl" accent padded />}>
-            <div>Highlights</div>
-            <Text size="md">Deals you may like</Text>
+        <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="md" padded>
+          <Block root={<Heading size="2xl" accent />}>
+            <div>Our Highlights</div>
+            <Text size="md">Deals you may like.</Text>
           </Block>
-          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="sm" variant="text">
+
+          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="sm" transparent variant="cta">
             View All
           </Button>
         </Block>
@@ -80,12 +84,12 @@ const HomePage: NextPage = () => {
       {/* Products */}
       {data?.products?.items && (
         <Block gap="lg" contained>
-          <Block columns="1fr auto" vAlign="center">
-            <Block root={<Heading size="2xl" accent padded />}>
+          <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="md" padded>
+            <Block root={<Heading size="2xl" accent />}>
               <div>New Arrivals</div>
               <Text size="md">Shop the widest range of products</Text>
             </Block>
-            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcons />} size="sm" variant="text">
+            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="sm" transparent variant="cta">
               View All
             </Button>
           </Block>
@@ -123,14 +127,6 @@ const HomePage: NextPage = () => {
           </Carousel>
         </Block>
       )}
-
-      {/* Our Partners */}
-      <Block gap="md" contained>
-        <Heading accent padded>
-          Our Partners in Hong Kong
-        </Heading>
-        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/deals/pwa-home" />
-      </Block>
     </Block>
   )
 }

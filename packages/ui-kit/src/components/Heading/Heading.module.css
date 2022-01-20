@@ -42,13 +42,13 @@
 
 .root.accent {
   position: relative;
-  padding-left: calc(var(--spacing-sm) + 0.75em);
+  padding-left: calc(var(--spacing-sm) + 0.25em);
 }
 
 .root.accent::before {
   content: '';
   position: absolute;
-  left: var(--spacing-sm);
+  left: 0;
   top: 0;
   width: 0.15em;
   height: 100%;

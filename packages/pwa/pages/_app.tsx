@@ -33,12 +33,12 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   const { pageModel } = pageProps
 
   const branding = {
-    siteName: 'Kriss+',
+    siteName: 'KrisShop',
     colorBody: '#fff',
     colorOnBody: '#222',
     colorSurface: '#f3f3f3',
     colorOnSurface: '#222',
-    colorPrimary: '#00266b',
+    colorPrimary: '#111',
     colorOnPrimary: '#fff',
     colorSecondary: '#ff9f00',
     colorOnSecondary: '#fff',

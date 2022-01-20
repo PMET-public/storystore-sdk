@@ -1,3 +1,11 @@
+/** Grid List */
+.gridList > :global(.aem-container) {
+  display: grid;
+  grid-gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+}
+
+/** Rows Grid */
 .rowsGrid > :global(.aem-container) {
   display: grid;
   grid-gap: var(--spacing-xl);
@@ -28,12 +36,20 @@
 }
 
 @media (min-width: 768px) {
+  .gridList > :global(.aem-container) {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .carousel > :global(.aem-container) {
     --show: var(--carousel-show-md);
   }
 }
 
 @media (min-width: 1024px) {
+  .gridList > :global(.aem-container) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .carousel > :global(.aem-container) {
     --show: var(--carousel-show-lg);
   }
