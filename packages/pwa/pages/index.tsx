@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { Block, Button, Carousel, Heading, Link, Price, Text, Tile } from '@storystore/ui-kit/components'
+import { Block, Button, Carousel, Heading, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
 
@@ -77,19 +77,19 @@ const HomePage: NextPage = () => {
       </Block>
 
       {/* Products */}
-      {data?.products?.items && (
-        <Block gap="md" contained>
-          <Block columns="1fr auto" gap="sm" padded vAlign="center">
-            <Heading size="2xl" accent>
-              New Arrivals
-            </Heading>
-            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
-              View All
-            </Button>
-          </Block>
+      <Block gap="md" contained>
+        <Block columns="1fr auto" gap="sm" padded vAlign="center">
+          <Heading size="2xl" accent>
+            New Arrivals
+          </Heading>
+          <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
+            View All
+          </Button>
+        </Block>
 
-          <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} padded peak>
-            {data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} padded peak>
+          {data?.products?.items ? (
+            data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
               <Tile
                 key={url_key}
                 surface
@@ -117,10 +117,16 @@ const HomePage: NextPage = () => {
                 }
                 tags={categories?.map(({ name }) => `#${name}`)}
               />
-            ))}
-          </Carousel>
-        </Block>
-      )}
+            ))
+          ) : (
+            <>
+              <TileSkeleton animate />
+              <TileSkeleton animate />
+              <TileSkeleton animate />
+            </>
+          )}
+        </Carousel>
+      </Block>
     </Block>
   )
 }
