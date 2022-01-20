@@ -63,7 +63,7 @@ const HomePage: NextPage = () => {
 
       {/* Deals */}
       <Block gap="md" contained>
-        <Block columns="1fr auto" gap="sm" padded vAlign="center">
+        <Block columns="1fr auto" gap="sm" vAlign="center" padded>
           <Heading size="2xl" accent>
             Our Highlights
           </Heading>
@@ -78,7 +78,7 @@ const HomePage: NextPage = () => {
 
       {/* Products */}
       <Block gap="md" contained>
-        <Block columns="1fr auto" gap="sm" padded vAlign="center">
+        <Block columns="1fr auto" gap="sm" vAlign="center" padded>
           <Heading size="2xl" accent>
             New Arrivals
           </Heading>
@@ -87,44 +87,38 @@ const HomePage: NextPage = () => {
           </Button>
         </Block>
 
-        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} padded peak>
-          {data?.products?.items ? (
-            data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
-              <Tile
-                key={url_key}
-                surface
-                vignette
-                root={<Link href={`/product/${url_key}`} />}
-                heading={<Heading size="xs">{name}</Heading>}
-                image={
-                  <img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />
-                }
-                subheading={
-                  <Price
-                    currency={price_range.minimum_price.regular_price.currency}
-                    label={
-                      price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
-                        ? 'Starting at'
-                        : undefined
-                    }
-                    regular={price_range.minimum_price.regular_price.value}
-                    special={
-                      price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
-                        ? price_range.minimum_price.final_price.value
-                        : undefined
-                    }
-                  />
-                }
-                tags={categories?.map(({ name }) => `#${name}`)}
-              />
-            ))
-          ) : (
-            <>
-              <TileSkeleton animate />
-              <TileSkeleton animate />
-              <TileSkeleton animate />
-            </>
-          )}
+        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} peak>
+          {data?.products?.items
+            ? data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+                <Tile
+                  key={url_key}
+                  surface
+                  vignette
+                  root={<Link href={`/product/${url_key}`} />}
+                  heading={<Heading size="xs">{name}</Heading>}
+                  image={
+                    <img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />
+                  }
+                  subheading={
+                    <Price
+                      currency={price_range.minimum_price.regular_price.currency}
+                      label={
+                        price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
+                          ? 'Starting at'
+                          : undefined
+                      }
+                      regular={price_range.minimum_price.regular_price.value}
+                      special={
+                        price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
+                          ? price_range.minimum_price.final_price.value
+                          : undefined
+                      }
+                    />
+                  }
+                  tags={categories?.map(({ name }) => `#${name}`)}
+                />
+              ))
+            : [<TileSkeleton key="1" animate />, <TileSkeleton key="2" animate />, <TileSkeleton key="3" animate />]}
         </Carousel>
       </Block>
     </Block>
