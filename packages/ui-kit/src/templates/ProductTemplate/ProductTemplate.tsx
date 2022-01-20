@@ -9,12 +9,11 @@ export type ProductTemplateProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export const ProductTemplate: FunctionComponent<ProductTemplateProps> = ({ media, className, children, ...props }) => {
-  console.log(media)
   return (
     <Block
       {...props}
       className={classes([style.root, className])}
-      columns={{ sm: '1fr', md: '1fr 1fr', xl: '1.5fr 1fr' }}
+      columns={{ sm: '1fr', md: '1fr 1fr' }}
       rows={{ sm: 'auto 1fr', md: '1fr' }}
       contained
     >
@@ -51,7 +50,7 @@ export const ProductTemplate: FunctionComponent<ProductTemplateProps> = ({ media
       {/* Content */}
       <div>
         <div className={style.wrapperContent}>
-          <Block gap="lg" className={style.content}>
+          <Block columns="1fr" gap="lg" className={style.content}>
             {children}
           </Block>
         </div>

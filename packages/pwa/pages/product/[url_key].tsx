@@ -71,7 +71,7 @@ const ProductPage: NextPage = () => {
         <img key={key} width={400} height={500} src={url} alt={label} loading={key === 0 ? 'eager' : 'lazy'} />
       ))}
     >
-      <Block gap="md">
+      <Block gap="md" columns="1fr">
         <Block gap="sm">
           {/* Product Title */}
           <Heading>{product?.name}</Heading>

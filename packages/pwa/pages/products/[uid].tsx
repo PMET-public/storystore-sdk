@@ -12,6 +12,7 @@ const COMMERCE_PRODUCTS_QUERY = gql`
       name
 
       children {
+        id: uid
         uid
         name
       }
@@ -83,7 +84,6 @@ const ProductsPage: NextPage = () => {
   if (error) return <div>💩 {error.message}</div>
 
   const category = data?.categoryList?.[0]
-  console.log({ category })
 
   return (
     <Block padded contained>
