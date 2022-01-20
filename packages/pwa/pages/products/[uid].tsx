@@ -110,7 +110,6 @@ const ProductsPage: NextPage = () => {
             <TileSkeleton animate />
             <TileSkeleton animate />
             <TileSkeleton animate />
-            <TileSkeleton animate />
           </>
         ) : (
           category.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
@@ -120,7 +119,7 @@ const ProductsPage: NextPage = () => {
               vignette
               root={<Link href={`/product/${url_key}`} />}
               heading={<Heading size="xs">{name}</Heading>}
-              image={<img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
+              image={<img width={500} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
               subheading={
                 <Price
                   currency={price_range.minimum_price.regular_price.currency}

@@ -42,7 +42,7 @@
 
 .root.accent {
   position: relative;
-  padding-left: calc(var(--spacing-sm) + 0.25em);
+  padding-left: calc(var(--spacing-sm) + 0.025em);
 }
 
 .root.accent::before {

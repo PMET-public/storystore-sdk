@@ -87,7 +87,7 @@ const HomePage: NextPage = () => {
           </Button>
         </Block>
 
-        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} peak>
+        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} peak padded>
           {data?.products?.items
             ? data.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
                 <Tile
@@ -97,7 +97,7 @@ const HomePage: NextPage = () => {
                   root={<Link href={`/product/${url_key}`} />}
                   heading={<Heading size="xs">{name}</Heading>}
                   image={
-                    <img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />
+                    <img width={400} height={400} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />
                   }
                   subheading={
                     <Price

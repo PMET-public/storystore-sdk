@@ -45,7 +45,7 @@ img.image,
 }
 
 .surface .content {
-  padding: 0 var(--padded) var(--padded);
+  padding: var(--spacing-xs) var(--padded) var(--padded);
 }
 
 .heading {
