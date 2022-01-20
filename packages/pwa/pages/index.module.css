@@ -1,5 +1,9 @@
+.hero {
+  --height: 70vh;
+  height: var(--height);
+}
 .hero :global(#hero-image) {
-  height: 70vh;
+  height: var(--height);
   object-fit: cover;
   object-position: center;
 }

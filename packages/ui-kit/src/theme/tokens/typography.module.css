@@ -1,6 +1,6 @@
 .typography {
   /* Font Families */
-  --font-body: system-ui, sans-serif;
+  --font-body: sans-serif;
 
   /* Font Sizes */
   --font-xs: 0.75rem;

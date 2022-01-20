@@ -79,7 +79,7 @@ const ProductsPage: NextPage = () => {
     context: { clientName: 'commerce' },
   })
 
-  if (loading) return <h1>⏳ Loading</h1>
+  if (loading && !data) return <h1>⏳ Loading</h1>
 
   if (error) return <div>💩 {error.message}</div>
 

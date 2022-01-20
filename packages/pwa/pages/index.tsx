@@ -46,17 +46,13 @@ const COMMERCE_QUERY = gql`
 `
 
 const HomePage: NextPage = () => {
-  const { loading, data, error } = useQuery(COMMERCE_QUERY, {
+  const { data } = useQuery(COMMERCE_QUERY, {
     variables: {
       search: '',
       pageSize: 9,
     },
     context: { clientName: 'commerce' },
   })
-
-  if (loading) return <h1>⏳ Loading</h1>
-
-  if (error) return <div>💩 {error.message}</div>
 
   return (
     <Block gap="3xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
