@@ -55,7 +55,7 @@ const HomePage: NextPage = () => {
   })
 
   return (
-    <Block gap="3xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
+    <Block gap="xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
       {/* Hero */}
       <div className={style.hero}>
         <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa" />
