@@ -1,53 +1,69 @@
 import { gql, useQuery } from '@apollo/client'
-import { Block, Heading, Link, Pills, Price, SkeletonLoader, Tile, TileSkeleton } from '@storystore/ui-kit/components'
+import { Block, Button, Heading, Link, Price, SkeletonLoader, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useCallback, useState } from 'react'
-import { useForm } from 'react-hook-form'
+
+// Styles
+import style from './products.module.css'
 
 const COMMERCE_PRODUCTS_QUERY = gql`
-  query COMMERCE_PRODUCTS_QUERY($filters: CategoryFilterInput) {
-    categoryList(filters: $filters) {
+  query COMMERCE_PRODUCTS_QUERY(
+    $categories: CategoryFilterInput
+    $products: ProductAttributeFilterInput
+    $pageSize: Int
+  ) {
+    categoryList(filters: $categories) {
       id: uid
       name
-
       children {
         id: uid
         uid
         name
+        __typename
       }
-      products {
-        items {
-          uid: id
-          url_key
-          name
-          categories {
-            name
-            uid
-          }
+      __typename
+    }
 
-          thumbnail {
-            label
-            url
-          }
-          price_range {
-            minimum_price {
-              final_price {
-                currency
-                value
-              }
-              regular_price {
-                value
-              }
-            }
-            maximum_price {
-              regular_price {
-                value
-              }
-            }
-          }
+    products(filter: $products, pageSize: $pageSize) {
+      items {
+        uid: id
+        url_key
+        name
+        categories {
+          name
+          uid
+          __typename
         }
+        thumbnail {
+          label
+          url
+          __typename
+        }
+        price_range {
+          minimum_price {
+            final_price {
+              currency
+              value
+              __typename
+            }
+            regular_price {
+              value
+              __typename
+            }
+            __typename
+          }
+          maximum_price {
+            regular_price {
+              value
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        __typename
       }
+      __typename
     }
   }
 `
@@ -57,24 +73,21 @@ const ProductsPage: NextPage = () => {
 
   const { uid = 'NDI=' } = router.query
 
-  const { register } = useForm({ mode: 'onChange' })
-
-  const handleOnChange = useCallback(
-    ([_uid]) => {
-      router.push(`/products/${_uid}`)
-    },
-    [router]
-  )
-
   const { loading, data, error } = useQuery(COMMERCE_PRODUCTS_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     variables: {
-      filters: {
+      categories: {
         category_uid: {
-          in: uid,
+          eq: uid,
         },
       },
+      products: {
+        category_uid: {
+          eq: uid,
+        },
+      },
+      pageSize: 9,
     },
     context: { clientName: 'commerce' },
   })
@@ -82,29 +95,34 @@ const ProductsPage: NextPage = () => {
   if (error) return <div>💩 {error.message}</div>
 
   const category = data?.categoryList?.[0]
+  const products = data?.products
 
   return (
     <Block padded contained style={{ paddingBottom: 'var(--spacing-xl)' }}>
-      <Pills
-        label={
-          <Heading size="md">
-            {category?.name || (
-              <SkeletonLoader animate width="10em" height="1em">
-                <rect width="100%" height="100%" />
-              </SkeletonLoader>
-            )}
-          </Heading>
-        }
-        name="categoryIds"
-        variant="single"
-        items={category?.children?.map(({ name, uid }) => ({ id: uid, label: name, value: uid, ...register(uid) }))}
-        onChange={handleOnChange}
-      />
+      <div className={style.categories}>
+        <Heading size="md">
+          {category?.name || (
+            <SkeletonLoader animate width="10em" height="1em">
+              <rect width="100%" height="100%" />
+            </SkeletonLoader>
+          )}
+        </Heading>
+
+        {category?.children?.map(({ name, uid }) => (
+          <Button key={uid} root={<Link href={`/products/${uid}`} />} transparent size="xs">
+            {name}
+          </Button>
+        ))}
+      </div>
 
       {/* Products */}
       <Block columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1fr 1fr' }} gap="md">
-        {loading && !category?.products.items ? (
+        {loading && !products?.items ? (
           <>
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
             <TileSkeleton animate />
             <TileSkeleton animate />
             <TileSkeleton animate />
@@ -112,7 +130,7 @@ const ProductsPage: NextPage = () => {
             <TileSkeleton animate />
           </>
         ) : (
-          category.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+          products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
             <Tile
               key={url_key}
               surface

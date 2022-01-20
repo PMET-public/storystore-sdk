@@ -80,9 +80,9 @@ const HomePage: NextPage = () => {
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
           <Heading size="2xl" accent>
-            New Arrivals
+            Electronics
           </Heading>
-          <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
+          <Button root={<Link href="/products/NDQ=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
             View All
           </Button>
         </Block>
