@@ -4,7 +4,7 @@ import {
   AllowedComponentsContainer,
   AllowedComponentsProperties,
 } from '@adobe/aem-react-editable-components'
-import { classes, getBreakpointValues } from '@storystore/ui-kit/dist/lib'
+import { classes, getBreakpointValues } from '@storystore/ui-kit/lib'
 import { FunctionComponent } from 'react'
 
 // Styles
