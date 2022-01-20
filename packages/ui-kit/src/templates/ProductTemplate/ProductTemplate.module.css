@@ -73,7 +73,7 @@ img.image,
 }
 
 /* Desktop */
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .media {
     grid-template-columns: 1fr 1fr;
   }
@@ -82,4 +82,4 @@ img.image,
   .image:last-child:nth-child(even) {
     grid-column-end: span 2;
   }
-}
+} */

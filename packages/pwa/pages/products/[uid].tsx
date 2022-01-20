@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { Block, Heading, Link, Pills, Price, Tile } from '@storystore/ui-kit/components'
+import { Block, Heading, Link, Pills, Price, SkeletonLoader, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useCallback, useState } from 'react'
@@ -79,8 +79,6 @@ const ProductsPage: NextPage = () => {
     context: { clientName: 'commerce' },
   })
 
-  if (loading && !data) return <h1>⏳ Loading</h1>
-
   if (error) return <div>💩 {error.message}</div>
 
   const category = data?.categoryList?.[0]
@@ -88,42 +86,61 @@ const ProductsPage: NextPage = () => {
   return (
     <Block padded contained>
       <Pills
-        label={<Heading size="md">{category.name}</Heading>}
+        label={
+          <Heading size="md">
+            {category?.name || (
+              <SkeletonLoader animate width="10em" height="1em">
+                <rect width="100%" height="100%" />
+              </SkeletonLoader>
+            )}
+          </Heading>
+        }
         name="categoryIds"
         variant="single"
-        items={category.children?.map(({ name, uid }) => ({ id: uid, label: name, value: uid, ...register(uid) }))}
+        items={category?.children?.map(({ name, uid }) => ({ id: uid, label: name, value: uid, ...register(uid) }))}
         onChange={handleOnChange}
       />
 
       {/* Products */}
       <Block columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1fr 1fr' }} gap="md">
-        {category.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
-          <Tile
-            key={url_key}
-            surface
-            vignette
-            root={<Link href={`/product/${url_key}`} />}
-            heading={<Heading size="xs">{name}</Heading>}
-            image={<img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
-            subheading={
-              <Price
-                currency={price_range.minimum_price.regular_price.currency}
-                label={
-                  price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
-                    ? 'Starting at'
-                    : undefined
-                }
-                regular={price_range.minimum_price.regular_price.value}
-                special={
-                  price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
-                    ? price_range.minimum_price.final_price.value
-                    : undefined
-                }
-              />
-            }
-            tags={categories?.map(({ name }) => `#${name}`)}
-          />
-        ))}
+        {loading && !category?.products.items ? (
+          <>
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+            <TileSkeleton animate />
+          </>
+        ) : (
+          category.products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+            <Tile
+              key={url_key}
+              surface
+              vignette
+              root={<Link href={`/product/${url_key}`} />}
+              heading={<Heading size="xs">{name}</Heading>}
+              image={<img width={400} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
+              subheading={
+                <Price
+                  currency={price_range.minimum_price.regular_price.currency}
+                  label={
+                    price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
+                      ? 'Starting at'
+                      : undefined
+                  }
+                  regular={price_range.minimum_price.regular_price.value}
+                  special={
+                    price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
+                      ? price_range.minimum_price.final_price.value
+                      : undefined
+                  }
+                />
+              }
+              tags={categories?.map(({ name }) => `#${name}`)}
+            />
+          ))
+        )}
       </Block>
     </Block>
   )

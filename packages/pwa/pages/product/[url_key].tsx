@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { ProductTemplate } from '@storystore/ui-kit/templates'
 import { gql, useQuery } from '@apollo/client'
-import { Block, Heading, Price, Text, Html } from '@storystore/ui-kit'
+import { Block, Heading, Price, Text, Html, SkeletonLoader } from '@storystore/ui-kit'
 
 const PRODUCT_QUERY = gql`
   query PRODUCT_QUERY($filter: ProductAttributeFilterInput) {
@@ -63,21 +63,40 @@ const ProductPage: NextPage = () => {
 
   const product = data?.products?.items?.[0]
 
-  if (loading && !product) return <h1>Loading</h1>
+  // if (loading && !product) return <h1>Loading</h1>
 
   return (
     <ProductTemplate
-      media={product?.media_gallery?.map(({ url, label }, key) => (
-        <img key={key} width={400} height={500} src={url} alt={label} loading={key === 0 ? 'eager' : 'lazy'} />
-      ))}
+      media={
+        product?.media_gallery?.map(({ url, label }, key) => (
+          <img key={key} width={400} height={500} src={url} alt={label} loading={key === 0 ? 'eager' : 'lazy'} />
+        )) || [
+          <img
+            key="1"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+            alt=""
+            width={400}
+            height={500}
+            style={{ background: 'var(--color-skeleton)' }}
+          />,
+        ]
+      }
     >
       <Block gap="md" columns="1fr">
         <Block gap="sm">
           {/* Product Title */}
-          <Heading>{product?.name}</Heading>
+          <Heading>
+            {product ? (
+              product?.name
+            ) : (
+              <SkeletonLoader animate width="10em" height="1em">
+                <rect width="100%" height="100%" />
+              </SkeletonLoader>
+            )}
+          </Heading>
 
           {/* Product Price */}
-          {product && (
+          {product ? (
             <Price
               currency={product.price_range.minimum_price.regular_price.currency}
               label={
@@ -93,13 +112,21 @@ const ProductPage: NextPage = () => {
                   : undefined
               }
             />
+          ) : (
+            <SkeletonLoader animate width="7em" height="1em">
+              <rect width="100%" height="100%" />
+            </SkeletonLoader>
           )}
 
           {/* Product SKU */}
-          {product?.sku && (
+          {product ? (
             <Text size="sm" style={{ opacity: 0.7 }}>
               SKU: {product.sku}
             </Text>
+          ) : (
+            <SkeletonLoader animate width="5em" height="1em">
+              <rect width="100%" height="100%" />
+            </SkeletonLoader>
           )}
         </Block>
 
