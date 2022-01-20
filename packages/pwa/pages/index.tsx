@@ -67,7 +67,7 @@ const HomePage: NextPage = () => {
 
       {/* Deals */}
       <Block gap="lg" contained>
-        <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="md" padded>
+        <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="sm" padded>
           <Block root={<Heading size="2xl" accent />}>
             <div>Our Highlights</div>
             <Text size="md">Deals you may like.</Text>
@@ -84,7 +84,7 @@ const HomePage: NextPage = () => {
       {/* Products */}
       {data?.products?.items && (
         <Block gap="lg" contained>
-          <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="md" padded>
+          <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="sm" padded>
             <Block root={<Heading size="2xl" accent />}>
               <div>New Arrivals</div>
               <Text size="md">Shop the widest range of products</Text>

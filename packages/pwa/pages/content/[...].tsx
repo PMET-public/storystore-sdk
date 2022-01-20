@@ -14,7 +14,7 @@ export type PageProps = {
   error: any
 }
 
-const DynamicPage: NextPage<PageProps> = ({ pageModel, error }) => {
+const DynamicPage: NextPage<PageProps> = ({ pageModel = {}, error }) => {
   const { asPath } = useRouter()
   const path = asPath.replace('.html', '')
 
@@ -27,19 +27,19 @@ const DynamicPage: NextPage<PageProps> = ({ pageModel, error }) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  let pageModel = {}
-  let error: any
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//   let pageModel = {}
+//   let error: any
 
-  try {
-    pageModel = await ModelManager.getData({ modelClient: new ModelClient(process.env.NEXT_PUBLIC_URL), path: req.url })
-  } catch (e) {
-    error = e.response.status
-  }
+//   try {
+//     pageModel = await ModelManager.getData({ modelClient: new ModelClient(process.env.NEXT_PUBLIC_URL), path: req.url })
+//   } catch (e) {
+//     error = e.response.status
+//   }
 
-  return {
-    props: { pageModel, error },
-  }
-}
+//   return {
+//     props: { pageModel, error },
+//   }
+// }
 
 export default DynamicPage
