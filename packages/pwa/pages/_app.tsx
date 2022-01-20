@@ -17,7 +17,9 @@ import '@storystore/ui-kit/dist/theme/css/aem.css'
 import '../components'
 
 /** Initialize AEM Model */
-ModelManager.initializeAsync({ modelClient: new ModelClient(process.env.NEXT_PUBLIC_URL) })
+if (process.browser) {
+  ModelManager.initializeAsync({ modelClient: new ModelClient(process.env.NEXT_PUBLIC_URL) })
+}
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
