@@ -51,7 +51,6 @@ const HomePage: NextPage = () => {
       search: '',
       pageSize: 9,
     },
-    context: { clientName: 'commerce' },
   })
 
   return (

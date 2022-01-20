@@ -58,7 +58,6 @@ const ProductPage: NextPage = () => {
         },
       },
     },
-    context: { clientName: 'commerce' },
   })
 
   const product = data?.products?.items?.[0]

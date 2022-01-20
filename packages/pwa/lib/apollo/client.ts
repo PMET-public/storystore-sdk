@@ -2,21 +2,10 @@ import { useMemo } from 'react'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink, ApolloLink } from '@apollo/client'
-import { getSiteURLFromPath } from '../get-site-path'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
-
-const aemLink = new HttpLink({
-  uri: getSiteURLFromPath('/api/aem/graphql'),
-  credentials: 'same-origin',
-})
-
-const commerceLink = new HttpLink({
-  uri: getSiteURLFromPath('/api/commerce/graphql'),
-  credentials: 'same-origin',
-})
 
 const createApolloClient = () => {
   return new ApolloClient({
@@ -24,11 +13,10 @@ const createApolloClient = () => {
     queryDeduplication: true,
     ssrMode: !process.browser,
     cache: new InMemoryCache({}),
-    link: ApolloLink.split(
-      operation => operation.getContext().clientName === 'aem', // Routes the query to the proper client
-      aemLink,
-      commerceLink
-    ),
+    link: new HttpLink({
+      uri: new URL(process.env.NEXT_PUBLIC_ADOBE_ENDPOINT).href,
+      credentials: 'same-origin',
+    }),
   })
 }
 

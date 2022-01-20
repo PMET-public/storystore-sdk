@@ -89,7 +89,6 @@ const ProductsPage: NextPage = () => {
       },
       pageSize: 9,
     },
-    context: { clientName: 'commerce' },
   })
 
   if (error) return <div>💩 {error.message}</div>
