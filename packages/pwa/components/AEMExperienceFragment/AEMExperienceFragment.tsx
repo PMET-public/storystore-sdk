@@ -6,10 +6,7 @@ export const RESOURCE_TYPE = `${site}/components/experiencefragment`
 
 export const AEMExperienceFragmentConfig = {
   emptyLabel: 'Experience Fragment',
-  isEmpty: (props: any) => {
-    console.log('Experience Fragment', { site, props })
-    return !props || !props.configured
-  },
+  isEmpty: (props: any) => !props || !props.configured,
   resourceType: RESOURCE_TYPE,
 }
 
