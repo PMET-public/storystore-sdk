@@ -62,14 +62,13 @@ const HomePage: NextPage = () => {
       </div>
 
       {/* Deals */}
-      <Block gap="lg" contained>
-        <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="sm" padded>
-          <Block root={<Heading size="2xl" accent />}>
-            <div>Our Highlights</div>
-            <Text size="md">Deals you may like.</Text>
-          </Block>
+      <Block gap="md" contained>
+        <Block columns="1fr auto" gap="sm" padded vAlign="center">
+          <Heading size="2xl" accent>
+            Our Highlights
+          </Heading>
 
-          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="sm" transparent variant="cta">
+          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="xs" transparent variant="cta">
             View All
           </Button>
         </Block>
@@ -79,13 +78,12 @@ const HomePage: NextPage = () => {
 
       {/* Products */}
       {data?.products?.items && (
-        <Block gap="lg" contained>
-          <Block columns={{ sm: '1fr', md: '1fr auto' }} gap="sm" padded>
-            <Block root={<Heading size="2xl" accent />}>
-              <div>New Arrivals</div>
-              <Text size="md">Shop the widest range of products</Text>
-            </Block>
-            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="sm" transparent variant="cta">
+        <Block gap="md" contained>
+          <Block columns="1fr auto" gap="sm" padded vAlign="center">
+            <Heading size="2xl" accent>
+              New Arrivals
+            </Heading>
+            <Button root={<Link href="/products/NDI=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
               View All
             </Button>
           </Block>

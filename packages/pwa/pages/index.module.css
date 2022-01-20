@@ -1,5 +1,5 @@
 .hero {
-  --height: 70vh;
+  --height: 60vh;
   height: var(--height);
 }
 .hero :global(#hero-image) {

@@ -18,6 +18,7 @@
   transition-duration: 305ms;
   transition-property: opacity, color, background-color, filter;
   transition-timing-function: ease;
+  border-radius: calc(var(--rounded) - 0.15rem);
 }
 
 .root[disabled] {

@@ -34,7 +34,7 @@ const Teaser = ({
       image={<img src={imagePath} alt="" loading="lazy" className={style.image} />}
       className={style.root}
       heading={
-        <Block gap="xs">
+        <Block gap="xs" padded>
           {pretitle && (
             <Heading root={<div />} size="sm">
               {pretitle}
@@ -46,6 +46,7 @@ const Teaser = ({
           </Heading>
 
           <Text root={<Html htmlString={description} />} size="sm" />
+
           {actions && (
             <Block
               columns={{ sm: 'max-content', md: 'repeat(auto-fit, minmax(100px, 1fr))' }}
