@@ -13,7 +13,7 @@ export const AEMImageConfig = {
   resourceType: RESOURCE_TYPE,
 }
 
-const Image = ({ id, lazyEnabled, src, ...props }) => {
+const Image = ({ id, lazyEnabled, src }) => {
   return <img id={id} loading={lazyEnabled ? 'lazy' : 'eager'} src={src} className={style.root} />
 }
 
