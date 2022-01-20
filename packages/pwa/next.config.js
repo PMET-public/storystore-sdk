@@ -56,12 +56,6 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         source: '/etc.clientlibs/:path*',
         destination: '/api/aem',
       },
-
-      /** Proxy Commerce */
-      {
-        source: '/api/commerce/graphql/:path*',
-        destination: '/api/commerce',
-      },
     ]
   },
 
