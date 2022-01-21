@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
 import { Block, Button, Carousel, Heading, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import NextImage from '../components/NextImage'
+import { ModelManager } from '@adobe/aem-spa-page-model-manager'
 
 import style from './index.module.css'
 
@@ -10,8 +11,12 @@ import StoreIcon from 'remixicon-react/Store3LineIcon'
 import DealsIcon from 'remixicon-react/PriceTag3LineIcon'
 
 import PRODUCTS_QUERY from '../graphql/products.graphql'
+import { getAEMModelProps } from '../lib/aem-model'
 
-const HomePage: NextPage = () => {
+const HERO_XF_PATH = '/content/experience-fragments/venia/us/en/site/home-hero/pwa'
+const DEALS_XF_PATH = '/content/experience-fragments/venia/us/en/site/deals/pwa-home'
+
+const HomePage: NextPage<any> = ({ hero, deals }) => {
   const productsQuery = useQuery(PRODUCTS_QUERY, {
     variables: {
       search: '',
@@ -23,7 +28,7 @@ const HomePage: NextPage = () => {
     <Block gap="xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
       {/* Hero */}
       <div className={style.hero}>
-        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa" />
+        <AEMExperienceFragment pagePath={HERO_XF_PATH} {...getAEMModelProps(hero)} />
       </div>
 
       {/* Deals */}
@@ -36,7 +41,7 @@ const HomePage: NextPage = () => {
           </Button>
         </Block>
 
-        <AEMExperienceFragment pagePath="/content/experience-fragments/venia/us/en/site/deals/pwa-home" />
+        <AEMExperienceFragment pagePath={DEALS_XF_PATH} {...getAEMModelProps(deals)} />
       </Block>
 
       {/* Products */}
@@ -90,6 +95,18 @@ const HomePage: NextPage = () => {
       </Block>
     </Block>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const hero = await ModelManager.getData(HERO_XF_PATH)
+  const deals = await ModelManager.getData(DEALS_XF_PATH)
+
+  return {
+    props: {
+      hero,
+      deals,
+    },
+  }
 }
 
 export default HomePage
