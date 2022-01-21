@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import NextImage from '../components/NextImage'
+import NextNprogress from 'nextjs-progressbar'
 
 /** Global Styles */
 import '@storystore/ui-kit/dist/theme/css/global.css'
@@ -91,6 +92,14 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           }}
         />
       </Head>
+
+      <NextNprogress
+        color={branding.colorAccent}
+        startPosition={0.4}
+        stopDelayMs={200}
+        height={3}
+        options={{ showSpinner: false, easing: 'ease' }}
+      />
 
       <ApolloProvider client={apolloClient}>
         <UIProvider
