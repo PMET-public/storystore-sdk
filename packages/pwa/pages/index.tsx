@@ -90,7 +90,12 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
               }
               tags={categories?.map(({ name }) => `#${name}`)}
             />
-          )) || [<TileSkeleton key="1" animate />, <TileSkeleton key="2" animate />, <TileSkeleton key="3" animate />]}
+          )) || [
+            <TileSkeleton key="1" animate />,
+            <TileSkeleton key="2" animate />,
+            <TileSkeleton key="3" animate />,
+            <TileSkeleton key="4" animate />,
+          ]}
         </Carousel>
       </Block>
     </Block>
