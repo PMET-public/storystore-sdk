@@ -60,6 +60,7 @@ const HomePage: NextPage = () => {
               vignette
               root={<Link href={`/product/${url_key}`} />}
               heading={<Heading size="xs">{name}</Heading>}
+              className={style.tile}
               image={
                 <NextImage
                   width={600}
