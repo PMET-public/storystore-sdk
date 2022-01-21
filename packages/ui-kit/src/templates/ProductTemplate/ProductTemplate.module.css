@@ -22,12 +22,13 @@ img.image,
 
 .wrapperContent {
   background-color: var(--color-body);
-  border-radius: 0.5rem 0.5rem 0 0;
+  border-radius: var(--rounded) var(--rounded) 0;
   box-shadow: 0 0rem 2rem rgb(0, 0, 0, 0.25);
   height: 100%;
   padding: var(--spacing-lg) var(--padded) var(--spacing-xl);
   position: relative;
   z-index: 5;
+  calc(var(--rounded) * -1)
 }
 
 /* Tablet */
@@ -61,6 +62,7 @@ img.image,
     align-items: center;
     border-radius: unset;
     box-shadow: unset;
+    margin-top: unset;
     display: flex;
     height: auto;
     max-width: 40rem;
