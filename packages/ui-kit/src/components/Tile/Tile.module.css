@@ -49,7 +49,7 @@
 }
 
 .surface .content {
-  padding: var(--spacing-xs) var(--padded) var(--padded);
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
 }
 
 .heading {

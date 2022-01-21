@@ -29,9 +29,7 @@ const HomePage: NextPage = () => {
       {/* Deals */}
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
-          <Heading size="2xl" accent>
-            Our Highlights
-          </Heading>
+          <Heading size="2xl">Highlights</Heading>
 
           <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="xs" transparent variant="cta">
             View All
@@ -44,22 +42,20 @@ const HomePage: NextPage = () => {
       {/* Products */}
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
-          <Heading size="2xl" accent>
-            Electronics
-          </Heading>
+          <Heading size="2xl">Electronics</Heading>
           <Button root={<Link href="/category/NDQ=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
             View All
           </Button>
         </Block>
 
-        <Carousel gap="md" show={{ sm: 1, md: 2, xl: 3 }} peak padded>
+        <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>
           {productsQuery.data?.products?.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
             <Tile
               key={url_key}
               surface
               vignette
               root={<Link href={`/product/${url_key}`} />}
-              heading={<Heading size="xs">{name}</Heading>}
+              heading={<Heading size="sm">{name}</Heading>}
               className={style.tile}
               image={
                 <NextImage

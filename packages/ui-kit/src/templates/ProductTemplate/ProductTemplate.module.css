@@ -28,7 +28,7 @@ img.image,
   padding: var(--spacing-lg) var(--padded) var(--spacing-xl);
   position: relative;
   z-index: 5;
-  calc(var(--rounded) * -1)
+  margin-top: calc(var(--rounded) * -1);
 }
 
 /* Tablet */

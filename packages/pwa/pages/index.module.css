@@ -7,7 +7,3 @@
   object-fit: cover;
   object-position: center;
 }
-
-.tile img {
-  height: 400px !important;
-}
