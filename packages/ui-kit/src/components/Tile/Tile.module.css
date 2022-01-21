@@ -18,6 +18,7 @@
 
 .image {
   display: grid;
+  grid-auto-rows: max-content;
 }
 
 .image img {
