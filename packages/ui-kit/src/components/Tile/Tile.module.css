@@ -16,12 +16,14 @@
   color: var(--color-on-surface);
 }
 
-img.image,
+.image {
+  display: grid;
+}
+
 .image img {
   object-fit: cover;
-  object-position: center;
   width: 100%;
-  height: 100%;
+  height: 400px;
 }
 
 .vignette {

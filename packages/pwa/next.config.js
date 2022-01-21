@@ -1,14 +1,19 @@
 const withPlugins = require('next-compose-plugins')
-const withStoryStore = require('@storystore/ui-kit/nextjs')
 const withPWA = require('next-pwa')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
-module.exports = withPlugins([withPWA, withStoryStore], {
+module.exports = withPlugins([withPWA], {
   experimental: {
     esmExternals: 'loose',
   },
 
   assetPrefix: process.env.NEXT_PUBLIC_URL,
+
+  images: {
+    domains: [new URL(process.env.AEM_HOST).origin, new URL(process.env.COMMERCE_HOST).origin],
+    deviceSizes: [640, 768, 1024, 1280, 1600],
+    formats: ['image/webp'],
+  },
 
   pwa: {
     dest: '.next/static',

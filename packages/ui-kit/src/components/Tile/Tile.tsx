@@ -29,12 +29,8 @@ export const Tile: FunctionComponent<TileProps> = ({
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, [style.surface, surface], className])}>
       <div className={style.wrapper}>
-        <div className={classes([[style.vignette, vignette]])}>
-          <image.type
-            {...merge(image.props, {
-              className: classes([style.image, image.props.className]),
-            })}
-          />
+        <div className={classes([style.image, [style.vignette, vignette]])}>
+          <image.type {...image.props} className={classes([image.props.className, style.img])} />
         </div>
 
         <div className={style.content}>
@@ -75,9 +71,16 @@ export type TileSkeletonProps = HTMLAttributes<HTMLElement> & {
   surface?: boolean
   uniqueKey?: string
   animate?: boolean
+  imageHeight?: number | string
+  imageWidth?: number | string
 }
 
-export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ uniqueKey, animate, ...props }) => {
+export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({
+  uniqueKey,
+  animate,
+
+  ...props
+}) => {
   return (
     <Tile
       image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}

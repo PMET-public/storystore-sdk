@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Block, Button, Carousel, Heading, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
 import { NextPage } from 'next'
+import NextImage from '../components/NextImage'
 
 import style from './index.module.css'
 
@@ -59,7 +60,16 @@ const HomePage: NextPage = () => {
               vignette
               root={<Link href={`/product/${url_key}`} />}
               heading={<Heading size="xs">{name}</Heading>}
-              image={<img width={400} height={400} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
+              image={
+                <NextImage
+                  width={600}
+                  height={600}
+                  loading="lazy"
+                  objectFit="cover"
+                  alt={thumbnail.label || name}
+                  src={thumbnail.url}
+                />
+              }
               subheading={
                 <Price
                   currency={price_range.minimum_price.regular_price.currency}

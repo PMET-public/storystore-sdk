@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { ProductTemplate } from '@storystore/ui-kit/templates'
 import { useQuery } from '@apollo/client'
 import { Block, Heading, Price, Text, Html, SkeletonLoader } from '@storystore/ui-kit'
+import NextImage from '../../components/NextImage'
 
 import PRODUCTS_QUERY from '../../graphql/products.graphql'
 
@@ -25,24 +26,23 @@ const ProductPage: NextPage = () => {
   })
 
   const product = productsQuery.data?.products?.items?.[0]
-  console.log({ product })
 
   return (
     <ProductTemplate
       media={
         product?.media_gallery?.map(({ url, label }, key) => (
-          <img key={key} width={500} height={500} src={url} alt={label} loading={key === 0 ? 'eager' : 'lazy'} />
+          <NextImage
+            key={key}
+            width={1000}
+            height={1000}
+            src={url}
+            alt={label}
+            objectFit="cover"
+            loading={key === 0 ? 'eager' : 'lazy'}
+          />
         )) || [
           <img
-            key="1"
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-            alt=""
-            width={500}
-            height={500}
-            style={{ background: 'var(--color-skeleton)' }}
-          />,
-          <img
-            key="2"
+            key="loader"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
             alt=""
             width={500}

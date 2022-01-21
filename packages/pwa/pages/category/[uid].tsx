@@ -4,6 +4,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import PRODUCTS_QUERY from '../../graphql/products.graphql'
 import CATEGORIES_QUERY from '../../graphql/categories.graphql'
+import NextImage from '../../components/NextImage'
 
 // Styles
 import style from './products.module.css'
@@ -27,8 +28,6 @@ const ProductsPage: NextPage = () => {
       pageSize: 9,
     },
   })
-
-  console.log(productsQuery.error, categoriesQuery.error)
 
   const categories = categoriesQuery.data?.categoryList?.[0]
   const products = productsQuery.data?.products
@@ -73,7 +72,16 @@ const ProductsPage: NextPage = () => {
               vignette
               root={<Link href={`/product/${url_key}`} />}
               heading={<Heading size="xs">{name}</Heading>}
-              image={<img width={500} height={500} loading="lazy" alt={thumbnail.label || name} src={thumbnail.url} />}
+              image={
+                <NextImage
+                  width={600}
+                  height={600}
+                  loading="lazy"
+                  alt={thumbnail.label || name}
+                  src={thumbnail.url}
+                  objectFit="cover"
+                />
+              }
               subheading={
                 <Price
                   currency={price_range.minimum_price.regular_price.currency}
