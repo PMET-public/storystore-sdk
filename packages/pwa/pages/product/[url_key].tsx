@@ -37,7 +37,7 @@ const ProductPage: NextPage = () => {
             height={1000}
             src={url}
             alt={label}
-            objectFit="cover"
+            objectFit="contain"
             loading={key === 0 ? 'eager' : 'lazy'}
           />
         )) || [
