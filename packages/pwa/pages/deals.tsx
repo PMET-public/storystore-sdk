@@ -10,13 +10,14 @@ const DealsPage: NextPage<any> = ({ deals }) => {
   return (
     <Block gap="md" contained padded style={{ paddingTop: 'var(--spacing-xl)', paddingBottom: 'var(--spacing-xl)' }}>
       <Heading>KRISSHOP.COM DEALS</Heading>
+
       <AEMExperienceFragment pagePath={DEALS_XF_PATH} {...getAEMModelProps(deals)} />
     </Block>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const deals = await ModelManager.getData(DEALS_XF_PATH)
+  const deals = (await ModelManager.getData(DEALS_XF_PATH).catch(console.error)) || {}
 
   return {
     props: {

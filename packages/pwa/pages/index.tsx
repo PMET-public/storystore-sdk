@@ -14,7 +14,7 @@ import PRODUCTS_QUERY from '../graphql/products.graphql'
 import { getAEMModelProps } from '../lib/aem-model'
 
 const HERO_XF_PATH = '/content/experience-fragments/venia/us/en/site/home-hero/pwa'
-const DEALS_XF_PATH = '/content/experience-fragments/venia/us/en/site/deals/pwa-home'
+const HIGHLIGHTS_XF_PATH = '/content/experience-fragments/venia/us/en/site/deals/highlights'
 
 const HomePage: NextPage<any> = ({ hero, deals }) => {
   const productsQuery = useQuery(PRODUCTS_QUERY, {
@@ -41,7 +41,7 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
           </Button>
         </Block>
 
-        <AEMExperienceFragment pagePath={DEALS_XF_PATH} {...getAEMModelProps(deals)} />
+        <AEMExperienceFragment pagePath={HIGHLIGHTS_XF_PATH} {...getAEMModelProps(deals)} />
       </Block>
 
       {/* Products */}
@@ -95,6 +95,7 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
             <TileSkeleton key="2" animate />,
             <TileSkeleton key="3" animate />,
             <TileSkeleton key="4" animate />,
+            <TileSkeleton key="5" animate />,
           ]}
         </Carousel>
       </Block>
@@ -103,8 +104,8 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const hero = await ModelManager.getData(HERO_XF_PATH)
-  const deals = await ModelManager.getData(DEALS_XF_PATH)
+  const hero = (await ModelManager.getData(HERO_XF_PATH).catch(console.error)) ?? {}
+  const deals = (await ModelManager.getData(HIGHLIGHTS_XF_PATH).catch(console.error)) ?? {}
 
   return {
     props: {
