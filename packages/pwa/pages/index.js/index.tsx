@@ -22,7 +22,7 @@ import StoreIcon from 'remixicon-react/Store3LineIcon'
 import HOME_QUERY from './home.graphql'
 
 const HomePage: NextPage = () => {
-  const { data } = useQuery(HOME_QUERY, {
+  const { loading, data } = useQuery(HOME_QUERY, {
     fetchPolicy: 'cache-and-network',
   })
 
@@ -64,11 +64,11 @@ const HomePage: NextPage = () => {
               subheading={<Text root={<Html htmlString={description.html} />} size="sm" />}
             />
           )) || [
-            <TileSkeleton key="1" animate />,
-            <TileSkeleton key="2" animate />,
-            <TileSkeleton key="3" animate />,
-            <TileSkeleton key="4" animate />,
-            <TileSkeleton key="5" animate />,
+            <TileSkeleton key="1" animate={loading} />,
+            <TileSkeleton key="2" animate={loading} />,
+            <TileSkeleton key="3" animate={loading} />,
+            <TileSkeleton key="4" animate={loading} />,
+            <TileSkeleton key="5" animate={loading} />,
           ]}
         </Carousel>
       </Block>
@@ -120,11 +120,11 @@ const HomePage: NextPage = () => {
               tags={categories?.map(({ name }) => `#${name}`)}
             />
           )) || [
-            <TileSkeleton key="1" animate />,
-            <TileSkeleton key="2" animate />,
-            <TileSkeleton key="3" animate />,
-            <TileSkeleton key="4" animate />,
-            <TileSkeleton key="5" animate />,
+            <TileSkeleton key="1" animate={loading} />,
+            <TileSkeleton key="2" animate={loading} />,
+            <TileSkeleton key="3" animate={loading} />,
+            <TileSkeleton key="4" animate={loading} />,
+            <TileSkeleton key="5" animate={loading} />,
           ]}
         </Carousel>
       </Block>

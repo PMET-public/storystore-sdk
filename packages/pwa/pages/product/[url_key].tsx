@@ -12,7 +12,7 @@ const ProductPage: NextPage = () => {
 
   const { url_key } = router.query
 
-  const { data } = useQuery(PRODUCTS_QUERY, {
+  const { loading, data } = useQuery(PRODUCTS_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     skip: !url_key,
@@ -26,8 +26,6 @@ const ProductPage: NextPage = () => {
   })
 
   const product = data?.products?.items?.[0]
-
-  console.log({ product })
 
   return (
     <ProductTemplate
@@ -61,7 +59,7 @@ const ProductPage: NextPage = () => {
             {product?.name ? (
               product.name
             ) : (
-              <SkeletonLoader animate width="10em" height="1em">
+              <SkeletonLoader animate={loading} width="10em" height="1em">
                 <rect width="100%" height="100%" />
               </SkeletonLoader>
             )}
@@ -85,7 +83,7 @@ const ProductPage: NextPage = () => {
               }
             />
           ) : (
-            <SkeletonLoader animate width="7em" height="1em">
+            <SkeletonLoader animate={loading} width="7em" height="1em">
               <rect width="100%" height="100%" />
             </SkeletonLoader>
           )}
@@ -96,7 +94,7 @@ const ProductPage: NextPage = () => {
               SKU: {product.sku}
             </Text>
           ) : (
-            <SkeletonLoader animate width="5em" height="1em">
+            <SkeletonLoader animate={loading} width="5em" height="1em">
               <rect width="100%" height="100%" />
             </SkeletonLoader>
           )}

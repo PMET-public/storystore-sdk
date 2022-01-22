@@ -14,7 +14,7 @@ const ProductsPage: NextPage = () => {
 
   const { uid = 'NDI=' } = router.query
 
-  const { data } = useQuery(CATEGORY_QUERY, {
+  const { loading, error, data } = useQuery(CATEGORY_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     variables: {
@@ -35,7 +35,7 @@ const ProductsPage: NextPage = () => {
       <div className={style.categories}>
         <Heading size="md">
           {categories?.name || (
-            <SkeletonLoader animate width="10em" height="1em">
+            <SkeletonLoader animate={loading} width="10em" height="1em">
               <rect width="100%" height="100%" />
             </SkeletonLoader>
           )}
@@ -50,20 +50,20 @@ const ProductsPage: NextPage = () => {
 
       {/* Products */}
       <Block columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1fr 1fr' }} gap="md">
-        {!products?.items ? (
+        {error || (loading && !products?.items) ? (
           <>
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
-            <TileSkeleton animate />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
+            <TileSkeleton animate={loading} />
           </>
         ) : (
-          products.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+          products?.items?.map(({ name, url_key, thumbnail, price_range, categories }) => (
             <Tile
               key={url_key}
               surface
