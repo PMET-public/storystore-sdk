@@ -45,9 +45,9 @@ const ProductPage: NextPage = () => {
             key="loader"
             src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
             alt=""
-            width={500}
-            height={500}
-            style={{ background: 'var(--color-skeleton)' }}
+            width={1000}
+            height={1000}
+            style={{ height: '100%', background: 'var(--color-skeleton)' }}
           />,
         ]
       }
