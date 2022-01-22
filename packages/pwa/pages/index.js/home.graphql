@@ -1,0 +1,61 @@
+query HOME_QUERY {
+  deals: dealsList {
+    items {
+      _path
+      name
+      description {
+        html
+      }
+      image {
+        ... on ImageRef {
+          _path
+          type
+          width
+          height
+        }
+      }
+      category
+    }
+  }
+
+  electronics: products(search: "", pageSize: 9) {
+    items {
+      uid
+      url_key
+      name
+      sku
+      description {
+        html
+      }
+      # Gallery
+      media_gallery {
+        label
+        url
+      }
+
+      # Thumbnail
+      thumbnail {
+        label
+        url
+      }
+
+      # Price
+      price_range {
+        minimum_price {
+          final_price {
+            currency
+            value
+          }
+          regular_price {
+            value
+          }
+        }
+        maximum_price {
+          regular_price {
+            value
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,5 @@
 query PRODUCTS_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
-  products(search: $search, filter: $filter, pageSize: $pageSize)
-    @connection(key: "Products", filter: ["filter", "search"]) {
-    total_count
+  products(search: $search, filter: $filter, pageSize: $pageSize) {
     items {
       uid
       url_key

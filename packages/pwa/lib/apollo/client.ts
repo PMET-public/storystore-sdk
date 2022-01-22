@@ -8,6 +8,7 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 const cache = new InMemoryCache({
+  addTypename: true,
   typePolicies: {
     /**
      * Use the same Key for all Product Types to make it easier to access

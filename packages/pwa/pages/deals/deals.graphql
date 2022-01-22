@@ -1,0 +1,20 @@
+query DEALS_QUERY {
+  deals: dealsList {
+    items {
+      _path
+      name
+      description {
+        html
+      }
+      image {
+        ... on ImageRef {
+          _path
+          type
+          width
+          height
+        }
+      }
+      category
+    }
+  }
+}

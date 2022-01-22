@@ -1,47 +1,76 @@
 import { useQuery } from '@apollo/client'
-import { Block, Button, Carousel, Heading, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
-import { AEMExperienceFragment } from '../components/AEMExperienceFragment'
-import { GetServerSideProps, NextPage } from 'next'
-import NextImage from '../components/NextImage'
-import { ModelManager } from '@adobe/aem-spa-page-model-manager'
+import {
+  Block,
+  Button,
+  Carousel,
+  Heading,
+  Html,
+  Link,
+  Price,
+  Text,
+  Tile,
+  TileSkeleton,
+} from '@storystore/ui-kit/components'
+import { AEMExperienceFragment } from '../../components/AEMExperienceFragment'
+import { NextPage } from 'next'
+import NextImage from '../../components/NextImage'
 
-import style from './index.module.css'
+import style from './home.module.css'
 
 import StoreIcon from 'remixicon-react/Store3LineIcon'
-import DealsIcon from 'remixicon-react/PriceTag3LineIcon'
 
-import PRODUCTS_QUERY from '../graphql/products.graphql'
-import { getAEMModelProps } from '../lib/aem-model'
+import HOME_QUERY from './home.graphql'
 
-const HERO_XF_PATH = '/content/experience-fragments/venia/us/en/site/home-hero/pwa'
-const HIGHLIGHTS_XF_PATH = '/content/experience-fragments/venia/us/en/site/deals/highlights'
-
-const HomePage: NextPage<any> = ({ hero, deals }) => {
-  const productsQuery = useQuery(PRODUCTS_QUERY, {
-    variables: {
-      search: '',
-      pageSize: 9,
-    },
+const HomePage: NextPage = () => {
+  const { data } = useQuery(HOME_QUERY, {
+    fetchPolicy: 'cache-and-network',
   })
 
   return (
     <Block gap="xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
       {/* Hero */}
       <div className={style.hero}>
-        <AEMExperienceFragment pagePath={HERO_XF_PATH} {...getAEMModelProps(hero)} />
+        <AEMExperienceFragment
+          pagePath="/content/experience-fragments/venia/us/en/site/pwa/hero/master"
+          itemPath="root"
+        />
       </div>
 
-      {/* Deals */}
+      {/* Highlights */}
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
           <Heading size="2xl">Highlights</Heading>
-
-          <Button root={<Link href="/deals" />} icon={<DealsIcon />} size="xs" transparent variant="cta">
+          <Button root={<Link href="/deals" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
             View All
           </Button>
         </Block>
 
-        <AEMExperienceFragment pagePath={HIGHLIGHTS_XF_PATH} {...getAEMModelProps(deals)} />
+        <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>
+          {data?.deals?.items.map(({ _path, name, description, image, category }) => (
+            <Tile
+              key={_path}
+              root={<Link href={`/${category}`} />}
+              heading={<Heading size="md">{name}</Heading>}
+              image={
+                <NextImage
+                  width={image.width}
+                  height={image.height}
+                  loading="lazy"
+                  objectFit="cover"
+                  alt={name}
+                  src={image._path}
+                />
+              }
+              subheading={<Text root={<Html htmlString={description.html} />} size="sm" />}
+            />
+          )) || [
+            <TileSkeleton key="1" animate />,
+            <TileSkeleton key="2" animate />,
+            <TileSkeleton key="3" animate />,
+            <TileSkeleton key="4" animate />,
+            <TileSkeleton key="5" animate />,
+          ]}
+        </Carousel>
       </Block>
 
       {/* Products */}
@@ -54,7 +83,7 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
         </Block>
 
         <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>
-          {productsQuery.data?.products?.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
+          {data?.electronics?.items.map(({ name, url_key, thumbnail, price_range, categories }) => (
             <Tile
               key={url_key}
               surface
@@ -101,18 +130,6 @@ const HomePage: NextPage<any> = ({ hero, deals }) => {
       </Block>
     </Block>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const hero = (await ModelManager.getData(HERO_XF_PATH).catch(console.error)) ?? {}
-  const deals = (await ModelManager.getData(HIGHLIGHTS_XF_PATH).catch(console.error)) ?? {}
-
-  return {
-    props: {
-      hero,
-      deals,
-    },
-  }
 }
 
 export default HomePage

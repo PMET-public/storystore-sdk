@@ -2,8 +2,8 @@ import { useQuery } from '@apollo/client'
 import { Block, Button, Heading, Link, Price, SkeletonLoader, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import PRODUCTS_QUERY from '../../graphql/products.graphql'
-import CATEGORIES_QUERY from '../../graphql/categories.graphql'
+import CATEGORY_QUERY from './category.graphql'
+
 import NextImage from '../../components/NextImage'
 
 // Styles
@@ -14,9 +14,7 @@ const ProductsPage: NextPage = () => {
 
   const { uid = 'NDI=' } = router.query
 
-  const categoriesQuery = useQuery(CATEGORIES_QUERY, { variables: { filters: { category_uid: { eq: uid } } } })
-
-  const productsQuery = useQuery(PRODUCTS_QUERY, {
+  const { data } = useQuery(CATEGORY_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     variables: {
@@ -29,8 +27,8 @@ const ProductsPage: NextPage = () => {
     },
   })
 
-  const categories = categoriesQuery.data?.categoryList?.[0]
-  const products = productsQuery.data?.products
+  const categories = data?.categoryList?.[0]
+  const products = data?.products
 
   return (
     <Block padded contained style={{ paddingBottom: 'var(--spacing-xl)' }}>
@@ -52,7 +50,7 @@ const ProductsPage: NextPage = () => {
 
       {/* Products */}
       <Block columns={{ sm: '1fr', md: '1fr 1fr', xl: '1fr 1fr 1fr' }} gap="md">
-        {productsQuery.loading && !products?.items ? (
+        {!products?.items ? (
           <>
             <TileSkeleton animate />
             <TileSkeleton animate />

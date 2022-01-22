@@ -5,14 +5,14 @@ import { useQuery } from '@apollo/client'
 import { Block, Heading, Price, Text, Html, SkeletonLoader } from '@storystore/ui-kit'
 import NextImage from '../../components/NextImage'
 
-import PRODUCTS_QUERY from '../../graphql/products.graphql'
+import PRODUCTS_QUERY from './product.graphql'
 
 const ProductPage: NextPage = () => {
   const router = useRouter()
 
   const { url_key } = router.query
 
-  const productsQuery = useQuery(PRODUCTS_QUERY, {
+  const { data } = useQuery(PRODUCTS_QUERY, {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     skip: !url_key,
@@ -25,7 +25,9 @@ const ProductPage: NextPage = () => {
     },
   })
 
-  const product = productsQuery.data?.products?.items?.[0]
+  const product = data?.products?.items?.[0]
+
+  console.log({ product })
 
   return (
     <ProductTemplate

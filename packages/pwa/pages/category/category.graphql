@@ -1,0 +1,42 @@
+query CATEGORY_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
+  categoryList(filters: $filter) {
+    uid
+    name
+    children {
+      uid
+      name
+    }
+  }
+
+  products(search: $search, filter: $filter, pageSize: $pageSize) {
+    items {
+      uid
+      url_key
+      name
+
+      # Thumbnail
+      thumbnail {
+        label
+        url
+      }
+
+      # Price
+      price_range {
+        minimum_price {
+          final_price {
+            currency
+            value
+          }
+          regular_price {
+            value
+          }
+        }
+        maximum_price {
+          regular_price {
+            value
+          }
+        }
+      }
+    }
+  }
+}
