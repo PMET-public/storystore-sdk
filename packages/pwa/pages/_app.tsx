@@ -47,7 +47,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     colorOnPrimary: '#fff',
     colorSecondary: '#ff9f00',
     colorOnSecondary: '#fff',
-    rounded: 'var(--rounded-2xl)',
+    rounded: '1.5rem',
     ...pageModel?.branding,
   }
 

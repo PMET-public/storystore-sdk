@@ -12,7 +12,7 @@
 
 .surface {
   background-color: var(--color-surface);
-  border-radius: var(--rounded);
+  border-radius: var(--rounded-md);
   color: var(--color-on-surface);
 }
 

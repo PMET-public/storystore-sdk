@@ -9,7 +9,7 @@
   display: inline-flex;
   font-size: var(--size);
   font-weight: var(--font-semibold);
-  grid-gap: var(--spacing-sm);
+  grid-gap: 0.35em;
   height: 3em;
   justify-content: center;
   line-height: var(--leading-none);
@@ -18,7 +18,7 @@
   transition-duration: 305ms;
   transition-property: opacity, color, background-color, filter;
   transition-timing-function: ease;
-  border-radius: calc(var(--rounded) - 0.15rem);
+  border-radius: var(--rounded-sm);
 }
 
 .root[disabled] {
@@ -70,6 +70,6 @@
 
 .icon {
   fill: currentColor;
-  height: 1.4em;
+  height: 1.3em;
   width: auto;
 }

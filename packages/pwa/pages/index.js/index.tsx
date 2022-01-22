@@ -1,23 +1,12 @@
 import { useQuery } from '@apollo/client'
-import {
-  Block,
-  Button,
-  Carousel,
-  Heading,
-  Html,
-  Link,
-  Price,
-  Text,
-  Tile,
-  TileSkeleton,
-} from '@storystore/ui-kit/components'
+import { Block, Carousel, Heading, Html, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
 import { AEMExperienceFragment } from '../../components/AEMExperienceFragment'
 import { NextPage } from 'next'
 import NextImage from '../../components/NextImage'
 
 import style from './home.module.css'
 
-import StoreIcon from 'remixicon-react/Store3LineIcon'
+import ArrowRightIcon from 'remixicon-react/ArrowRightLineIcon'
 
 import HOME_QUERY from './home.graphql'
 
@@ -39,10 +28,13 @@ const HomePage: NextPage = () => {
       {/* Highlights */}
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
-          <Heading size="2xl">Highlights</Heading>
-          <Button root={<Link href="/deals" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
-            View All
-          </Button>
+          <Heading size={{ sm: 'xl', md: '2xl' }}>Highlights</Heading>
+          <Link href="/deals">
+            <Block gap="xxs" columns="auto auto" vAlign="center" root={<Text size="sm" weight="semibold" />}>
+              <span>View All</span>
+              <ArrowRightIcon size="1.3em" />
+            </Block>
+          </Link>
         </Block>
 
         <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>
@@ -76,10 +68,13 @@ const HomePage: NextPage = () => {
       {/* Products */}
       <Block gap="md" contained>
         <Block columns="1fr auto" gap="sm" vAlign="center" padded>
-          <Heading size="2xl">Electronics</Heading>
-          <Button root={<Link href="/category/NDQ=" />} icon={<StoreIcon />} size="xs" transparent variant="cta">
-            View All
-          </Button>
+          <Heading size={{ sm: 'xl', md: '2xl' }}>Electronics</Heading>
+          <Link href="/category/NDQ=">
+            <Block gap="xxs" columns="auto auto" vAlign="center" root={<Text size="sm" weight="semibold" />}>
+              <span>View All</span>
+              <ArrowRightIcon size="1.3em" />
+            </Block>
+          </Link>
         </Block>
 
         <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>

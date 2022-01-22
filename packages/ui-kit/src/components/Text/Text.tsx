@@ -27,7 +27,7 @@ export const Text: FunctionComponent<TextProps> = ({
         ...root.props.style,
         ...props.style,
         ['--size']: `var(--font-${size})`,
-        ['--weight']: `var(--leading-${weight})`,
+        ['--weight']: `var(--font-${weight})`,
         ['--leading']: `var(--leading-${leading})`,
       }}
     />
