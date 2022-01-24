@@ -69,7 +69,7 @@ const cache = new InMemoryCache({
 })
 
 const link = new HttpLink({
-  uri: new URL(process.env.NEXT_PUBLIC_ADOBE_ENDPOINT).href,
+  uri: new URL('/api/magento/graphql', process.env.NEXT_PUBLIC_URL).href,
   credentials: 'same-origin',
   useGETForQueries: true,
 })

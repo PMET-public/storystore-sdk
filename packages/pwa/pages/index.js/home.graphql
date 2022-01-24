@@ -1,23 +1,4 @@
 query HOME_QUERY {
-  deals: dealsList {
-    items {
-      _path
-      name
-      description {
-        html
-      }
-      image {
-        ... on ImageRef {
-          _path
-          type
-          width
-          height
-        }
-      }
-      category
-    }
-  }
-
   electronics: products(search: "", pageSize: 9) {
     items {
       uid

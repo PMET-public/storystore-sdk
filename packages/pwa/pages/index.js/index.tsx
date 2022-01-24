@@ -20,7 +20,7 @@ const HomePage: NextPage = () => {
       {/* Hero */}
       <div className={style.hero}>
         <AEMExperienceFragment
-          pagePath="/content/experience-fragments/venia/us/en/site/pwa/hero/master"
+          pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa"
           itemPath="root"
         />
       </div>
@@ -37,32 +37,10 @@ const HomePage: NextPage = () => {
           </Link>
         </Block>
 
-        <Carousel gap="md" show={{ sm: 1, md: 2, lg: 3, xl: 4 }} peak padded>
-          {data?.deals?.items.map(({ _path, name, description, image, category }) => (
-            <Tile
-              key={_path}
-              root={<Link href={`/${category}`} />}
-              heading={<Heading size="md">{name}</Heading>}
-              image={
-                <NextImage
-                  width={image.width}
-                  height={image.height}
-                  loading="lazy"
-                  objectFit="cover"
-                  alt={name}
-                  src={image._path}
-                />
-              }
-              subheading={<Text root={<Html htmlString={description.html} />} size="sm" />}
-            />
-          )) || [
-            <TileSkeleton key="1" animate={loading} />,
-            <TileSkeleton key="2" animate={loading} />,
-            <TileSkeleton key="3" animate={loading} />,
-            <TileSkeleton key="4" animate={loading} />,
-            <TileSkeleton key="5" animate={loading} />,
-          ]}
-        </Carousel>
+        <AEMExperienceFragment
+          pagePath="/content/experience-fragments/venia/us/en/site/highlights/master"
+          itemPath="root"
+        />
       </Block>
 
       {/* Products */}

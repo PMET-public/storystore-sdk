@@ -61,6 +61,10 @@ module.exports = withPlugins([withPWA], {
         source: '/etc.clientlibs/:path*',
         destination: '/api/aem',
       },
+      {
+        source: '/api/magento/:path*',
+        destination: '/api/magento',
+      },
     ]
   },
 
