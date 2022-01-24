@@ -2,6 +2,7 @@
   --rounded: 0px;
   --rounded-xs: calc(var(--rounded) * 0.25);
   --rounded-sm: calc(var(--rounded) * 0.5);
+  --rounded-md: calc(var(--rounded) * 1);
   --rounded-lg: calc(var(--rounded) * 1.15);
   --rounded-lg: calc(var(--rounded) * 1.25);
   --rounded-xl: calc(var(--rounded) * 1.35);
