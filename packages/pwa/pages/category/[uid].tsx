@@ -18,6 +18,11 @@ const ProductsPage: NextPage = () => {
     fetchPolicy: 'cache-and-network',
     returnPartialData: true,
     variables: {
+      filters: {
+        category_uid: {
+          eq: uid,
+        },
+      },
       filter: {
         category_uid: {
           eq: uid,

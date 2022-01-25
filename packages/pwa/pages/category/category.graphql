@@ -1,5 +1,10 @@
-query CATEGORY_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
-  categoryList(filters: $filter) {
+query CATEGORY_QUERY(
+  $search: String
+  $filters: CategoryFilterInput
+  $filter: ProductAttributeFilterInput
+  $pageSize: Int
+) {
+  categoryList(filters: $filters) {
     uid
     name
     children {
