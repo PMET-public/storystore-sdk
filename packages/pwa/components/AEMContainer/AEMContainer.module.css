@@ -73,6 +73,49 @@
   scroll-snap-align: center;
 }
 
+/* Deals */
+
+.deal > :global(.aem-container) {
+  display: grid;
+  grid-gap: var(--spacing-sm);
+}
+
+.deal > :global(.aem-container > div:not(:first-child)) {
+  padding: 0 var(--spacing-sm);
+}
+
+.deal > :global(.aem-container .cmp-title) {
+  font-size: var(--font-3xl);
+  font-weight: var(--font-semibold);
+}
+
+.deal > :global(.aem-container .cmp-text) {
+  font-size: var(--font-md);
+  line-height: var(--leading-normal);
+}
+
+.deal > :global(.aem-container .cmp-text p:not(:last-of-type)) {
+  margin-bottom: var(--spacing-sm);
+}
+
+.deal > :global(.aem-container button) {
+  font-size: var(--font-sm);
+}
+
+.gridList .deal > :global(.aem-container .cmp-title),
+.carousel .deal > :global(.aem-container .cmp-title) {
+  font-size: var(--font-lg);
+}
+
+.gridList .deal > :global(.aem-container .cmp-text),
+.carousel .deal > :global(.aem-container .cmp-text) {
+  font-size: var(--font-sm);
+}
+
+/* .deal > :global(.aem-container .cmp-text) {
+  padding: 0 var(--spacing-sm);
+} */
+
 @media (min-width: 768px) {
   .gridList > :global(.aem-container) {
     grid-template-columns: 1fr 1fr;

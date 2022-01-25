@@ -12,8 +12,6 @@ import {
 import {
   BreadCrumbV2,
   BreadCrumbV2IsEmptyFn,
-  ButtonV1,
-  ButtonV1IsEmptyFn,
   DownloadV1,
   DownloadV1IsEmptyFn,
   LanguageNavigationV1,
@@ -34,6 +32,7 @@ import { AEMTeaser, AEMTeaserConfig } from './AEMTeaser/AEMTeaser'
 import { AEMCarousel, AEMCarouselConfig } from './AEMCarousel/AEMCarousel'
 import { AEMImage, AEMImageConfig } from './AEMImage/AEMImage'
 import { AEMContainer, AEMContainerConfig } from './AEMContainer/AEMContainer'
+import { AEMButton, AEMButtonConfig } from './AEMButton'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -42,7 +41,6 @@ MapTo(`${site}/components/text`)(TextV2, { isEmpty: TextV2IsEmptyFn })
 MapTo<any>(`${site}/components/download`)(DownloadV1, { isEmpty: DownloadV1IsEmptyFn })
 MapTo<any>(`${site}/components/list`)(ListV2, { isEmpty: ListV2IsEmptyFn })
 MapTo(`${site}/components/separator`)(SeparatorV1, { isEmpty: SeparatorV1IsEmptyFn })
-MapTo(`${site}/components/button`)(ButtonV1, { isEmpty: ButtonV1IsEmptyFn })
 MapTo<any>(`${site}/components/title`)(TitleV2, { isEmpty: TitleV2IsEmptyFn })
 MapTo<any>(`${site}/components/breadcrumb`)(BreadCrumbV2, { isEmpty: BreadCrumbV2IsEmptyFn })
 MapTo<any>(`${site}/components/navigation`)(NavigationV1)
@@ -56,3 +54,7 @@ MapTo(AEMTeaserConfig.resourceType)(AEMTeaser, AEMTeaserConfig)
 MapTo(AEMCarouselConfig.resourceType)(AEMCarousel, AEMCarouselConfig)
 MapTo(AEMImageConfig.resourceType)(AEMImage, AEMImageConfig)
 MapTo(AEMContainerConfig.resourceType)(AEMContainer, AEMContainerConfig)
+MapTo(AEMButtonConfig.resourceType)(AEMButton, AEMButtonConfig)
+
+// Building Blocks
+MapTo('cq/experience-fragments/editor/components/buildingblock')(AEMContainer, AEMContainerConfig)

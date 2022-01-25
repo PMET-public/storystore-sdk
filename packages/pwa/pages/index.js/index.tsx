@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Block, Carousel, Heading, Html, Link, Price, Text, Tile, TileSkeleton } from '@storystore/ui-kit/components'
-import { AEMExperienceFragment } from '../../components/AEMExperienceFragment'
+import { AEMContainer } from '../../components/AEMContainer'
 import { NextPage } from 'next'
 import NextImage from '../../components/NextImage'
 
@@ -19,10 +19,7 @@ const HomePage: NextPage = () => {
     <Block gap="xl" style={{ paddingBottom: 'var(--spacing-2xl)' }}>
       {/* Hero */}
       <div className={style.hero}>
-        <AEMExperienceFragment
-          pagePath="/content/experience-fragments/venia/us/en/site/home-hero/pwa"
-          itemPath="root"
-        />
+        <AEMContainer pagePath="content/experience-fragments/venia/us/en/site/home-hero/pwa" itemPath="root" />
       </div>
 
       {/* Highlights */}
@@ -37,10 +34,7 @@ const HomePage: NextPage = () => {
           </Link>
         </Block>
 
-        <AEMExperienceFragment
-          pagePath="/content/experience-fragments/venia/us/en/site/highlights/master"
-          itemPath="root"
-        />
+        <AEMContainer pagePath="content/experience-fragments/venia/us/en/site/highlights/master" itemPath="root" />
       </Block>
 
       {/* Products */}

@@ -25,6 +25,7 @@ export const AEMContainerConfig = {
 export type ContainerProps = AllowedComponentsProperties
 
 const Container: FunctionComponent<ContainerProps> = ({ ...props }) => {
+  console.log(props.appliedCssClassNames)
   // Rows Grid
   const rowsGrid = !!props.appliedCssClassNames?.match(/\b(container--rows-grid)\b/i)
 
@@ -41,6 +42,9 @@ const Container: FunctionComponent<ContainerProps> = ({ ...props }) => {
   // Grid List
   const gridList = !!props.appliedCssClassNames?.match(/\b(container--grid-list)\b/i)
 
+  // Deal
+  const deal = !!props.appliedCssClassNames?.match(/\b(container--deal)\b/i)
+
   return (
     <div
       className={classes([
@@ -48,6 +52,7 @@ const Container: FunctionComponent<ContainerProps> = ({ ...props }) => {
         [style.carousel, carousel],
         [style.rowsGrid, rowsGrid],
         [style.gridList, gridList],
+        [style.deal, deal],
       ])}
       style={{ ...carouselStyle }}
     >
