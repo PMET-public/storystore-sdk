@@ -25,7 +25,6 @@ export const AEMContainerConfig = {
 export type ContainerProps = AllowedComponentsProperties
 
 const Container: FunctionComponent<ContainerProps> = ({ ...props }) => {
-  console.log(props.appliedCssClassNames)
   // Rows Grid
   const rowsGrid = !!props.appliedCssClassNames?.match(/\b(container--rows-grid)\b/i)
 
