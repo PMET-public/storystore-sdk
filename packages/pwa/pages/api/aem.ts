@@ -17,7 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const AEM_HOST = settings?.AEM_HOST ?? process.env.AEM_HOST
   const AEM_AUTH = settings?.AEM_AUTH ?? process.env.AEM_AUTH
-  const AEM_GRAPHQL_PATH = settings?.AEM_GRAPHQL_PATH ?? process.env.AEM_GRAPHQL_PATH
 
   return runMiddleware(
     req,
@@ -28,10 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       auth: AEM_AUTH,
       changeOrigin: true,
       selfHandleResponse: true,
-      // ws: true,
-      pathRewrite: {
-        '/api/aem': AEM_GRAPHQL_PATH,
-      },
 
       onProxyRes: responseInterceptor(async responseBuffer => {
         return responseBuffer

@@ -18,6 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const COMMERCE_HOST = settings?.COMMERCE_HOST ?? process.env.COMMERCE_HOST
   const COMMERCE_AUTH = settings?.COMMERCE_AUTH ?? process.env.COMMERCE_AUTH
 
+  if (!COMMERCE_HOST) return res.send('Missing Commerce endpoing')
+
   return runMiddleware(
     req,
     res,

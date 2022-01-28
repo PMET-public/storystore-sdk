@@ -1,0 +1,15 @@
+query HOME_QUERY {
+  adventureList {
+    items {
+      _path
+      adventureActivity
+      adventureTitle
+      adventureTripLength
+      adventurePrimaryImage {
+        ... on ImageRef {
+          _path
+        }
+      }
+    }
+  }
+}

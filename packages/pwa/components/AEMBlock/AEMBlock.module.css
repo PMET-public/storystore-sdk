@@ -1,0 +1,30 @@
+.root {
+  max-width: 100vw;
+}
+
+/** Rows Grid */
+.root > :global(.aem-container) {
+  display: grid;
+  grid-gap: var(--gap);
+  grid-auto-rows: max-content;
+  grid-auto-columns: 1fr;
+  justify-content: var(--align);
+  align-items: var(--vAlign);
+}
+
+.padded > :global(.aem-container) {
+  padding-left: var(--padded);
+  padding-right: var(--padded);
+}
+
+.contained > :global(.aem-container) {
+  max-width: var(--contained);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.isInEditor > :global(.aem-container) {
+  outline: 1px dashed var(--color-skeleton);
+  padding: 3px;
+  border-radius: 3px;
+}

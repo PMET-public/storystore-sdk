@@ -1,12 +1,18 @@
-import { withMappable } from '@adobe/aem-react-editable-components'
-import { Tile, Heading, Button, Link, Block, Text, Html } from '@storystore/ui-kit'
+// Import the withMappable API provided bu the AEM SPA Editor JS SDK
+import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
+
+// Import the base  component
+import { Banner, Heading, Button, Link, Block, Text, Html } from '@storystore/ui-kit'
+
 import { createElement } from 'react'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
-export const RESOURCE_TYPE = `${site}/components/teaser`
+// The sling:resourceType for which this Core Component is registered with in AEM
+const RESOURCE_TYPE = `${site}/components/teaser`
 
-export const AEMTeaserConfig = {
+// Create an EditConfig to allow the AEM SPA Editor to properly render the component in the Editor's context
+const EditConfig = {
   emptyLabel: 'Teaser',
   isEmpty: (props: any) => !props,
   resourceType: RESOURCE_TYPE,
@@ -14,10 +20,11 @@ export const AEMTeaserConfig = {
 
 const Teaser = ({ id, titleType, title, pretitle, linkURL, actions, description, imagePath }) => {
   return (
-    <Tile
+    <Banner
       root={linkURL && !actions.length ? <Link href={linkURL} /> : undefined}
       id={id}
-      image={<img src={imagePath} alt="" loading="lazy" />}
+      height="600px"
+      backgroundImage={<img src={imagePath} alt="" loading="lazy" />}
       heading={
         <Block gap="xs">
           {pretitle && (
@@ -52,4 +59,8 @@ const Teaser = ({ id, titleType, title, pretitle, linkURL, actions, description,
   )
 }
 
-export const AEMTeaser = withMappable(Teaser, AEMTeaserConfig)
+// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
+MapTo<any>(RESOURCE_TYPE)(Teaser, EditConfig)
+
+// withMappable allows the component to be hardcoded into the SPA; <AEMTeaser .../>
+export const AEMTeaser = withMappable(Teaser, EditConfig)

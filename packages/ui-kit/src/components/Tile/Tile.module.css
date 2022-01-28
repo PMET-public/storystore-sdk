@@ -49,7 +49,8 @@
 
 .content {
   display: grid;
-  grid-gap: var(--spacing-sm);
+  grid-gap: var(--spacing-xs);
+  grid-auto-rows: max-content;
   padding: var(--spacing-sm) var(--spacing-md);
 }
 

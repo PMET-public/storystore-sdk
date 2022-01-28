@@ -28,5 +28,5 @@
 .body {
   z-index: 1;
   background: var(--color-body);
-  min-height: calc(100vh - var(--app-header-height));
+  /* min-height: calc(100vh - var(--app-header-height)); */
 }

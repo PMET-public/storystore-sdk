@@ -1,77 +1,21 @@
 import { useMemo } from 'react'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
-import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink, ApolloLink } from '@apollo/client'
+import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from '@apollo/client'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
-const cache = new InMemoryCache({
-  addTypename: true,
-  typePolicies: {
-    /**
-     * Use the same Key for all Product Types to make it easier to access
-     */
-    SimpleProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    VirtualProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    DownloadableProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    GiftCardProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    BundleProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    GroupedProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-    ConfigurableProduct: {
-      keyFields: ({ url_key }) => `Product:${url_key}`,
-    },
-
-    Query: {
-      fields: {
-        categoryList(existing, { args, canRead, toReference }) {
-          /**
-           * Look for Category reference in Cache
-           */
-          if (args?.filters?.ids?.eq) {
-            const reference = toReference({
-              __typename: 'CategoryTree',
-              id: args.filters.ids.eq,
-            })
-            return canRead(reference) ? [{ ...reference }] : [{ ...existing }]
-          }
-          return existing
-        },
-        products(existing, { args, canRead, toReference }) {
-          /**
-           * Look for Product reference in Cache
-           */
-          if (args?.filter?.url_key?.eq) {
-            const reference = toReference({
-              __typename: 'Product',
-              id: args.filter.url_key.eq,
-            })
-            return canRead(reference) ? { ...existing, items: [{ ...reference }] } : { ...existing }
-          }
-          return { ...existing }
-        },
-      },
-    },
-  },
-})
-
 const link = new HttpLink({
-  uri: new URL('/api/magento/graphql', process.env.NEXT_PUBLIC_URL).href,
+  uri: new URL('/content/_cq_graphql/global/endpoint.json', process.env.NEXT_PUBLIC_URL).href,
   credentials: 'same-origin',
   useGETForQueries: true,
+})
+
+const cache = new InMemoryCache({
+  addTypename: true,
+  typePolicies: {},
 })
 
 const createApolloClient = () => {

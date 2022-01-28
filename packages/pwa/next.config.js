@@ -2,6 +2,12 @@ const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
+const domains = [new URL(process.env.AEM_HOST).origin]
+
+if (process.env.COMMERCE_HOST) {
+  domains.push(new URL(process.env.COMMERCE_HOST).origin)
+}
+
 module.exports = withPlugins([withPWA], {
   experimental: {
     esmExternals: 'loose',
@@ -10,7 +16,7 @@ module.exports = withPlugins([withPWA], {
   assetPrefix: process.env.NEXT_PUBLIC_URL,
 
   images: {
-    domains: [new URL(process.env.AEM_HOST).origin, new URL(process.env.COMMERCE_HOST).origin],
+    domains,
     deviceSizes: [640, 768, 1024, 1280, 1600],
     formats: ['image/webp'],
   },
@@ -36,6 +42,11 @@ module.exports = withPlugins([withPWA], {
 
   async rewrites() {
     return [
+      /** Home Page */
+      // {
+      //   source: '/',
+      //   destination: '/home',
+      // },
       /** Service Worker (Workbox) */
       {
         source: '/sw.js',
@@ -54,13 +65,14 @@ module.exports = withPlugins([withPWA], {
 
       /** Proxy to AEM /content */
       {
-        source: '/content/:path*.(model.json|jpg|jpeg|gif|png|pdf|js|json|css)',
+        source: '/content/:path*.(jpg|jpeg|gif|png|pdf|js|json|css)',
         destination: '/api/aem',
       },
       {
         source: '/etc.clientlibs/:path*',
         destination: '/api/aem',
       },
+      /** Proxy to Commerce */
       {
         source: '/api/magento/:path*',
         destination: '/api/magento',

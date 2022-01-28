@@ -38,15 +38,15 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   const { pageModel } = pageProps
 
   const branding = {
-    siteName: 'KrisShop',
-    colorBody: '#fff',
-    colorOnBody: '#222',
-    colorSurface: '#f3f3f3',
-    colorOnSurface: '#222',
-    colorPrimary: '#111',
-    colorOnPrimary: '#fff',
-    colorSecondary: '#ff9f00',
-    colorOnSecondary: '#fff',
+    siteName: 'WKND Adventures',
+    // colorBody: '#fff',
+    // colorOnBody: '#222',
+    // colorSurface: '#f3f3f3',
+    // colorOnSurface: '#222',
+    // colorPrimary: '#111',
+    // colorOnPrimary: '#fff',
+    // colorSecondary: '#ff9f00',
+    // colorOnSecondary: '#fff',
     // rounded: '1.5rem',
     ...pageModel?.branding,
   }
@@ -125,6 +125,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                 variant="primary"
                 contained
                 sticky
+                transparent
                 logo={
                   <Link href="/">
                     {branding.logoFile ? (
