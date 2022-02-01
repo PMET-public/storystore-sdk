@@ -21,7 +21,7 @@ const EditConfig = {
 const Title = ({ ...props }) => {
   const { id, text, type = 'h1', appliedCssClassNames = '' } = props
 
-  // Vertical Alingment
+  // Size
   const size = appliedCssClassNames.match(/title--size-(md|lg|xl|2xl|3xl|4xl)/)?.[1] || undefined
 
   // Padding

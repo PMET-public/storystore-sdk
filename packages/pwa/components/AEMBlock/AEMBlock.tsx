@@ -5,6 +5,7 @@ import {
   AllowedComponentsContainer,
   AllowedComponentsProperties,
 } from '@adobe/aem-react-editable-components'
+import { ContainerV1IsEmptyFn } from '@adobe/aem-core-components-react-spa'
 import { classes } from '@storystore/ui-kit/lib'
 import { FunctionComponent } from 'react'
 
@@ -19,7 +20,7 @@ const RESOURCE_TYPE = `${site}/components/block`
 // Create an EditConfig to allow the AEM SPA Editor to properly render the component in the Editor's context
 const EditConfig = {
   emptyLabel: 'Block Container', // The component placeholder in AEM SPA Editor
-  isEmpty: (props: any) => props.cqItemsOrder?.length === 0, // The function to determine if this component has been authored
+  isEmpty: ContainerV1IsEmptyFn, // The function to determine if this component has been authored
   resourceType: RESOURCE_TYPE, // The sling:resourceType this SPA component is mapped to
 }
 
@@ -61,7 +62,7 @@ const Block: FunctionComponent<AllowedComponentsProperties> = ({ ...props }) => 
 }
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo<any>(RESOURCE_TYPE)(Block, EditConfig)
+MapTo(RESOURCE_TYPE)(Block, EditConfig)
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMBlock .../>
 export const AEMBlock = withMappable(Block, EditConfig)
