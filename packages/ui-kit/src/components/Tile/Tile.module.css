@@ -59,7 +59,13 @@
 }
 
 .heading {
+  font-size: var(--font-md);
   font-weight: var(--font-semibold);
+}
+
+.subheading {
+  font-size: var(--font-sm);
+  height: 1.3em;
 }
 
 .tags {
