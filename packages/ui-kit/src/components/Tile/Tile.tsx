@@ -78,12 +78,13 @@ export type TileSkeletonProps = HTMLAttributes<HTMLElement> & {
 export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({
   uniqueKey,
   animate,
-
+  imageHeight = 400,
+  imageWidth = '100%',
   ...props
 }) => {
   return (
     <Tile
-      image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
+      image={<div style={{ width: imageWidth, height: imageHeight, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
       heading={
         <SkeletonLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />

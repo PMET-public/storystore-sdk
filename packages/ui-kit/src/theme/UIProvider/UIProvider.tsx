@@ -1,5 +1,4 @@
 import { FunctionComponent, HTMLAttributes } from 'react'
-import { useFocusVisible } from '@react-aria/interactions'
 import style from './UIProvider.module.css'
 import { classes } from '../../lib'
 import ToastContainer from '../../components/Toast'
@@ -10,11 +9,9 @@ import ToastContainer from '../../components/Toast'
 export type UIProviderProps = HTMLAttributes<HTMLDivElement>
 
 export const UIProvider: FunctionComponent<UIProviderProps> = ({ children, ...props }) => {
-  const { isFocusVisible } = useFocusVisible({ isTextInput: true })
-
   return (
     <>
-      <div {...props} className={classes([style.root, [style.focusVisible, isFocusVisible]])}>
+      <div {...props} className={classes([style.root])}>
         {children}
       </div>
       <ToastContainer autoClose={5000} closeOnClick pauseOnFocusLoss theme="dark" />

@@ -20,7 +20,7 @@ const ContentFragmentList = ({ ...props }) => {
   const { id, configTitleKey, configSubtitleKey, configImageKey, items } = props
 
   return (
-    <Carousel id={id} show={{ sm: 1, md: 2, lg: 3 }} gap="sm" peak hideScrollBar>
+    <Carousel id={id} show={{ sm: 1, md: 2, lg: 3 }} gap="md" peak hideScrollBar>
       {EditConfig.isEmpty(props)
         ? [<TileSkeleton key={0} />, <TileSkeleton key={1} />, <TileSkeleton key={2} />, <TileSkeleton key={3} />]
         : items?.map(({ elements }, key) => {

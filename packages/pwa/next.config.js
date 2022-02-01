@@ -47,6 +47,11 @@ module.exports = withPlugins([withPWA], {
       //   source: '/',
       //   destination: '/home',
       // },
+      // Map Pages with .html extensions (needed for AEM Authoring)
+      {
+        source: '/content/:path*(.html)',
+        destination: '/content/:path*',
+      },
       /** Service Worker (Workbox) */
       {
         source: '/sw.js',

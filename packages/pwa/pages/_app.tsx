@@ -47,7 +47,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
     // colorOnPrimary: '#fff',
     // colorSecondary: '#ff9f00',
     // colorOnSecondary: '#fff',
-    // rounded: '1.5rem',
+    // rounded: '1rem',
     ...pageModel?.branding,
   }
 
@@ -127,7 +127,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                 sticky
                 transparent
                 logo={
-                  <Link href="/">
+                  <Link href={`/content/${process.env.NEXT_PUBLIC_AEM_SITE}/us/en`}>
                     {branding.logoFile ? (
                       <NextImage src={branding.logoFile} alt={branding.siteName} />
                     ) : (

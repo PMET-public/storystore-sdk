@@ -1,12 +1,14 @@
-query HOME_QUERY {
-  adventureList {
+query ADVENTURES_QUERY($filter: AdventureModelFilter) {
+  adventureList(filter: $filter) {
     items {
+      id: _path
       _path
       adventureActivity
       adventureTitle
       adventureTripLength
       adventurePrimaryImage {
         ... on ImageRef {
+          id: _path
           _path
         }
       }
