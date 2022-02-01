@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import { App, Header, Footer, Button } from '@storystore/ui-kit/components'
-import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
+import { App, Header, Footer } from '@storystore/ui-kit/components'
+import { ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
@@ -39,8 +39,8 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
   const branding = {
     siteName: 'WKND Adventures',
-    // colorBody: '#fff',
-    // colorOnBody: '#222',
+    colorBody: '#fff',
+    colorOnBody: '#222',
     // colorSurface: '#f3f3f3',
     // colorOnSurface: '#222',
     // colorPrimary: '#111',
@@ -148,6 +148,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
               />
             }
             footer={<Footer contained></Footer>}
+            fillHeight={!AuthoringUtils.isInEditor()}
           >
             <Component {...pageProps} />
           </App>

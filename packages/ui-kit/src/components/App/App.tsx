@@ -15,6 +15,7 @@ export type AppProps = HTMLAttributes<HTMLDivElement> & {
   header: ReactElement
   footer: ReactElement
   linkRoot?: ReactElement
+  fillHeight?: boolean
 }
 
 export const App: FunctionComponent<AppProps> = ({
@@ -24,6 +25,7 @@ export const App: FunctionComponent<AppProps> = ({
   children,
   header = <header />,
   footer = <footer />,
+  fillHeight,
   ...props
 }) => {
   // Notify user when Network Online/Offline mode changes
@@ -54,7 +56,7 @@ export const App: FunctionComponent<AppProps> = ({
         <div ref={headerElem} className={style.header}>
           <header.type {...header.props} />
         </div>
-        <main className={style.body}>{children}</main>
+        <main className={classes([style.body, [style.fillHeight, fillHeight]])}>{children}</main>
         <footer.type {...footer.props} className={classes([style.footer, footer.props.className])} />
       </root.type>
     </LinkProvider>
