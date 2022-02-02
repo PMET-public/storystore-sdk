@@ -10,13 +10,10 @@ let apolloClient: ApolloClient<NormalizedCacheObject>
 const link = new HttpLink({
   uri: new URL('/content/_cq_graphql/global/endpoint.json', process.env.NEXT_PUBLIC_URL).href,
   credentials: 'same-origin',
-  useGETForQueries: true,
+  // useGETForQueries: true,
 })
 
-const cache = new InMemoryCache({
-  addTypename: true,
-  typePolicies: {},
-})
+const cache = new InMemoryCache({})
 
 const createApolloClient = () => {
   return new ApolloClient({
