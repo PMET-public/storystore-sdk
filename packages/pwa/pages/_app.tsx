@@ -39,7 +39,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
 
   const branding = {
     siteName: 'WKND Adventures',
-    colorBody: '#fff',
+    colorBody: '#f3f3f3',
     colorOnBody: '#222',
     // colorSurface: '#f3f3f3',
     // colorOnSurface: '#222',

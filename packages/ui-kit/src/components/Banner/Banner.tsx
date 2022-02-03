@@ -62,7 +62,12 @@ export const Banner: FunctionComponent<BannerProps> = ({
         <backgroundImage.type {...merge(backgroundImage.props, { className: style.backgroundImage })} />
       )}
 
-      <Block className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
+      <Block
+        rows="1fr"
+        columns="1fr"
+        className={classes([style.wrapper, style[align], style[vAlign]])}
+        contained={contained}
+      >
         <div className={style.content}>
           {heading && <heading.type {...merge(heading.props, {})} />}
           {button && <button.type {...merge(button.props, { className: style.button })} />}

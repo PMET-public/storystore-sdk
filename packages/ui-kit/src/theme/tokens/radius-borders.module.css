@@ -1,5 +1,5 @@
 .radiusBorder {
-  --rounded: 0px;
+  --rounded: 0;
   --rounded-xs: calc(var(--rounded) * 0.25);
   --rounded-sm: calc(var(--rounded) * 0.5);
   --rounded-md: calc(var(--rounded) * 1);

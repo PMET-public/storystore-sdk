@@ -1,0 +1,10 @@
+.content {
+  padding: var(--spacing-lg) 0;
+}
+
+@media (min-width: 1024px) {
+  .image {
+    position: sticky;
+    top: 0;
+  }
+}

@@ -41,10 +41,10 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       }}
     >
       {isValidElement(icon) ? (
-        <Block columns="max-content 1fr" gap="sm" vAlign="center">
+        <div className={style.iconWrapper}>
           <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />
           {children}
-        </Block>
+        </div>
       ) : (
         children
       )}

@@ -1,0 +1,63 @@
+query ADVENTURE_QUERY($path: String!) {
+  adventureByPath(_path: $path) {
+    item {
+      _path
+      adventureTitle
+      adventureType
+      adventureActivity
+      adventureTripLength
+      adventureGroupSize
+      adventureDifficulty
+      adventurePrice
+      adventureDescription {
+        html
+      }
+      adventureItinerary {
+        html
+      }
+      adventureGearList {
+        html
+      }
+      adventurePrimaryImage {
+        ... on ImageRef {
+          id: _path
+          _path
+          width
+          height
+        }
+      }
+      # Contributor
+      # You need to create this new Content Fragment first:
+      # https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/content-fragment-models.html?lang=en#create-a-contributor-model
+      # contributor {
+      #   _path
+      #   fullName
+      #   biographyText {
+      #     html
+      #   }
+      #   pictureReference {
+      #     ... on ImageRef {
+      #       _path
+      #     }
+      #   }
+      #   occupation
+      # }
+    }
+  }
+
+  adventureList {
+    items {
+      id: _path
+      _path
+      adventureActivity
+      adventureTitle
+      adventureTripLength
+      adventurePrimaryImage {
+        ... on ImageRef {
+          id: _path
+          _path
+        }
+      }
+    }
+  }
+}

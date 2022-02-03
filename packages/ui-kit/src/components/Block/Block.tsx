@@ -37,7 +37,7 @@ export const Block: FunctionComponent<BlockProps> = ({
   gap: _gap,
   columns: _columns = '1fr',
   columnsGap: _columnsGap,
-  rows: _rows = '1fr',
+  rows: _rows = 'max-content',
   rowsGap: _rowsGap,
   align = 'unset',
   vAlign = 'unset',
