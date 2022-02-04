@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
 import { Error, Block, Banner, SkeletonLoader, Heading, Text, Html, Card } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
+import { AEMResponsiveGrid } from '../../../../../../../components'
+import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import NextImage from '../../../../../../../components/NextImage'
 
 // Icons
-import MapIcon from 'remixicon-react/RoadMapLineIcon'
 import CalendarIcon from 'remixicon-react/CalendarCheckLineIcon'
 import LengthIcon from 'remixicon-react/CalendarFillIcon'
 import BagIcon from 'remixicon-react/BriefcaseLineIcon'
@@ -16,8 +17,6 @@ import PriceIcon from 'remixicon-react/PriceTag3FillIcon'
 
 // GraphQL Query
 import ADVENTURE_QUERY from './adventure.graphql'
-import { AEMResponsiveGrid } from '../../../../../../../components'
-import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 
 const Loader = ({ ...props }) => (
   <SkeletonLoader uniqueKey="title-loader" height="1em" {...props}>
@@ -28,7 +27,7 @@ const Loader = ({ ...props }) => (
 const AdventurePage: NextPage = () => {
   const { asPath } = useRouter()
 
-  const pagePath = asPath.split('?')?.[0]
+  const pagePath = asPath.split('.html')?.[0]?.split('?')?.[0]
 
   // Network Online/Offline State
   const online = useNetworkStatus()
