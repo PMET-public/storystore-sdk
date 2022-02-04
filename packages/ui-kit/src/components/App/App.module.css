@@ -28,6 +28,7 @@
 .body {
   z-index: 1;
   background: var(--color-body);
+  padding-bottom: var(--spacing-xl);
 }
 
 .body.fillHeight {

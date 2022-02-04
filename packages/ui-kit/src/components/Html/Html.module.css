@@ -1,3 +1,7 @@
+.root {
+  line-height: 1.5;
+}
+
 .root h1,
 .root h2,
 .root h3,
@@ -30,10 +34,6 @@
 
 .root h6 {
   font-size: var(--font-sm);
-}
-
-.root p {
-  line-height: 1.5;
 }
 
 .root p:not(:last-child) {

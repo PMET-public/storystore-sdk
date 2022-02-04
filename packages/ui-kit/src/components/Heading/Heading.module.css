@@ -48,17 +48,9 @@
   }
 }
 
-.root.accent {
-  position: relative;
-  padding-left: calc(var(--spacing-sm) + 0.125em);
-}
-
-.root.accent::before {
+.root.accent::after {
   content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 0.15em;
-  height: 100%;
-  background-color: var(--color-secondary);
+  border-bottom: 0.15em solid var(--color-secondary);
+  width: 4rem;
+  display: block;
 }

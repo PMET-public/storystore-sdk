@@ -44,20 +44,4 @@ query ADVENTURE_QUERY($path: String!) {
       # }
     }
   }
-
-  adventureList {
-    items {
-      id: _path
-      _path
-      adventureActivity
-      adventureTitle
-      adventureTripLength
-      adventurePrimaryImage {
-        ... on ImageRef {
-          id: _path
-          _path
-        }
-      }
-    }
-  }
 }

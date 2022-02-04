@@ -1,4 +1,3 @@
-import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import { SkeletonLoader } from '@storystore/ui-kit'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'

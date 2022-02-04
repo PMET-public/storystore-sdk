@@ -16,7 +16,7 @@ const AdventuresPage: NextPage = () => {
   const getAdventureLink = useCallback(
     (path: string) => {
       const pathname = asPath.split('.html')?.[0]
-      return pathname + path
+      return pathname + '/adventure?path=' + path
     },
     [asPath]
   )

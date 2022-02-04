@@ -1,5 +1,5 @@
 .root {
-  padding: var(--spacing-md) var(--padded);
+  padding: var(--spacing-md);
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   border-radius: var(--rounded);

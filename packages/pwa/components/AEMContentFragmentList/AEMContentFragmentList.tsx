@@ -3,6 +3,7 @@ import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 
 // Import the base  component
 import { Carousel, Tile, TileSkeleton, Heading } from '@storystore/ui-kit'
+import NextImage from '../NextImage'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -31,7 +32,7 @@ const ContentFragmentList = ({ ...props }) => {
             return (
               <Tile
                 key={key}
-                image={<img src={imageSrc} alt={title} width={500} height={500} />}
+                image={<NextImage src={imageSrc} alt={title} width={500} height={500} />}
                 heading={<Heading size="md">{title}</Heading>}
                 subheading={subtitle}
               />
