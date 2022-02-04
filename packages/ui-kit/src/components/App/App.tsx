@@ -43,7 +43,9 @@ export const App: FunctionComponent<AppProps> = ({
   const headerElem = useRef(null)
 
   const resize = useResize()
+
   const headerElemMeasures = useMeasure(headerElem)
+
   const bodyHeight = resize.height - headerElemMeasures.height
 
   return (

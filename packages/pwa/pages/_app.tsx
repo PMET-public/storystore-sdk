@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { App, Header, Footer } from '@storystore/ui-kit/components'
-import { ModelManager, ModelClient } from '@adobe/aem-spa-page-model-manager'
+import { ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
@@ -122,6 +122,16 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           }}
         >
           <App
+            style={
+              // Fix authorinz dynamic heights
+              AuthoringUtils.isInEditor()
+                ? {
+                    ['--app-body-height' as string]: process.browser
+                      ? `calc(${window.innerHeight}px - var(--app-header-height))`
+                      : '100%',
+                  }
+                : undefined
+            }
             linkRoot={<Link />}
             header={
               <Header
