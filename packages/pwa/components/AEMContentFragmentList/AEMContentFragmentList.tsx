@@ -32,7 +32,7 @@ const ContentFragmentList = ({ ...props }) => {
             return (
               <Tile
                 key={key}
-                image={<NextImage src={imageSrc} alt={title} width={500} height={500} />}
+                image={imageSrc && <NextImage src={imageSrc} alt={title} width={500} height={500} />}
                 heading={<Heading size="md">{title}</Heading>}
                 subheading={subtitle}
               />
@@ -42,8 +42,8 @@ const ContentFragmentList = ({ ...props }) => {
   )
 }
 
-// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo(RESOURCE_TYPE)(ContentFragmentList, EditConfig)
-
 // withMappable allows the component to be hardcoded into the SPA; <AEMCarousel .../>
 export const AEMContentFragmentList = withMappable(ContentFragmentList, EditConfig)
+
+// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
+MapTo(RESOURCE_TYPE)(ContentFragmentList, EditConfig)

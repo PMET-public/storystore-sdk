@@ -22,8 +22,8 @@ const TextRoot = ({ ...props }) => {
   return richText ? <Html id={id} htmlString={text} /> : <Text id={id}>{text}</Text>
 }
 
-// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
-MapTo<any>(RESOURCE_TYPE)(TextRoot, EditConfig)
-
 // withMappable allows the component to be hardcoded into the SPA; <AEMText .../>
 export const AEMText = withMappable(TextRoot, EditConfig)
+
+// MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
+MapTo(RESOURCE_TYPE)(TextRoot, EditConfig)

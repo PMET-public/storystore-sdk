@@ -18,7 +18,8 @@ const EditConfig = {
 }
 
 const ButtonRoot = ({ ...props }) => {
-  console.log('Button', props)
+  if (EditConfig.isEmpty(props)) return null
+
   const { id, text = 'Button', accessibilityLabel, link, appliedCssClassNames = '' } = props
 
   // Size
