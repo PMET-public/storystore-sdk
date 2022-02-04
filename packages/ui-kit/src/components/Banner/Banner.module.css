@@ -90,11 +90,13 @@
 
 .wrapper.left {
   justify-content: flex-start;
+  padding-right: 40%;
 }
 
 .wrapper.right {
   justify-content: flex-end;
   text-align: right;
+  padding-leftt: 40%;
 }
 
 .wrapper.top {

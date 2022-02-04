@@ -50,7 +50,8 @@ const Teaser = ({ ...props }) => {
       vAlign={vAlign}
       backgroundColor="var(--color-skeleton)"
       variant={variant}
-      height={{ sm: variant === 'hero' ? '600px' : '260px', md: variant === 'hero' ? '800px' : '260px' }}
+      // height={{ sm: variant === 'hero' ? '600px' : '260px', md: variant === 'hero' ? '800px' : '260px' }}
+      height={variant === 'hero' ? 'calc(var(--app-body-height) - 10rem)' : '260px'}
       backgroundImage={<img src={imagePath} alt="" loading="lazy" />}
       contained={contained}
       heading={

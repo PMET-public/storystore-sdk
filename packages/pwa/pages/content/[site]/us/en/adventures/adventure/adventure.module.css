@@ -1,0 +1,11 @@
+.hero {
+  height: 600px;
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    position: sticky;
+    top: var(--app-header-height);
+    height: calc(var(--app-body-height) - var(--app-header-height));
+  }
+}

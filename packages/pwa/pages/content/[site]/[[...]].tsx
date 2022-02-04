@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
         height="100%"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
-        style={{ maxHeight: 'calc(100vh - var(--app-header-height))' }}
+        style={{ height: 'var(--app-body-height)' }}
       >
         <rect width="100%" height="100%" />
       </SkeletonLoader>

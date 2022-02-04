@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client'
 import { Error, Block, Banner, SkeletonLoader, Heading, Text, Html, Card } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import { AEMResponsiveGrid } from '../../../../../../../components'
-import { AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import NextImage from '../../../../../../../components/NextImage'
 
 // Icons
@@ -14,6 +13,9 @@ import BagIcon from 'remixicon-react/BriefcaseLineIcon'
 import GroupIcon from 'remixicon-react/GroupFillIcon'
 import MedalIcon from 'remixicon-react/MedalFillIcon'
 import PriceIcon from 'remixicon-react/PriceTag3FillIcon'
+
+// Styles
+import styles from './adventure.module.css'
 
 // GraphQL Query
 import ADVENTURE_QUERY from './adventure.graphql'
@@ -54,13 +56,7 @@ const AdventurePage: NextPage = () => {
       <Block gap="md" columns={{ sm: '1f', lg: '1fr 1fr' }}>
         {/* Image */}
         <Banner
-          height={{
-            sm: '600px',
-            lg: AuthoringUtils.isInEditor()
-              ? '800px'
-              : 'calc(100vh - var(--app-header-height) - var(--app-header-height))',
-          }}
-          style={{ position: 'sticky', top: 'var(--app-header-height)' }}
+          className={styles.hero}
           backgroundImage={
             adventure?.adventurePrimaryImage ? (
               <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />

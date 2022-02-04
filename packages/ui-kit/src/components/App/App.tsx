@@ -1,7 +1,7 @@
 import { FunctionComponent, HTMLAttributes, ReactElement, useRef } from 'react'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
-import { useMeasure, useNetworkStatus } from '../../hooks'
+import { useMeasure, useNetworkStatus, useResize } from '../../hooks'
 import { toast } from '../../components'
 
 // Styles
@@ -15,7 +15,6 @@ export type AppProps = HTMLAttributes<HTMLDivElement> & {
   header: ReactElement
   footer: ReactElement
   linkRoot?: ReactElement
-  fillHeight?: boolean
 }
 
 export const App: FunctionComponent<AppProps> = ({
@@ -25,7 +24,6 @@ export const App: FunctionComponent<AppProps> = ({
   children,
   header = <header />,
   footer = <footer />,
-  fillHeight,
   ...props
 }) => {
   // Notify user when Network Online/Offline mode changes
@@ -44,19 +42,26 @@ export const App: FunctionComponent<AppProps> = ({
 
   const headerElem = useRef(null)
 
+  const resize = useResize()
   const headerElemMeasures = useMeasure(headerElem)
+  const bodyHeight = resize.height - headerElemMeasures.height
 
   return (
     <LinkProvider value={linkRoot}>
       <root.type
         {...merge(props, root.props)}
         className={classes([style.root, className])}
-        style={{ ['--app-header-height']: headerElemMeasures.height + 'px', ...root.props.style, ...props.style }}
+        style={{
+          ['--app-header-height']: headerElemMeasures.height + 'px',
+          ['--app-body-height']: bodyHeight + 'px',
+          ...root.props.style,
+          ...props.style,
+        }}
       >
         <div ref={headerElem} className={style.header}>
           <header.type {...header.props} />
         </div>
-        <main className={classes([style.body, [style.fillHeight, fillHeight]])}>{children}</main>
+        <main className={style.body}>{children}</main>
         <footer.type {...footer.props} className={classes([style.footer, footer.props.className])} />
       </root.type>
     </LinkProvider>
