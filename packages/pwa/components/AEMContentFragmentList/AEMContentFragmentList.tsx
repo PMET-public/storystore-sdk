@@ -2,7 +2,7 @@
 import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
 
 // Import the base  component
-import { Carousel, Tile, TileSkeleton, Heading } from '@storystore/ui-kit'
+import { Carousel, Tile, TileSkeleton, Heading, Link } from '@storystore/ui-kit'
 import NextImage from '../NextImage'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
@@ -18,13 +18,13 @@ const EditConfig = {
 }
 
 const ContentFragmentList = ({ ...props }) => {
-  const { id, configTitleKey, configSubtitleKey, configImageKey, items } = props
+  const { id, configTitleKey, configSubtitleKey, configImageKey, linkBasePath, items } = props
 
   return (
     <Carousel id={id} show={{ sm: 1, md: 2, lg: 3 }} gap="md" peak hideScrollBar>
       {EditConfig.isEmpty(props)
         ? [<TileSkeleton key={0} />, <TileSkeleton key={1} />, <TileSkeleton key={2} />, <TileSkeleton key={3} />]
-        : items?.map(({ elements }, key) => {
+        : items?.map(({ elements, fragmentPath }, key) => {
             const imageSrc = elements?.[configImageKey]
             const title = elements?.[configTitleKey]
             const subtitle = elements?.[configSubtitleKey]
@@ -32,7 +32,19 @@ const ContentFragmentList = ({ ...props }) => {
             return (
               <Tile
                 key={key}
-                image={imageSrc && <NextImage src={imageSrc} alt={title} width={500} height={500} />}
+                root={linkBasePath ? <Link href={`${linkBasePath}?path=${fragmentPath}`} /> : <div />}
+                image={
+                  imageSrc ? (
+                    <NextImage src={imageSrc} alt={title} width={500} height={500} />
+                  ) : (
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkkAQAAB8AG7jymN8AAAAASUVORK5CYII="
+                      width="500"
+                      height="500"
+                    />
+                    // <img style={{ width: 500, height: 500, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />
+                  )
+                }
                 heading={<Heading size="md">{title}</Heading>}
                 subheading={subtitle}
               />
