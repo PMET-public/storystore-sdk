@@ -43,15 +43,7 @@ module.exports = withPlugins([withPWA], {
   async rewrites() {
     return [
       /** Home Page */
-      // {
-      //   source: '/',
-      //   destination: '/home',
-      // },
-      // Map Pages with .html extensions (needed for AEM Authoring)
-      {
-        source: '/content/:path*(.html)',
-        destination: '/content/:path*',
-      },
+
       /** Service Worker (Workbox) */
       {
         source: '/sw.js',
@@ -76,6 +68,11 @@ module.exports = withPlugins([withPWA], {
       {
         source: '/etc.clientlibs/:path*',
         destination: '/api/aem',
+      },
+      /** Map Pages with .html extensions (needed for AEM Authoring) */
+      {
+        source: '/content/:path*(.html)',
+        destination: '/content/:path*',
       },
       /** Proxy to Commerce */
       {
