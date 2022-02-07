@@ -25,8 +25,6 @@ const EditConfig = {
 }
 
 const Container: FunctionComponent<AllowedComponentsProperties> = ({ ...props }) => {
-  console.log('Is Empty?', EditConfig.isEmpty(props))
-
   const { appliedCssClassNames = '', isInEditor } = props
 
   // Gap Spacing
