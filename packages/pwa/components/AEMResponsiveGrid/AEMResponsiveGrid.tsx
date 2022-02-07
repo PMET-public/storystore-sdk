@@ -17,7 +17,7 @@ const EditConfig = {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMResponsiveGrid .../>
-export const AEMResponsiveGrid = withMappable(AllowedComponentsContainer, EditConfig)
+export const AEMResponsiveGrid = withMappable<any>(AllowedComponentsContainer, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(withComponentMappingContext(AllowedComponentsContainer), EditConfig)

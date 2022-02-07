@@ -23,7 +23,7 @@ const TextRoot = ({ ...props }) => {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMText .../>
-export const AEMText = withMappable(TextRoot, EditConfig)
+export const AEMText = withMappable<any>(TextRoot, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(TextRoot, EditConfig)

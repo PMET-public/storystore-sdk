@@ -1,5 +1,5 @@
 // Import the withMappable API provided bu the AEM SPA Editor JS SDK
-import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
+import { withMappable, MapTo, MappedComponentProperties } from '@adobe/aem-react-editable-components'
 
 // Import the base  component
 import { Carousel, Tile, TileSkeleton, Heading, Link } from '@storystore/ui-kit'
@@ -55,7 +55,7 @@ const ContentFragmentList = ({ ...props }) => {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMCarousel .../>
-export const AEMContentFragmentList = withMappable(ContentFragmentList, EditConfig)
+export const AEMContentFragmentList = withMappable<any>(ContentFragmentList, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(ContentFragmentList, EditConfig)

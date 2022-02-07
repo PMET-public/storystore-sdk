@@ -35,7 +35,7 @@ const Image = ({ id, src, alt, title, link }: AEMImageProps) => {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMImage .../>
-export const AEMImage = withMappable<AEMImageProps>(Image, EditConfig)
+export const AEMImage = withMappable<any>(Image, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(Image, EditConfig)

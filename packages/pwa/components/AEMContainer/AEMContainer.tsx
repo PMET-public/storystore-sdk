@@ -5,6 +5,7 @@ import {
   AllowedComponentsContainer,
   AllowedComponentsProperties,
   withComponentMappingContext,
+  MappedComponentProperties,
 } from '@adobe/aem-react-editable-components'
 import { classes } from '@storystore/ui-kit/lib'
 import { FunctionComponent } from 'react'
@@ -54,7 +55,7 @@ const Container: FunctionComponent<AllowedComponentsProperties> = ({ ...props })
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMContainer .../>
-export const AEMContainer = withMappable(Container, EditConfig)
+export const AEMContainer = withMappable<any>(Container, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(withComponentMappingContext(Container), EditConfig)

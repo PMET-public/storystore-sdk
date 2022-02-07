@@ -1,5 +1,5 @@
 // Import the withMappable API provided bu the AEM SPA Editor JS SDK
-import { withMappable, MapTo } from '@adobe/aem-react-editable-components'
+import { withMappable, MapTo, MappedComponentProperties } from '@adobe/aem-react-editable-components'
 import { ButtonV1IsEmptyFn } from '@adobe/aem-core-components-react-base'
 
 // Import the base  component
@@ -45,8 +45,8 @@ const ButtonRoot = ({ ...props }) => {
   )
 }
 
+// withMappable allows the component to be hardcoded into the SPA; <AEMButton .../>
+export const AEMButton = withMappable<any>(ButtonRoot, EditConfig)
+
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(ButtonRoot, EditConfig)
-
-// withMappable allows the component to be hardcoded into the SPA; <AEMButton .../>
-export const AEMButton = withMappable(ButtonRoot, EditConfig)

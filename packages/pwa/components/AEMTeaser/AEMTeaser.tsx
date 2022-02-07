@@ -90,7 +90,7 @@ const Teaser = ({ ...props }) => {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMTeaser .../>
-export const AEMTeaser = withMappable<MappedComponentProperties & TeaserV1Model>(Teaser, EditConfig)
+export const AEMTeaser = withMappable<any>(Teaser, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo<MappedComponentProperties & TeaserV1Model>(RESOURCE_TYPE)(Teaser, EditConfig)

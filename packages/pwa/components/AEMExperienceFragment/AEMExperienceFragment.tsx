@@ -1,5 +1,11 @@
 // Import the withMappable API provided bu the AEM SPA Editor JS SDK
-import { Container, withMappable, MapTo, withComponentMappingContext } from '@adobe/aem-react-editable-components'
+import {
+  Container,
+  withMappable,
+  MapTo,
+  withComponentMappingContext,
+  MappedComponentProperties,
+} from '@adobe/aem-react-editable-components'
 
 const site = process.env.NEXT_PUBLIC_AEM_SITE
 
@@ -16,7 +22,7 @@ const EditConfig = {
 }
 
 // withMappable allows the component to be hardcoded into the SPA; <AEMExperenceFragment .../>
-export const AEMExperienceFragment = withMappable(Container, EditConfig)
+export const AEMExperienceFragment = withMappable<any>(Container, EditConfig)
 
 // MapTo allows the AEM SPA Editor JS SDK to dynamically render components added to SPA Editor Containers
 MapTo(RESOURCE_TYPE)(withComponentMappingContext(Container), EditConfig)
