@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
 import { App, Header, Footer } from '@storystore/ui-kit/components'
@@ -9,6 +9,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
 import NextNprogress from 'nextjs-progressbar'
+import { useRouter } from 'next/router'
 
 /** Global Styles */
 import '@storystore/ui-kit/dist/theme/css/global.css'
@@ -37,7 +38,14 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 const AppRoot = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)
 
-  const { pageModel } = pageProps
+  const { asPath } = useRouter()
+
+  const [pageModel, setPageModel] = useState(pageProps.pageModel)
+
+  useEffect(() => {
+    if (pageModel) return
+    ModelManager.getData(asPath).then(setPageModel)
+  }, [pageModel, asPath])
 
   const branding = {
     siteName: 'StoryStore PWA',
@@ -139,7 +147,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                 sticky
                 transparent
                 logo={
-                  <Link href="/">
+                  <Link href={process.env.NEXT_PUBLIC_HOME_PATH}>
                     {branding.logoFile ? (
                       <img src={branding.logoFile} alt={branding.siteName} />
                     ) : (
