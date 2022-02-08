@@ -74,11 +74,6 @@ module.exports = withPlugins([withPWA], {
         source: '/content/:path*(.html)',
         destination: '/content/:path*',
       },
-      /** Proxy to Commerce */
-      {
-        source: '/api/commerce/:path*',
-        destination: process.env.COMMERCE_GRAPHQL_ENDPOINT,
-      },
     ]
   },
 

@@ -2,47 +2,20 @@ import { useMemo } from 'react'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from '@apollo/client'
-import { RetryLink } from '@apollo/client/link/retry'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
-const aemLink = new HttpLink({
+const link = new HttpLink({
   uri: new URL('/content/_cq_graphql/global/endpoint.json', process.env.NEXT_PUBLIC_URL).href,
   credentials: 'same-origin',
 })
 
-const commerceLink = new HttpLink({
-  uri: new URL('/api/commerce', process.env.NEXT_PUBLIC_URL).href,
-  credentials: 'same-origin',
-})
-
-const link = new RetryLink().split(
-  operation => operation.getContext().commerce,
-  commerceLink,
-  aemLink // default
-)
-
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
-      fields: {
-        products: {
-          // Don't cache separate results based on
-          // any of this field's arguments.
-          keyArgs: false,
-          // Concatenate the incoming list items with
-          // the existing list items.
-          merge(existing = { items: [] }, incoming) {
-            return {
-              ...existing,
-              ...incoming,
-              items: [...existing.items, ...incoming.items],
-            }
-          },
-        },
-      },
+      fields: {},
     },
   },
 })
