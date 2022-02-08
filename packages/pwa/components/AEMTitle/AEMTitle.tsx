@@ -19,10 +19,10 @@ const EditConfig = {
 }
 
 const Title = ({ ...props }) => {
-  const { id, text, type = 'h1', appliedCssClassNames = '' } = props
+  const { id, text, type = 'h1', appliedCssClassNames = '', icon, size: _size } = props
 
   // Size
-  const size = appliedCssClassNames.match(/title--size-(md|lg|xl|2xl|3xl|4xl)/)?.[1] || undefined
+  const size = appliedCssClassNames.match(/title--size-(md|lg|xl|2xl|3xl|4xl)/)?.[1] || _size
 
   // Padding
   const padded = !!appliedCssClassNames.match(/title--padded/)
@@ -31,7 +31,7 @@ const Title = ({ ...props }) => {
   const accent = !!appliedCssClassNames.match(/title--accent/)
 
   return (
-    <Heading id={id} root={createElement(type)} size={size} padded={padded} accent={accent}>
+    <Heading icon={icon} id={id} root={createElement(type)} size={size} padded={padded} accent={accent}>
       {text}
     </Heading>
   )

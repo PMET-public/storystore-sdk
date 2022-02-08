@@ -4,10 +4,6 @@ const WebpackAssetsManifest = require('webpack-assets-manifest')
 
 const domains = [new URL(process.env.AEM_HOST).origin]
 
-if (process.env.COMMERCE_HOST) {
-  domains.push(new URL(process.env.COMMERCE_HOST).origin)
-}
-
 module.exports = withPlugins([withPWA], {
   experimental: {
     esmExternals: 'loose',
@@ -36,6 +32,16 @@ module.exports = withPlugins([withPWA], {
           { key: 'Access-Control-Allow-Methods', value: '*' },
           { key: 'Access-Control-Allow-Headers', value: '*' },
         ],
+      },
+    ]
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: process.env.NEXT_PUBLIC_HOME_PATH,
+        permanent: true,
       },
     ]
   },
@@ -69,6 +75,7 @@ module.exports = withPlugins([withPWA], {
         source: '/etc.clientlibs/:path*',
         destination: '/api/aem',
       },
+
       /** Map Pages with .html extensions (needed for AEM Authoring) */
       {
         source: '/content/:path*(.html)',

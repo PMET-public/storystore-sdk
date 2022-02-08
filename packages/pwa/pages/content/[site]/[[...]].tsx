@@ -1,16 +1,13 @@
 // import { ModelManager } from '@adobe/aem-spa-page-model-manager'
+import { AuthoringUtils, ModelManager } from '@adobe/aem-spa-page-model-manager'
 import { SkeletonLoader } from '@storystore/ui-kit'
-import {
-  // GetServerSideProps,
-  NextPage,
-} from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-// import { Utils } from '@adobe/aem-react-editable-components'
+import { Utils } from '@adobe/aem-react-editable-components'
 import { AEMResponsiveGrid } from '../../../components'
 
-const HomePage: NextPage<{ pageModel?: any }> = ({ pageModel }) => {
+const HomePage: NextPage<any> = ({ responsivegrid }) => {
   const { asPath, isReady } = useRouter()
-  console.log({ asPath })
 
   if (!isReady)
     return (
@@ -31,26 +28,26 @@ const HomePage: NextPage<{ pageModel?: any }> = ({ pageModel }) => {
 
   return (
     <div>
-      <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...pageModel} />
+      <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...responsivegrid} />
     </div>
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-//   const url = req.url
+/** Server-Side Rendering */
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const url = req.url
 
-//   let pageModel = {}
+  const model = await ModelManager.getData(url)
 
-//   if (url !== `/content/${process.env.NEXT_PUBLIC_AEM_SITE}`) {
-//     // do not if it's the root page (authoring)
-//     pageModel = { ...Utils.modelToProps(await ModelManager.getData(url)) }
-//   }
+  const responsivegrid = model?.[':items']?.root?.[':items']?.responsivegrid
+    ? Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
+    : {}
 
-//   return {
-//     props: {
-//       pageModel,
-//     },
-//   }
-// }
+  return {
+    props: {
+      responsivegrid,
+    },
+  }
+}
 
 export default HomePage

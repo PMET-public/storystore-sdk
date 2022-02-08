@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env.local' })
+require('dotenv').config({ path: __dirname + '/../.env.local' })
 
 const events = require('events')
 events.EventEmitter.prototype._maxListeners = 70
@@ -21,6 +21,8 @@ const app = next({
   config,
   dir: path.join(__dirname, '../'),
 })
+
+console.log(process.env)
 
 const handle = app.getRequestHandler()
 

@@ -7,10 +7,9 @@
   "description": "An AEM PWA Experience",
   "scripts": {
     "lint": "next lint",
-    "server": "NODE_ENV=development node ./bin/server.js",
     "dev": "PORT=6007 next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node ./bin/server.js",
     "prepare": "echo ✔️",
     "cleanup": "rimraf pkg .next",
     "prepkg": "rimraf pkg ; next build",

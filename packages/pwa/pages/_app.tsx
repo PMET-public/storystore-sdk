@@ -140,7 +140,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
                 sticky
                 transparent
                 logo={
-                  <Link href={`/content/${process.env.NEXT_PUBLIC_AEM_SITE}/us/en`}>
+                  <Link href="/">
                     {branding.logoFile ? (
                       <NextImage src={branding.logoFile} alt={branding.siteName} />
                     ) : (

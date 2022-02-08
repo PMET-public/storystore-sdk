@@ -1,10 +1,11 @@
 import { ServerError, useQuery } from '@apollo/client'
 import { Block, Error, Link, Pills, Tile, TileSkeleton } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 import NextImage from '../../../../../../components/NextImage'
+import { addApolloState, initializeApollo } from '../../../../../../lib/apollo/client'
 
 // GraphQL Query
 import ADVENTURES_QUERY from './adventures.graphql'
@@ -91,6 +92,24 @@ const AdventuresPage: NextPage = () => {
       </Block>
     </Block>
   )
+}
+
+/** Server-Side Rendering */
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const apolloClient = initializeApollo()
+
+  try {
+    await apolloClient.query({
+      query: ADVENTURES_QUERY,
+      variables: { filter: {} },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
+  return addApolloState(apolloClient, {
+    props: {},
+  })
 }
 
 export default AdventuresPage
