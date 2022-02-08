@@ -76,8 +76,8 @@ module.exports = withPlugins([withPWA], {
       },
       /** Proxy to Commerce */
       {
-        source: '/api/magento/:path*',
-        destination: '/api/magento',
+        source: '/api/commerce/:path*',
+        destination: process.env.COMMERCE_GRAPHQL_ENDPOINT,
       },
     ]
   },

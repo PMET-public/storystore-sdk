@@ -1,4 +1,4 @@
-import { gql, ServerError, useQuery } from '@apollo/client'
+import { ServerError, useQuery } from '@apollo/client'
 import { Block, Error, Link, Pills, Tile, TileSkeleton } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import { NextPage } from 'next'

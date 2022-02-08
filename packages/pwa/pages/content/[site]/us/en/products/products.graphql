@@ -1,21 +1,12 @@
-query CATEGORY_QUERY(
-  $search: String
-  $filters: CategoryFilterInput
-  $filter: ProductAttributeFilterInput
-  $pageSize: Int
-) {
-  categoryList(filters: $filters) {
-    uid
-    name
-    children {
-      uid
-      name
+query PRODUCTS_QUERY($search: String = "", $pageSize: Int = 9, $currentPage: Int = 1) {
+  products(search: $search, pageSize: $pageSize, currentPage: $currentPage) {
+    page_info {
+      current_page
+      total_pages
     }
-  }
 
-  products(search: $search, filter: $filter, pageSize: $pageSize) {
     items {
-      uid
+      #   uid
       url_key
       name
 
