@@ -209,31 +209,42 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 }
 
 /** Server-Side Rendering */
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  /** Get AEM Model data */
-  const [path, damPath] = req.url.split('?')
-  const model = await ModelManager.getData(path)
-  const details = Utils.modelToProps(model?.[':items']?.details)
-  const responsivegrid = Utils.modelToProps(model?.[':items']?.root[':items'].responsivegrid)
-
+export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, query }) => {
   const apolloClient = initializeApollo()
 
+  const [pagePath] = resolvedUrl.split('?')
+
+  const path = query.path
+
+  const props: any = {}
+
   try {
-    if (damPath) {
-      await apolloClient.query({
+    const [model] = await Promise.all([
+      // AEM Model
+
+      ModelManager.getData(pagePath),
+
+      // GraphQL Query
+      apolloClient.query({
         query: ADVENTURE_QUERY,
-        variables: { path: damPath?.split('path=')[1] },
-      })
+        variables: { path },
+      }),
+    ])
+
+    // AEM Model SSR Props
+    if (model?.[':items']?.details) {
+      props.details = Utils.modelToProps(model[':items'].details)
+    }
+
+    if (model?.[':items']?.root[':items'].responsivegrid) {
+      props.responsivegrid = Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 
   return addApolloState(apolloClient, {
-    props: {
-      details,
-      responsivegrid,
-    },
+    props,
   })
 }
 

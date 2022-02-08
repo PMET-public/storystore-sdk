@@ -34,19 +34,21 @@ const HomePage: NextPage<any> = ({ responsivegrid }) => {
 }
 
 /** Server-Side Rendering */
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const url = req.url
+export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl }) => {
+  const props: any = {}
 
-  const model = await ModelManager.getData(url)
+  try {
+    const [model] = await Promise.all([ModelManager.getData(resolvedUrl)])
 
-  const responsivegrid = model?.[':items']?.root?.[':items']?.responsivegrid
-    ? Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
-    : {}
+    if (model?.[':items']?.root?.[':items']?.responsivegrid) {
+      props.responsivegrid = Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
+    }
+  } catch (error) {
+    console.error(error)
+  }
 
   return {
-    props: {
-      responsivegrid,
-    },
+    props,
   }
 }
 

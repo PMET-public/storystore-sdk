@@ -22,8 +22,6 @@ const app = next({
   dir: path.join(__dirname, '../'),
 })
 
-console.log(process.env)
-
 const handle = app.getRequestHandler()
 
 app.prepare().then(() => {

@@ -95,20 +95,24 @@ const AdventuresPage: NextPage = () => {
 }
 
 /** Server-Side Rendering */
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({}) => {
   const apolloClient = initializeApollo()
 
+  const props: any = {}
+
   try {
-    await apolloClient.query({
-      query: ADVENTURES_QUERY,
-      variables: { filter: {} },
-    })
+    await Promise.all([
+      apolloClient.query({
+        query: ADVENTURES_QUERY,
+        variables: { filter: {} },
+      }),
+    ])
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 
   return addApolloState(apolloClient, {
-    props: {},
+    props,
   })
 }
 

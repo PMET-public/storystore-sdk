@@ -48,8 +48,6 @@ module.exports = withPlugins([withPWA], {
 
   async rewrites() {
     return [
-      /** Home Page */
-
       /** Service Worker (Workbox) */
       {
         source: '/sw.js',
