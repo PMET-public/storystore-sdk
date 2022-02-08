@@ -78,7 +78,7 @@
 }
 
 .root.sticky.scrolled {
-  --header-logo-size: 2.5rem;
+  /* --header-logo-size: 2.5rem; */
   --header-logo-color: var(--header-text);
   backdrop-filter: blur(50px);
 }

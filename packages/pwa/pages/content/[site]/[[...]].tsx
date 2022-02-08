@@ -38,10 +38,12 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl }) =>
   const props: any = {}
 
   try {
-    const [model] = await Promise.all([ModelManager.getData(resolvedUrl)])
+    const [pageModel] = await Promise.all([ModelManager.getData(resolvedUrl)])
 
-    if (model?.[':items']?.root?.[':items']?.responsivegrid) {
-      props.responsivegrid = Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
+    props.pageModel = pageModel
+
+    if (pageModel?.[':items']?.root?.[':items']?.responsivegrid) {
+      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].responsivegrid)
     }
   } catch (error) {
     console.error(error)

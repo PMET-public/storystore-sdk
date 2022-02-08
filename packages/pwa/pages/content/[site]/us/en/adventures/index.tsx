@@ -1,6 +1,7 @@
 import { ServerError, useQuery } from '@apollo/client'
 import { Block, Error, Link, Pills, Tile, TileSkeleton } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
+import { ModelManager } from '@adobe/aem-spa-page-model-manager'
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
@@ -95,18 +96,21 @@ const AdventuresPage: NextPage = () => {
 }
 
 /** Server-Side Rendering */
-export const getServerSideProps: GetServerSideProps = async ({}) => {
+export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl }) => {
   const apolloClient = initializeApollo()
 
   const props: any = {}
 
   try {
-    await Promise.all([
+    const [pageModel] = await Promise.all([
+      ModelManager.getData(resolvedUrl.split('?')[0]),
       apolloClient.query({
         query: ADVENTURES_QUERY,
         variables: { filter: {} },
       }),
     ])
+
+    props.pageModel = pageModel
   } catch (error) {
     console.error(error)
   }

@@ -8,7 +8,6 @@ import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
-import NextImage from '../components/NextImage'
 import NextNprogress from 'nextjs-progressbar'
 
 /** Global Styles */
@@ -41,7 +40,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
   const { pageModel } = pageProps
 
   const branding = {
-    siteName: 'WKND Adventures',
+    siteName: 'StoryStore PWA',
     colorBody: '#f3f3f3',
     colorOnBody: '#222',
     // colorSurface: '#f3f3f3',
@@ -135,14 +134,14 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             linkRoot={<Link />}
             header={
               <Header
-                variant="primary"
+                variant="surface"
                 contained
                 sticky
                 transparent
                 logo={
                   <Link href="/">
                     {branding.logoFile ? (
-                      <NextImage src={branding.logoFile} alt={branding.siteName} />
+                      <img src={branding.logoFile} alt={branding.siteName} />
                     ) : (
                       <StoryStoreLogo aria-label="StoryStore.SDK" />
                     )}

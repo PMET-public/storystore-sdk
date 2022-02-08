@@ -66,7 +66,7 @@ module.exports = withPlugins([withPWA], {
 
       /** Proxy to AEM /content */
       {
-        source: '/content/:path*.(jpg|jpeg|gif|png|pdf|js|json|css)',
+        source: '/content/:path*.(jpg|jpeg|gif|png|pdf|js|json|css|svg)',
         destination: '/api/aem',
       },
       {

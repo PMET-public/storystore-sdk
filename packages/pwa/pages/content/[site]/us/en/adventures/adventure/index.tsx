@@ -219,7 +219,7 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
   const props: any = {}
 
   try {
-    const [model] = await Promise.all([
+    const [pageModel] = await Promise.all([
       // AEM Model
 
       ModelManager.getData(pagePath),
@@ -231,13 +231,15 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
       }),
     ])
 
+    props.pageModel = pageModel
+
     // AEM Model SSR Props
-    if (model?.[':items']?.details) {
-      props.details = Utils.modelToProps(model[':items'].details)
+    if (pageModel?.[':items']?.details) {
+      props.details = Utils.modelToProps(pageModel[':items'].details)
     }
 
-    if (model?.[':items']?.root[':items'].responsivegrid) {
-      props.responsivegrid = Utils.modelToProps(model[':items'].root[':items'].responsivegrid)
+    if (pageModel?.[':items']?.root[':items'].responsivegrid) {
+      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].responsivegrid)
     }
   } catch (error) {
     console.error(error)
