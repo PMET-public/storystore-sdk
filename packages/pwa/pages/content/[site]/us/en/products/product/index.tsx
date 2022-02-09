@@ -8,14 +8,18 @@ import {
   Error,
   Heading,
   Html,
+  Link,
   Price,
   SkeletonLoader,
   Text,
+  Tile,
+  TileSkeleton,
 } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import NextImage from '../../../../../../../components/NextImage'
+import { addApolloState, initializeApollo } from '../../../../../../../lib/apollo/client'
 
 // Styles
 import styles from './product.module.css'
@@ -59,6 +63,8 @@ const ProductPage: NextPage = () => {
   }
 
   const product = data?.products?.items?.[0]
+
+  const adventures = data?.adventureList?.items
 
   return (
     <Block gap="xl" contained padded>
@@ -172,8 +178,63 @@ const ProductPage: NextPage = () => {
           </Block>
         </Block>
       </Block>
+
+      {/*  Adventures */}
+      <Block gap="md" contained padded>
+        <Heading size={{ sm: 'xl', md: '2xl' }}>Looking for more? Your adventure awaits.</Heading>
+
+        <Carousel show={{ sm: 1, md: 2, lg: 3 }} gap="sm" peak>
+          {adventures?.map(
+            ({ _path, adventureTitle, adventureTripLength, adventureActivity, adventurePrimaryImage }) => (
+              <Tile
+                key={_path}
+                root={<Link href={`${process.env.NEXT_PUBLIC_HOME_PATH}/adventures/adventure?path=${_path}`} />}
+                image={<NextImage src={adventurePrimaryImage._path} width={500} height={500} alt={adventureTitle} />}
+                heading={<Heading>{adventureTitle}</Heading>}
+                tags={[`${adventureTripLength} ${adventureActivity}`]}
+              />
+            )
+          ) || [
+            <TileSkeleton key={0} uniqueKey="0" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={1} uniqueKey="1" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={2} uniqueKey="2" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={3} uniqueKey="3" animate={loading} imageWidth={500} imageHeight={500} />,
+          ]}
+        </Carousel>
+      </Block>
     </Block>
   )
+}
+
+/** Server-Side Rendering */
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const apolloClient = initializeApollo()
+
+  const path = query.path
+
+  const props: any = {}
+
+  try {
+    await Promise.all([
+      // GraphQL Query
+      apolloClient.query({
+        query: PRODUCT_QUERY,
+        variables: {
+          filter: {
+            url_key: {
+              eq: path,
+            },
+          },
+        },
+      }),
+    ])
+  } catch (error) {
+    console.error(error)
+  }
+
+  return addApolloState(apolloClient, {
+    props,
+  })
 }
 
 export default ProductPage

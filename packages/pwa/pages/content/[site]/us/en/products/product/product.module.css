@@ -9,6 +9,7 @@
 
   .gallery {
     display: unset;
+    min-height: var(--app-body-height);
   }
 
   .details {
