@@ -10,6 +10,7 @@ import {
   Html,
   Link,
   Price,
+  Share,
   SkeletonLoader,
   Text,
   Tile,
@@ -165,9 +166,13 @@ const ProductPage: NextPage = () => {
             </Text>
 
             {/* Add to Cart */}
-            <Button variant="cta" disabled>
-              Add to Cart
-            </Button>
+            <Block columns="1fr auto" gap="sm">
+              <Button variant="cta" disabled>
+                Add to Cart
+              </Button>
+
+              <Share title={product?.name} url={process.browser ? window.location.href : undefined} />
+            </Block>
 
             {/* Description */}
             {product?.description?.html ? (
