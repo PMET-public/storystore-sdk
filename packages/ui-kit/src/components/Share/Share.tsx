@@ -13,7 +13,6 @@ export type ShareProps = HTMLAttributes<HTMLElement> & {
   title?: string
   text?: string
   url?: string
-  label?: string
 }
 
 export const Share: FunctionComponent<ShareProps> = ({
@@ -21,7 +20,7 @@ export const Share: FunctionComponent<ShareProps> = ({
   title,
   text,
   url,
-  label,
+  children,
   className,
   ...props
 }) => {
@@ -57,7 +56,7 @@ export const Share: FunctionComponent<ShareProps> = ({
         onClick={handleShare}
         className={classes([[styles.error, error]])}
       >
-        {label}
+        {children}
       </Button>
     </root.type>
   )
