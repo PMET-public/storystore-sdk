@@ -184,7 +184,7 @@ const AdventurePage: NextPage = () => {
 
       {/* Recommended Products */}
       <Block gap="md">
-        <Heading size={{ sm: 'xl', md: '2xl' }}>Gear up. It's adventure time!</Heading>
+        <Heading size={{ sm: 'xl', md: '2xl' }}>Gear up. It&apos;s adventure time!</Heading>
 
         <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
           {products?.map(({ url_key, name, thumbnail, categories, price_range }) => (
