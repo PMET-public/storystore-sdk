@@ -141,7 +141,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             header={
               <Header
                 variant="surface"
-                // transparent
+                transparent
                 contained
                 sticky
                 logo={
