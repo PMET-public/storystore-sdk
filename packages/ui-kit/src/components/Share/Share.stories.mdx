@@ -1,0 +1,24 @@
+import { Meta, ArgsTable, Story, Canvas } from '@storybook/addon-docs'
+import Share from '.'
+
+<Meta title="UIComponents/Share" component={Share} parameters={{ layout: 'centered' }} />
+
+export const Template = args => {
+  return <Share {...args} />
+}
+
+# Share
+
+WIP.
+
+<Canvas withSource="open">
+  <Story name="Share" args={{ title: 'StoryStore.SDK', text: 'This is a test.', url: window.location.href }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+```
+import { Share } from '@storystore/ui-kit/components'
+```
+
+<ArgsTable story="Share" />
