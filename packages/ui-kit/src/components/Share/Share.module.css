@@ -1,3 +1,7 @@
+.button {
+  width: 100%;
+}
+
 .error {
   border-color: --color-error;
 }

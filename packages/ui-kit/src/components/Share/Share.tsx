@@ -54,7 +54,7 @@ export const Share: FunctionComponent<ShareProps> = ({
         aria-label="Share"
         disabled={disabled}
         onClick={handleShare}
-        className={classes([[styles.error, error]])}
+        className={classes([styles.button, [styles.error, error]])}
       >
         {children}
       </Button>
