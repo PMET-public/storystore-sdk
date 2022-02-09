@@ -5,17 +5,17 @@ query PRODUCTS_QUERY($search: String, $filter: ProductAttributeFilterInput, $pag
       url_key
       name
       sku
+
+      categories {
+        name
+      }
+
       description {
         html
       }
+
       # Gallery
       media_gallery {
-        label
-        url
-      }
-
-      # Thumbnail
-      thumbnail {
         label
         url
       }

@@ -186,7 +186,7 @@ const AdventurePage: NextPage = () => {
       <Block gap="md">
         <Heading size={{ sm: 'xl', md: '2xl' }}>Gear up. It&apos;s adventure time!</Heading>
 
-        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
+        <Carousel show={{ sm: 1, md: 2, lg: 3 }} gap="sm" peak>
           {products?.map(({ url_key, name, thumbnail, categories, price_range }) => (
             <Tile
               key={url_key}
@@ -225,7 +225,7 @@ const AdventurePage: NextPage = () => {
       <Block gap="md" contained padded>
         <Heading size={{ sm: 'xl', md: '2xl' }}>Looking for more? Your adventure awaits.</Heading>
 
-        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
+        <Carousel show={{ sm: 1, md: 2, lg: 3 }} gap="sm" peak>
           {moreAdventures?.map(
             ({ _path, adventureTitle, adventureTripLength, adventureActivity, adventurePrimaryImage }) => (
               <Tile

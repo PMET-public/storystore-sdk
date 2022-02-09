@@ -30,7 +30,7 @@ const HomePage: NextPage = () => {
       <Block gap="md" contained padded>
         <Heading size={{ sm: 'xl', md: '2xl' }}>For the outdoor kind.</Heading>
 
-        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
+        <Carousel show={{ sm: 1, md: 2, lg: 3 }} gap="sm" peak>
           {adventures?.map(
             ({ _path, adventureTitle, adventureTripLength, adventureActivity, adventurePrimaryImage }) => (
               <Tile
