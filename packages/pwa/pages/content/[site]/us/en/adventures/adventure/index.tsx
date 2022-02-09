@@ -221,7 +221,6 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
   try {
     const [pageModel] = await Promise.all([
       // AEM Model
-
       ModelManager.getData(pagePath),
 
       // GraphQL Query

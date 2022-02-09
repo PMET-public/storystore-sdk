@@ -84,13 +84,13 @@ const AdventuresPage: NextPage = () => {
         )) ||
           (loading && (
             <>
-              <TileSkeleton />
-              <TileSkeleton />
-              <TileSkeleton />
-              <TileSkeleton />
-              <TileSkeleton />
-              <TileSkeleton />
-              <TileSkeleton />
+              <TileSkeleton uniqueKey="0" animate={loading} />
+              <TileSkeleton uniqueKey="1" animate={loading} />
+              <TileSkeleton uniqueKey="2" animate={loading} />
+              <TileSkeleton uniqueKey="3" animate={loading} />
+              <TileSkeleton uniqueKey="4" animate={loading} />
+              <TileSkeleton uniqueKey="5" animate={loading} />
+              <TileSkeleton uniqueKey="6" animate={loading} />
               <TileSkeleton />
             </>
           ))}
