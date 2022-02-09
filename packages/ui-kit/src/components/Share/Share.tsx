@@ -13,9 +13,18 @@ export type ShareProps = HTMLAttributes<HTMLElement> & {
   title?: string
   text?: string
   url?: string
+  label?: string
 }
 
-export const Share: FunctionComponent<ShareProps> = ({ root = <div />, title, text, url, className, ...props }) => {
+export const Share: FunctionComponent<ShareProps> = ({
+  root = <div />,
+  title,
+  text,
+  url,
+  label,
+  className,
+  ...props
+}) => {
   const [disabled, setDisabled] = useState(false)
 
   const [error, setError] = useState(false)
@@ -47,7 +56,9 @@ export const Share: FunctionComponent<ShareProps> = ({ root = <div />, title, te
         disabled={disabled}
         onClick={handleShare}
         className={classes([[styles.error, error]])}
-      />
+      >
+        {label}
+      </Button>
     </root.type>
   )
 }
