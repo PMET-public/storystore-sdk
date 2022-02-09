@@ -41,6 +41,7 @@ const ContentFragmentList = ({ ...props }) => {
                       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkkAQAAB8AG7jymN8AAAAASUVORK5CYII="
                       width="500"
                       height="500"
+                      alt="loading..."
                     />
                     // <img style={{ width: 500, height: 500, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />
                   )
