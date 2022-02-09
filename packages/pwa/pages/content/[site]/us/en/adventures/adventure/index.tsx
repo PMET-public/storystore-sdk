@@ -15,6 +15,7 @@ import {
   Link,
   Price,
   TileSkeleton,
+  Share,
 } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import NextImage from '../../../../../../../components/NextImage'
@@ -76,6 +77,8 @@ const AdventurePage: NextPage = () => {
         {/* Image */}
         <Banner
           className={styles.hero}
+          vAlign="bottom"
+          align="left"
           backgroundImage={
             adventure?.adventurePrimaryImage ? (
               <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />
@@ -88,9 +91,13 @@ const AdventurePage: NextPage = () => {
         <Block gap="md">
           {/* Overview */}
           <Block root={<Card />} gap="md">
-            <Heading size={{ sm: '2xl', lg: '4xl' }} accent>
-              {adventure?.adventureTitle || <Loader animate={loading} />}
-            </Heading>
+            <Block columns="1fr auto" gap="sm">
+              <Heading size={{ sm: '2xl', lg: '4xl' }} accent>
+                {adventure?.adventureTitle || <Loader animate={loading} />}
+              </Heading>
+
+              <Share url={process.browser ? window.location.href : undefined} title={adventure?.adventureTitle} />
+            </Block>
 
             {adventure?.adventureDescription?.html ? (
               <Html htmlString={adventure.adventureDescription.html} />
