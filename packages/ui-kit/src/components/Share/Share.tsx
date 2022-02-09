@@ -1,12 +1,12 @@
 import { FunctionComponent, HTMLAttributes, ReactElement, useCallback, useEffect, useState } from 'react'
 import { classes, merge } from '../../lib'
+import { Button } from '..'
 
 // Styles
 import styles from './Share.module.css'
 
 // Icons
 import ShareIcon from 'remixicon-react/ShareForwardFillIcon'
-import { Button } from '..'
 
 export type ShareProps = HTMLAttributes<HTMLElement> & {
   root?: ReactElement
@@ -29,7 +29,11 @@ export const Share: FunctionComponent<ShareProps> = ({
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    setDisabled(!navigator?.canShare({ title, text, url }))
+    try {
+      setDisabled((navigator as any).canShare({ title, text, url }) === false)
+    } catch (error) {
+      setDisabled(true)
+    }
   }, [title, text, url])
 
   const handleShare = useCallback(async () => {
