@@ -44,4 +44,51 @@ query ADVENTURE_QUERY($path: String!) {
       # }
     }
   }
+
+  products(pageSize: 9, filter: { category_uid: { eq: "NDI=" } }) {
+    items {
+      url_key
+      name
+      thumbnail {
+        label
+        url
+      }
+      categories {
+        name
+      }
+
+      price_range {
+        minimum_price {
+          final_price {
+            currency
+            value
+          }
+          regular_price {
+            value
+          }
+        }
+        maximum_price {
+          regular_price {
+            value
+          }
+        }
+      }
+    }
+  }
+
+  moreAdventures: adventureList {
+    items {
+      id: _path
+      _path
+      adventureActivity
+      adventureTitle
+      adventureTripLength
+      adventurePrimaryImage {
+        ... on ImageRef {
+          id: _path
+          _path
+        }
+      }
+    }
+  }
 }

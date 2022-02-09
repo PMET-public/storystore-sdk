@@ -1,12 +1,24 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { Error, Block, Banner, SkeletonLoader, Heading, Text, Html, Card } from '@storystore/ui-kit'
+import {
+  Error,
+  Block,
+  Banner,
+  SkeletonLoader,
+  Heading,
+  Text,
+  Html,
+  Card,
+  Carousel,
+  Tile,
+  Link,
+  Price,
+  TileSkeleton,
+} from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
-import { Utils } from '@adobe/aem-react-editable-components'
-import { ModelManager } from '@adobe/aem-spa-page-model-manager'
-import { AEMResponsiveGrid, AEMTitle } from '../../../../../../../components'
 import NextImage from '../../../../../../../components/NextImage'
+import { addApolloState, initializeApollo } from '../../../../../../../lib/apollo/client'
 
 // Icons
 import CalendarIcon from 'remixicon-react/CalendarCheckLineIcon'
@@ -21,7 +33,6 @@ import styles from './adventure.module.css'
 
 // GraphQL Query
 import ADVENTURE_QUERY from './adventure.graphql'
-import { addApolloState, initializeApollo } from '../../../../../../../lib/apollo/client'
 
 const Loader = ({ ...props }) => (
   <SkeletonLoader uniqueKey="title-loader" height="1em" {...props}>
@@ -29,11 +40,7 @@ const Loader = ({ ...props }) => (
   </SkeletonLoader>
 )
 
-const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
-  const { asPath } = useRouter()
-
-  const pagePath = asPath.split('.html')?.[0]?.split('?')?.[0]
-
+const AdventurePage: NextPage = () => {
   // Network Online/Offline State
   const online = useNetworkStatus()
 
@@ -42,10 +49,19 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
   const path = query?.path
 
-  const { loading, error, data } = useQuery(ADVENTURE_QUERY, { variables: { path }, skip: !isReady || !path })
+  const { loading, error, data } = useQuery<any>(ADVENTURE_QUERY, {
+    variables: { path },
+    skip: !isReady || !path,
+  })
 
-  // Adventure Object
+  // Adventure
   const adventure = data?.adventureByPath.item
+
+  // Products
+  const products = data?.products?.items
+
+  // More Adventures
+  const moreAdventures = data?.moreAdventures?.items
 
   // Error View
   if (error) {
@@ -87,15 +103,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
           <Block gap="md" columns={{ sm: '1fr', md: '1fr 1fr' }}>
             {/* Duration */}
             <Block root={<Card />} columns="auto 1fr" gap="sm" vAlign="center">
-              {isReady && (
-                <AEMTitle
-                  pagePath={pagePath}
-                  itemPath="details/heading-duration"
-                  icon={<LengthIcon />}
-                  size="md"
-                  {...details?.cqItems['heading-duration']}
-                />
-              )}
+              <Heading icon={<LengthIcon />} size="md">
+                Duration
+              </Heading>
 
               {adventure?.adventureTripLength ? (
                 <Text>{adventure.adventureTripLength}</Text>
@@ -106,15 +116,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
             {/* Group Size  */}
             <Block root={<Card />} columns="auto 1fr" gap="sm" vAlign="center">
-              {isReady && (
-                <AEMTitle
-                  pagePath={pagePath}
-                  itemPath="details/heading-group-size"
-                  icon={<GroupIcon />}
-                  size="md"
-                  {...details?.cqItems['heading-group-size']}
-                />
-              )}
+              <Heading icon={<GroupIcon />} size="md">
+                Group Size
+              </Heading>
 
               {adventure?.adventureGroupSize ? (
                 <Text>{adventure.adventureGroupSize}</Text>
@@ -125,15 +129,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
             {/* Difficulty */}
             <Block root={<Card />} columns="auto 1fr" gap="sm" vAlign="center">
-              {isReady && (
-                <AEMTitle
-                  pagePath={pagePath}
-                  itemPath="details/heading-difficulty"
-                  icon={<MedalIcon />}
-                  size="md"
-                  {...details?.cqItems['heading-difficulty']}
-                />
-              )}
+              <Heading icon={<MedalIcon />} size="md">
+                Difficulty
+              </Heading>
 
               {adventure?.adventureDifficulty ? (
                 <Text>{adventure.adventureDifficulty}</Text>
@@ -144,15 +142,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
             {/* Price */}
             <Block root={<Card />} columns="auto 1fr" gap="sm" vAlign="center">
-              {isReady && (
-                <AEMTitle
-                  pagePath={pagePath}
-                  itemPath="details/heading-price"
-                  icon={<PriceIcon />}
-                  size="md"
-                  {...details?.cqItems['heading-price']}
-                />
-              )}
+              <Heading icon={<PriceIcon />} size="md">
+                Price
+              </Heading>
 
               {adventure?.adventurePrice ? (
                 <Text>{adventure.adventurePrice}</Text>
@@ -164,15 +156,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
           {/* Itinerary Section */}
           <Block root={<Card />} gap="md">
-            {isReady && (
-              <AEMTitle
-                pagePath={pagePath}
-                itemPath="details/heading-itinerary"
-                icon={<CalendarIcon />}
-                size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-itinerary']}
-              />
-            )}
+            <Heading icon={<CalendarIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+              Itinerary
+            </Heading>
 
             {adventure?.adventureItinerary?.html ? (
               <Html htmlString={adventure.adventureItinerary.html} />
@@ -183,15 +169,9 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
           {/* What to Bring Section */}
           <Block root={<Card />} gap="md">
-            {isReady && (
-              <AEMTitle
-                pagePath={pagePath}
-                itemPath="details/heading-what-to-bring"
-                icon={<BagIcon />}
-                size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-what-to-bring']}
-              />
-            )}
+            <Heading icon={<BagIcon />} size={{ sm: 'xl', lg: '2xl' }}>
+              What to Bring
+            </Heading>
 
             {adventure?.adventureGearList?.html ? (
               <Html htmlString={adventure?.adventureGearList.html} />
@@ -202,45 +182,88 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
         </Block>
       </Block>
 
-      {/* AEM Container */}
-      {isReady && <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...responsivegrid} />}
+      {/* Recommended Products */}
+      <Block gap="md">
+        <Heading size={{ sm: 'xl', md: '2xl' }}>Gear up. It's adventure time!</Heading>
+
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
+          {products?.map(({ url_key, name, thumbnail, categories, price_range }) => (
+            <Tile
+              key={url_key}
+              root={<Link href={`${process.env.NEXT_PUBLIC_HOME_PATH}/products/product?path=${url_key}`} />}
+              image={<NextImage src={thumbnail.url} width={500} height={500} alt={thumbnail.label} />}
+              heading={<Heading>{name}</Heading>}
+              subheading={
+                <Price
+                  currency={price_range.minimum_price.regular_price.currency}
+                  label={
+                    price_range.minimum_price.regular_price < price_range.maximum_price.regular_price
+                      ? 'Starting at'
+                      : undefined
+                  }
+                  regular={price_range.minimum_price.regular_price.value}
+                  special={
+                    price_range.minimum_price.regular_price.value > price_range.minimum_price.final_price.value
+                      ? price_range.minimum_price.final_price.value
+                      : undefined
+                  }
+                />
+              }
+              tags={categories.map(c => '#' + c.name)}
+              surface
+            />
+          )) || [
+            <TileSkeleton key={0} uniqueKey="0" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={1} uniqueKey="1" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={2} uniqueKey="2" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={3} uniqueKey="3" animate={loading} imageWidth={500} imageHeight={500} />,
+          ]}
+        </Carousel>
+      </Block>
+
+      {/* More Adventures */}
+      <Block gap="md" contained padded>
+        <Heading size={{ sm: 'xl', md: '2xl' }}>Looking for more? Your adventure awaits.</Heading>
+
+        <Carousel show={{ sm: 1, lg: 3 }} gap="sm" peak>
+          {moreAdventures?.map(
+            ({ _path, adventureTitle, adventureTripLength, adventureActivity, adventurePrimaryImage }) => (
+              <Tile
+                key={_path}
+                root={<Link href={`${process.env.NEXT_PUBLIC_HOME_PATH}/adventures/adventure?path=${_path}`} />}
+                image={<NextImage src={adventurePrimaryImage._path} width={500} height={500} alt={adventureTitle} />}
+                heading={<Heading>{adventureTitle}</Heading>}
+                tags={[`${adventureTripLength} ${adventureActivity}`]}
+              />
+            )
+          ) || [
+            <TileSkeleton key={0} uniqueKey="0" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={1} uniqueKey="1" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={2} uniqueKey="2" animate={loading} imageWidth={500} imageHeight={500} />,
+            <TileSkeleton key={3} uniqueKey="3" animate={loading} imageWidth={500} imageHeight={500} />,
+          ]}
+        </Carousel>
+      </Block>
     </Block>
   )
 }
 
 /** Server-Side Rendering */
-export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const apolloClient = initializeApollo()
-
-  const [pagePath] = resolvedUrl.split('?')
 
   const path = query.path
 
   const props: any = {}
 
   try {
-    const [pageModel] = await Promise.all([
-      // AEM Model
-
-      ModelManager.getData(pagePath),
-
+    await Promise.all([
       // GraphQL Query
       apolloClient.query({
         query: ADVENTURE_QUERY,
         variables: { path },
       }),
     ])
-
-    props.pageModel = pageModel
-
-    // AEM Model SSR Props
-    if (pageModel?.[':items']?.details) {
-      props.details = Utils.modelToProps(pageModel[':items'].details)
-    }
-
-    if (pageModel?.[':items']?.root[':items'].responsivegrid) {
-      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].responsivegrid)
-    }
   } catch (error) {
     console.error(error)
   }

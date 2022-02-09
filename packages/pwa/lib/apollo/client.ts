@@ -8,7 +8,7 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 const link = new HttpLink({
-  uri: new URL('/content/_cq_graphql/global/endpoint.json', process.env.NEXT_PUBLIC_URL).href,
+  uri: new URL(process.env.NEXT_PUBLIC_GATEWAY_API_ENDPOINT).href,
   credentials: 'same-origin',
 })
 

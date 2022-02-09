@@ -2,7 +2,7 @@ const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
-const domains = [new URL(process.env.AEM_HOST).origin]
+const domains = [new URL(process.env.AEM_HOST).origin, new URL(process.env.COMMERCE_HOST).origin]
 
 module.exports = withPlugins([withPWA], {
   experimental: {
