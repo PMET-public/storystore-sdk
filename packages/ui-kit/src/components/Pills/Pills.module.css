@@ -1,23 +1,9 @@
 .root {
-  -webkit-overflow-scrolling: touch;
-  background-color: var(--color-body);
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  position: sticky;
-  scrollbar-width: none;
-  top: 0;
-  z-index: 20;
-  height: var(--app-header-height);
-
   display: grid;
   grid-gap: var(--spacing-sm);
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   align-items: center;
-}
-
-.root::-webkit-scrollbar {
-  display: none;
 }
 
 .root .swatches {

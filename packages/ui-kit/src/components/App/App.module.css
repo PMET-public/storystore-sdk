@@ -1,5 +1,6 @@
 .root {
-  --app-header-height: unset;
+  --app-header-height: 84px;
+  --app-body-height: calc(var(--app-viewport-height) - var(--app-header-height));
   background-color: var(--color-body);
   color: var(--color-on-body);
   display: grid;
@@ -17,12 +18,6 @@
 .toast svg {
   width: 1.6em;
   fill: currentColor;
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
 }
 
 .body {

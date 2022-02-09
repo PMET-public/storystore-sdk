@@ -133,9 +133,7 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
               // Fix authorinz dynamic heights
               AuthoringUtils.isInEditor()
                 ? {
-                    ['--app-body-height' as string]: process.browser
-                      ? `calc(${window.innerHeight}px - var(--app-header-height))`
-                      : '100%',
+                    ['--app-viewport-height' as string]: process.browser ? window.innerHeight + 'px' : '100%',
                   }
                 : undefined
             }
@@ -143,9 +141,9 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
             header={
               <Header
                 variant="surface"
+                // transparent
                 contained
                 sticky
-                transparent
                 logo={
                   <Link href={process.env.NEXT_PUBLIC_HOME_PATH}>
                     {branding.logoFile ? (

@@ -1,7 +1,7 @@
-import { FunctionComponent, HTMLAttributes, ReactElement, useRef } from 'react'
+import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
-import { useMeasure, useNetworkStatus, useResize } from '../../hooks'
+import { useNetworkStatus, useResize } from '../../hooks'
 import { toast } from '../../components'
 
 // Styles
@@ -40,13 +40,9 @@ export const App: FunctionComponent<AppProps> = ({
     }
   })
 
-  const headerElem = useRef(null)
-
   const resize = useResize()
 
-  const headerElemMeasures = useMeasure(headerElem)
-
-  const bodyHeight = resize.height - headerElemMeasures.height
+  const viewportHeight = resize.height
 
   return (
     <LinkProvider value={linkRoot}>
@@ -54,15 +50,13 @@ export const App: FunctionComponent<AppProps> = ({
         {...merge(props, root.props)}
         className={classes([style.root, className])}
         style={{
-          ['--app-header-height']: headerElemMeasures.height + 'px',
-          ['--app-body-height']: bodyHeight + 'px',
+          ['--app-viewport-height']: viewportHeight + 'px',
           ...root.props.style,
           ...props.style,
         }}
       >
-        <div ref={headerElem} className={style.header}>
-          <header.type {...header.props} />
-        </div>
+        <header.type {...header.props} />
+
         <main className={style.body}>{children}</main>
         <footer.type {...footer.props} className={classes([style.footer, footer.props.className])} />
       </root.type>

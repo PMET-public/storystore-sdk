@@ -11,6 +11,9 @@ import { addApolloState, initializeApollo } from '../../../../../../lib/apollo/c
 // GraphQL Query
 import ADVENTURES_QUERY from './adventures.graphql'
 
+// Styles
+import styles from './adventures.module.css'
+
 const AdventuresPage: NextPage = () => {
   // Get current pathname for links
   const { asPath } = useRouter()
@@ -26,7 +29,6 @@ const AdventuresPage: NextPage = () => {
   // Network Online/Offline State
   const online = useNetworkStatus()
 
-  //   Filters
   const [filter, setFilter] = useState({})
 
   const handleOnFilterUpdate = useCallback(values => {
@@ -56,6 +58,7 @@ const AdventuresPage: NextPage = () => {
   return (
     <Block rows="auto 1fr" padded style={{ height: '100%' }} contained>
       <Pills
+        className={styles.filters}
         variant="single"
         items={[
           { label: 'All', value: '', id: 'adventureActivity' },
@@ -63,7 +66,8 @@ const AdventuresPage: NextPage = () => {
           { label: 'Cycling', value: 'Cycling', id: 'adventureActivity' },
           { label: 'Skiing', value: 'Skiing', id: 'adventureActivity' },
           { label: 'Surfing', value: 'Surfing', id: 'adventureActivity' },
-          { label: 'Travel', value: ['Social', 'Camping'], id: 'adventureActivity' },
+          { label: 'Social', value: 'Social', id: 'adventureActivity' },
+          { label: 'Camping', value: 'Camping', id: 'adventureActivity' },
         ]}
         onChange={handleOnFilterUpdate}
       />

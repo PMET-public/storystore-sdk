@@ -2,7 +2,7 @@
   --header-bg: var(--color-surface);
   --header-link: var(--header-text);
   --header-text: var(--color-on-surface);
-  --header-logo-size: 3.125rem;
+  --header-logo-size: 3rem;
   --header-logo-color: unset;
 
   background-color: var(--header-bg);
@@ -10,6 +10,7 @@
   font-size: var(--font-sm);
   z-index: 10;
   height: 84px;
+  transition: background-color 200ms ease-in-out;
 }
 
 .wrapper {
