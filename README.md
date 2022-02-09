@@ -10,7 +10,7 @@ The following tools should be installed locally:
 - Yarn `sudo npm install -g yarn`
 - [AEM SDK](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#aem-sdk) running locally (localhost:4502)
   - [Sample Data and GraphQL Endpoint](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#wknd-site-content-endpoints)
-  - [CORS Configuration](https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/setup.html?lang=en#cors-config)
+- [StoryStore's WKND Adventure (Remote-SPA) Content](https://github.com/PMET-public/storystore-aem/tree/project/wknd-adventures)
 
 ### 📜 Instructions
 
