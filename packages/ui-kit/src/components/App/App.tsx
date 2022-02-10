@@ -42,15 +42,13 @@ export const App: FunctionComponent<AppProps> = ({
 
   const resize = useResize()
 
-  const viewportHeight = resize.height
-
   return (
     <LinkProvider value={linkRoot}>
       <root.type
         {...merge(props, root.props)}
         className={classes([style.root, className])}
         style={{
-          ['--app-viewport-height']: viewportHeight + 'px',
+          ['--app-viewport-height']: resize.height ? `${resize.height}px` : '100vh',
           ...root.props.style,
           ...props.style,
         }}

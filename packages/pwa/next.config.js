@@ -2,8 +2,6 @@ const withPlugins = require('next-compose-plugins')
 const withPWA = require('next-pwa')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
-const domains = [new URL(process.env.AEM_HOST).origin, new URL(process.env.COMMERCE_HOST).origin]
-
 module.exports = withPlugins([withPWA], {
   experimental: {
     esmExternals: 'loose',
@@ -12,7 +10,6 @@ module.exports = withPlugins([withPWA], {
   assetPrefix: process.env.NEXT_PUBLIC_URL,
 
   images: {
-    domains,
     deviceSizes: [640, 768, 1024, 1280, 1600],
     formats: ['image/webp'],
   },
