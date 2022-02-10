@@ -295,10 +295,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   try {
     await Promise.all([
       // GraphQL Query
-      apolloClient.query({
-        query: ADVENTURE_QUERY,
-        variables: { path },
-      }),
+      path &&
+        apolloClient.query({
+          query: ADVENTURE_QUERY,
+          variables: { path },
+        }),
     ])
   } catch (error) {
     console.error(error)
