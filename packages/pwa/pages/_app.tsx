@@ -45,13 +45,6 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
         <link rel="apple-touch-icon" href={getSiteURLFromPath('/icons/apple-touch-icon.png')} />
         <link rel="manifest" href={getSiteURLFromPath('/manifest.webmanifest')} crossOrigin="use-credentials" />
 
-        {/* AEM Grid CSS (Responsive Layout) */}
-        <link
-          rel="stylesheet"
-          href={`/etc.clientlibs/${process.env.NEXT_PUBLIC_AEM_SITE}/clientlibs/clientlib-grid.css`}
-          type="text/css"
-        />
-
         {/* Google Analytics */}
         <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
 
