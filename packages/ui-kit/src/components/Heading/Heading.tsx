@@ -30,7 +30,7 @@ export const Heading: FunctionComponent<HeadingProps> = ({
   return (
     <root.type
       {...merge(props, root.props)}
-      className={classes([style.root, [style.accent, accent], [style.padded, padded], className])}
+      className={classes([style.root, [style.padded, padded], [(style.accent, accent)], className])}
       style={{
         ['--heading-size-sm']: `var(--font-${size.sm})`,
         ['--heading-size-md']: `var(--font-${size.md})`,
