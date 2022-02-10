@@ -24,6 +24,7 @@ const Teaser = ({ ...props }) => {
 
   /** Screen Color */
   const variant = appliedCssClassNames.match(/teaser--variant-(hero)/)?.[1]
+  const hero = variant === 'hero'
 
   /** Screen Color */
   const screen = appliedCssClassNames.match(/teaser--screen-(light|dark)/)?.[1]
@@ -50,8 +51,8 @@ const Teaser = ({ ...props }) => {
       vAlign={vAlign}
       backgroundColor="var(--color-skeleton)"
       variant={variant}
-      // height={{ sm: variant === 'hero' ? '600px' : '260px', md: variant === 'hero' ? '800px' : '260px' }}
-      height={variant === 'hero' ? 'calc(var(--app-body-height) - 10rem)' : '260px'}
+      height={hero ? 'calc(var(--app-body-height) - 200px)' : undefined}
+      style={{ minHeight: hero ? 400 : 260 }}
       backgroundImage={<img src={imagePath} alt="" loading="lazy" />}
       contained={contained}
       heading={
@@ -62,7 +63,19 @@ const Teaser = ({ ...props }) => {
             </Heading>
           )}
 
-          <Heading root={titleType && createElement(titleType)} size={{ sm: '2xl', md: '3xl', lg: '5xl' }}>
+          <Heading
+            root={titleType && createElement(titleType)}
+            size={hero ? '5xl' : { sm: '4xl', md: '5xl' }}
+            style={
+              hero
+                ? {
+                    ['--heading-size-sm' as string]: 'calc(100vw / 15)',
+                    ['--heading-size-md' as string]: 'calc(100vw / 27)',
+                    ['--heading-size-lg' as string]: 'calc(100vw / 25)',
+                  }
+                : undefined
+            }
+          >
             {title}
           </Heading>
 
