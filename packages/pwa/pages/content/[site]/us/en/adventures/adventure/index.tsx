@@ -91,8 +91,8 @@ const AdventurePage: NextPage = () => {
         <Block gap="md">
           {/* Overview */}
           <Block root={<Card />} gap="md">
-            <Block columns="1fr auto" gap="sm" vAlign="end">
-              <Heading size={{ sm: '2xl', lg: '4xl' }} accent>
+            <Block columns="1fr auto" gap="sm">
+              <Heading size={{ sm: '2xl', lg: '4xl' }} accent style={{ alignSelf: 'end' }}>
                 {adventure?.adventureTitle || <Loader animate={loading} />}
               </Heading>
 
