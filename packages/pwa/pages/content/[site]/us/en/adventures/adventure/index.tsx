@@ -74,7 +74,7 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
         <Block gap="md">
           {/* Overview */}
           <Block root={<Card />} gap="md">
-            <Block columns="1fr auto" gap="sm">
+            <Block columns="1fr auto" gap="sm" vAlign="end">
               <Heading size={{ sm: '2xl', lg: '4xl' }} accent>
                 {adventure?.adventureTitle || <Loader animate={loading} />}
               </Heading>
