@@ -230,10 +230,11 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
       ModelManager.getData(pagePath),
 
       // GraphQL Query
-      apolloClient.query({
-        query: ADVENTURE_QUERY,
-        variables: { path },
-      }),
+      path &&
+        apolloClient.query({
+          query: ADVENTURE_QUERY,
+          variables: { path },
+        }),
     ])
 
     props.pageModel = pageModel
