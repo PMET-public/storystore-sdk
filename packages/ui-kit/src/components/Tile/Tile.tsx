@@ -84,7 +84,17 @@ export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({
 }) => {
   return (
     <Tile
-      image={<div style={{ width: imageWidth, height: imageHeight, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
+      image={
+        <SkeletonLoader
+          uniqueKey={uniqueKey && `${uniqueKey}--image`}
+          animate={animate}
+          width={imageWidth}
+          height={imageHeight}
+          style={{ width: '100%', height: 'auto' }}
+        >
+          <rect width="100%" height="100%" />
+        </SkeletonLoader>
+      }
       heading={
         <SkeletonLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />
