@@ -1,16 +1,9 @@
 .root {
-  -webkit-overflow-scrolling: touch;
-  background-color: var(--color-body);
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: var(--spacing-md) 0;
-  position: sticky;
-  scrollbar-width: none;
-  top: 0;
-}
-
-.root::-webkit-scrollbar {
-  display: none;
+  display: grid;
+  grid-gap: var(--spacing-sm);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
 }
 
 .root .swatches {

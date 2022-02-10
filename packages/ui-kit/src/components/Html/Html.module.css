@@ -1,3 +1,7 @@
+.root {
+  line-height: 1.5;
+}
+
 .root h1,
 .root h2,
 .root h3,
@@ -32,7 +36,7 @@
   font-size: var(--font-sm);
 }
 
-.root p:not(:last-of-type) {
+.root p:not(:last-child) {
   margin-bottom: var(--spacing-md);
 }
 
@@ -42,10 +46,14 @@
   padding-left: 1em;
   display: grid;
   grid-gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
   grid-auto-rows: max-content;
   list-style-position: inside;
   list-style-type: square;
+}
+
+.root ol:not(:last-child),
+.root ul:not(:last-child) {
+  margin-bottom: var(--spacing-md);
 }
 
 .root strong,

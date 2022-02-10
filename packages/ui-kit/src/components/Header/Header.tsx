@@ -3,6 +3,7 @@ import { classes, merge, Color } from '../../lib'
 import { Block } from '../'
 import { useScrollPosition } from '../../hooks/useScrollPosition'
 import { useMeasure } from '../../hooks/useMeasure'
+import LogoIcon from 'remixicon-react/Home2FillIcon'
 
 // Styles
 import style from './Header.module.css'
@@ -25,7 +26,7 @@ export type HeaderProps = HTMLAttributes<HTMLDivElement> & {
 
 export const Header: FunctionComponent<HeaderProps> = ({
   root = <header />,
-  logo,
+  logo = <LogoIcon />,
   nav,
   transparent = false,
   variant = 'surface',

@@ -11,15 +11,17 @@ export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
   accent?: boolean
   color?: OnColor
   icon?: ReactElement<HTMLAttributes<SVGAElement>>
+  padded?: boolean
 }
 
 export const Heading: FunctionComponent<HeadingProps> = ({
   root = <div />,
-  size: _size = 'normal',
+  size: _size = 'xl',
   accent,
   className,
   color,
   icon,
+  padded,
   children,
   ...props
 }) => {
@@ -28,7 +30,7 @@ export const Heading: FunctionComponent<HeadingProps> = ({
   return (
     <root.type
       {...merge(props, root.props)}
-      className={classes([style.root, [style.accent, accent], className])}
+      className={classes([style.root, [style.padded, padded], [(style.accent, accent)], className])}
       style={{
         ['--heading-size-sm']: `var(--font-${size.sm})`,
         ['--heading-size-md']: `var(--font-${size.md})`,
@@ -39,10 +41,10 @@ export const Heading: FunctionComponent<HeadingProps> = ({
       }}
     >
       {isValidElement(icon) ? (
-        <Block columns="max-content 1fr" gap="sm" vAlign="center">
+        <div className={style.iconWrapper}>
           <icon.type {...icon.props} className={classes([style.icon, icon.props.className])} />
           {children}
-        </Block>
+        </div>
       ) : (
         children
       )}

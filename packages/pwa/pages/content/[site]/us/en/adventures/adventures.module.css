@@ -1,0 +1,15 @@
+.filters {
+  top: 0;
+  z-index: 20;
+  height: var(--app-header-height);
+  position: sticky;
+  scrollbar-width: none;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  background-color: var(--color-body);
+  -webkit-overflow-scrolling: touch;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}

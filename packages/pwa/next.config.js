@@ -1,14 +1,21 @@
 const withPlugins = require('next-compose-plugins')
-const withStoryStore = require('@storystore/ui-kit/nextjs')
 const withPWA = require('next-pwa')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 
-module.exports = withPlugins([withPWA, withStoryStore], {
+const domains = [new URL(process.env.AEM_HOST).origin]
+
+module.exports = withPlugins([withPWA], {
   experimental: {
     esmExternals: 'loose',
   },
 
   assetPrefix: process.env.NEXT_PUBLIC_URL,
+
+  images: {
+    domains,
+    deviceSizes: [640, 768, 1024, 1280, 1600],
+    formats: ['image/webp'],
+  },
 
   pwa: {
     dest: '.next/static',
@@ -25,6 +32,16 @@ module.exports = withPlugins([withPWA, withStoryStore], {
           { key: 'Access-Control-Allow-Methods', value: '*' },
           { key: 'Access-Control-Allow-Headers', value: '*' },
         ],
+      },
+    ]
+  },
+
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: process.env.NEXT_PUBLIC_HOME_PATH,
+        permanent: true,
       },
     ]
   },
@@ -47,27 +64,20 @@ module.exports = withPlugins([withPWA, withStoryStore], {
         destination: '/_next/static/asset-manifest.json',
       },
 
-      /** Proxy AEM GraphQL /__graphql */
+      /** Proxy to AEM /content */
       {
-        source: '/__graphql/:path*',
-        destination: '/api/aem-proxy',
+        source: '/content/:path*.(jpg|jpeg|gif|png|pdf|js|json|css|svg)',
+        destination: '/api/aem',
+      },
+      {
+        source: '/etc.clientlibs/:path*',
+        destination: '/api/aem',
       },
 
-      // Proxy files with extensions
+      /** Map Pages with .html extensions (needed for AEM Authoring) */
       {
-        source: '/content/dam/:site/:locale/adventures/:path*.(.*)',
-        destination: '/api/aem-proxy',
-      },
-      /** Rewrite Adventure Details */
-      {
-        source: '/content/dam/:site/:locale/adventures/:path*',
-        destination: '/adventure',
-      },
-
-      /** Proxy AEM Content /content */
-      {
-        source: '/content/:path*',
-        destination: '/api/aem-proxy',
+        source: '/content/:path*(.html)',
+        destination: '/content/:path*',
       },
     ]
   },
@@ -86,6 +96,14 @@ module.exports = withPlugins([withPWA, withStoryStore], {
       })
 
       return rule
+    })
+
+    /**
+     * GraphQL Queries
+     */
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      loader: 'graphql-tag/loader',
     })
 
     /**

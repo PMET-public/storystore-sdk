@@ -46,7 +46,7 @@
 
 .root::-webkit-scrollbar-thumb {
   border-radius: 0.625rem;
-  background: var(--color-on-surface);
+  background: var(--color-scrollbar);
 }
 
 .root.hideScrollBar {

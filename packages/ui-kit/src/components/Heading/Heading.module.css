@@ -3,9 +3,21 @@
   display: block;
   font-size: var(--heading-size-sm);
   font-weight: var(--font-semibold);
-  line-height: 1.3;
+  line-height: 1;
   width: 100%;
-  vertical-align: middle;
+}
+
+.padded {
+  padding-left: var(--padded);
+  padding-right: var(--padded);
+}
+
+.iconWrapper {
+  display: grid;
+  align-items: center;
+  grid-auto-rows: max-content;
+  grid-gap: 0.35em;
+  grid-template-columns: auto 1fr;
 }
 
 .icon {
@@ -36,10 +48,8 @@
 }
 
 .root.accent::after {
-  background-color: var(--color-secondary);
   content: '';
+  border-bottom: 0.15em solid var(--color-secondary);
+  width: 4rem;
   display: block;
-  height: 0.185rem;
-  margin-top: 0.15em;
-  width: 2rem;
 }

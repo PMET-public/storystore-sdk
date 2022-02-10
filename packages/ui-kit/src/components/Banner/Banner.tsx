@@ -18,6 +18,7 @@ export type BannerProps = HTMLAttributes<HTMLDivElement> & {
   width?: BreakpointValues<string>
   height?: BreakpointValues<string>
   screen?: 'dark' | 'darker' | 'light' | 'lighter'
+  variant?: 'hero' | 'normal'
 }
 
 export const Banner: FunctionComponent<BannerProps> = ({
@@ -34,6 +35,7 @@ export const Banner: FunctionComponent<BannerProps> = ({
   height: _height = '400px',
   textColor,
   width: _width = '100%',
+  variant = 'normal',
   screen,
   ...props
 }) => {
@@ -43,7 +45,14 @@ export const Banner: FunctionComponent<BannerProps> = ({
   return (
     <root.type
       {...merge(props, root.props)}
-      className={classes([style.root, [style.screen, screen], style[screen || 'dark'], style[vAlign], className])}
+      className={classes([
+        style.root,
+        [style.screen, screen],
+        style[screen || 'dark'],
+        style[vAlign],
+        style[variant],
+        className,
+      ])}
       style={{
         ['--banner-bg-color']: backgroundColor,
         ['--banner-text-color']: textColor,
@@ -62,7 +71,12 @@ export const Banner: FunctionComponent<BannerProps> = ({
         <backgroundImage.type {...merge(backgroundImage.props, { className: style.backgroundImage })} />
       )}
 
-      <Block className={classes([style.wrapper, style[align], style[vAlign]])} contained={contained}>
+      <Block
+        rows="1fr"
+        columns="1fr"
+        className={classes([style.wrapper, style[align], style[vAlign]])}
+        contained={contained}
+      >
         <div className={style.content}>
           {heading && <heading.type {...merge(heading.props, {})} />}
           {button && <button.type {...merge(button.props, { className: style.button })} />}

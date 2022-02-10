@@ -2,13 +2,15 @@
   --header-bg: var(--color-surface);
   --header-link: var(--header-text);
   --header-text: var(--color-on-surface);
-  --header-logo-size: 3.125rem;
+  --header-logo-size: 3rem;
   --header-logo-color: unset;
 
   background-color: var(--header-bg);
   color: var(--header-text);
   font-size: var(--font-sm);
   z-index: 10;
+  height: 84px;
+  transition: background-color 200ms ease-in-out;
 }
 
 .wrapper {
@@ -77,7 +79,7 @@
 }
 
 .root.sticky.scrolled {
-  --header-logo-size: 2.5rem;
+  /* --header-logo-size: 2.5rem; */
   --header-logo-color: var(--header-text);
   backdrop-filter: blur(50px);
 }
@@ -114,7 +116,7 @@
   display: grid;
   grid-auto-columns: max-content;
   grid-auto-flow: column;
-  grid-gap: var(--spacing-md);
+  grid-gap: var(--spacing-sm);
   height: 100%;
   justify-content: flex-end;
   white-space: nowrap;

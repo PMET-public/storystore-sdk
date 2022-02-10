@@ -1,0 +1,11 @@
+.root {
+  display: grid;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+  grid-gap: 0.35em;
+}
+
+.special {
+  opacity: 0.7;
+  text-decoration: line-through;
+}

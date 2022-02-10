@@ -2,22 +2,31 @@ import { useMemo } from 'react'
 import merge from 'deepmerge'
 import isEqual from 'lodash.isequal'
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from '@apollo/client'
-import { getSiteURLFromPath } from '../get-site-path'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
+
+const link = new HttpLink({
+  uri: new URL('/content/_cq_graphql/global/endpoint.json', process.env.NEXT_PUBLIC_URL).href,
+  credentials: 'same-origin',
+})
+
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {},
+    },
+  },
+})
 
 const createApolloClient = () => {
   return new ApolloClient({
     connectToDevTools: process.browser,
     queryDeduplication: true,
     ssrMode: !process.browser,
-    cache: new InMemoryCache({}),
-    link: new HttpLink({
-      uri: getSiteURLFromPath('/__graphql'),
-      credentials: 'same-origin',
-    }),
+    cache,
+    link,
   })
 }
 

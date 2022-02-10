@@ -1,7 +1,7 @@
 import { FunctionComponent, HTMLAttributes, ReactElement } from 'react'
 import { classes, merge } from '../../lib'
 import { LinkProvider } from '../Link'
-import { useNetworkStatus } from '../../hooks'
+import { useNetworkStatus, useResize } from '../../hooks'
 import { toast } from '../../components'
 
 // Styles
@@ -22,8 +22,8 @@ export const App: FunctionComponent<AppProps> = ({
   linkRoot = <a />,
   className,
   children,
-  header,
-  footer,
+  header = <header />,
+  footer = <footer />,
   ...props
 }) => {
   // Notify user when Network Online/Offline mode changes
@@ -40,10 +40,23 @@ export const App: FunctionComponent<AppProps> = ({
     }
   })
 
+  const resize = useResize()
+
+  const viewportHeight = resize.height
+
   return (
     <LinkProvider value={linkRoot}>
-      <root.type {...merge(props, root.props)} className={classes([style.root, className])}>
-        <header.type {...header.props} className={classes([style.header, header.props.className])} />
+      <root.type
+        {...merge(props, root.props)}
+        className={classes([style.root, className])}
+        style={{
+          ['--app-viewport-height']: viewportHeight + 'px',
+          ...root.props.style,
+          ...props.style,
+        }}
+      >
+        <header.type {...header.props} />
+
         <main className={style.body}>{children}</main>
         <footer.type {...footer.props} className={classes([style.footer, footer.props.className])} />
       </root.type>

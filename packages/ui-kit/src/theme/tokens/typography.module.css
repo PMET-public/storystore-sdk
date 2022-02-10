@@ -1,11 +1,11 @@
 .typography {
   /* Font Families */
-  --font-body: system-ui, sans-serif;
+  --font-body: sans-serif;
 
   /* Font Sizes */
   --font-xs: 0.75rem;
   --font-sm: 0.875rem;
-  --font: 1rem;
+  --font-md: 1rem;
   --font-lg: 1.125rem;
   --font-xl: 1.25rem;
   --font-2xl: 1.5rem;

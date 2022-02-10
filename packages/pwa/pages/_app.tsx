@@ -1,16 +1,31 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { AppProps } from 'next/app'
 import { UIProvider } from '@storystore/ui-kit/theme'
-import WKNDApp from '@storystore/ui-kit/dist/experiences/wknd/components/App'
+import { App, Header, Footer } from '@storystore/ui-kit/components'
+import { ModelManager, ModelClient, AuthoringUtils } from '@adobe/aem-spa-page-model-manager'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../lib/apollo/client'
 import { getSiteURLFromPath } from '../lib/get-site-path'
-import { useTrackers } from '../lib/tracker'
+import NextNprogress from 'nextjs-progressbar'
+import { useRouter } from 'next/router'
 
-// Global Styles
+/** Global Styles */
 import '@storystore/ui-kit/dist/theme/css/global.css'
+import '@storystore/ui-kit/dist/theme/css/aem.css'
+
+/** Default logo */
+import StoryStoreLogo from 'remixicon-react/TerminalBoxFillIcon'
+
+/** Load AEM Components */
+import '../components'
+
+/** Initialize AEM Model */
+
+ModelManager.initializeAsync({
+  modelClient: new ModelClient(new URL(process.env.NEXT_PUBLIC_URL).origin),
+})
 
 const Link: FunctionComponent<any> = ({ href, ...props }) => {
   return (
@@ -23,10 +38,28 @@ const Link: FunctionComponent<any> = ({ href, ...props }) => {
 const AppRoot = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps)
 
-  /** Initialize Google Analytics (production only) */
-  useTrackers()
+  const { asPath } = useRouter()
 
-  const { model = {} } = pageProps
+  const [pageModel, setPageModel] = useState(pageProps.pageModel)
+
+  useEffect(() => {
+    if (pageModel) return
+    ModelManager.getData(asPath).then(setPageModel)
+  }, [pageModel, asPath])
+
+  const branding = {
+    siteName: 'StoryStore PWA',
+    colorBody: '#f3f3f3',
+    colorOnBody: '#222',
+    // colorSurface: '#f3f3f3',
+    // colorOnSurface: '#222',
+    // colorPrimary: '#111',
+    // colorOnPrimary: '#fff',
+    // colorSecondary: '#ff9f00',
+    // colorOnSecondary: '#fff',
+    // rounded: '1rem',
+    ...pageModel?.branding,
+  }
 
   return (
     <>
@@ -37,40 +70,95 @@ const AppRoot = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5,user-scalable=no"
         />
-        <meta name="apple-mobile-web-app-title" content={model.page?.siteName || ''} />
-        <title>{model.page ? `${model.page.siteName} | ${model.page.title}` : ''}</title>
-        <meta name="description" content={model.page?.description || ''} />
-        <meta name="keywords" content={model.page?.keywords || ''} />
+        <meta name="apple-mobile-web-app-title" content={branding.siteName || ''} />
+        <meta name="description" content={pageModel?.description || ''} />
+        <meta name="keywords" content={pageModel?.keywords || ''} />
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <title>{[branding.siteName, pageModel?.title].filter(x => !!x).join(' | ')}</title>
 
         <link rel="shortcut icon" type="image/png" href={getSiteURLFromPath('/favicon.ico')} />
         <link rel="apple-touch-icon" href={getSiteURLFromPath('/icons/apple-touch-icon.png')} />
         <link rel="manifest" href={getSiteURLFromPath('/manifest.webmanifest')} crossOrigin="use-credentials" />
 
+        {/* AEM Grid CSS (Responsive Layout) */}
+        <link
+          rel="stylesheet"
+          href={`/etc.clientlibs/${process.env.NEXT_PUBLIC_AEM_SITE}/clientlibs/clientlib-grid.css`}
+          type="text/css"
+        />
+
         {/* Google Analytics */}
         <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin="anonymous" />
 
-        {model.page?.colorSecondary && <meta name="theme-color" content={model.page.colorSecondary} />}
+        {branding.colorPrimary && <meta name="theme-color" content={branding.colorPrimary} />}
 
-        {model.page && (
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
               :root {
-                background-color: ${model.page.colorBody};
-                color: ${model.page.colorOnBody};
+                background-color: ${branding.colorBody};
+                color: ${branding.colorOnBody};
               }
             `,
-            }}
-          />
-        )}
+          }}
+        />
       </Head>
+
+      <NextNprogress
+        color={branding.colorAccent}
+        startPosition={0.4}
+        stopDelayMs={200}
+        height={3}
+        options={{ showSpinner: false, easing: 'ease' }}
+      />
+
       <ApolloProvider client={apolloClient}>
-        <UIProvider>
-          <WKNDApp pagePath={model.__pagePath} myPassportLink={<Link href="/my-passport" />} {...model.page}>
+        <UIProvider
+          style={{
+            ['--color-body' as string]: branding.colorBody,
+            ['--color-on-body' as string]: branding.colorOnBody,
+            ['--color-surface' as string]: branding.colorSurface,
+            ['--color-on-surface' as string]: branding.colorOnSurface,
+            ['--color-primary' as string]: branding.colorPrimary,
+            ['--color-on-primary' as string]: branding.colorOnPrimary,
+            ['--color-secondary' as string]: branding.colorSecondary,
+            ['--color-on-secondary' as string]: branding.colorOnSecondary,
+            ['--rounded' as string]: branding.rounded,
+          }}
+        >
+          <App
+            style={
+              // Fix authorinz dynamic heights
+              AuthoringUtils.isInEditor()
+                ? {
+                    ['--app-viewport-height' as string]: process.browser ? window.innerHeight + 'px' : '100%',
+                  }
+                : undefined
+            }
+            linkRoot={<Link />}
+            header={
+              <Header
+                variant="surface"
+                transparent
+                contained
+                sticky
+                logo={
+                  <Link href={process.env.NEXT_PUBLIC_HOME_PATH}>
+                    {branding.logoFile ? (
+                      <img src={branding.logoFile} alt={branding.siteName} />
+                    ) : (
+                      <StoryStoreLogo aria-label="StoryStore.SDK" />
+                    )}
+                  </Link>
+                }
+              />
+            }
+            footer={<Footer contained></Footer>}
+          >
             <Component {...pageProps} />
-          </WKNDApp>
+          </App>
         </UIProvider>
       </ApolloProvider>
     </>

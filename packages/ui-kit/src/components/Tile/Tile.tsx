@@ -12,6 +12,7 @@ export type TileProps = HTMLAttributes<HTMLElement> & {
   subheading?: ReactElement | string
   tags?: Array<ReactElement | string>
   surface?: boolean
+  vignette?: boolean
 }
 
 export const Tile: FunctionComponent<TileProps> = ({
@@ -22,12 +23,15 @@ export const Tile: FunctionComponent<TileProps> = ({
   subheading,
   tags,
   surface,
+  vignette,
   ...props
 }) => {
   return (
     <root.type {...merge(props, root.props)} className={classes([style.root, [style.surface, surface], className])}>
       <div className={style.wrapper}>
-        <image.type {...merge(image.props, { className: style.image })} />
+        <div className={classes([style.image, [style.vignette, vignette]])}>
+          <image.type {...image.props} className={classes([image.props.className, style.img])} />
+        </div>
 
         <div className={style.content}>
           {isValidElement(heading) ? (
@@ -67,12 +71,20 @@ export type TileSkeletonProps = HTMLAttributes<HTMLElement> & {
   surface?: boolean
   uniqueKey?: string
   animate?: boolean
+  imageHeight?: number | string
+  imageWidth?: number | string
 }
 
-export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({ uniqueKey, animate, ...props }) => {
+export const TileSkeleton: FunctionComponent<TileSkeletonProps> = ({
+  uniqueKey,
+  animate,
+  imageHeight = 400,
+  imageWidth = '100%',
+  ...props
+}) => {
   return (
     <Tile
-      image={<div style={{ width: '100%', height: 400, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
+      image={<div style={{ width: imageWidth, height: imageHeight, backgroundColor: 'rgba(0, 0, 0, 0.05)' }} />}
       heading={
         <SkeletonLoader uniqueKey={uniqueKey && `${uniqueKey}--heading`} width="70%" height="1em" animate={animate}>
           <rect width="100%" height="100%" />

@@ -1,3 +1,7 @@
+.root {
+  overflow: hidden;
+}
+
 .wrapper {
   display: inline-flex;
   flex-direction: column;
@@ -8,34 +12,66 @@
 
 .surface {
   background-color: var(--color-surface);
+  border-radius: var(--rounded-md);
   color: var(--color-on-surface);
 }
 
 .image {
+  display: grid;
+  grid-auto-rows: 100%;
+}
+
+.image img {
   object-fit: cover;
-  object-position: center;
   width: 100%;
+  /* height: auto; */
+}
+
+.root:not(.surface) .image {
+  border-radius: var(--rounded);
+  overflow: hidden;
+}
+
+.vignette {
+  position: relative;
   flex-grow: 1;
 }
 
+.vignette::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 3rem rgba(0, 0, 0, 0.15);
+}
+
 .content {
-  margin-top: var(--spacing-sm);
   display: grid;
-  grid-gap: var(--spacing-sm);
+  grid-gap: var(--spacing-xs);
+  grid-auto-rows: max-content;
+  padding: var(--spacing-sm) var(--spacing-md);
 }
 
 .surface .content {
-  padding: 0 var(--padded) var(--padded);
+  padding-bottom: var(--spacing-md);
 }
 
 .heading {
+  font-size: var(--font-md);
   font-weight: var(--font-semibold);
+}
+
+.subheading {
+  font-size: var(--font-sm);
+  height: 1.3em;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  font-size: var(--font-sm);
+  font-size: var(--font-xs);
 }
 
 .tag {

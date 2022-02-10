@@ -1,21 +1,26 @@
 {
   "name": "@storystore/pwa",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "license": "MIT",
   "bin": "bin/server.js",
   "author": "Carlos A. Cabrera @fnhipster",
   "description": "An AEM PWA Experience",
   "scripts": {
     "lint": "next lint",
-    "dev": "NODE_ENV=development node ./bin/server.js",
+    "dev": "PORT=6007 next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node ./bin/server.js",
     "prepare": "echo ✔️",
     "cleanup": "rimraf pkg .next",
     "prepkg": "rimraf pkg ; next build",
     "pkg": "pkg . --no-bytecode --public-packages \"*\" --public --compress GZip --output pkg/PWA"
   },
   "dependencies": {
+    "@adobe/aem-core-components-react-base": "^1.1.8",
+    "@adobe/aem-core-components-react-spa": "^1.2.0",
+    "@adobe/aem-react-editable-components": "^1.1.10",
+    "@adobe/aem-spa-component-mapping": "^1.1.1",
+    "@adobe/aem-spa-page-model-manager": "^1.4.0",
     "@apollo/client": "^3.1.1",
     "@storystore/toolbox": "^0.1.0",
     "@storystore/ui-kit": "^1.0.2",
@@ -23,10 +28,12 @@
     "http-proxy-middleware": "^2.0.1",
     "lodash.isequal": "^4.5.0",
     "next": "^11.1.2",
+    "nextjs-progressbar": "^0.0.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-ga": "^3.3.0",
     "react-router-dom": "^5.3.0",
+    "remixicon-react": "^1.0.0",
     "xmldom": "^0.6.0"
   },
   "devDependencies": {
