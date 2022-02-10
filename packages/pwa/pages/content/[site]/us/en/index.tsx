@@ -17,7 +17,18 @@ const HomePage: NextPage = () => {
       <Banner
         height={{ sm: '70vh', md: '80vh' }}
         backgroundImage={<NextImage src="/Hero.jpeg" layout="fill" alt="" />}
-        heading={<Heading size={{ sm: '2xl', md: '3xl', lg: '4xl' }}>Not all who wander are lost.</Heading>}
+        heading={
+          <Heading
+            size="5xl"
+            style={{
+              ['--heading-size-sm' as string]: 'calc(100vw / 15)',
+              ['--heading-size-md' as string]: 'calc(100vw / 27)',
+              ['--heading-size-lg' as string]: 'calc(100vw / 25)',
+            }}
+          >
+            Not all who wander are lost.
+          </Heading>
+        }
         button={
           <Button root={<Link href={`${process.env.NEXT_PUBLIC_HOME_PATH}/adventures`} />}>View Adventures</Button>
         }
