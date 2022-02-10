@@ -13,11 +13,8 @@ const link = new HttpLink({
 })
 
 const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {},
-    },
-  },
+  addTypename: true,
+  typePolicies: {},
 })
 
 const createApolloClient = () => {

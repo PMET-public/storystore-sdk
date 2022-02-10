@@ -47,7 +47,15 @@ const HomePage: NextPage = () => {
               <Tile
                 key={_path}
                 root={<Link href={`${process.env.NEXT_PUBLIC_HOME_PATH}/adventures/adventure?path=${_path}`} />}
-                image={<NextImage src={adventurePrimaryImage._path} width={500} height={500} alt={adventureTitle} />}
+                image={
+                  <NextImage
+                    src={adventurePrimaryImage._path}
+                    width={500}
+                    height={500}
+                    objectFit="cover"
+                    alt={adventureTitle}
+                  />
+                }
                 heading={<Heading>{adventureTitle}</Heading>}
                 tags={[`${adventureTripLength} ${adventureActivity}`]}
               />

@@ -10,6 +10,8 @@ query ADVENTURES_QUERY($filter: AdventureModelFilter) {
         ... on ImageRef {
           id: _path
           _path
+          width
+          height
         }
       }
     }

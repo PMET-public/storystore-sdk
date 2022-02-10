@@ -38,6 +38,8 @@ const AdventuresPage: NextPage = () => {
 
   // GraphQL Data
   const { error, data, loading, previousData } = useQuery(ADVENTURES_QUERY, {
+    fetchPolicy: 'cache-and-network',
+    returnPartialData: true,
     variables: { filter },
   })
 

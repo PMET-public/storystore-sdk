@@ -1,6 +1,7 @@
 query PRODUCTS_QUERY($search: String, $filter: ProductAttributeFilterInput, $pageSize: Int) {
   products(search: $search, filter: $filter, pageSize: $pageSize) {
     items {
+      id: uid
       uid
       url_key
       name
@@ -51,6 +52,8 @@ query PRODUCTS_QUERY($search: String, $filter: ProductAttributeFilterInput, $pag
         ... on ImageRef {
           id: _path
           _path
+          width
+          height
         }
       }
     }

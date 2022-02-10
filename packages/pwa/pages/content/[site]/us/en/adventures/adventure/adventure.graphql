@@ -1,6 +1,16 @@
-query ADVENTURE_QUERY($path: String!) {
+query ADVENTURE_QUERY($path: String!, $productsCategoryUID: String, $includeProducts: Boolean = false) {
+  # Get list of Categories in "Equipment" (UID "NDI=")
+  categories(filters: { parent_category_uid: { eq: "NDI=" } }) {
+    items {
+      id: uid
+      uid
+      name
+    }
+  }
+
   adventureByPath(_path: $path) {
     item {
+      id: _path
       _path
       adventureTitle
       adventureType
@@ -45,8 +55,9 @@ query ADVENTURE_QUERY($path: String!) {
     }
   }
 
-  products(pageSize: 9, filter: { category_uid: { eq: "NDI=" } }) {
+  products(pageSize: 9, filter: { category_uid: { eq: $productsCategoryUID } }) @include(if: $includeProducts) {
     items {
+      id: uid
       url_key
       name
       thumbnail {
@@ -87,6 +98,8 @@ query ADVENTURE_QUERY($path: String!) {
         ... on ImageRef {
           id: _path
           _path
+          width
+          height
         }
       }
     }
