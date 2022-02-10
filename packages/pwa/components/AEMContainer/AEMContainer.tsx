@@ -5,7 +5,6 @@ import {
   AllowedComponentsContainer,
   AllowedComponentsProperties,
   withComponentMappingContext,
-  MappedComponentProperties,
 } from '@adobe/aem-react-editable-components'
 import { classes } from '@storystore/ui-kit/lib'
 import { FunctionComponent } from 'react'
