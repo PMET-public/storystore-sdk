@@ -175,7 +175,7 @@ const ProductPage: NextPage = () => {
             </Block>
 
             {/* Description */}
-            {product?.description?.html ? (
+            {product?.description ? (
               <Html htmlString={product.description.html} />
             ) : (
               loading && <Loader animate={loading} />
