@@ -7,7 +7,7 @@ export const LinkProvider = LinkContext.Provider
 
 export const useLink = () => useContext(LinkContext)
 
-export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {}
+export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & { [key: string]: any }
 
 export const Link: FunctionComponent<LinkProps> = ({ className, children, ...props }) => {
   const link = useLink()

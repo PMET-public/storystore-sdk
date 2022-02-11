@@ -1,7 +1,7 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { Error, Block, Banner, SkeletonLoader, Heading, Text, Html, Card, Share } from '@storystore/ui-kit'
+import { Error, Block, SkeletonLoader, Heading, Text, Html, Card, Share } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import { Utils } from '@adobe/aem-react-editable-components'
 import { ModelManager } from '@adobe/aem-spa-page-model-manager'
@@ -48,7 +48,7 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
   })
 
   // Adventure Object
-  const adventure = data?.adventureByPath.item
+  const adventure = data?.adventureByPath?.item
 
   // Error View
   if (error) {
@@ -61,18 +61,15 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
     <Block gap="xl" contained padded>
       <Block gap="md" columns={{ sm: '1f', lg: '1fr 1fr' }}>
         {/* Image */}
-        <Banner
-          className={styles.hero}
-          vAlign="bottom"
-          align="left"
-          backgroundImage={
-            adventure?.adventurePrimaryImage ? (
+        {adventure?.adventurePrimaryImage ? (
+          <div className={styles.hero}>
+            <div className={styles.heroImageWrapper}>
               <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />
-            ) : (
-              <Loader animate={loading} height="800px" width="100%" />
-            )
-          }
-        />
+            </div>
+          </div>
+        ) : (
+          <Loader animate={loading} height="800px" width="100%" />
+        )}
 
         <Block gap="md">
           {/* Overview */}
