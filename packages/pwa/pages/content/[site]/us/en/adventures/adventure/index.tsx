@@ -274,7 +274,7 @@ const AdventurePage: NextPage = () => {
 
           {/* Contributor (optional enable in ./adventure.graphql) */}
           {adventure?.adventureContributor && (
-            <Block root={<Card />} gap="sm">
+            <Block root={<Card />} gap="md">
               <Block columns="auto 1fr" gap="md" vAlign="center">
                 <NextImage
                   src={adventure.adventureContributor.pictureReference._path}
