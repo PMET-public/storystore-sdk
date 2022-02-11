@@ -4,7 +4,6 @@ import { NetworkStatus, useQuery } from '@apollo/client'
 import {
   Error,
   Block,
-  Banner,
   SkeletonLoader,
   Heading,
   Text,
@@ -132,7 +131,7 @@ const AdventurePage: NextPage = () => {
   })
 
   // Adventure
-  const adventure = data?.adventureByPath.item
+  const adventure = data?.adventureByPath?.item
 
   // Products
   const products = data?.products?.items
@@ -160,18 +159,15 @@ const AdventurePage: NextPage = () => {
     <Block key={`Adventure:${path}`} gap="xl" contained padded>
       <Block gap="md" columns={{ sm: '1f', lg: '1fr 1fr' }}>
         {/* Image */}
-        <Banner
-          className={styles.hero}
-          vAlign="bottom"
-          align="left"
-          backgroundImage={
-            adventure?.adventurePrimaryImage ? (
+        {adventure?.adventurePrimaryImage ? (
+          <div className={styles.hero}>
+            <div className={styles.heroImageWrapper}>
               <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />
-            ) : (
-              <Loader animate={loading} height="800px" width="100%" />
-            )
-          }
-        />
+            </div>
+          </div>
+        ) : (
+          <Loader animate={loading} height="800px" width="100%" />
+        )}
 
         <Block gap="md">
           {/* Overview */}

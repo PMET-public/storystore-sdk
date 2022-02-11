@@ -2,6 +2,12 @@
   height: 600px;
 }
 
+.heroImageWrapper {
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
 .contributorImage {
   border-radius: var(--rounded-full);
 }
