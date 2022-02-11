@@ -279,7 +279,6 @@ const AdventurePage: NextPage = () => {
                   layout="fixed"
                   objectFit="cover"
                   alt={adventure.adventureContributor.fullName}
-                  className={styles.contributorImage}
                 />
                 <Heading size="2xl" accent>
                   {adventure.adventureContributor.fullName}
@@ -287,7 +286,7 @@ const AdventurePage: NextPage = () => {
                 </Heading>
               </Block>
 
-              <Html htmlString={adventure.adventureContributor.biographyText.html} />
+              <Html className={styles.contributorBio} htmlString={adventure.adventureContributor.biographyText.html} />
             </Block>
           )}
         </Block>
