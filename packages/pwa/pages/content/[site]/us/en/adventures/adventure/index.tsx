@@ -217,7 +217,6 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
                   layout="fixed"
                   objectFit="cover"
                   alt={adventure.adventureContributor.fullName}
-                  className={styles.contributorImage}
                 />
                 <Heading size="2xl" accent>
                   {adventure.adventureContributor.fullName}
@@ -225,7 +224,7 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
                 </Heading>
               </Block>
 
-              <Html htmlString={adventure.adventureContributor.biographyText.html} />
+              <Html className={styles.contributorBio} htmlString={adventure.adventureContributor.biographyText.html} />
             </Block>
           )}
         </Block>
