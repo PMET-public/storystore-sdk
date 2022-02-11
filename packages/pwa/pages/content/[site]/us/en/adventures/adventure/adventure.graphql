@@ -1,4 +1,9 @@
-query ADVENTURE_QUERY($path: String!, $productsCategoryUID: String, $includeProducts: Boolean = false) {
+query ADVENTURE_QUERY(
+  $path: String!
+  $productsCategoryUID: String
+  $includeProducts: Boolean = false
+  $variation: String = "master"
+) {
   # Get list of Categories in "Equipment" (UID "NDI=")
   categories(filters: { parent_category_uid: { eq: "NDI=" } }) {
     items {
@@ -8,7 +13,7 @@ query ADVENTURE_QUERY($path: String!, $productsCategoryUID: String, $includeProd
     }
   }
 
-  adventureByPath(_path: $path) {
+  adventureByPath(_path: $path, variation: $variation) {
     item {
       id: _path
       _path
@@ -36,21 +41,27 @@ query ADVENTURE_QUERY($path: String!, $productsCategoryUID: String, $includeProd
           height
         }
       }
+
       # Contributor
       # You need to create this new Content Fragment first:
       # https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/content-fragment-models.html?lang=en#create-a-contributor-model
-      # contributor {
-      #   _path
-      #   fullName
-      #   biographyText {
-      #     html
-      #   }
-      #   pictureReference {
-      #     ... on ImageRef {
-      #       _path
+      #
+      # adventureContributor {
+      #   ... on ContributorModel {
+      #     id: _path
+      #     _path
+      #     fullName
+      #     biographyText {
+      #       html
+      #     }
+      #     occupation
+      #     pictureReference {
+      #       ... on ImageRef {
+      #         id: _path
+      #         _path
+      #       }
       #     }
       #   }
-      #   occupation
       # }
     }
   }

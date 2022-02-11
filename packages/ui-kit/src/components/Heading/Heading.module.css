@@ -3,7 +3,7 @@
   display: block;
   font-size: var(--heading-size-sm);
   font-weight: var(--font-semibold);
-  line-height: 1;
+  line-height: 1.3;
   width: 100%;
 }
 
@@ -47,9 +47,10 @@
   }
 }
 
-.root.accent::after {
-  content: '';
+.accent::after {
   border-bottom: 0.15em solid var(--color-secondary);
-  width: 4rem;
+  content: '';
   display: block;
+  margin-top: var(--spacing-xs);
+  width: 4rem;
 }

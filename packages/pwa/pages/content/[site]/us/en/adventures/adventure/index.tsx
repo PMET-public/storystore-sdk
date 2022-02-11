@@ -126,7 +126,7 @@ const AdventurePage: NextPage = () => {
 
   const { loading, error, data, refetch, networkStatus } = useQuery<any>(ADVENTURE_QUERY, {
     fetchPolicy: 'cache-and-network',
-    variables: { path },
+    variables: { path, variation: 'summary' },
     returnPartialData: true,
     skip: !isReady || !path,
   })
@@ -271,6 +271,29 @@ const AdventurePage: NextPage = () => {
               <Loader animate={loading} />
             )}
           </Block>
+
+          {/* Contributor (optional enable in ./adventure.graphql) */}
+          {adventure?.adventureContributor && (
+            <Block root={<Card />} gap="sm">
+              <Block columns="auto 1fr" gap="md" vAlign="center">
+                <NextImage
+                  src={adventure.adventureContributor.pictureReference._path}
+                  width={80}
+                  height={80}
+                  layout="fixed"
+                  objectFit="cover"
+                  alt={adventure.adventureContributor.fullName}
+                  className={styles.contributorImage}
+                />
+                <Heading size="2xl" accent>
+                  {adventure.adventureContributor.fullName}
+                  <Heading size="sm">{adventure.adventureContributor.occupation}</Heading>
+                </Heading>
+              </Block>
+
+              <Html htmlString={adventure.adventureContributor.biographyText.html} />
+            </Block>
+          )}
         </Block>
       </Block>
 
@@ -298,7 +321,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       path &&
         apolloClient.query({
           query: ADVENTURE_QUERY,
-          variables: { path },
+          variables: { path, variation: 'summary' },
         }),
     ])
   } catch (error) {
