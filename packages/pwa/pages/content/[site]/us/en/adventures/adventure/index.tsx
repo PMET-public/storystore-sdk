@@ -281,8 +281,8 @@ const AdventurePage: NextPage = () => {
                   alt={adventure.adventureContributor.fullName}
                 />
                 <Heading size="2xl" accent>
-                  {adventure.adventureContributor.fullName}
                   <Heading size="sm">{adventure.adventureContributor.occupation}</Heading>
+                  {adventure.adventureContributor.fullName}
                 </Heading>
               </Block>
 
