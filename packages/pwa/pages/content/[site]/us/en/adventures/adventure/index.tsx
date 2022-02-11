@@ -42,7 +42,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
   const path = query?.path
 
-  const { loading, error, data } = useQuery(ADVENTURE_QUERY, { variables: { path }, skip: !isReady || !path })
+  const { loading, error, data } = useQuery(ADVENTURE_QUERY, {
+    variables: { path, variation: 'summary' },
+    skip: !isReady || !path,
+  })
 
   // Adventure Object
   const adventure = data?.adventureByPath.item
@@ -205,6 +208,29 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               <Loader animate={loading} />
             )}
           </Block>
+
+          {/* Contributor (optional enable in ./adventure.graphql) */}
+          {adventure?.adventureContributor && (
+            <Block root={<Card />} gap="sm">
+              <Block columns="auto 1fr" gap="md" vAlign="center">
+                <NextImage
+                  src={adventure.adventureContributor.pictureReference._path}
+                  width={80}
+                  height={80}
+                  layout="fixed"
+                  objectFit="cover"
+                  alt={adventure.adventureContributor.fullName}
+                  className={styles.contributorImage}
+                />
+                <Heading size="2xl" accent>
+                  {adventure.adventureContributor.fullName}
+                  <Heading size="sm">{adventure.adventureContributor.occupation}</Heading>
+                </Heading>
+              </Block>
+
+              <Html htmlString={adventure.adventureContributor.biographyText.html} />
+            </Block>
+          )}
         </Block>
       </Block>
 
@@ -233,7 +259,7 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
       path &&
         apolloClient.query({
           query: ADVENTURE_QUERY,
-          variables: { path },
+          variables: { path, variation: 'summary' },
         }),
     ])
 

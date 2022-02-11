@@ -2,6 +2,10 @@
   height: 600px;
 }
 
+.contributorImage {
+  border-radius: var(--rounded-full);
+}
+
 @media (min-width: 1024px) {
   .hero {
     position: sticky;
