@@ -8,7 +8,7 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
 const link = new HttpLink({
-  uri: new URL(process.env.NEXT_PUBLIC_GATEWAY_API_ENDPOINT).href,
+  uri: new URL('/api/gateway', process.env.NEXT_PUBLIC_URL).href,
   credentials: 'same-origin',
 })
 

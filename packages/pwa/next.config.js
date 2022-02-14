@@ -71,6 +71,12 @@ module.exports = withPlugins([withPWA], {
         destination: '/api/aem',
       },
 
+      /** Proxy Gatewat Endpoint */
+      {
+        source: '/api/gateway',
+        destination: new URL(process.env.NEXT_PUBLIC_GATEWAY_API_ENDPOINT).href,
+      },
+
       /** Map Pages with .html extensions (needed for AEM Authoring) */
       {
         source: '/content/:path*(.html)',
