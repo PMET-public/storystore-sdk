@@ -18,11 +18,23 @@ The following tools should be installed locally:
 
 `yarn install`
 
+✌️ Run PWA
+
+`yarn pwa`
+
+The experience will be available at:
+
+- **WKND Adventures (Your Demo Web App)**: http://localhost:6007
+
+You can view and edit source code in the PWA `./packages/pwa`
+
+---
+
 ✨ Run StoryStore SDK:
 
 `yarn sdk`
 
-The experiences will be available at:
+The experience will be available at:
 
 - **WKND Adventures (Your Demo Web App)**: http://localhost:6007
 - **UIKit (Development Canvas)**: http://localhost:6006
