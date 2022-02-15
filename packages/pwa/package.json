@@ -45,7 +45,7 @@
     "next-pwa": "^5.4.0",
     "pkg": "^5.4.1",
     "rimraf": "^3.0.2",
-    "webpack-assets-manifest": "^5.1.0"
+    "webpack-assets-manifest": "^4.0.6"
   },
   "engines": {
     "node": ">=12.0.0"
