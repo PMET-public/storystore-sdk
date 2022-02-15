@@ -6,6 +6,7 @@
   position: relative;
   width: inherit;
   height: inherit;
+  background: var(--color-skeleton);
 }
 
 @media (min-width: 1024px) {
