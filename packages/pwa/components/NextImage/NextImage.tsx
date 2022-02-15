@@ -17,6 +17,7 @@ const toBase64 = (str: string) =>
 export const NextImage: FunctionComponent<ImageProps> = props => {
   return (
     <Image
+      key={props.src.toString()}
       loader={loader}
       alt=""
       placeholder="blur"

@@ -162,7 +162,7 @@ const AdventurePage: NextPage = () => {
         {adventure?.adventurePrimaryImage ? (
           <div className={styles.hero}>
             <div className={styles.heroImageWrapper}>
-              <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />
+              <NextImage src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" priority />
             </div>
           </div>
         ) : (
