@@ -3,7 +3,7 @@ import { SkeletonLoader } from '@storystore/ui-kit'
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Utils } from '@adobe/aem-react-editable-components'
-import { AEMResponsiveGrid } from '../../../components'
+import { AEMContainer } from '../../../components'
 
 const HomePage: NextPage<any> = ({ responsivegrid }) => {
   const { asPath, isReady } = useRouter()
@@ -27,7 +27,7 @@ const HomePage: NextPage<any> = ({ responsivegrid }) => {
 
   return (
     <div>
-      <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...responsivegrid} />
+      <AEMContainer pagePath={pagePath} itemPath="root/container" {...responsivegrid} />
     </div>
   )
 }

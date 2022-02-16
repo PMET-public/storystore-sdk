@@ -5,7 +5,7 @@ import { Error, Block, SkeletonLoader, Heading, Text, Html, Card, Share } from '
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import { Utils } from '@adobe/aem-react-editable-components'
 import { ModelManager } from '@adobe/aem-spa-page-model-manager'
-import { AEMResponsiveGrid, AEMTitle } from '../../../../../../../components'
+import { AEMContainer, AEMTitle } from '../../../../../../../components'
 import NextImage from '../../../../../../../components/NextImage'
 
 // Icons
@@ -96,10 +96,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-duration"
+                  itemPath="root/title_duration"
                   icon={<LengthIcon />}
                   size="md"
-                  {...details?.cqItems['heading-duration']}
+                  {...details?.cqItems['title_duration']}
                 />
               )}
 
@@ -115,10 +115,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-group-size"
+                  itemPath="root/title_group_size"
                   icon={<GroupIcon />}
                   size="md"
-                  {...details?.cqItems['heading-group-size']}
+                  {...details?.cqItems['title_group_size']}
                 />
               )}
 
@@ -134,10 +134,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-difficulty"
+                  itemPath="root/title_difficulty"
                   icon={<MedalIcon />}
                   size="md"
-                  {...details?.cqItems['heading-difficulty']}
+                  {...details?.cqItems['title_difficulty']}
                 />
               )}
 
@@ -153,10 +153,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-price"
+                  itemPath="root/title_price"
                   icon={<PriceIcon />}
                   size="md"
-                  {...details?.cqItems['heading-price']}
+                  {...details?.cqItems['title_price']}
                 />
               )}
 
@@ -173,10 +173,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
             {isReady && (
               <AEMTitle
                 pagePath={pagePath}
-                itemPath="details/heading-itinerary"
+                itemPath="root/title_itinerary"
                 icon={<CalendarIcon />}
                 size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-itinerary']}
+                {...details?.cqItems['title_itinerary']}
               />
             )}
 
@@ -192,10 +192,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
             {isReady && (
               <AEMTitle
                 pagePath={pagePath}
-                itemPath="details/heading-what-to-bring"
+                itemPath="root/title_what_to_bring"
                 icon={<BagIcon />}
                 size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-what-to-bring']}
+                {...details?.cqItems['title_what_to_bring']}
               />
             )}
 
@@ -231,7 +231,7 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
       </Block>
 
       {/* AEM Container */}
-      {isReady && <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...responsivegrid} />}
+      {isReady && <AEMContainer pagePath={pagePath} itemPath="root/container" {...responsivegrid} />}
     </Block>
   )
 }
@@ -262,12 +262,13 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
     props.pageModel = pageModel
 
     // AEM Model SSR Props
-    if (pageModel?.[':items']?.details) {
-      props.details = Utils.modelToProps(pageModel[':items'].details)
+    if (pageModel?.[':items']?.root) {
+      const { container: _, ...details } = Utils.modelToProps(pageModel[':items'].root)
+      props.details = details
     }
 
-    if (pageModel?.[':items']?.root[':items'].responsivegrid) {
-      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].responsivegrid)
+    if (pageModel?.[':items']?.root[':items'].container) {
+      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].container)
     }
   } catch (error) {
     console.error(error)
