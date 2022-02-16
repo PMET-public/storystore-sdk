@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { Error, Block, Banner, SkeletonLoader, Heading, Text, Html, Card, Share } from '@storystore/ui-kit'
+import { Error, Block, SkeletonLoader, Heading, Text, Html, Card, Share } from '@storystore/ui-kit'
 import { useNetworkStatus } from '@storystore/ui-kit/hooks'
 import { Utils } from '@adobe/aem-react-editable-components'
 import { ModelManager } from '@adobe/aem-spa-page-model-manager'
-import { AEMResponsiveGrid, AEMTitle } from '../../../../../../../components'
+import { AEMContainer, AEMTitle } from '../../../../../../../components'
 import NextImage from '../../../../../../../components/NextImage'
 
 // Icons
@@ -42,10 +42,13 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
 
   const path = query?.path
 
-  const { loading, error, data } = useQuery(ADVENTURE_QUERY, { variables: { path }, skip: !isReady || !path })
+  const { loading, error, data } = useQuery(ADVENTURE_QUERY, {
+    variables: { path, variation: 'summary' },
+    skip: !isReady || !path,
+  })
 
   // Adventure Object
-  const adventure = data?.adventureByPath.item
+  const adventure = data?.adventureByPath?.item
 
   // Error View
   if (error) {
@@ -58,18 +61,15 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
     <Block gap="xl" contained padded>
       <Block gap="md" columns={{ sm: '1f', lg: '1fr 1fr' }}>
         {/* Image */}
-        <Banner
-          className={styles.hero}
-          vAlign="bottom"
-          align="left"
-          backgroundImage={
-            adventure?.adventurePrimaryImage ? (
+        {adventure?.adventurePrimaryImage ? (
+          <div className={styles.hero}>
+            <div className={styles.heroImageWrapper}>
               <NextImage loading="eager" src={adventure.adventurePrimaryImage._path} layout="fill" objectFit="cover" />
-            ) : (
-              <Loader animate={loading} height="800px" width="100%" />
-            )
-          }
-        />
+            </div>
+          </div>
+        ) : (
+          <Loader animate={loading} height="800px" width="100%" />
+        )}
 
         <Block gap="md">
           {/* Overview */}
@@ -96,10 +96,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-duration"
+                  itemPath="root/title_duration"
                   icon={<LengthIcon />}
                   size="md"
-                  {...details?.cqItems['heading-duration']}
+                  {...details?.cqItems['title_duration']}
                 />
               )}
 
@@ -115,10 +115,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-group-size"
+                  itemPath="root/title_group_size"
                   icon={<GroupIcon />}
                   size="md"
-                  {...details?.cqItems['heading-group-size']}
+                  {...details?.cqItems['title_group_size']}
                 />
               )}
 
@@ -134,10 +134,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-difficulty"
+                  itemPath="root/title_difficulty"
                   icon={<MedalIcon />}
                   size="md"
-                  {...details?.cqItems['heading-difficulty']}
+                  {...details?.cqItems['title_difficulty']}
                 />
               )}
 
@@ -153,10 +153,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               {isReady && (
                 <AEMTitle
                   pagePath={pagePath}
-                  itemPath="details/heading-price"
+                  itemPath="root/title_price"
                   icon={<PriceIcon />}
                   size="md"
-                  {...details?.cqItems['heading-price']}
+                  {...details?.cqItems['title_price']}
                 />
               )}
 
@@ -173,10 +173,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
             {isReady && (
               <AEMTitle
                 pagePath={pagePath}
-                itemPath="details/heading-itinerary"
+                itemPath="root/title_itinerary"
                 icon={<CalendarIcon />}
                 size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-itinerary']}
+                {...details?.cqItems['title_itinerary']}
               />
             )}
 
@@ -192,10 +192,10 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
             {isReady && (
               <AEMTitle
                 pagePath={pagePath}
-                itemPath="details/heading-what-to-bring"
+                itemPath="root/title_what_to_bring"
                 icon={<BagIcon />}
                 size={{ sm: 'xl', lg: '2xl' }}
-                {...details?.cqItems['heading-what-to-bring']}
+                {...details?.cqItems['title_what_to_bring']}
               />
             )}
 
@@ -205,11 +205,33 @@ const AdventurePage: NextPage<any> = ({ details, responsivegrid }) => {
               <Loader animate={loading} />
             )}
           </Block>
+
+          {/* Contributor (optional enable in ./adventure.graphql) */}
+          {adventure?.adventureContributor && (
+            <Block root={<Card />} gap="md">
+              <Block columns="auto 1fr" gap="md" vAlign="center">
+                <NextImage
+                  src={adventure.adventureContributor.pictureReference._path}
+                  width={80}
+                  height={80}
+                  layout="fixed"
+                  objectFit="cover"
+                  alt={adventure.adventureContributor.fullName}
+                />
+                <Heading size="2xl" accent>
+                  <Heading size="sm">{adventure.adventureContributor.occupation}</Heading>
+                  {adventure.adventureContributor.fullName}
+                </Heading>
+              </Block>
+
+              <Html className={styles.contributorBio} htmlString={adventure.adventureContributor.biographyText.html} />
+            </Block>
+          )}
         </Block>
       </Block>
 
       {/* AEM Container */}
-      {isReady && <AEMResponsiveGrid pagePath={pagePath} itemPath="root/responsivegrid" {...responsivegrid} />}
+      {isReady && <AEMContainer pagePath={pagePath} itemPath="root/container" {...responsivegrid} />}
     </Block>
   )
 }
@@ -230,21 +252,23 @@ export const getServerSideProps: GetServerSideProps = async ({ resolvedUrl, quer
       ModelManager.getData(pagePath),
 
       // GraphQL Query
-      apolloClient.query({
-        query: ADVENTURE_QUERY,
-        variables: { path },
-      }),
+      path &&
+        apolloClient.query({
+          query: ADVENTURE_QUERY,
+          variables: { path, variation: 'summary' },
+        }),
     ])
 
     props.pageModel = pageModel
 
     // AEM Model SSR Props
-    if (pageModel?.[':items']?.details) {
-      props.details = Utils.modelToProps(pageModel[':items'].details)
+    if (pageModel?.[':items']?.root) {
+      const { container: _, ...details } = Utils.modelToProps(pageModel[':items'].root)
+      props.details = details
     }
 
-    if (pageModel?.[':items']?.root[':items'].responsivegrid) {
-      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].responsivegrid)
+    if (pageModel?.[':items']?.root[':items'].container) {
+      props.responsivegrid = Utils.modelToProps(pageModel[':items'].root[':items'].container)
     }
   } catch (error) {
     console.error(error)

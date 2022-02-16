@@ -1,5 +1,5 @@
-query ADVENTURE_QUERY($path: String!) {
-  adventureByPath(_path: $path) {
+query ADVENTURE_QUERY($path: String!, $variation: String = "master") {
+  adventureByPath(_path: $path, variation: $variation) {
     item {
       _path
       adventureTitle
@@ -26,21 +26,27 @@ query ADVENTURE_QUERY($path: String!) {
           height
         }
       }
+
       # Contributor
       # You need to create this new Content Fragment first:
       # https://experienceleague.adobe.com/docs/experience-manager-learn/getting-started-with-aem-headless/graphql/multi-step/content-fragment-models.html?lang=en#create-a-contributor-model
-      # contributor {
-      #   _path
-      #   fullName
-      #   biographyText {
-      #     html
-      #   }
-      #   pictureReference {
-      #     ... on ImageRef {
-      #       _path
+      #
+      # adventureContributor {
+      #   ... on ContributorModel {
+      #     id: _path
+      #     _path
+      #     fullName
+      #     biographyText {
+      #       html
+      #     }
+      #     occupation
+      #     pictureReference {
+      #       ... on ImageRef {
+      #         id: _path
+      #         _path
+      #       }
       #     }
       #   }
-      #   occupation
       # }
     }
   }
